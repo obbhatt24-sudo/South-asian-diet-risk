@@ -1,1 +1,602 @@
-[]
+[
+  {
+    "id": "ing_001",
+    "source_code": "INDB-0001",
+    "name": "White rice, raw, milled",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source"],
+    "nutrients_per_100g": {
+      "energy_kcal": 345,
+      "protein_g": 6.8,
+      "carbohydrate_g": 78.2,
+      "fiber_g": 0.2,
+      "total_fat_g": 0.5,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 0.1,
+      "sodium_mg": 5
+    },
+    "glycemic_index": 73,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_002",
+    "source_code": "INDB-0002",
+    "name": "Basmati rice, raw",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source"],
+    "nutrients_per_100g": {
+      "energy_kcal": 349,
+      "protein_g": 7.5,
+      "carbohydrate_g": 78.9,
+      "fiber_g": 0.4,
+      "total_fat_g": 0.4,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 0.1,
+      "sodium_mg": 5
+    },
+    "glycemic_index": 54,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_003",
+    "source_code": "INDB-0003",
+    "name": "Whole wheat flour (atta)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 341,
+      "protein_g": 11.8,
+      "carbohydrate_g": 69.4,
+      "fiber_g": 12.5,
+      "total_fat_g": 1.7,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 0.4,
+      "sodium_mg": 2
+    },
+    "glycemic_index": 62,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_004",
+    "source_code": "INDB-0004",
+    "name": "Maida (refined wheat flour)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source"],
+    "nutrients_per_100g": {
+      "energy_kcal": 348,
+      "protein_g": 10.3,
+      "carbohydrate_g": 73.9,
+      "fiber_g": 2.7,
+      "total_fat_g": 0.9,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 0.2,
+      "sodium_mg": 2
+    },
+    "glycemic_index": 76,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_005",
+    "source_code": "INDB-0005",
+    "name": "Brown rice, raw",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 357,
+      "protein_g": 7.9,
+      "carbohydrate_g": 77.2,
+      "fiber_g": 3.5,
+      "total_fat_g": 2.7,
+      "saturated_fat_g": 0.5,
+      "sugars_g": 0.7,
+      "sodium_mg": 5
+    },
+    "glycemic_index": 55,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_006",
+    "source_code": "INDB-0006",
+    "name": "Jowar (sorghum flour)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 349,
+      "protein_g": 10.4,
+      "carbohydrate_g": 72.6,
+      "fiber_g": 6.3,
+      "total_fat_g": 1.9,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 1.0,
+      "sodium_mg": 1
+    },
+    "glycemic_index": 62,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_007",
+    "source_code": "INDB-0007",
+    "name": "Bajra (pearl millet flour)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 361,
+      "protein_g": 11.6,
+      "carbohydrate_g": 67.5,
+      "fiber_g": 11.5,
+      "total_fat_g": 5.0,
+      "saturated_fat_g": 1.0,
+      "sugars_g": 0.5,
+      "sodium_mg": 10
+    },
+    "glycemic_index": 54,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_008",
+    "source_code": "INDB-0008",
+    "name": "Ragi (finger millet flour)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 336,
+      "protein_g": 7.3,
+      "carbohydrate_g": 72.0,
+      "fiber_g": 11.5,
+      "total_fat_g": 1.3,
+      "saturated_fat_g": 0.2,
+      "sugars_g": 1.6,
+      "sodium_mg": 11
+    },
+    "glycemic_index": 69,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_009",
+    "source_code": "INDB-0009",
+    "name": "Ghee",
+    "food_group": "Fats and Oils",
+    "diet_type": "veg",
+    "role_tags": ["cooking_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 900,
+      "protein_g": 0.0,
+      "carbohydrate_g": 0.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 99.5,
+      "saturated_fat_g": 61.9,
+      "sugars_g": 0.0,
+      "sodium_mg": 2
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_010",
+    "source_code": "INDB-0010",
+    "name": "Mustard oil",
+    "food_group": "Fats and Oils",
+    "diet_type": "veg",
+    "role_tags": ["cooking_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 900,
+      "protein_g": 0.0,
+      "carbohydrate_g": 0.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 100.0,
+      "saturated_fat_g": 11.6,
+      "sugars_g": 0.0,
+      "sodium_mg": 0
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_011",
+    "source_code": "INDB-0011",
+    "name": "Refined sunflower oil",
+    "food_group": "Fats and Oils",
+    "diet_type": "veg",
+    "role_tags": ["cooking_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 900,
+      "protein_g": 0.0,
+      "carbohydrate_g": 0.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 100.0,
+      "saturated_fat_g": 10.1,
+      "sugars_g": 0.0,
+      "sodium_mg": 0
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_012",
+    "source_code": "INDB-0012",
+    "name": "Coconut oil",
+    "food_group": "Fats and Oils",
+    "diet_type": "veg",
+    "role_tags": ["cooking_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 892,
+      "protein_g": 0.0,
+      "carbohydrate_g": 0.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 99.1,
+      "saturated_fat_g": 82.5,
+      "sugars_g": 0.0,
+      "sodium_mg": 0
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_013",
+    "source_code": "INDB-0013",
+    "name": "Chana dal, raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 360,
+      "protein_g": 20.8,
+      "carbohydrate_g": 59.8,
+      "fiber_g": 7.6,
+      "total_fat_g": 5.6,
+      "saturated_fat_g": 0.6,
+      "sugars_g": 5.8,
+      "sodium_mg": 18
+    },
+    "glycemic_index": 8,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_014",
+    "source_code": "INDB-0014",
+    "name": "Masoor dal, raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 343,
+      "protein_g": 25.1,
+      "carbohydrate_g": 59.0,
+      "fiber_g": 11.7,
+      "total_fat_g": 0.6,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 2.0,
+      "sodium_mg": 6
+    },
+    "glycemic_index": 31,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_015",
+    "source_code": "INDB-0015",
+    "name": "Toor dal, raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 335,
+      "protein_g": 22.3,
+      "carbohydrate_g": 57.6,
+      "fiber_g": 15.0,
+      "total_fat_g": 1.7,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 2.8,
+      "sodium_mg": 30
+    },
+    "glycemic_index": 29,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_016",
+    "source_code": "INDB-0016",
+    "name": "Moong dal, raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 347,
+      "protein_g": 24.0,
+      "carbohydrate_g": 59.9,
+      "fiber_g": 16.3,
+      "total_fat_g": 1.2,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 6.6,
+      "sodium_mg": 15
+    },
+    "glycemic_index": 25,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_017",
+    "source_code": "INDB-0017",
+    "name": "Spinach, raw",
+    "food_group": "Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["vegetable"],
+    "nutrients_per_100g": {
+      "energy_kcal": 26,
+      "protein_g": 2.9,
+      "carbohydrate_g": 3.6,
+      "fiber_g": 2.2,
+      "total_fat_g": 0.4,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 0.4,
+      "sodium_mg": 79
+    },
+    "glycemic_index": 15,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_018",
+    "source_code": "INDB-0018",
+    "name": "Onion, raw",
+    "food_group": "Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["vegetable"],
+    "nutrients_per_100g": {
+      "energy_kcal": 40,
+      "protein_g": 1.1,
+      "carbohydrate_g": 9.3,
+      "fiber_g": 1.7,
+      "total_fat_g": 0.1,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 4.2,
+      "sodium_mg": 4
+    },
+    "glycemic_index": 10,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_019",
+    "source_code": "INDB-0019",
+    "name": "Tomato, raw",
+    "food_group": "Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["vegetable"],
+    "nutrients_per_100g": {
+      "energy_kcal": 18,
+      "protein_g": 0.9,
+      "carbohydrate_g": 3.9,
+      "fiber_g": 1.2,
+      "total_fat_g": 0.2,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 2.6,
+      "sodium_mg": 5
+    },
+    "glycemic_index": 15,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_020",
+    "source_code": "INDB-0020",
+    "name": "Paneer",
+    "food_group": "Dairy",
+    "diet_type": "veg",
+    "role_tags": ["dairy_protein", "dairy_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 265,
+      "protein_g": 18.3,
+      "carbohydrate_g": 1.2,
+      "fiber_g": 0.0,
+      "total_fat_g": 20.8,
+      "saturated_fat_g": 13.2,
+      "sugars_g": 1.2,
+      "sodium_mg": 30
+    },
+    "glycemic_index": 27,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_021",
+    "source_code": "INDB-0021",
+    "name": "Curd (plain yogurt)",
+    "food_group": "Dairy",
+    "diet_type": "veg",
+    "role_tags": ["dairy_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 62,
+      "protein_g": 3.2,
+      "carbohydrate_g": 4.7,
+      "fiber_g": 0.0,
+      "total_fat_g": 3.4,
+      "saturated_fat_g": 2.1,
+      "sugars_g": 4.7,
+      "sodium_mg": 36
+    },
+    "glycemic_index": 36,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_022",
+    "source_code": "INDB-0022",
+    "name": "Full-fat milk",
+    "food_group": "Dairy",
+    "diet_type": "veg",
+    "role_tags": ["dairy_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 61,
+      "protein_g": 3.2,
+      "carbohydrate_g": 4.8,
+      "fiber_g": 0.0,
+      "total_fat_g": 3.5,
+      "saturated_fat_g": 2.1,
+      "sugars_g": 4.8,
+      "sodium_mg": 43
+    },
+    "glycemic_index": 31,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_023",
+    "source_code": "INDB-0023",
+    "name": "Potato, raw",
+    "food_group": "Starchy Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["starchy_vegetable"],
+    "nutrients_per_100g": {
+      "energy_kcal": 77,
+      "protein_g": 2.0,
+      "carbohydrate_g": 17.5,
+      "fiber_g": 2.2,
+      "total_fat_g": 0.1,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 0.8,
+      "sodium_mg": 6
+    },
+    "glycemic_index": 78,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_024",
+    "source_code": "INDB-0024",
+    "name": "Sweet potato, raw",
+    "food_group": "Starchy Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["starchy_vegetable"],
+    "nutrients_per_100g": {
+      "energy_kcal": 86,
+      "protein_g": 1.6,
+      "carbohydrate_g": 20.1,
+      "fiber_g": 3.0,
+      "total_fat_g": 0.1,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 4.2,
+      "sodium_mg": 55
+    },
+    "glycemic_index": 63,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_025",
+    "source_code": "INDB-0025",
+    "name": "Almonds, raw",
+    "food_group": "Nuts and Seeds",
+    "diet_type": "veg",
+    "role_tags": ["nut_seed"],
+    "nutrients_per_100g": {
+      "energy_kcal": 579,
+      "protein_g": 21.2,
+      "carbohydrate_g": 21.6,
+      "fiber_g": 12.5,
+      "total_fat_g": 49.9,
+      "saturated_fat_g": 3.8,
+      "sugars_g": 4.4,
+      "sodium_mg": 1
+    },
+    "glycemic_index": 15,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_026",
+    "source_code": "INDB-0026",
+    "name": "Groundnuts (peanuts), raw",
+    "food_group": "Nuts and Seeds",
+    "diet_type": "veg",
+    "role_tags": ["nut_seed"],
+    "nutrients_per_100g": {
+      "energy_kcal": 567,
+      "protein_g": 25.8,
+      "carbohydrate_g": 16.1,
+      "fiber_g": 8.5,
+      "total_fat_g": 49.2,
+      "saturated_fat_g": 6.8,
+      "sugars_g": 4.7,
+      "sodium_mg": 18
+    },
+    "glycemic_index": 14,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_027",
+    "source_code": "INDB-0027",
+    "name": "Sugar (sucrose)",
+    "food_group": "Sugars and Sweeteners",
+    "diet_type": "veg",
+    "role_tags": ["sweetener"],
+    "nutrients_per_100g": {
+      "energy_kcal": 387,
+      "protein_g": 0.0,
+      "carbohydrate_g": 99.9,
+      "fiber_g": 0.0,
+      "total_fat_g": 0.0,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 99.9,
+      "sodium_mg": 1
+    },
+    "glycemic_index": 65,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_028",
+    "source_code": "INDB-0028",
+    "name": "Jaggery",
+    "food_group": "Sugars and Sweeteners",
+    "diet_type": "veg",
+    "role_tags": ["sweetener"],
+    "nutrients_per_100g": {
+      "energy_kcal": 383,
+      "protein_g": 0.4,
+      "carbohydrate_g": 98.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 0.1,
+      "saturated_fat_g": 0.0,
+      "sugars_g": 98.0,
+      "sodium_mg": 30
+    },
+    "glycemic_index": 84,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_029",
+    "source_code": "INDB-0029",
+    "name": "Chicken breast, raw",
+    "food_group": "Meat and Poultry",
+    "diet_type": "non_veg",
+    "role_tags": ["animal_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 120,
+      "protein_g": 22.5,
+      "carbohydrate_g": 0.0,
+      "fiber_g": 0.0,
+      "total_fat_g": 2.6,
+      "saturated_fat_g": 0.7,
+      "sugars_g": 0.0,
+      "sodium_mg": 74
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_030",
+    "source_code": "INDB-0030",
+    "name": "Egg, whole, raw",
+    "food_group": "Eggs",
+    "diet_type": "egg",
+    "role_tags": ["animal_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 143,
+      "protein_g": 12.6,
+      "carbohydrate_g": 0.7,
+      "fiber_g": 0.0,
+      "total_fat_g": 9.5,
+      "saturated_fat_g": 3.1,
+      "sugars_g": 0.4,
+      "sodium_mg": 142
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  }
+]
