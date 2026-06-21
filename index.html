@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South Asian Diet Risk Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>South Asian Diet Risk Calculator</h1>
+    <fieldset>
+      <legend>Context</legend>
+      <label>
+        <input type="radio" name="context" value="india" checked />
+        India
+      </label>
+      <label>
+        <input type="radio" name="context" value="us" />
+        US South Asian
+      </label>
+    </fieldset>
+    <p id="context-description"></p>
+  </header>
+
+  <nav>
+    <button data-view="meal-builder">Build Meal</button>
+    <button data-view="results">Results</button>
+    <button data-view="about">About</button>
+  </nav>
+
+  <main>
+
+    <section id="meal-builder">
+      <h2>Build your meal</h2>
+
+      <div role="tablist">
+        <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel">Ingredients</button>
+        <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel">Dishes</button>
+      </div>
+
+      <div id="ingredient-search-panel" role="tabpanel">
+        <input id="ingredient-search" type="text"
+               placeholder="Search ingredients (e.g. rice, ghee, dal)..." />
+        <label>
+          <input type="checkbox" id="nonveg-toggle" />
+          Include non-vegetarian
+        </label>
+        <div id="ingredient-results"></div>
+      </div>
+
+      <div id="dish-search-panel" role="tabpanel" style="display:none">
+        <input id="dish-search" type="text"
+               placeholder="Search dishes (e.g. dal tadka, chole bhature)..." />
+        <div id="dish-results"></div>
+      </div>
+
+      <div id="meal-items"><p>No items yet.</p></div>
+      <div id="meal-nutrient-totals"></div>
+
+      <div id="personal-context">
+        <h3>Personal context (optional — not stored)</h3>
+
+        <label>BMI category
+          <select id="bmi-input">
+            <option value="normal" selected>Not specified / Normal (18.5–22.9)</option>
+            <option value="underweight">Underweight (&lt;18.5)</option>
+            <option value="overweight">Overweight (23–24.9) — Asian cutoff</option>
+            <option value="obese">Obese (≥25) — Asian cutoff</option>
+          </select>
+        </label>
+        <p class="bmi-note">Asian cutoffs: overweight ≥23, obese ≥25 (WHO/SEARO).
+          Western standard uses ≥25 for overweight.</p>
+
+        <label>Family history of type 2 diabetes
+          <select id="t2d-history">
+            <option value="unknown" selected>Unknown / not specified</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+
+        <label>Family history of heart disease or stroke
+          <select id="cvd-history">
+            <option value="unknown" selected>Unknown / not specified</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+
+        <label>Salt added during cooking
+          <select id="salt-input">
+            <option value="null" selected>Not specified</option>
+            <option value="200">Light (~200mg sodium)</option>
+            <option value="400">Moderate (~400mg sodium)</option>
+            <option value="800">Heavy (~800mg sodium)</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="calculate-btn" disabled>Calculate meal risk</button>
+    </section>
+
+    <section id="results" style="display:none">
+      <h2>Your meal risk scores</h2>
+      <div id="disclaimer-banner">
+        These scores are educational tools, not medical diagnoses.
+        Consult a qualified healthcare provider for personal health decisions.
+        Scores reflect a single meal, not your overall dietary pattern.
+      </div>
+      <div id="scores-container"></div>
+      <div id="recommendations-container"></div>
+      <button id="back-btn">Back to meal builder</button>
+    </section>
+
+    <section id="about" style="display:none">
+      <h2>About this tool</h2>
+      <p>Placeholder — content added in Step 24.</p>
+    </section>
+
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/scorer.js"></script>
+  <script src="js/recommender.js"></script>
+  <script src="js/meal-builder.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
