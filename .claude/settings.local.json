@@ -15,7 +15,9 @@
       "PowerShell($json = Get-Content \"data\\\\ingredients.json\" -Raw; $arr = $json | ConvertFrom-Json; Write-Host \"Valid. Count: $\\($arr.Count\\)\"; $arr | ForEach-Object { Write-Host \"$\\($_.id\\) $\\($_.name\\)\" })",
       "mcp__Claude_Preview__preview_start",
       "PowerShell(\\(Get-Command npx -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python3 -ErrorAction SilentlyContinue\\).Source)",
-      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\", \"C:\\\\Program Files \\(x86\\)\\\\nodejs\", \"$env:APPDATA\\\\npm\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\" -ErrorAction SilentlyContinue | Select-Object FullName)"
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\", \"C:\\\\Program Files \\(x86\\)\\\\nodejs\", \"$env:APPDATA\\\\npm\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\" -ErrorAction SilentlyContinue | Select-Object FullName)",
+      "Bash(node -e ' *)",
+      "PowerShell($gi = Get-Content \"data\\\\gi-overrides.json\" -Raw | ConvertFrom-Json; $rec = Get-Content \"data\\\\rec-overrides.json\" -Raw | ConvertFrom-Json; Write-Output \"gi-overrides: $\\($gi.Count\\) entries — valid\"; Write-Output \"rec-overrides: $\\($rec.Count\\) entries — valid\")"
     ]
   }
 }

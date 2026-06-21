@@ -758,5 +758,25 @@
     },
     "glycemic_index": null,
     "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_039",
+    "source_code": "CUSTOM-0039",
+    "name": "Missi roti (besan-atta blend)",
+    "food_group": "Cereals and Millets",
+    "diet_type": "veg",
+    "role_tags": ["starch_source", "whole_grain"],
+    "nutrients_per_100g": {
+      "energy_kcal": 330,
+      "protein_g": 13.5,
+      "carbohydrate_g": 55.0,
+      "fiber_g": 8.0,
+      "total_fat_g": 4.5,
+      "saturated_fat_g": 0.5,
+      "sugars_g": 2.0,
+      "sodium_mg": 5
+    },
+    "glycemic_index": 28,
+    "source": "Estimated from published besan/atta blend GI studies (range 28–45, midpoint 36 per facet doc; 28 used as lower bound for typical 50:50 blend)"
   }
 ]

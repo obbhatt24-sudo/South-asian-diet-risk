@@ -1,1 +1,104 @@
-[]
+[
+  {
+    "ingredient_id": "ing_001",
+    "gi": 73,
+    "source": "Augustin et al. 2020 meta-analysis",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_002",
+    "gi": 54,
+    "source": "Brand-Miller et al.",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_003",
+    "gi": 62,
+    "source": "Published Indian study values",
+    "preparation": "Tawa-cooked"
+  },
+  {
+    "ingredient_id": "ing_004",
+    "gi": 76,
+    "source": "Standard value",
+    "preparation": "—"
+  },
+  {
+    "ingredient_id": "ing_005",
+    "gi": 55,
+    "source": "Standard value",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_006",
+    "gi": 62,
+    "source": "Nirmala et al.",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_007",
+    "gi": 54,
+    "source": "Published values",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_008",
+    "gi": 69,
+    "source": "Published values",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_013",
+    "gi": 8,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_014",
+    "gi": 31,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_015",
+    "gi": 29,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_016",
+    "gi": 25,
+    "source": "Published values",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_023",
+    "gi": 78,
+    "source": "Augustin et al. 2020",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_024",
+    "gi": 63,
+    "source": "Published values",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_034",
+    "gi": 43,
+    "source": "Published values",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_035",
+    "gi": 33,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_036",
+    "gi": 29,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  }
+]

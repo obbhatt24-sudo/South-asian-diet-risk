@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "flag": "high_glycemic_load",
+    "source_ingredient_id": "ing_001",
+    "intervention": "replace",
+    "target_ingredient_id": "ing_002",
+    "instruction_text": "Swap white rice for basmati rice — its lower GI (54 vs 73) meaningfully reduces the glycemic load of this meal.",
+    "reason": "Basmati rice has a substantially lower GI than common milled white rice due to its longer grain and higher amylose content."
+  },
+  {
+    "flag": "high_glycemic_load",
+    "source_ingredient_id": "ing_004",
+    "intervention": "replace",
+    "target_ingredient_id": "ing_039",
+    "instruction_text": "Swap maida bhature for missi roti (besan + atta blend) — much lower GI and higher protein and fiber.",
+    "reason": "Missi roti made from a chickpea flour and whole wheat blend has a GI around 28 vs maida's 76, and adds protein and fiber."
+  },
+  {
+    "flag": "high_saturated_fat",
+    "source_ingredient_id": "ing_009",
+    "intervention": "reduce",
+    "target_ingredient_id": null,
+    "instruction_text": "Use 1 tsp of ghee instead of 2–3 tsp when finishing the dish — the flavour carries at lower quantity.",
+    "reason": "Ghee is predominantly saturated fat (62g/100g); small reductions meaningfully lower meal-level saturated fat."
+  },
+  {
+    "flag": "high_saturated_fat",
+    "source_ingredient_id": "ing_012",
+    "intervention": "replace",
+    "target_ingredient_id": "ing_010",
+    "instruction_text": "Replace coconut oil with mustard oil — mustard oil has a much better unsaturated fat profile for heart health.",
+    "reason": "Coconut oil is ~83% saturated fat; mustard oil is ~12% saturated fat with a high MUFA:SFA ratio."
+  },
+  {
+    "flag": "poor_fat_quality",
+    "source_ingredient_id": "ing_009",
+    "intervention": "reduce",
+    "target_ingredient_id": null,
+    "instruction_text": "Reduce ghee quantity — its low MUFA:SFA ratio is the main driver of the fat quality score. Use 1 tsp instead of 2.",
+    "reason": "Ghee has a MUFA:SFA ratio well below 0.5, pushing the meal into the lowest fat quality band."
+  },
+  {
+    "flag": "poor_fat_quality",
+    "source_ingredient_id": "ing_011",
+    "intervention": "replace",
+    "target_ingredient_id": "ing_010",
+    "instruction_text": "Replace refined sunflower oil with mustard oil — mustard oil has a higher MUFA:SFA ratio and is the traditional South Asian cooking oil.",
+    "reason": "Sunflower oil is predominantly PUFA with moderate MUFA; mustard oil has a higher MUFA content and is the MASALA SAM score reference fat."
+  },
+  {
+    "flag": "high_saturated_fat",
+    "source_ingredient_id": "ing_038",
+    "intervention": "replace",
+    "target_ingredient_id": "ing_021",
+    "instruction_text": "Replace cream with curd (yogurt) in the gravy — similar creamy texture, much lower saturated fat.",
+    "reason": "Heavy cream is ~23g saturated fat per 100g; full-fat curd is ~2g per 100g, with added probiotic benefit."
+  },
+  {
+    "flag": "low_fiber",
+    "source_ingredient_id": null,
+    "intervention": "add",
+    "target_ingredient_id": "ing_017",
+    "instruction_text": "Add a vegetable side (spinach, methi, or bhindi) to boost fiber. This meal is low in fiber.",
+    "reason": "Fiber is independently protective for both T2D and CVD; non-starchy green vegetables are the lowest-calorie way to add fiber to a South Asian meal."
+  },
+  {
+    "flag": "poor_protein_quality",
+    "source_ingredient_id": null,
+    "intervention": "add",
+    "target_ingredient_id": "ing_016",
+    "instruction_text": "Add a small portion of moong dal or masoor dal — legume protein is independently protective for both diabetes and heart disease risk in South Asian populations.",
+    "reason": "ICMR-INDIAB found legume and dairy protein independently associated with lower T2D risk; replacing 5% of carbohydrate energy with plant protein was significantly protective."
+  }
+]
