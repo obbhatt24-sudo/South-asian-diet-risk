@@ -69,7 +69,12 @@ document.getElementById('tab-dish').addEventListener('click', function() {
   document.getElementById('tab-ingredient').classList.remove('active');
 });
 
+function enableUI() {
+  console.log('UI ready');
+}
+
 function initUI() {
+  loadData().then(() => { console.log('Data loaded'); enableUI(); });
   showView('meal-builder');
   document.getElementById('context-description').textContent = CONTEXT_DESCRIPTIONS['india'];
   console.log('App initialised, state:', state);

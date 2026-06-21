@@ -12,7 +12,9 @@
       "Bash(python -c ' *)",
       "PowerShell(node -e \"console.log\\('node ok'\\)\" 2>&1)",
       "Bash(node -e \"const d = require\\('./data/ingredients.json'\\); console.log\\('Valid. Count:', d.length\\); d.forEach\\(i => console.log\\(i.id, i.name\\)\\)\")",
-      "PowerShell($json = Get-Content \"data\\\\ingredients.json\" -Raw; $arr = $json | ConvertFrom-Json; Write-Host \"Valid. Count: $\\($arr.Count\\)\"; $arr | ForEach-Object { Write-Host \"$\\($_.id\\) $\\($_.name\\)\" })"
+      "PowerShell($json = Get-Content \"data\\\\ingredients.json\" -Raw; $arr = $json | ConvertFrom-Json; Write-Host \"Valid. Count: $\\($arr.Count\\)\"; $arr | ForEach-Object { Write-Host \"$\\($_.id\\) $\\($_.name\\)\" })",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(\\(Get-Command npx -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python3 -ErrorAction SilentlyContinue\\).Source)"
     ]
   }
 }
