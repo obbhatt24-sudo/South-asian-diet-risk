@@ -1,1 +1,291 @@
-[]
+[
+  {
+    "id": "dish_001",
+    "name": "Dal Tadka",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_015", "amount_g": 200 },
+      { "ingredient_id": "ing_009", "amount_g": 15 },
+      { "ingredient_id": "ing_018", "amount_g": 80 },
+      { "ingredient_id": "ing_019", "amount_g": 80 },
+      { "ingredient_id": "ing_031", "amount_g": 10 },
+      { "ingredient_id": "ing_032", "amount_g": 10 },
+      { "ingredient_id": "ing_033", "amount_g": 5 }
+    ],
+    "total_weight_g": 1000,
+    "servings": 4,
+    "serving_size_g": 250,
+    "nutrients_per_serving": {
+      "energy_kcal": 223,
+      "protein_g": 12.0,
+      "carbohydrate_g": 33.3,
+      "fiber_g": 8.3,
+      "total_fat_g": 5.0,
+      "saturated_fat_g": 2.5,
+      "sugars_g": 2.9,
+      "sodium_mg": 20
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_002",
+    "name": "Dal Makhani",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_034", "amount_g": 150 },
+      { "ingredient_id": "ing_037", "amount_g": 30 },
+      { "ingredient_id": "ing_009", "amount_g": 10 },
+      { "ingredient_id": "ing_038", "amount_g": 30 },
+      { "ingredient_id": "ing_022", "amount_g": 50 },
+      { "ingredient_id": "ing_019", "amount_g": 100 },
+      { "ingredient_id": "ing_018", "amount_g": 80 },
+      { "ingredient_id": "ing_031", "amount_g": 10 },
+      { "ingredient_id": "ing_032", "amount_g": 10 }
+    ],
+    "total_weight_g": 1000,
+    "servings": 4,
+    "serving_size_g": 250,
+    "nutrients_per_serving": {
+      "energy_kcal": 258,
+      "protein_g": 10.3,
+      "carbohydrate_g": 27.2,
+      "fiber_g": 7.6,
+      "total_fat_g": 12.3,
+      "saturated_fat_g": 7.5,
+      "sugars_g": 2.9,
+      "sodium_mg": 69
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_003",
+    "name": "Chana Masala",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_035", "amount_g": 200 },
+      { "ingredient_id": "ing_018", "amount_g": 100 },
+      { "ingredient_id": "ing_019", "amount_g": 100 },
+      { "ingredient_id": "ing_011", "amount_g": 20 },
+      { "ingredient_id": "ing_031", "amount_g": 10 },
+      { "ingredient_id": "ing_032", "amount_g": 10 },
+      { "ingredient_id": "ing_033", "amount_g": 5 }
+    ],
+    "total_weight_g": 1000,
+    "servings": 4,
+    "serving_size_g": 250,
+    "nutrients_per_serving": {
+      "energy_kcal": 250,
+      "protein_g": 10.6,
+      "carbohydrate_g": 35.5,
+      "fiber_g": 7.2,
+      "total_fat_g": 8.4,
+      "saturated_fat_g": 0.8,
+      "sugars_g": 6.7,
+      "sodium_mg": 17
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_004",
+    "name": "Palak Paneer",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_017", "amount_g": 300 },
+      { "ingredient_id": "ing_020", "amount_g": 150 },
+      { "ingredient_id": "ing_018", "amount_g": 80 },
+      { "ingredient_id": "ing_019", "amount_g": 80 },
+      { "ingredient_id": "ing_009", "amount_g": 20 },
+      { "ingredient_id": "ing_031", "amount_g": 10 },
+      { "ingredient_id": "ing_032", "amount_g": 10 }
+    ],
+    "total_weight_g": 1000,
+    "servings": 4,
+    "serving_size_g": 250,
+    "nutrients_per_serving": {
+      "energy_kcal": 181,
+      "protein_g": 9.6,
+      "carbohydrate_g": 7.1,
+      "fiber_g": 2.3,
+      "total_fat_g": 13.2,
+      "saturated_fat_g": 8.1,
+      "sugars_g": 2.2,
+      "sodium_mg": 73
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_005",
+    "name": "Aloo Sabzi",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_023", "amount_g": 400 },
+      { "ingredient_id": "ing_018", "amount_g": 100 },
+      { "ingredient_id": "ing_011", "amount_g": 20 },
+      { "ingredient_id": "ing_033", "amount_g": 5 },
+      { "ingredient_id": "ing_031", "amount_g": 10 }
+    ],
+    "total_weight_g": 600,
+    "servings": 4,
+    "serving_size_g": 150,
+    "nutrients_per_serving": {
+      "energy_kcal": 140,
+      "protein_g": 2.7,
+      "carbohydrate_g": 21.2,
+      "fiber_g": 2.8,
+      "total_fat_g": 5.4,
+      "saturated_fat_g": 0.5,
+      "sugars_g": 1.9,
+      "sodium_mg": 10
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_006",
+    "name": "Chole Bhature",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_035", "amount_g": 250 },
+      { "ingredient_id": "ing_004", "amount_g": 300 },
+      { "ingredient_id": "ing_021", "amount_g": 50 },
+      { "ingredient_id": "ing_011", "amount_g": 50 },
+      { "ingredient_id": "ing_018", "amount_g": 100 },
+      { "ingredient_id": "ing_019", "amount_g": 100 },
+      { "ingredient_id": "ing_031", "amount_g": 10 }
+    ],
+    "total_weight_g": 1400,
+    "servings": 4,
+    "serving_size_g": 350,
+    "nutrients_per_serving": {
+      "energy_kcal": 624,
+      "protein_g": 20.8,
+      "carbohydrate_g": 98.1,
+      "fiber_g": 10.6,
+      "total_fat_g": 17.4,
+      "saturated_fat_g": 2.0,
+      "sugars_g": 8.7,
+      "sodium_mg": 24
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_007",
+    "name": "Rajma Chawal",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_036", "amount_g": 150 },
+      { "ingredient_id": "ing_001", "amount_g": 150 },
+      { "ingredient_id": "ing_018", "amount_g": 100 },
+      { "ingredient_id": "ing_019", "amount_g": 100 },
+      { "ingredient_id": "ing_011", "amount_g": 20 },
+      { "ingredient_id": "ing_031", "amount_g": 10 },
+      { "ingredient_id": "ing_032", "amount_g": 10 }
+    ],
+    "total_weight_g": 1200,
+    "servings": 4,
+    "serving_size_g": 300,
+    "nutrients_per_serving": {
+      "energy_kcal": 321,
+      "protein_g": 11.8,
+      "carbohydrate_g": 56.9,
+      "fiber_g": 10.4,
+      "total_fat_g": 5.9,
+      "saturated_fat_g": 0.6,
+      "sugars_g": 2.6,
+      "sodium_mg": 15
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_008",
+    "name": "Idli Sambar",
+    "diet_type": "veg",
+    "ingredients": [
+      { "ingredient_id": "ing_001", "amount_g": 150 },
+      { "ingredient_id": "ing_034", "amount_g": 50 },
+      { "ingredient_id": "ing_015", "amount_g": 100 },
+      { "ingredient_id": "ing_019", "amount_g": 80 },
+      { "ingredient_id": "ing_018", "amount_g": 60 },
+      { "ingredient_id": "ing_009", "amount_g": 10 },
+      { "ingredient_id": "ing_033", "amount_g": 3 }
+    ],
+    "total_weight_g": 1200,
+    "servings": 4,
+    "serving_size_g": 300,
+    "nutrients_per_serving": {
+      "energy_kcal": 291,
+      "protein_g": 11.6,
+      "carbohydrate_g": 53.6,
+      "fiber_g": 6.7,
+      "total_fat_g": 3.5,
+      "saturated_fat_g": 1.7,
+      "sugars_g": 2.1,
+      "sodium_mg": 17
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_009",
+    "name": "Chicken Curry",
+    "diet_type": "non_veg",
+    "ingredients": [
+      { "ingredient_id": "ing_029", "amount_g": 400 },
+      { "ingredient_id": "ing_018", "amount_g": 100 },
+      { "ingredient_id": "ing_019", "amount_g": 100 },
+      { "ingredient_id": "ing_011", "amount_g": 20 },
+      { "ingredient_id": "ing_021", "amount_g": 60 },
+      { "ingredient_id": "ing_031", "amount_g": 15 },
+      { "ingredient_id": "ing_032", "amount_g": 10 }
+    ],
+    "total_weight_g": 1000,
+    "servings": 4,
+    "serving_size_g": 250,
+    "nutrients_per_serving": {
+      "energy_kcal": 196,
+      "protein_g": 23.8,
+      "carbohydrate_g": 5.7,
+      "fiber_g": 0.9,
+      "total_fat_g": 8.2,
+      "saturated_fat_g": 1.5,
+      "sugars_g": 2.5,
+      "sodium_mg": 83
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  },
+  {
+    "id": "dish_010",
+    "name": "Egg Bhurji",
+    "diet_type": "egg",
+    "ingredients": [
+      { "ingredient_id": "ing_030", "amount_g": 240 },
+      { "ingredient_id": "ing_018", "amount_g": 80 },
+      { "ingredient_id": "ing_019", "amount_g": 80 },
+      { "ingredient_id": "ing_011", "amount_g": 15 },
+      { "ingredient_id": "ing_031", "amount_g": 5 },
+      { "ingredient_id": "ing_032", "amount_g": 5 }
+    ],
+    "total_weight_g": 600,
+    "servings": 4,
+    "serving_size_g": 150,
+    "nutrients_per_serving": {
+      "energy_kcal": 134,
+      "protein_g": 8.1,
+      "carbohydrate_g": 3.7,
+      "fiber_g": 0.6,
+      "total_fat_g": 9.5,
+      "saturated_fat_g": 2.2,
+      "sugars_g": 1.6,
+      "sodium_mg": 87
+    },
+    "glycemic_index": null,
+    "source": "INDB recipe database"
+  }
+]

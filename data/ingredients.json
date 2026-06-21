@@ -598,5 +598,165 @@
     },
     "glycemic_index": 0,
     "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_031",
+    "source_code": "INDB-0031",
+    "name": "Garlic, raw",
+    "food_group": "Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["vegetable", "spice"],
+    "nutrients_per_100g": {
+      "energy_kcal": 149,
+      "protein_g": 6.4,
+      "carbohydrate_g": 33.1,
+      "fiber_g": 2.1,
+      "total_fat_g": 0.5,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 1.0,
+      "sodium_mg": 17
+    },
+    "glycemic_index": 30,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_032",
+    "source_code": "INDB-0032",
+    "name": "Ginger, raw",
+    "food_group": "Vegetables",
+    "diet_type": "veg",
+    "role_tags": ["vegetable", "spice"],
+    "nutrients_per_100g": {
+      "energy_kcal": 80,
+      "protein_g": 1.8,
+      "carbohydrate_g": 17.8,
+      "fiber_g": 2.0,
+      "total_fat_g": 0.8,
+      "saturated_fat_g": 0.2,
+      "sugars_g": 1.7,
+      "sodium_mg": 13
+    },
+    "glycemic_index": 15,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_033",
+    "source_code": "INDB-0033",
+    "name": "Cumin seeds",
+    "food_group": "Spices and Condiments",
+    "diet_type": "veg",
+    "role_tags": ["spice"],
+    "nutrients_per_100g": {
+      "energy_kcal": 375,
+      "protein_g": 17.8,
+      "carbohydrate_g": 44.2,
+      "fiber_g": 10.5,
+      "total_fat_g": 22.3,
+      "saturated_fat_g": 1.5,
+      "sugars_g": 2.3,
+      "sodium_mg": 168
+    },
+    "glycemic_index": null,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_034",
+    "source_code": "INDB-0034",
+    "name": "Urad dal, raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 347,
+      "protein_g": 24.0,
+      "carbohydrate_g": 59.3,
+      "fiber_g": 18.3,
+      "total_fat_g": 1.4,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 1.5,
+      "sodium_mg": 38
+    },
+    "glycemic_index": 43,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_035",
+    "source_code": "INDB-0035",
+    "name": "Chickpeas (kabuli chana), raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 360,
+      "protein_g": 19.3,
+      "carbohydrate_g": 60.8,
+      "fiber_g": 12.4,
+      "total_fat_g": 6.0,
+      "saturated_fat_g": 0.6,
+      "sugars_g": 9.9,
+      "sodium_mg": 24
+    },
+    "glycemic_index": 28,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_036",
+    "source_code": "INDB-0036",
+    "name": "Kidney beans (rajma), raw",
+    "food_group": "Pulses and Legumes",
+    "diet_type": "veg",
+    "role_tags": ["legume_protein"],
+    "nutrients_per_100g": {
+      "energy_kcal": 337,
+      "protein_g": 22.9,
+      "carbohydrate_g": 61.3,
+      "fiber_g": 25.4,
+      "total_fat_g": 1.5,
+      "saturated_fat_g": 0.2,
+      "sugars_g": 2.0,
+      "sodium_mg": 28
+    },
+    "glycemic_index": 24,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_037",
+    "source_code": "INDB-0037",
+    "name": "Butter, unsalted",
+    "food_group": "Fats and Oils",
+    "diet_type": "veg",
+    "role_tags": ["cooking_fat", "dairy_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 717,
+      "protein_g": 0.9,
+      "carbohydrate_g": 0.1,
+      "fiber_g": 0.0,
+      "total_fat_g": 81.1,
+      "saturated_fat_g": 51.4,
+      "sugars_g": 0.1,
+      "sodium_mg": 11
+    },
+    "glycemic_index": 0,
+    "source": "INDB (derived from IFCT 2017)"
+  },
+  {
+    "id": "ing_038",
+    "source_code": "INDB-0038",
+    "name": "Cream (fresh, heavy)",
+    "food_group": "Dairy",
+    "diet_type": "veg",
+    "role_tags": ["dairy_fat"],
+    "nutrients_per_100g": {
+      "energy_kcal": 340,
+      "protein_g": 2.0,
+      "carbohydrate_g": 2.8,
+      "fiber_g": 0.0,
+      "total_fat_g": 36.0,
+      "saturated_fat_g": 22.5,
+      "sugars_g": 2.8,
+      "sodium_mg": 38
+    },
+    "glycemic_index": null,
+    "source": "INDB (derived from IFCT 2017)"
   }
 ]
