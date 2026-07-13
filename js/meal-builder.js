@@ -190,13 +190,58 @@ function renderMealItems() {
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
     editBtn.addEventListener('click', function() {
-      console.log('edit — Step 11');
+      startEditMealItem(item, index, label, name);
     });
 
     div.appendChild(label);
     div.appendChild(removeBtn);
     div.appendChild(editBtn);
     container.appendChild(div);
+  });
+}
+
+function startEditMealItem(item, index, label, name) {
+  const isDish = item.type === 'dish';
+  const currentValue = isDish ? item.servings : item.gramAmount;
+
+  const form = document.createElement('span');
+  form.innerHTML =
+    '<span>' + (index + 1) + '. ' + name + '</span> ' +
+    '<input type="number" ' +
+      (isDish ? 'min="0.5" max="10" step="0.5"' : 'min="1" max="2000"') +
+      ' value="' + currentValue + '" id="edit-input"> ' +
+    '<span>' + (isDish ? 'serving(s)' : 'g') + '</span> ' +
+    '<button id="edit-save-btn">Save</button> ' +
+    '<button id="edit-cancel-btn">Cancel</button> ' +
+    '<span id="edit-error" style="color:red; font-size:0.85em;"></span>';
+
+  label.replaceWith(form);
+
+  const input = form.querySelector('#edit-input');
+
+  function saveEdit() {
+    const newValue = parseFloat(input.value);
+    if (!newValue || newValue <= 0) {
+      form.querySelector('#edit-error').textContent = 'Must be greater than 0';
+      return;
+    }
+    if (isDish) {
+      state.mealItems[index].servings = newValue;
+    } else {
+      state.mealItems[index].gramAmount = newValue;
+    }
+    renderMealItems();
+    updateNutrientTotals();
+  }
+
+  form.querySelector('#edit-save-btn').addEventListener('click', saveEdit);
+
+  input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') saveEdit();
+  });
+
+  form.querySelector('#edit-cancel-btn').addEventListener('click', function() {
+    renderMealItems();
   });
 }
 
