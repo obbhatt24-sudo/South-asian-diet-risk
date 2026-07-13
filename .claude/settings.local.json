@@ -17,7 +17,11 @@
       "PowerShell(\\(Get-Command npx -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python -ErrorAction SilentlyContinue\\).Source; \\(Get-Command python3 -ErrorAction SilentlyContinue\\).Source)",
       "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\", \"C:\\\\Program Files \\(x86\\)\\\\nodejs\", \"$env:APPDATA\\\\npm\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\" -ErrorAction SilentlyContinue | Select-Object FullName)",
       "Bash(node -e ' *)",
-      "PowerShell($gi = Get-Content \"data\\\\gi-overrides.json\" -Raw | ConvertFrom-Json; $rec = Get-Content \"data\\\\rec-overrides.json\" -Raw | ConvertFrom-Json; Write-Output \"gi-overrides: $\\($gi.Count\\) entries — valid\"; Write-Output \"rec-overrides: $\\($rec.Count\\) entries — valid\")"
+      "PowerShell($gi = Get-Content \"data\\\\gi-overrides.json\" -Raw | ConvertFrom-Json; $rec = Get-Content \"data\\\\rec-overrides.json\" -Raw | ConvertFrom-Json; Write-Output \"gi-overrides: $\\($gi.Count\\) entries — valid\"; Write-Output \"rec-overrides: $\\($rec.Count\\) entries — valid\")",
+      "Bash(python -c \"import json;d=json.load\\(open\\(r'C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\data\\\\ingredients.json'\\)\\);i=[x for x in d if x['id']=='ing_001'][0];print\\(i['name'], i['nutrients_per_100g']['carbohydrate_g'], i.get\\('glycemic_index'\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:61784/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:61784/)",
+      "Bash(python -c \"import json;d=json.load\\(open\\(r'C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\data\\\\ingredients.json'\\)\\);[print\\(x['id'], x['name'], x['nutrients_per_100g']['carbohydrate_g'], x.get\\('glycemic_index'\\)\\) for x in d if 'chana' in x['name'].lower\\(\\) or 'bengal' in x['name'].lower\\(\\)]\")"
     ]
   }
 }

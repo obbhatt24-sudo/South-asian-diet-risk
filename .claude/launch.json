@@ -4,8 +4,8 @@
     {
       "name": "south-asian-diet",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5175"],
-      "port": 5175,
+      "runtimeArgs": ["-m", "http.server", "5180"],
+      "port": 5180,
       "autoPort": false
     }
   ]
