@@ -7,6 +7,13 @@
       "runtimeArgs": ["-m", "http.server", "5180"],
       "port": 5180,
       "autoPort": false
+    },
+    {
+      "name": "south-asian-diet-alt",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5181"],
+      "port": 5181,
+      "autoPort": false
     }
   ]
 }
