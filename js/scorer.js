@@ -189,3 +189,117 @@ function diabetesScore(mealItems, context, personalContext) {
 
   return { score: finalScore, band, subScores, flags, gl, refShare, protShare };
 }
+
+function sfaSubScore(sfaG) {
+  if (sfaG < 4) return 0;
+  if (sfaG < 8) return 15;
+  if (sfaG < 12) return 28;
+  return 40;
+}
+
+// Few ingredients carry a measured mufa_g, so most fall back to the
+// MUFA_SFA_FALLBACK ratio table keyed by lowercase ingredient name.
+function getMufaSfaRatio(mealItems) {
+  let totalSfa = 0;
+  let totalMufa = 0;
+  let usedFallback = false;
+
+  const accumulate = (ing, scale) => {
+    const sfa = ing.nutrients_per_100g.saturated_fat_g * scale;
+    totalSfa += sfa;
+    if (ing.nutrients_per_100g.mufa_g !== undefined) {
+      totalMufa += ing.nutrients_per_100g.mufa_g * scale;
+    } else {
+      const fallbackRatio =
+        MUFA_SFA_FALLBACK[ing.name.toLowerCase()] ?? MUFA_SFA_FALLBACK_DEFAULT;
+      totalMufa += sfa * fallbackRatio;
+      usedFallback = true;
+    }
+  };
+
+  for (const item of mealItems) {
+    if (item.type === 'ingredient') {
+      const ing = getIngredientById(item.id);
+      if (!ing) continue;
+      accumulate(ing, item.gramAmount / 100);
+    } else if (item.type === 'dish') {
+      const dish = getDishById(item.id);
+      if (!dish) continue;
+      for (const di of dish.ingredients) {
+        const ing = getIngredientById(di.ingredient_id);
+        if (!ing) continue;
+        accumulate(ing, (di.amount_g / 100) * (item.servings / dish.servings));
+      }
+    }
+  }
+
+  if (totalSfa === 0) return { ratio: null, usedFallback: false };
+  return { ratio: totalMufa / totalSfa, usedFallback };
+}
+
+function fatQualitySubScore(ratio) {
+  if (ratio === null) return null;
+  if (ratio > 2.0) return 0;
+  if (ratio >= 1.0) return 12;
+  if (ratio >= 0.5) return 22;
+  return 30;
+}
+
+function sodiumSubScore(sodiumMg) {
+  if (sodiumMg === null) return null;
+  if (sodiumMg < 400) return 0;
+  if (sodiumMg < 751) return 3;
+  if (sodiumMg < 1201) return 7;
+  return 10;
+}
+
+function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
+  const nutrients = computeMealNutrients(mealItems);
+  const totalSodium = addedSodiumMg !== null
+    ? nutrients.sodium_mg + addedSodiumMg
+    : null;
+
+  const { ratio, usedFallback } = getMufaSfaRatio(mealItems);
+  const sodiumSub = sodiumSubScore(totalSodium);
+  const fatQualSub = fatQualitySubScore(ratio);
+
+  const subScores = {
+    saturated_fat: sfaSubScore(nutrients.saturated_fat_g),
+    fat_quality: fatQualSub, // may be null
+    fiber: fiberSubScore(nutrients.fiber_g),
+    sodium: sodiumSub // may be null
+  };
+
+  // Sum only non-null sub-scores
+  const rawSum = Object.values(subScores).reduce((sum, v) => sum + (v ?? 0), 0);
+
+  const bmiMult = getBmiMultiplier(personalContext.bmiCategory);
+  const cvdMult = personalContext.cvdFamilyHistory === true ? 1.15 : 1.0;
+  const finalScore = Math.min(100, Math.round(rawSum * bmiMult * cvdMult));
+
+  const band = finalScore < 30 ? 'Low' : finalScore < 60 ? 'Moderate' : 'High';
+
+  const flags = [];
+  if (subScores.saturated_fat > 0) flags.push('high_saturated_fat');
+  if (fatQualSub !== null && fatQualSub > 0) flags.push('poor_fat_quality');
+  if (subScores.fiber > 0) flags.push('low_fiber');
+  if (sodiumSub !== null && sodiumSub > 0) flags.push('high_sodium');
+
+  return {
+    score: finalScore,
+    band,
+    subScores,
+    flags,
+    ratio,
+    usedFallback,
+    totalSodium
+  };
+}
+
+// Master entry point — the rest of the app only ever calls score().
+function score(mealItems, addedSodiumMg, context, personalContext) {
+  return {
+    diabetes: diabetesScore(mealItems, context, personalContext),
+    cvd: cvdScore(mealItems, addedSodiumMg, context, personalContext)
+  };
+}
