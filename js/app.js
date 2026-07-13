@@ -71,6 +71,7 @@ document.getElementById('tab-dish').addEventListener('click', function() {
 
 function enableUI() {
   console.log('UI ready');
+  initMealBuilder();
 }
 
 function initUI() {
