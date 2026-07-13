@@ -144,3 +144,48 @@ function proteinQualitySubScore(share) {
   if (share >= 0.05) return 10;
   return 15;
 }
+
+function fiberSubScore(fiberG) {
+  if (fiberG >= 6) return 0;
+  if (fiberG >= 4) return 5;
+  if (fiberG >= 2) return 12;
+  return 20;
+}
+
+function getBmiMultiplier(bmiCategory) {
+  switch (bmiCategory) {
+    case 'overweight': return 1.1;
+    case 'obese': return 1.2;
+    default: return 1.0;
+  }
+}
+
+function diabetesScore(mealItems, context, personalContext) {
+  const nutrients = computeMealNutrients(mealItems);
+  const gl = computeMealGL(mealItems);
+  const refShare = refinedCarbShare(mealItems);
+  const protShare = proteinQualityShare(mealItems);
+
+  const subScores = {
+    glycemic_load: glSubScore(gl),
+    refined_carb: refinedCarbSubScore(refShare, context),
+    fiber: fiberSubScore(nutrients.fiber_g),
+    protein_quality: proteinQualitySubScore(protShare)
+  };
+
+  const rawSum = Object.values(subScores).reduce((sum, v) => sum + v, 0);
+
+  const bmiMult = getBmiMultiplier(personalContext.bmiCategory);
+  const t2dMult = personalContext.t2dFamilyHistory === true ? 1.15 : 1.0;
+  const finalScore = Math.min(100, Math.round(rawSum * bmiMult * t2dMult));
+
+  const band = finalScore < 30 ? 'Low' : finalScore < 60 ? 'Moderate' : 'High';
+
+  const flags = [];
+  if (subScores.glycemic_load > 0) flags.push('high_glycemic_load');
+  if (subScores.refined_carb > 0) flags.push('high_refined_carb_share');
+  if (subScores.fiber > 0) flags.push('low_fiber');
+  if (subScores.protein_quality > 0) flags.push('poor_protein_quality');
+
+  return { score: finalScore, band, subScores, flags, gl, refShare, protShare };
+}

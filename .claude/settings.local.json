@@ -25,7 +25,15 @@
       "PowerShell(node \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\13bc8dbf-fb5c-42c0-a89c-4b1c6ba1f5a9\\\\scratchpad\\\\test-scorer.js\")",
       "PowerShell(try { \\(Invoke-WebRequest -Uri http://localhost:51561/js/scorer.js -UseBasicParsing -TimeoutSec 5\\).Content.Length } catch { $_.Exception.Message })",
       "PowerShell(git add js/scorer.js notes/deferred-improvements.md)",
-      "PowerShell(git add .claude/launch.json)"
+      "PowerShell(git add .claude/launch.json)",
+      "PowerShell(node \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\2c1dc443-bf16-41af-b535-5205feb90a5a\\\\scratchpad\\\\test-step14.js\")",
+      "PowerShell($cmds = 'node','node.exe','deno','bun','npx'; foreach \\($c in $cmds\\) { $r = Get-Command $c -ErrorAction SilentlyContinue; if \\($r\\) { \"$c -> $\\($r.Source\\)\" } }; if \\(Test-Path \"$env:ProgramFiles\\\\nodejs\\\\node.exe\"\\) { \"found: $env:ProgramFiles\\\\nodejs\\\\node.exe\" })",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\nodejs\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\", \"$env:LOCALAPPDATA\\\\nvm\", \"$env:APPDATA\\\\nvm\", \"$env:USERPROFILE\\\\scoop\\\\apps\", \"$env:LOCALAPPDATA\\\\Microsoft\\\\WinGet\\\\Packages\"\\); foreach \\($p in $paths\\) { if \\(Test-Path $p\\) { Get-ChildItem $p -Recurse -Filter \"node.exe\" -ErrorAction SilentlyContinue | Select-Object -First 3 -ExpandProperty FullName } }; $b = Get-ChildItem \"$env:USERPROFILE\\\\.bun\\\\bin\\\\bun.exe\",\"$env:USERPROFILE\\\\.deno\\\\bin\\\\deno.exe\" -ErrorAction SilentlyContinue; if \\($b\\) { $b.FullName })",
+      "PowerShell(Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -ge 5170 -and $_.LocalPort -le 5200 } | ForEach-Object { $p = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue; \"{0} pid={1} name={2}\" -f $_.LocalPort, $_.OwningProcess, $p.ProcessName } | Sort-Object -Unique)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"ProcessId=84268 OR ProcessId=58464 OR ProcessId=85276 OR ProcessId=32516 OR ProcessId=86300\" | ForEach-Object { \"pid=$\\($_.ProcessId\\) cmd=$\\($_.CommandLine\\)\" })",
+      "PowerShell(Stop-Process -Id 84268,58464,85276,32516,86300 -Force -Confirm:$false; Start-Sleep -Milliseconds 500; Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.LocalPort -in 5173,5174,5175,5180,5181 } | Measure-Object | Select-Object -ExpandProperty Count)"
     ]
   }
 }
