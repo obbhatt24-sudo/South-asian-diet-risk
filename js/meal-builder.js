@@ -9,12 +9,11 @@ function renderIngredientResults(results, query) {
   container.innerHTML = '';
 
   if (query.length < 2) {
-    container.innerHTML = '<p>Type at least 2 characters to search.</p>';
     return;
   }
 
   if (results.length === 0) {
-    container.innerHTML = `<p>No ingredients found matching '${query}'. Try a different spelling.</p>`;
+    container.innerHTML = `<p class='empty-state'>No ingredients found matching "${query}". Try a different spelling.</p>`;
     return;
   }
 
@@ -133,6 +132,15 @@ function promptServingCount(dish, clickedDiv) {
 }
 
 function addDishToMeal(id, servings) {
+  const dish = getDishById(id);
+  if (dish) {
+    dish.ingredients.forEach(function(entry) {
+      if (!getIngredientById(entry.ingredient_id)) {
+        console.warn('Dish ' + id + ' has unresolved ingredient:', entry.ingredient_id);
+      }
+    });
+  }
+
   state.mealItems.push({ type: 'dish', id: id, servings: parseFloat(servings) });
   document.getElementById('dish-search').value = '';
   document.getElementById('dish-results').innerHTML = '';
@@ -198,6 +206,17 @@ function renderMealItems() {
     div.appendChild(editBtn);
     container.appendChild(div);
   });
+
+  const clearBtn = document.createElement('button');
+  clearBtn.id = 'clear-meal-btn';
+  clearBtn.textContent = 'Clear meal';
+  clearBtn.addEventListener('click', function() {
+    state.mealItems = [];
+    renderMealItems();
+    updateNutrientTotals();
+    updateCalculateButton();
+  });
+  container.appendChild(clearBtn);
 }
 
 function startEditMealItem(item, index, label, name) {
