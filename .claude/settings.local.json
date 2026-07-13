@@ -21,7 +21,11 @@
       "Bash(python -c \"import json;d=json.load\\(open\\(r'C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\data\\\\ingredients.json'\\)\\);i=[x for x in d if x['id']=='ing_001'][0];print\\(i['name'], i['nutrients_per_100g']['carbohydrate_g'], i.get\\('glycemic_index'\\)\\)\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:61784/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:61784/)",
-      "Bash(python -c \"import json;d=json.load\\(open\\(r'C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\data\\\\ingredients.json'\\)\\);[print\\(x['id'], x['name'], x['nutrients_per_100g']['carbohydrate_g'], x.get\\('glycemic_index'\\)\\) for x in d if 'chana' in x['name'].lower\\(\\) or 'bengal' in x['name'].lower\\(\\)]\")"
+      "Bash(python -c \"import json;d=json.load\\(open\\(r'C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\data\\\\ingredients.json'\\)\\);[print\\(x['id'], x['name'], x['nutrients_per_100g']['carbohydrate_g'], x.get\\('glycemic_index'\\)\\) for x in d if 'chana' in x['name'].lower\\(\\) or 'bengal' in x['name'].lower\\(\\)]\")",
+      "PowerShell(node \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\13bc8dbf-fb5c-42c0-a89c-4b1c6ba1f5a9\\\\scratchpad\\\\test-scorer.js\")",
+      "PowerShell(try { \\(Invoke-WebRequest -Uri http://localhost:51561/js/scorer.js -UseBasicParsing -TimeoutSec 5\\).Content.Length } catch { $_.Exception.Message })",
+      "PowerShell(git add js/scorer.js notes/deferred-improvements.md)",
+      "PowerShell(git add .claude/launch.json)"
     ]
   }
 }
