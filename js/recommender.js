@@ -368,3 +368,38 @@ function computeDeltaScore(candidate, mealItems, addedSodiumMg, context, pc) {
 
   return { delta, previewScore, scoreName, modifiedResult };
 }
+
+// Builds the final top-3 recommendation list from both scores' flags.
+function recommend(diabetesResult, cvdResult, mealItems, addedSodiumMg, context, pc) {
+  const allFlags = [...new Set([...diabetesResult.flags, ...cvdResult.flags])];
+
+  const candidates = [];
+  for (const flag of allFlags) {
+    const candidate = findCandidate(flag, mealItems, context);
+    if (!candidate) continue;
+    const { delta, previewScore, scoreName } = computeDeltaScore(
+      candidate, mealItems, addedSodiumMg, context, pc
+    );
+    if (delta < 3) continue; // floor: sub-3pt improvement not shown
+    candidates.push({ ...candidate, delta, previewScore, scoreName });
+  }
+
+  // Deduplicate: if two candidates share a sourceId (or targetId for adds),
+  // keep the one with the higher delta.
+  const seen = new Map();
+  for (const c of candidates) {
+    const key = c.sourceId ?? ('add_' + c.targetId);
+    if (!seen.has(key) || seen.get(key).delta < c.delta) {
+      seen.set(key, c);
+    }
+  }
+
+  // Sort: higher delta first. Tie-break: prefer replace/add over reduce.
+  return [...seen.values()]
+    .sort((a, b) => {
+      if (b.delta !== a.delta) return b.delta - a.delta;
+      const rank = { replace: 0, add: 0, reduce: 1 };
+      return (rank[a.intervention] ?? 1) - (rank[b.intervention] ?? 1);
+    })
+    .slice(0, 3);
+}
