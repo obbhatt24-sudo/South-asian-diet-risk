@@ -127,6 +127,107 @@ function renderResults(result, recs) {
     'CVD Risk Score', c, CVD_BAND_TEXT[c.band], cvdRows, cvdNotes
   ));
 
-  document.getElementById('recommendations-container').textContent =
-    'Recommendations loading...';
+  renderRecommendations(recs, result);
+}
+
+function renderRecommendations(recs, currentScores) {
+  const container = document.getElementById('recommendations-container');
+  container.innerHTML = '';
+
+  if (recs.length === 0) {
+    const none = document.createElement('div');
+    none.className = 'no-recs';
+    none.textContent = 'No high-impact swaps found — this meal scores well on risk factors.';
+    container.appendChild(none);
+    return;
+  }
+
+  const heading = document.createElement('h3');
+  heading.textContent = 'Suggested improvements';
+  container.appendChild(heading);
+
+  recs.forEach(function(rec, index) {
+    const card = document.createElement('div');
+    const isReduce = rec.intervention === 'reduce';
+    card.className = isReduce ? 'rec-card rec-tip' : 'rec-card rec-swap';
+
+    const badge = document.createElement('span');
+    badge.className = 'rec-badge';
+    badge.textContent = isReduce ? 'Tip' : rec.intervention === 'replace' ? 'Swap' : 'Add';
+    card.appendChild(badge);
+
+    const instruction = document.createElement('p');
+    instruction.className = 'rec-instruction';
+    instruction.textContent = rec.instructionText;
+    card.appendChild(instruction);
+
+    const impact = document.createElement('div');
+    impact.className = 'rec-impact';
+    if (isReduce) {
+      impact.textContent = 'Estimated to reduce your ' + rec.scoreName + ' score by ~' +
+        rec.delta + ' points if quantity is halved.';
+      card.appendChild(impact);
+    } else {
+      impact.textContent = 'Your ' + rec.scoreName + ' score would drop from ' +
+        currentScores[rec.scoreName].score + ' → ' + rec.previewScore;
+      card.appendChild(impact);
+
+      const applyBtn = document.createElement('button');
+      applyBtn.id = 'apply-' + index;
+      applyBtn.textContent = 'Apply this swap';
+      applyBtn.addEventListener('click', function() {
+        applyRecommendation(rec, index);
+      });
+      card.appendChild(applyBtn);
+    }
+
+    container.appendChild(card);
+  });
+}
+
+function applyRecommendation(rec, index) {
+  if (rec.intervention === 'replace') {
+    if (rec.fromDishId) {
+      const dishIndex = state.mealItems.findIndex(function(item) {
+        return item.type === 'dish' && item.id === rec.fromDishId;
+      });
+      if (dishIndex !== -1) {
+        const exploded = explodeDish(state.mealItems[dishIndex]).map(function(ing) {
+          return ing.id === rec.sourceId ? { ...ing, id: rec.targetId } : ing;
+        });
+        state.mealItems.splice(dishIndex, 1, ...exploded);
+        alert('Dish expanded into ingredients to apply swap.');
+      }
+    } else {
+      const item = state.mealItems.find(function(it) {
+        return it.type === 'ingredient' && it.id === rec.sourceId;
+      });
+      if (item) item.id = rec.targetId;
+    }
+  } else if (rec.intervention === 'add') {
+    state.mealItems.push({
+      type: 'ingredient',
+      id: rec.targetId,
+      gramAmount: rec.standardPortion
+    });
+  }
+
+  renderMealItems();
+  updateNutrientTotals();
+
+  const result = score(
+    state.mealItems,
+    state.addedSodiumMg,
+    state.context,
+    state.personalContext
+  );
+  const recs = recommend(
+    result.diabetes,
+    result.cvd,
+    state.mealItems,
+    state.addedSodiumMg,
+    state.context,
+    state.personalContext
+  );
+  renderResults(result, recs);
 }

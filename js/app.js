@@ -37,7 +37,15 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
     state.context,
     state.personalContext
   );
-  renderResults(result, []); // recommendations added in Phase 4
+  const recs = recommend(
+    result.diabetes,
+    result.cvd,
+    state.mealItems,
+    state.addedSodiumMg,
+    state.context,
+    state.personalContext
+  );
+  renderResults(result, recs);
   showView('results');
 });
 
