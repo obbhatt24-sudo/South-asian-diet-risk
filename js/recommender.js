@@ -304,3 +304,67 @@ function findCandidate(flag, mealItems, context) {
 
   return null;
 }
+
+// Expands a dish meal item into its equivalent list of ingredient items,
+// scaled to the servings actually eaten. Also used by the Apply button.
+function explodeDish(dishItem) {
+  const dish = getDishById(dishItem.id);
+  return dish.ingredients.map((di) => ({
+    type: 'ingredient',
+    id: di.ingredient_id,
+    gramAmount: di.amount_g * (dishItem.servings / dish.servings)
+  }));
+}
+
+const T2D_FLAGS = ['high_glycemic_load', 'high_refined_carb_share', 'low_fiber', 'poor_protein_quality'];
+
+// Scores the meal with and without the candidate intervention applied.
+// Returns { delta, previewScore, scoreName, modifiedResult } where delta is
+// how many points the relevant score would drop (positive = improvement).
+function computeDeltaScore(candidate, mealItems, addedSodiumMg, context, pc) {
+  let modifiedItems;
+
+  if (candidate.intervention === 'add') {
+    modifiedItems = [
+      ...mealItems,
+      { type: 'ingredient', id: candidate.targetId, gramAmount: candidate.standardPortion }
+    ];
+  } else if (candidate.fromDishId) {
+    // Source is inside a dish: for delta computation only (not Apply),
+    // swap the dish item for its exploded ingredients and modify the source there.
+    modifiedItems = mealItems.flatMap((item) => {
+      if (item.type !== 'dish' || item.id !== candidate.fromDishId) return [item];
+      return explodeDish(item).map((ing) => {
+        if (ing.id !== candidate.sourceId) return ing;
+        return candidate.intervention === 'reduce'
+          ? { ...ing, gramAmount: ing.gramAmount * 0.5 }
+          : { ...ing, id: candidate.targetId };
+      });
+    });
+  } else {
+    modifiedItems = mealItems.map((item) => {
+      if (item.id !== candidate.sourceId) return item;
+      return candidate.intervention === 'reduce'
+        ? { ...item, gramAmount: item.gramAmount * 0.5 }
+        : { ...item, id: candidate.targetId };
+    });
+  }
+
+  const currentResult = score(mealItems, addedSodiumMg, context, pc);
+  const modifiedResult = score(modifiedItems, addedSodiumMg, context, pc);
+
+  let scoreName;
+  if (candidate.flag === 'low_fiber') {
+    // low_fiber affects both scores — report against whichever improves more.
+    const diabetesDelta = currentResult.diabetes.score - modifiedResult.diabetes.score;
+    const cvdDelta = currentResult.cvd.score - modifiedResult.cvd.score;
+    scoreName = diabetesDelta >= cvdDelta ? 'diabetes' : 'cvd';
+  } else {
+    scoreName = T2D_FLAGS.includes(candidate.flag) ? 'diabetes' : 'cvd';
+  }
+
+  const delta = currentResult[scoreName].score - modifiedResult[scoreName].score;
+  const previewScore = modifiedResult[scoreName].score;
+
+  return { delta, previewScore, scoreName, modifiedResult };
+}
