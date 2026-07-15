@@ -30,6 +30,17 @@ document.getElementById('back-btn').addEventListener('click', function() {
   showView('meal-builder');
 });
 
+document.getElementById('calculate-btn').addEventListener('click', function() {
+  const result = score(
+    state.mealItems,
+    state.addedSodiumMg,
+    state.context,
+    state.personalContext
+  );
+  renderResults(result, []); // recommendations added in Phase 4
+  showView('results');
+});
+
 document.querySelectorAll('input[name="context"]').forEach(function(radio) {
   radio.addEventListener('change', function() {
     state.context = radio.value;
