@@ -1,0 +1,27 @@
+/* Educational disclaimer banner — always visible, not collapsible */
+#disclaimer-banner {
+  display: block;
+  background: #FFF8E1;
+  border-left: 4px solid #F9A825;
+  padding: 12px 16px;
+  margin: 0 0 16px 0;
+}
+
+/* Permanent risk-context notes below each score card */
+.risk-note {
+  display: block;
+  font-size: 0.9em;
+  color: #444;
+  background: #FFF8E1;
+  border-left: 4px solid #F9A825;
+  padding: 8px 12px;
+  margin: 8px 0 20px 0;
+}
+
+/* Asian-specific BMI cutoff note in the meal builder */
+.bmi-note {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 4px 0 12px 0;
+}

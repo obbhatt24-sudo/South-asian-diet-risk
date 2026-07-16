@@ -109,6 +109,13 @@ function renderResults(result, recs) {
     'Diabetes Risk Score', d, DIABETES_BAND_TEXT[d.band], diabetesRows, diabetesNotes
   ));
 
+  const diabetesRiskNote = document.createElement('p');
+  diabetesRiskNote.className = 'risk-note';
+  diabetesRiskNote.textContent = 'Note: South Asians are predisposed to greater ' +
+    'visceral fat accumulation per unit of body weight — a risk factor not ' +
+    'fully captured by meal-level scoring (ICMR-INDIAB, 2023).';
+  container.appendChild(diabetesRiskNote);
+
   const cvdRows = [
     'Saturated Fat: ' + nutrients.saturated_fat_g.toFixed(1) + 'g → ' + c.subScores.saturated_fat + ' pts',
     c.ratio === null
@@ -126,6 +133,14 @@ function renderResults(result, recs) {
   container.appendChild(buildScoreCard(
     'CVD Risk Score', c, CVD_BAND_TEXT[c.band], cvdRows, cvdNotes
   ));
+
+  const cvdRiskNote = document.createElement('p');
+  cvdRiskNote.className = 'risk-note';
+  cvdRiskNote.textContent = 'Note: approximately 25% of South Asians carry ' +
+    'elevated Lp(a) lipoprotein — a genetic cardiovascular risk factor not ' +
+    'modifiable by diet and not captured by this score. A low CVD score ' +
+    'does not eliminate this baseline risk (MASALA Study; Tsimikas et al.).';
+  container.appendChild(cvdRiskNote);
 
   renderRecommendations(recs, result);
 }
