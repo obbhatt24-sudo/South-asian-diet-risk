@@ -1,21 +1,126 @@
-/* Educational disclaimer banner — always visible, not collapsible */
+/* ===== Layout ===== */
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  background: #FAFAFA;
+  color: #1A1A1A;
+}
+
+header {
+  background: #1A2D45;
+  color: white;
+  padding: 16px 20px;
+  margin: -16px -16px 24px;
+  border-radius: 0 0 8px 8px;
+}
+
+header h1 {
+  font-size: 1.3rem;
+  margin: 0 0 8px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+nav button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #2E5F8A;
+  background: white;
+  color: #2E5F8A;
+}
+
+nav button:hover {
+  background: #EAF2FB;
+}
+
+/* ===== Context toggle ===== */
+
+#context-toggle {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+#context-toggle label {
+  color: #CCE0F5;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+#context-description {
+  color: #99C2E8;
+  font-size: 0.85rem;
+  margin: 4px 0 0;
+  font-style: italic;
+}
+
+/* ===== Score cards ===== */
+
+.score-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #CCC;
+}
+
+.score-card.low {
+  border-left-color: #2E7D32;
+}
+
+.score-card.moderate {
+  border-left-color: #E65100;
+}
+
+.score-card.high {
+  border-left-color: #B71C1C;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.score-band.low {
+  color: #2E7D32;
+}
+
+.score-band.moderate {
+  color: #E65100;
+}
+
+.score-band.high {
+  color: #B71C1C;
+}
+
+/* ===== Disclaimers ===== */
+
 #disclaimer-banner {
-  display: block;
   background: #FFF8E1;
   border-left: 4px solid #F9A825;
   padding: 12px 16px;
-  margin: 0 0 16px 0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
-/* Permanent risk-context notes below each score card */
 .risk-note {
-  display: block;
-  font-size: 0.9em;
-  color: #444;
-  background: #FFF8E1;
-  border-left: 4px solid #F9A825;
-  padding: 8px 12px;
-  margin: 8px 0 20px 0;
+  font-size: 0.85rem;
+  color: #555;
+  border-top: 1px solid #EEE;
+  padding-top: 8px;
+  margin-top: 8px;
 }
 
 /* Asian-specific BMI cutoff note in the meal builder */
@@ -24,4 +129,149 @@
   font-size: 0.85em;
   color: #555;
   margin: 4px 0 12px 0;
+}
+
+/* ===== Recommendations ===== */
+
+.rec-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+.rec-swap {
+  border-left: 4px solid #1565C0;
+}
+
+.rec-tip {
+  border-left: 4px dashed #888;
+}
+
+.rec-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.rec-swap .rec-badge {
+  background: #DBEAFE;
+  color: #1565C0;
+}
+
+.rec-tip .rec-badge {
+  background: #F5F5F5;
+  color: #666;
+}
+
+.no-recs {
+  background: #F0FBF0;
+  border: 1px solid #A5D6A7;
+  padding: 14px;
+  border-radius: 6px;
+  color: #2E7D32;
+}
+
+button.apply-btn {
+  background: #1565C0;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button.apply-btn:hover {
+  background: #0D47A1;
+}
+
+/* ===== Meal builder ===== */
+
+.diet-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.diet-badge.veg {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.diet-badge.egg {
+  background: #FFF8E1;
+  color: #F57F17;
+}
+
+.diet-badge.non_veg {
+  background: #FFEBEE;
+  color: #B71C1C;
+}
+
+.dish-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background: #EDE7F6;
+  color: #4527A0;
+}
+
+#meal-items {
+  min-height: 40px;
+  margin: 12px 0;
+}
+
+.meal-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px solid #EEE;
+}
+
+#calculate-btn {
+  background: #2E5F8A;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 16px;
+  width: 100%;
+}
+
+#calculate-btn:disabled {
+  background: #B0BEC5;
+  cursor: not-allowed;
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 600px) {
+  .score-card {
+    padding: 14px;
+  }
+
+  .score-number {
+    font-size: 2.4rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  nav button {
+    flex: 1;
+    min-width: 80px;
+  }
 }

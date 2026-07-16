@@ -1,11 +1,5 @@
 // results.js — renders score cards into the results view.
 
-const BAND_COLOURS = {
-  Low: '#2E7D32',
-  Moderate: '#E65100',
-  High: '#B71C1C'
-};
-
 const DIABETES_BAND_TEXT = {
   Low: 'This meal contributes minimally to diabetes risk factors.',
   Moderate: 'This meal has notable diabetes risk-relevant features.',
@@ -44,9 +38,10 @@ function mealUsedGiDefaults(mealItems) {
 }
 
 function buildScoreCard(title, scoreObj, description, rows, notes) {
+  const bandClass = scoreObj.band.toLowerCase();
+
   const card = document.createElement('div');
-  card.className = 'score-card';
-  card.style.borderLeft = '4px solid ' + BAND_COLOURS[scoreObj.band];
+  card.className = 'score-card ' + bandClass;
 
   const heading = document.createElement('h3');
   heading.textContent = title;
@@ -56,7 +51,7 @@ function buildScoreCard(title, scoreObj, description, rows, notes) {
   number.textContent = scoreObj.score;
 
   const bandLabel = document.createElement('div');
-  bandLabel.className = 'score-band';
+  bandLabel.className = 'score-band ' + bandClass;
   bandLabel.textContent = scoreObj.band;
 
   const desc = document.createElement('p');
@@ -188,6 +183,7 @@ function renderRecommendations(recs, currentScores) {
       card.appendChild(impact);
 
       const applyBtn = document.createElement('button');
+      applyBtn.className = 'apply-btn';
       applyBtn.id = 'apply-' + index;
       applyBtn.textContent = 'Apply this swap';
       applyBtn.addEventListener('click', function() {
