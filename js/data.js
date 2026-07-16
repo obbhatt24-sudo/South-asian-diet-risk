@@ -64,6 +64,17 @@ function getIngredientById(id) {
   return _ingById[id] || null;
 }
 
+// Scoring loops skip ingredients they cannot resolve; warn once per id so
+// data problems are visible without spamming the console (score() runs
+// many times per recommendation pass).
+const _warnedMissingIngredientIds = new Set();
+function warnUnresolvedIngredient(id, where) {
+  if (_warnedMissingIngredientIds.has(id)) return;
+  _warnedMissingIngredientIds.add(id);
+  console.warn('Skipping unresolvable ingredient "' + id + '" in ' + where +
+    ' — not found in ingredients.json');
+}
+
 function getDishById(id) {
   return _dishById[id] || null;
 }
@@ -103,7 +114,7 @@ function computeMealNutrients(mealItems) {
 
     if (item.type === 'ingredient') {
       const ing = _ingById[item.id];
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealNutrients'); continue; }
       nutrients = ing.nutrients_per_100g;
       scale = (item.gramAmount || 0) / 100;
     } else if (item.type === 'dish') {

@@ -34,7 +34,7 @@ function computeMealGL(mealItems) {
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealGL'); continue; }
       const carbG = ing.nutrients_per_100g.carbohydrate_g * (item.gramAmount / 100);
       const gi = getGI(item.id);
       if (gi === null) continue;
@@ -44,7 +44,7 @@ function computeMealGL(mealItems) {
       if (!dish) continue;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
-        if (!ing) continue;
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'computeMealGL'); continue; }
         const scale = (di.amount_g / 100) * item.servings * (1 / dish.servings);
         const carbG = ing.nutrients_per_100g.carbohydrate_g * scale;
         const gi = getGI(di.ingredient_id);
@@ -71,7 +71,7 @@ function refinedCarbShare(mealItems) {
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'refinedCarbShare'); continue; }
       const carbG = ing.nutrients_per_100g.carbohydrate_g * (item.gramAmount / 100);
       totalCarbs += carbG;
       if (!ing.role_tags.includes('whole_grain')) refinedCarbs += carbG;
@@ -81,7 +81,7 @@ function refinedCarbShare(mealItems) {
       totalCarbs += dish.nutrients_per_serving.carbohydrate_g * item.servings;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
-        if (!ing) continue;
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'refinedCarbShare'); continue; }
         if (ing.role_tags.includes('whole_grain')) continue;
         const scale = (di.amount_g / 100) * (item.servings / dish.servings);
         refinedCarbs += ing.nutrients_per_100g.carbohydrate_g * scale;
@@ -116,7 +116,7 @@ function proteinQualityShare(mealItems) {
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'proteinQualityShare'); continue; }
       const proteinG = ing.nutrients_per_100g.protein_g * (item.gramAmount / 100);
       totalProtein += proteinG;
       if (isQuality(ing)) qualityProtein += proteinG;
@@ -126,7 +126,7 @@ function proteinQualityShare(mealItems) {
       totalProtein += dish.nutrients_per_serving.protein_g * item.servings;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
-        if (!ing) continue;
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'proteinQualityShare'); continue; }
         if (!isQuality(ing)) continue;
         const scale = (di.amount_g / 100) * (item.servings / dish.servings);
         qualityProtein += ing.nutrients_per_100g.protein_g * scale;
@@ -220,14 +220,14 @@ function getMufaSfaRatio(mealItems) {
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'getMufaSfaRatio'); continue; }
       accumulate(ing, item.gramAmount / 100);
     } else if (item.type === 'dish') {
       const dish = getDishById(item.id);
       if (!dish) continue;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
-        if (!ing) continue;
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'getMufaSfaRatio'); continue; }
         accumulate(ing, (di.amount_g / 100) * (item.servings / dish.servings));
       }
     }

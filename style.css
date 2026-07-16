@@ -104,6 +104,50 @@ nav button:hover {
   color: #B71C1C;
 }
 
+.score-minimal,
+.score-context {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ===== Sub-score breakdown ===== */
+
+details {
+  margin-top: 12px;
+  border-top: 1px solid #EEE;
+  padding-top: 8px;
+}
+
+summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #2E5F8A;
+  user-select: none;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.88rem;
+  color: #444;
+}
+
+.breakdown-row.na {
+  color: #999;
+}
+
+.breakdown-row .pts {
+  font-weight: bold;
+}
+
+.breakdown-note {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 6px;
+}
+
 /* ===== Disclaimers ===== */
 
 #disclaimer-banner {

@@ -37,6 +37,16 @@ function mealUsedGiDefaults(mealItems) {
   return false;
 }
 
+function buildBreakdownNote(text) {
+  const note = document.createElement('p');
+  note.className = 'breakdown-note';
+  note.textContent = text;
+  return note;
+}
+
+// Each row is { label, pts } for a scored sub-factor, or { label, na: true }
+// for an unavailable one (shown muted, 0 pts, no bold). An optional `note`
+// renders directly below its row.
 function buildScoreCard(title, scoreObj, description, rows, notes) {
   const bandClass = scoreObj.band.toLowerCase();
 
@@ -48,11 +58,17 @@ function buildScoreCard(title, scoreObj, description, rows, notes) {
 
   const number = document.createElement('div');
   number.className = 'score-number';
-  number.textContent = scoreObj.score;
+  number.textContent = String(scoreObj.score);
 
   const bandLabel = document.createElement('div');
   bandLabel.className = 'score-band ' + bandClass;
   bandLabel.textContent = scoreObj.band;
+
+  const contextLabel = document.createElement('div');
+  contextLabel.className = 'score-context';
+  contextLabel.textContent = state.context === 'us'
+    ? 'US South Asian context'
+    : 'India context';
 
   const desc = document.createElement('p');
   desc.className = 'score-description';
@@ -63,20 +79,41 @@ function buildScoreCard(title, scoreObj, description, rows, notes) {
   summary.textContent = 'Show breakdown';
   details.appendChild(summary);
 
-  for (const rowText of rows) {
+  for (const rowSpec of rows) {
     const row = document.createElement('div');
-    row.className = 'breakdown-row';
-    row.textContent = rowText;
+    row.className = rowSpec.na ? 'breakdown-row na' : 'breakdown-row';
+
+    const label = document.createElement('span');
+    label.textContent = rowSpec.label;
+    row.appendChild(label);
+
+    const pts = document.createElement('span');
+    if (rowSpec.na) {
+      pts.textContent = '0 pts';
+    } else {
+      pts.className = 'pts';
+      pts.textContent = rowSpec.pts + ' pts';
+    }
+    row.appendChild(pts);
+
     details.appendChild(row);
+    if (rowSpec.note) {
+      details.appendChild(buildBreakdownNote(rowSpec.note));
+    }
   }
   for (const noteText of notes) {
-    const note = document.createElement('p');
-    note.className = 'breakdown-note';
-    note.textContent = noteText;
-    details.appendChild(note);
+    details.appendChild(buildBreakdownNote(noteText));
   }
 
-  [heading, number, bandLabel, desc, details].forEach(function(el) {
+  card.appendChild(heading);
+  card.appendChild(number);
+  if (scoreObj.score === 0) {
+    const minimal = document.createElement('div');
+    minimal.className = 'score-minimal';
+    minimal.textContent = 'Minimal risk contribution';
+    card.appendChild(minimal);
+  }
+  [bandLabel, contextLabel, desc, details].forEach(function(el) {
     card.appendChild(el);
   });
   return card;
@@ -91,10 +128,10 @@ function renderResults(result, recs) {
   const c = result.cvd;
 
   const diabetesRows = [
-    'Glycemic Load: GL=' + d.gl.toFixed(1) + ' → ' + d.subScores.glycemic_load + ' pts',
-    'Refined Carbs: ' + Math.round(d.refShare * 100) + '% refined → ' + d.subScores.refined_carb + ' pts',
-    'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g → ' + d.subScores.fiber + ' pts',
-    'Protein Quality: ' + Math.round(d.protShare * 100) + '% quality protein → ' + d.subScores.protein_quality + ' pts'
+    { label: 'Glycemic Load: GL=' + d.gl.toFixed(1), pts: d.subScores.glycemic_load },
+    { label: 'Refined Carbs: ' + Math.round(d.refShare * 100) + '% refined', pts: d.subScores.refined_carb },
+    { label: 'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g', pts: d.subScores.fiber },
+    { label: 'Protein Quality: ' + Math.round(d.protShare * 100) + '% quality protein', pts: d.subScores.protein_quality }
   ];
   const diabetesNotes = [];
   if (mealUsedGiDefaults(state.mealItems)) {
@@ -111,22 +148,22 @@ function renderResults(result, recs) {
     'fully captured by meal-level scoring (ICMR-INDIAB, 2023).';
   container.appendChild(diabetesRiskNote);
 
-  const cvdRows = [
-    'Saturated Fat: ' + nutrients.saturated_fat_g.toFixed(1) + 'g → ' + c.subScores.saturated_fat + ' pts',
-    c.ratio === null
-      ? 'Fat Quality: N/A'
-      : 'Fat Quality: ratio=' + c.ratio.toFixed(2) + ' → ' + c.subScores.fat_quality + ' pts',
-    'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g → ' + c.subScores.fiber + ' pts',
-    c.totalSodium === null
-      ? 'Sodium: N/A — salt input not provided'
-      : 'Sodium: ' + Math.round(c.totalSodium) + 'mg → ' + c.subScores.sodium + ' pts'
-  ];
-  const cvdNotes = [];
+  const fatQualityRow = c.ratio === null
+    ? { label: 'Fat quality: N/A — fat type data unavailable', na: true }
+    : { label: 'Fat Quality: ratio=' + c.ratio.toFixed(2), pts: c.subScores.fat_quality };
   if (c.usedFallback) {
-    cvdNotes.push('* Fat quality estimated from food-group data.');
+    fatQualityRow.note = '* Fat quality estimated from food-group data.';
   }
+  const cvdRows = [
+    { label: 'Saturated Fat: ' + nutrients.saturated_fat_g.toFixed(1) + 'g', pts: c.subScores.saturated_fat },
+    fatQualityRow,
+    { label: 'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g', pts: c.subScores.fiber },
+    c.totalSodium === null
+      ? { label: 'Sodium: N/A — salt input not provided', na: true }
+      : { label: 'Sodium: ' + Math.round(c.totalSodium) + 'mg', pts: c.subScores.sodium }
+  ];
   container.appendChild(buildScoreCard(
-    'CVD Risk Score', c, CVD_BAND_TEXT[c.band], cvdRows, cvdNotes
+    'CVD Risk Score', c, CVD_BAND_TEXT[c.band], cvdRows, []
   ));
 
   const cvdRiskNote = document.createElement('p');

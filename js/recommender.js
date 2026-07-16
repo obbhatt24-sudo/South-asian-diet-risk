@@ -24,14 +24,14 @@ function forEachMealIngredient(mealItems, visit) {
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
-      if (!ing) continue;
+      if (!ing) { warnUnresolvedIngredient(item.id, 'forEachMealIngredient'); continue; }
       visit(ing, (item.gramAmount || 0) / 100, null);
     } else if (item.type === 'dish') {
       const dish = getDishById(item.id);
       if (!dish) continue;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
-        if (!ing) continue;
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'forEachMealIngredient'); continue; }
         const scale = (di.amount_g / 100) * ((item.servings || 0) / dish.servings);
         visit(ing, scale, dish.id);
       }
