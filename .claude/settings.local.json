@@ -41,7 +41,9 @@
       "Bash(node --check \"C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\js\\\\recommender.js\")",
       "PowerShell(node --check \"C:\\\\Users\\\\obbha\\\\OneDrive\\\\South-asian-diet-risk.cd\\\\js\\\\recommender.js\")",
       "PowerShell(if \\($?\\) { \"syntax OK\" })",
-      "PowerShell(git add js/recommender.js notes/deferred-improvements.md)"
+      "PowerShell(git add js/recommender.js notes/deferred-improvements.md)",
+      "Bash(node \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\10c423b4-99d7-4c1e-9db7-45a729b763c4\\\\scratchpad\\\\verify-recommend.js\")",
+      "PowerShell(git add js/results.js js/app.js .claude/launch.json)"
     ]
   }
 }
