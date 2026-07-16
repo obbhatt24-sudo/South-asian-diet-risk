@@ -218,7 +218,16 @@ function findCandidate(flag, mealItems, context) {
     const overrideTarget = override.target_ingredient_id
       ? getIngredientById(override.target_ingredient_id)
       : null;
+    // Override 'add' candidates need a portion size for delta preview and
+    // Apply, same as generic add candidates (see findAddTarget).
+    let overridePortion = null;
+    if (override.intervention === 'add' && overrideTarget) {
+      const portionTag = ['legume_protein', 'dairy_protein', 'vegetable']
+        .find((tag) => overrideTarget.role_tags.includes(tag));
+      overridePortion = ADD_PORTIONS[portionTag] ?? null;
+    }
     return makeCandidate({
+      standardPortion: overridePortion,
       flag,
       intervention: override.intervention,
       sourceId: override.source_ingredient_id,
