@@ -1,0 +1,263 @@
+[
+  {
+    "id": "chunk_001",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "south_asian_metabolic_risk",
+    "relevance_tags": ["diabetes", "india", "general"],
+    "placeholder": false,
+    "text": "The ICMR-INDIAB study, a nationally representative survey of Indian adults, documented a rising and heterogeneous burden of type 2 diabetes and prediabetes across states, with urban prevalence substantially exceeding rural prevalence. A defining feature of South Asian metabolic risk is that type 2 diabetes develops at a lower body mass index and a younger age than in Western populations. Many affected individuals are not obese by conventional thresholds, so BMI alone underestimates true metabolic risk in this group. This 'thin-fat' phenotype means diabetes prevention efforts calibrated to European BMI cut-offs miss a large share of at-risk South Asians."
+  },
+  {
+    "id": "chunk_002",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "dietary_glycemic_load",
+    "relevance_tags": ["glycemic_load", "diabetes", "india"],
+    "placeholder": true,
+    "text": "Indian dietary patterns are heavily cereal-based, with polished white rice and refined wheat contributing the majority of daily energy in many regions. This produces a high dietary glycemic load, which is associated with elevated postprandial glucose and greater risk of incident type 2 diabetes. In ICMR-INDIAB dietary analyses, higher carbohydrate quantity paired with a high glycemic index of the staple cereal is a leading modifiable driver of diabetes risk. Reducing the glycemic load of the staple — for example by lowering portion size or shifting to lower-GI grains — is a practical lever in this population."
+  },
+  {
+    "id": "chunk_003",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "refined_carbohydrates",
+    "relevance_tags": ["high_refined_carb", "diabetes", "india"],
+    "placeholder": true,
+    "text": "A high share of total energy from refined carbohydrates — milled rice, maida, and added sugars — characterizes the transitioning Indian diet. Refined grains are rapidly digested, producing sharp glucose and insulin excursions that, when repeated over years, promote insulin resistance. In INDIAB cohort data this refined-carbohydrate load tracks with markers of dysglycemia and central adiposity. Replacing a portion of refined cereal with whole grains and legumes lowers the refined-carbohydrate fraction and is associated with more favorable glycemic profiles."
+  },
+  {
+    "id": "chunk_004",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "dietary_fiber",
+    "relevance_tags": ["low_fiber", "diabetes", "india"],
+    "placeholder": true,
+    "text": "Despite a plant-forward reputation, many Indian diets are low in dietary fiber because the dominant cereals are refined and vegetable and whole-legume intake is often modest relative to total calories. Low fiber intake removes a key brake on carbohydrate digestion, contributing to steeper postprandial glucose elevation. Higher intake of soluble fiber from legumes, whole grains, and vegetables slows gastric emptying and glucose absorption. Increasing fiber is one of the most consistent dietary strategies for blunting postprandial glucose in South Asian eaters."
+  },
+  {
+    "id": "chunk_005",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "protein_quality",
+    "relevance_tags": ["poor_protein_quality", "diabetes", "india"],
+    "placeholder": true,
+    "text": "Meals dominated by cereal with a small legume or dairy share deliver a low proportion of high-quality protein, which weakens the satiety and glycemic-buffering benefits that protein provides. In South Asian dietary patterns, a higher legume and dairy contribution improves the protein-to-carbohydrate balance of the plate and is associated with better glycemic outcomes. Legumes additionally contribute fiber and resistant starch, compounding the benefit. Raising the quality and share of protein is a meaningful risk modifier in South Asian type 2 diabetes risk."
+  },
+  {
+    "id": "chunk_006",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "south_asian_bmi_thresholds",
+    "relevance_tags": ["diabetes", "cvd", "india", "general"],
+    "placeholder": true,
+    "text": "WHO and SEARO guidance recommends lower BMI action points for South Asian and other Asian populations, with overweight defined at a BMI of 23 kg/m2 or above and obesity at 25 kg/m2 or above, rather than the 25 and 30 cut-offs used for European populations. These lower thresholds reflect the observation that South Asians reach an equivalent burden of diabetes and cardiovascular risk at a lower body weight. Applying the standard cut-offs would misclassify many high-risk South Asians as normal weight. Clinical and dietary risk tools for this group should therefore adopt the lower action points."
+  },
+  {
+    "id": "chunk_007",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "south_asian_metabolic_risk",
+    "relevance_tags": ["diabetes", "cvd", "india", "general"],
+    "placeholder": true,
+    "text": "South Asians carry a predisposition to visceral (abdominal) fat accumulation, storing more fat around the internal organs per unit of body mass index than European populations. Visceral fat is metabolically active and strongly linked to insulin resistance, dyslipidemia, and cardiovascular risk, which helps explain the excess metabolic disease seen at relatively low BMI. Waist circumference and waist-to-hip ratio therefore capture South Asian risk better than BMI alone. This central-adiposity pattern is a core reason conventional weight thresholds understate risk in this population."
+  },
+  {
+    "id": "chunk_008",
+    "source": "ICMR-INDIAB",
+    "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
+    "section": "dietary_glycemic_load",
+    "relevance_tags": ["glycemic_load", "diabetes", "india"],
+    "placeholder": true,
+    "text": "Because postprandial glucose spikes carry particular weight for South Asian metabolic risk, meal-level glycemic load is a useful screening metric for this population. A meal glycemic load in the high range (roughly 20 or more) produces clinically meaningful postprandial glucose elevation, whereas keeping a single meal below about 10 sits in the low range. High-glycemic-load meals built on large portions of polished rice or refined wheat are a repeated daily exposure worth flagging. Lowering portion size or substituting lower-GI staples moves a meal out of the high-load range."
+  },
+  {
+    "id": "chunk_009",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, Kandula N, Herrington D, et al. Mediators of Atherosclerosis in South Asians Living in America (MASALA) Study: Objectives, Methods, and Cohort Description. Clin Cardiol. 2013;36(12):713-720.",
+    "section": "south_asian_metabolic_risk",
+    "relevance_tags": ["diabetes", "cvd", "us_south_asian", "general"],
+    "placeholder": false,
+    "text": "The MASALA study is a prospective, community-based cohort of 906 South Asians aged 40-79 living in the United States, designed with methods parallel to the Multi-Ethnic Study of Atherosclerosis (MESA) to enable direct cross-ethnic comparison. Its central rationale is that South Asians have high rates of cardiovascular disease that traditional risk factors do not fully explain, even at relatively low body mass index. The cohort undergoes coronary artery calcium scoring, carotid imaging, oral glucose tolerance testing, and CT-based visceral fat measurement. MASALA provides some of the strongest US evidence that South Asians carry elevated cardiometabolic risk compared with other ethnic groups at equivalent BMI."
+  },
+  {
+    "id": "chunk_010",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
+    "section": "saturated_fat",
+    "relevance_tags": ["high_saturated_fat", "cvd", "us_south_asian"],
+    "placeholder": true,
+    "text": "Traditional South Asian diets in the US often include substantial saturated fat from ghee (clarified butter) and full-fat dairy, both used generously in home cooking. High saturated fat intake raises LDL cholesterol, a principal driver of atherosclerotic cardiovascular disease. In MASALA dietary data, dietary patterns richer in these saturated-fat sources are associated with less favorable lipid profiles and greater subclinical atherosclerosis. Substituting a portion of ghee and full-fat dairy with unsaturated cooking fats is a direct lever for lowering LDL in this group."
+  },
+  {
+    "id": "chunk_011",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
+    "section": "fat_quality_mufa_sfa",
+    "relevance_tags": ["poor_fat_quality", "cvd", "us_south_asian"],
+    "placeholder": true,
+    "text": "Beyond the quantity of fat, the quality of cooking fat — captured by the ratio of monounsaturated to saturated fatty acids (MUFA:SFA) — shapes cardiovascular risk in South Asian diets. Cooking fats with a low MUFA:SFA ratio, such as ghee and coconut oil, push the lipid profile toward higher LDL, whereas high-MUFA oils are comparatively cardioprotective. Among MASALA participants, fat quality is a meaningful correlate of CVD biomarkers independent of total fat intake. Shifting the cooking oil rather than only cutting total fat is therefore an efficient intervention."
+  },
+  {
+    "id": "chunk_012",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
+    "section": "dietary_fiber",
+    "relevance_tags": ["low_fiber", "cvd", "us_south_asian"],
+    "placeholder": true,
+    "text": "Fiber intake in US South Asian dietary patterns is frequently below recommended levels, particularly when refined cereals displace whole grains, legumes, and vegetables. Higher dietary fiber is consistently associated with lower LDL cholesterol and reduced cardiovascular risk. In MASALA dietary data, greater fiber intake tracks with a more favorable cardiometabolic profile. Because legumes are already culturally central to South Asian cuisine, increasing whole-legume and whole-grain portions is a low-friction way to raise fiber and lower CVD risk."
+  },
+  {
+    "id": "chunk_013",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and MASALA lipoprotein(a) analyses.",
+    "section": "lp_a_cvd_risk",
+    "relevance_tags": ["cvd", "us_south_asian", "general"],
+    "placeholder": true,
+    "text": "Lipoprotein(a), or Lp(a), is a genetically determined, largely diet-independent lipoprotein that raises atherosclerotic and thrombotic cardiovascular risk. Elevated Lp(a) is disproportionately common in South Asians, with roughly a quarter of the population carrying clinically high levels. Because Lp(a) is not meaningfully modified by diet, its high prevalence adds a non-dietary layer of CVD risk on top of dietary factors in South Asians. This makes aggressive management of the modifiable dietary drivers — LDL, saturated fat, and fat quality — especially important when Lp(a) is already elevated."
+  },
+  {
+    "id": "chunk_014",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, Kandula N, Herrington D, et al. Mediators of Atherosclerosis in South Asians Living in America (MASALA) Study: Objectives, Methods, and Cohort Description. Clin Cardiol. 2013;36(12):713-720.",
+    "section": "south_asian_metabolic_risk",
+    "relevance_tags": ["cvd", "us_south_asian", "general"],
+    "placeholder": false,
+    "text": "Comparing South Asians in India with South Asians in the United States highlights different dominant risk drivers across contexts. In India, high dietary glycemic load from refined cereals and rising diabetes prevalence are prominent, whereas in the US context reduced physical activity and dietary fat quality — a shift toward higher saturated-fat, lower-MUFA cooking patterns — feature strongly. MASALA participants are overwhelmingly immigrants who have lived in the US for decades, capturing this acculturated risk profile. Recognizing which drivers dominate in a given setting helps target dietary advice appropriately."
+  },
+  {
+    "id": "chunk_015",
+    "source": "MASALA",
+    "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
+    "section": "dietary_fat_south_asian",
+    "relevance_tags": ["high_saturated_fat", "poor_fat_quality", "cvd", "us_south_asian"],
+    "placeholder": true,
+    "text": "Traditional South Asian cooking fats differ sharply in their cardiovascular profile. Ghee and coconut oil are dominated by saturated fatty acids and have a low MUFA:SFA ratio, whereas mustard oil is rich in monounsaturated and omega-3 fatty acids with a high MUFA:SFA ratio. For US South Asians, replacing ghee and coconut oil with mustard or other high-MUFA oils improves the overall fat quality of the diet without requiring a change in cooking style. This substitution is one of the most actionable dietary changes for reducing CVD risk in the community."
+  },
+  {
+    "id": "chunk_016",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "glycemic_index_values",
+    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "placeholder": false,
+    "text": "The glycemic index (GI) ranks a carbohydrate food by how much it raises blood glucose relative to a reference (glucose = 100), on a per-gram-of-carbohydrate basis. High-GI foods are defined as 70 or above, medium as 56-69, and low as 55 or below. Glycemic load (GL) scales GI by the actual amount of available carbohydrate in a portion, calculated as GI multiplied by grams of carbohydrate divided by 100. GL therefore captures both the quality and the quantity of carbohydrate in a real serving, making it more representative of a food's glycemic impact than GI alone."
+  },
+  {
+    "id": "chunk_017",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "glycemic_index_values",
+    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "placeholder": false,
+    "text": "White rice shows wide variation in glycemic index across varieties and preparation, but the 2021 international tables report an average GI of about 73 for white rice, versus about 65 for brown rice. GI values for rice were highest in Asian samples, averaging around 74. Milling removes the fibrous bran and germ, and softer cooking further gelatinizes the starch, both of which raise the GI. Because polished white rice is a staple in South Asian meals, its high GI is a primary contributor to meal glycemic load."
+  },
+  {
+    "id": "chunk_018",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "glycemic_index_values",
+    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "placeholder": false,
+    "text": "Basmati rice has a glycemic index of approximately 54, meaningfully lower than standard milled white rice at around 73. The difference is driven largely by basmati's higher amylose content; amylose is a linear starch that gelatinizes and digests more slowly than the branched amylopectin that predominates in stickier, lower-amylose rices. As a result, swapping ordinary white rice for basmati is a simple, culturally acceptable way to reduce the glycemic load of a South Asian meal. This substitution underlies a common lower-GI recommendation in the calculator."
+  },
+  {
+    "id": "chunk_019",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "glycemic_index_values",
+    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "placeholder": false,
+    "text": "Legumes are consistently low-GI foods worldwide, and the common Indian dals sit at the very bottom of the scale: chana dal around 8, toor (pigeon pea) dal around 29, and masoor (red lentil) around 31. Two mechanisms slow their digestion — a high content of resistant starch and viscous fiber, and an intact protein-and-cell-wall matrix that limits enzyme access to the starch. Pairing a low-GI dal with a higher-GI cereal lowers the overall glycemic load of the combined meal. This is why legume-forward meals are a cornerstone of lower-glycemic South Asian eating."
+  },
+  {
+    "id": "chunk_020",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "glycemic_index_values",
+    "relevance_tags": ["glycemic_load", "high_refined_carb", "diabetes", "general"],
+    "placeholder": false,
+    "text": "Whole-grain and refined versions of the same cereal differ substantially in glycemic index. Whole wheat atta, used for roti and chapati, has a GI of roughly 62, whereas refined maida (white flour) used in naan, bhature, and many restaurant breads sits around 76. The intact bran and germ in atta supply fiber and slow starch digestion, blunting the glucose response relative to maida. Choosing whole-wheat over refined-flour breads is therefore a straightforward way to reduce the refined-carbohydrate load and glycemic impact of a meal."
+  },
+  {
+    "id": "chunk_021",
+    "source": "Augustin et al. 2020",
+    "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
+    "section": "dietary_glycemic_load",
+    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "placeholder": false,
+    "text": "At the meal level, glycemic load is commonly categorized as low below about 10, medium at roughly 11-19, and high at 20 or above. Prospective cohort evidence indicates that dietary glycemic load is a stronger and more consistent predictor of type 2 diabetes and cardiovascular risk than glycemic index alone, because it accounts for portion size and total carbohydrate. This is why a meal-level GL estimate, rather than the GI of any single ingredient, is the more meaningful output for risk scoring. Keeping habitual meals out of the high-GL range is a practical dietary target."
+  },
+  {
+    "id": "chunk_022",
+    "source": "Edible-Oils",
+    "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
+    "section": "fat_quality_mufa_sfa",
+    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "placeholder": false,
+    "text": "The balance of fatty acids in a cooking oil, and in particular its ratio of monounsaturated to saturated fat (MUFA:SFA), predicts its effect on the blood lipid profile and hence the LDL:HDL ratio. Monounsaturated fat lowers LDL cholesterol while tending to preserve or raise HDL, whereas saturated fat raises LDL. Oils with a higher MUFA:SFA ratio, generally above about 1.5, are considered cardioprotective, while low-ratio fats worsen the lipid picture. Selecting a high-MUFA oil is therefore a fat-quality decision that operates independently of simply reducing total fat."
+  },
+  {
+    "id": "chunk_023",
+    "source": "Edible-Oils",
+    "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
+    "section": "fat_quality_mufa_sfa",
+    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "placeholder": false,
+    "text": "Mustard oil, widely used in North and East India, has a favorable fatty-acid profile: it is high in monounsaturated fat and low in saturated fat (about 8% SFA), giving it a high MUFA:SFA ratio and a near-ideal omega-6 to omega-3 balance. By contrast, ghee is predominantly saturated and has a low MUFA:SFA ratio of roughly 0.4, placing it at the opposite end of the fat-quality spectrum. Epidemiologic data cited in the edible-oils literature associate mustard oil use with lower ischemic heart disease risk compared with several other cooking fats. Its combination of high MUFA and plant omega-3 content underlies this benefit."
+  },
+  {
+    "id": "chunk_024",
+    "source": "Edible-Oils",
+    "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
+    "section": "saturated_fat",
+    "relevance_tags": ["high_saturated_fat", "cvd", "general"],
+    "placeholder": false,
+    "text": "Ghee (clarified butter) is an animal fat in which roughly 60% of the fat is saturated, so it raises total and LDL cholesterol when consumed in typical South Asian quantities. Because ghee is often added generously as a finishing fat, small quantities add up quickly across a day's meals. Saturated fat elevates LDL cholesterol, the central lipid driver of atherosclerotic cardiovascular disease. Reducing the amount of ghee used, or replacing part of it with a high-MUFA oil, lowers the meal's saturated-fat load and its LDL-raising effect."
+  },
+  {
+    "id": "chunk_025",
+    "source": "Edible-Oils",
+    "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
+    "section": "dietary_fat_south_asian",
+    "relevance_tags": ["high_saturated_fat", "poor_fat_quality", "cvd", "india"],
+    "placeholder": false,
+    "text": "Coconut oil, common in South Indian cooking, is nearly 90% saturated fat, dominated by lauric acid, giving it a very low MUFA:SFA ratio of roughly 0.1. Although its saturated fat is largely medium-chain, coconut oil still raises LDL cholesterol and is not a heart-neutral substitute for unsaturated oils. Its extreme saturation places it among the least favorable common cooking fats for cardiovascular risk. Where coconut oil is used as a primary cooking medium, shifting toward a high-MUFA oil meaningfully improves dietary fat quality."
+  },
+  {
+    "id": "chunk_026",
+    "source": "Edible-Oils",
+    "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
+    "section": "dietary_fat_south_asian",
+    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "placeholder": false,
+    "text": "Replacing saturated-fat-dominant cooking fats such as ghee and coconut oil with high-MUFA oils like mustard or groundnut (peanut) oil improves the diet's fat quality and is associated with lower LDL cholesterol. In the edible-oils review, mustard oil use was linked to a substantially reduced risk of ischemic heart disease relative to some other cooking media. Because the substitution keeps the cooking method and cuisine intact, it is a practical and culturally acceptable intervention. This swap is a recurring recommendation for poor-fat-quality meals in the calculator."
+  },
+  {
+    "id": "chunk_027",
+    "source": "WHO-SEARO",
+    "full_citation": "WHO Expert Consultation. Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies. Lancet. 2004;363(9403):157-163.",
+    "section": "south_asian_bmi_thresholds",
+    "relevance_tags": ["diabetes", "cvd", "general"],
+    "placeholder": true,
+    "text": "The WHO Expert Consultation concluded that many Asian populations, including South Asians, experience elevated risk of type 2 diabetes and cardiovascular disease at BMI levels below the standard international overweight cut-off of 25. To address this, lower action points were proposed, with added risk emerging around a BMI of 23 and higher risk around 27.5. The core finding is that a South Asian at a BMI of 23 can carry metabolic risk equivalent to a European population at a BMI of 25. Risk tools for South Asians should therefore trigger dietary and lifestyle action at these lower thresholds."
+  },
+  {
+    "id": "chunk_028",
+    "source": "WHO-SEARO",
+    "full_citation": "WHO Expert Consultation. Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies. Lancet. 2004;363(9403):157-163.",
+    "section": "south_asian_bmi_thresholds",
+    "relevance_tags": ["diabetes", "cvd", "general"],
+    "placeholder": true,
+    "text": "The mechanism behind lower BMI thresholds for South Asians is body-composition rather than body-weight: at a given BMI, South Asians carry a higher proportion of body fat and, in particular, more visceral abdominal fat than other ethnic groups. Visceral fat drives insulin resistance and an atherogenic lipid profile, so the same BMI corresponds to greater metabolic risk. This is why waist circumference and central-adiposity measures complement BMI in this population. The elevated fat-per-BMI relationship justifies the lower overweight and obesity action points."
+  },
+  {
+    "id": "chunk_029",
+    "source": "WHO-SEARO",
+    "full_citation": "Synthesis of WHO/SEARO BMI guidance and ICMR-INDIAB / MASALA cohort findings on South Asian metabolic risk.",
+    "section": "south_asian_metabolic_risk",
+    "relevance_tags": ["diabetes", "cvd", "india", "us_south_asian", "general"],
+    "placeholder": true,
+    "text": "South Asian metabolic risk arises from an interaction of dietary patterns and genetic or developmental predisposition, not diet alone. Even after accounting for high-glycemic-load, low-fiber, and poor-fat-quality dietary patterns, South Asians retain excess diabetes and cardiovascular risk attributable to factors such as a thin-fat body composition, greater visceral adiposity, and a higher prevalence of elevated lipoprotein(a). This means dietary improvement is necessary but not sufficient, and its benefits compound against an elevated genetic baseline. Framing risk as diet acting on top of predisposition helps set realistic expectations for how much diet change can shift an individual's risk."
+  }
+]
