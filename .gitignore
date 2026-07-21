@@ -2,3 +2,15 @@ node_modules/
 .DS_Store
 *.pyc
 __pycache__/
+
+# Server: only track source files; never commit .env or anything with the API key
+server/*
+!server/main.py
+!server/retriever.py
+!server/requirements.txt
+!server/.env.example
+!server/build_embeddings.py
+.env
+
+# Large and regenerable via server/build_embeddings.py
+data/embeddings.json
