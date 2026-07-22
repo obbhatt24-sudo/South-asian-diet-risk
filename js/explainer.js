@@ -40,7 +40,9 @@ async function fetchExplanation(scoreResult, mealItems) {
 
 async function loadExplanation(scoreResult, recs, mealItems) {
   const panel = document.getElementById('explanation-panel');
-  panel.innerHTML = '<p class="explanation-loading">Loading research explanation...</p>';
+  panel.innerHTML = `
+    <div class='explanation-spinner'></div>
+    <p class='explanation-loading'>Retrieving research context...</p>`;
 
   try {
     const payload = await fetchExplanation(scoreResult, mealItems);
