@@ -46,6 +46,10 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
     state.personalContext
   );
   renderResults(result, recs);
+  _lastScoreResult = result;
+  _lastRecs = recs;
+  _lastMealItems = [...state.mealItems];
+  loadExplanation(result, recs, state.mealItems);
   showView('results');
 });
 
