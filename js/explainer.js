@@ -54,7 +54,7 @@ async function loadExplanation(scoreResult, recs, mealItems) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(30000)  // 30s timeout for cold starts
+      signal: AbortSignal.timeout(60000)  // 60s timeout to cover Render free-tier cold starts (~50s)
     });
 
     if (!response.ok) throw new Error('Server error: ' + response.status);
