@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: south-asian-diet-rag
+    runtime: python
+    buildCommand: cd server && pip install -r requirements.txt
+    startCommand: cd server && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: VOYAGE_API_KEY
+        sync: false
+      - key: CORPUS_PATH
+        value: ../data/corpus.json
+      - key: EMBEDDINGS_PATH
+        value: ../data/embeddings.json
+      - key: MAX_CHUNKS
+        value: 5
+      - key: ALLOWED_ORIGIN
+        sync: false

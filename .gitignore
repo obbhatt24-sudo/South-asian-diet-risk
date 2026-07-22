@@ -10,7 +10,7 @@ server/*
 !server/requirements.txt
 !server/.env.example
 !server/build_embeddings.py
+!server/render.yaml
 .env
 
-# Large and regenerable via server/build_embeddings.py
-data/embeddings.json
+# embeddings.json is committed so Render has it at build time (small, ~350KB)
