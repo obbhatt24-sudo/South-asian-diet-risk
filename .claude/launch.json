@@ -35,6 +35,16 @@
       "runtimeArgs": ["-m", "http.server", "5184"],
       "port": 5184,
       "autoPort": false
+    },
+    {
+      "name": "rag-server",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d server && venv\\Scripts\\python.exe -m uvicorn main:app --reload --port 8001"
+      ],
+      "port": 8001,
+      "autoPort": false
     }
   ]
 }

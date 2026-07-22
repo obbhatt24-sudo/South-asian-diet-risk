@@ -10,15 +10,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from retriever import embed_text
+from retriever import EMBED_MODEL, _get_voyage_client
 
 with open(os.environ.get('CORPUS_PATH', '../data/corpus.json')) as f:
     corpus = json.load(f)
 
+# One batched request for the whole corpus: the free tier without a payment
+# method is limited to 3 requests/minute, so per-chunk requests get throttled.
+print(f'Embedding {len(corpus)} chunks in one batch request...')
+result = _get_voyage_client().embed([chunk['text'] for chunk in corpus], model=EMBED_MODEL)
+
 embeddings = []
-for i, chunk in enumerate(corpus):
-    print(f'Embedding chunk {i + 1}/{len(corpus)}: {chunk["id"]}')
-    vec = embed_text(chunk['text'])
+for i, (chunk, vec) in enumerate(zip(corpus, result.embeddings)):
+    print(f'Embedded chunk {i + 1}/{len(corpus)}: {chunk["id"]}')
     embeddings.append({
         'id': chunk['id'],
         'source': chunk['source'],
