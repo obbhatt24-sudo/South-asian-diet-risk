@@ -96,6 +96,18 @@ function getAllIngredients() {
   return _ingredients;
 }
 
+// When an ingredient item is entered as a cooked weight and the ingredient
+// has a cooked_conversion_factor, convert back to the raw/dry weight the
+// nutrient data is keyed to. Ingredients with a null factor (fats, dairy,
+// vegetables, nuts) have no cooked/raw distinction — use the entered grams.
+function effectiveGrams(item, ing) {
+  const grams = item.gramAmount || 0;
+  if (item.isCooked === true && ing && ing.cooked_conversion_factor != null) {
+    return grams / ing.cooked_conversion_factor;
+  }
+  return grams;
+}
+
 function computeMealNutrients(mealItems) {
   const totals = {
     energy_kcal: 0,
@@ -116,7 +128,7 @@ function computeMealNutrients(mealItems) {
       const ing = _ingById[item.id];
       if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealNutrients'); continue; }
       nutrients = ing.nutrients_per_100g;
-      scale = (item.gramAmount || 0) / 100;
+      scale = effectiveGrams(item, ing) / 100;
     } else if (item.type === 'dish') {
       const dish = _dishById[item.id];
       if (!dish) continue;

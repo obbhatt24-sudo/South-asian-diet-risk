@@ -27,6 +27,18 @@ const ADD_PORTIONS = {
   'vegetable': 80
 };
 
+// Carbohydrate (g) at which the carb-quality penalties (refined carb, low fiber,
+// low protein) reach full weight; below this they scale down proportionally.
+// This stops a small plain-starch portion from stacking the full absence
+// penalties on top of its glycemic-load score — the glycemic load already
+// scales with carbohydrate, so a 50g-dry rice side should read Moderate while a
+// large refined-carb-heavy plate still climbs into High. FAT_QUALITY_REF_G does
+// the same for fat quality: a little poor-quality fat (10g ghee in a dal) is a
+// smaller insult than a plate cooked in it. Saturated-fat and sodium sub-scores
+// already scale with absolute grams/mg, so they are left unscaled.
+const CARB_QUALITY_REF_G = 100;
+const FAT_QUALITY_REF_G = 30;
+
 // ADR-08: dish GL is computed from the dish's ingredient list, not a dish-level GI.
 function computeMealGL(mealItems) {
   let gl = 0;
@@ -35,7 +47,7 @@ function computeMealGL(mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealGL'); continue; }
-      const carbG = ing.nutrients_per_100g.carbohydrate_g * (item.gramAmount / 100);
+      const carbG = ing.nutrients_per_100g.carbohydrate_g * (effectiveGrams(item, ing) / 100);
       const gi = getGI(item.id);
       if (gi === null) continue;
       gl += (gi * carbG) / 100;
@@ -177,11 +189,16 @@ function diabetesScore(mealItems, context, personalContext) {
   const refShare = refinedCarbShare(mealItems);
   const protShare = proteinQualityShare(mealItems);
 
+  // Carb-quality penalties scale with the carbohydrate the meal delivers (see
+  // CARB_QUALITY_REF_G). Glycemic load is not scaled — it already depends on
+  // carbohydrate. Sub-scores are rounded so the breakdown UI shows whole points.
+  const carbScale = Math.min(1, nutrients.carbohydrate_g / CARB_QUALITY_REF_G);
+
   const subScores = {
-    glycemic_load: glSubScore(gl),
-    refined_carb: refinedCarbSubScore(refShare, context),
-    fiber: fiberSubScore(nutrients.fiber_g),
-    protein_quality: proteinQualitySubScore(protShare)
+    glycemic_load: Math.round(glSubScore(gl)),
+    refined_carb: Math.round(refinedCarbSubScore(refShare, context) * carbScale),
+    fiber: Math.round(fiberSubScore(nutrients.fiber_g) * carbScale),
+    protein_quality: Math.round(proteinQualitySubScore(protShare) * carbScale)
   };
 
   const rawSum = Object.values(subScores).reduce((sum, v) => sum + v, 0);
@@ -190,7 +207,7 @@ function diabetesScore(mealItems, context, personalContext) {
   const t2dMult = personalContext.t2dFamilyHistory === true ? 1.15 : 1.0;
   const finalScore = Math.min(100, Math.round(rawSum * bmiMult * t2dMult));
 
-  const band = finalScore < 30 ? 'Low' : finalScore < 60 ? 'Moderate' : 'High';
+  const band = finalScore < 35 ? 'Low' : finalScore < 65 ? 'Moderate' : 'High';
 
   const flags = [];
   if (subScores.glycemic_load > 0) flags.push('high_glycemic_load');
@@ -274,10 +291,16 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   const sodiumSub = sodiumSubScore(totalSodium);
   const fatQualSub = fatQualitySubScore(ratio);
 
+  // Fat-quality penalty scales with total fat, fiber penalty with carbohydrate
+  // (see CARB_QUALITY_REF_G / FAT_QUALITY_REF_G). Saturated fat and sodium are
+  // left unscaled — they already scale with absolute grams/mg.
+  const carbScale = Math.min(1, nutrients.carbohydrate_g / CARB_QUALITY_REF_G);
+  const fatScale = Math.min(1, nutrients.total_fat_g / FAT_QUALITY_REF_G);
+
   const subScores = {
     saturated_fat: sfaSubScore(nutrients.saturated_fat_g),
-    fat_quality: fatQualSub, // may be null
-    fiber: fiberSubScore(nutrients.fiber_g),
+    fat_quality: fatQualSub === null ? null : Math.round(fatQualSub * fatScale),
+    fiber: Math.round(fiberSubScore(nutrients.fiber_g) * carbScale),
     sodium: sodiumSub // may be null
   };
 
@@ -288,11 +311,11 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   const cvdMult = personalContext.cvdFamilyHistory === true ? 1.15 : 1.0;
   const finalScore = Math.min(100, Math.round(rawSum * bmiMult * cvdMult));
 
-  const band = finalScore < 30 ? 'Low' : finalScore < 60 ? 'Moderate' : 'High';
+  const band = finalScore < 35 ? 'Low' : finalScore < 65 ? 'Moderate' : 'High';
 
   const flags = [];
   if (subScores.saturated_fat > 0) flags.push('high_saturated_fat');
-  if (fatQualSub !== null && fatQualSub > 0) flags.push('poor_fat_quality');
+  if (subScores.fat_quality !== null && subScores.fat_quality > 0) flags.push('poor_fat_quality');
   if (subScores.fiber > 0) flags.push('low_fiber');
   if (sodiumSub !== null && sodiumSub > 0) flags.push('high_sodium');
 

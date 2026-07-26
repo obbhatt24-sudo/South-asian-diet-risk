@@ -37,12 +37,29 @@ function renderIngredientResults(results, query) {
   });
 }
 
+// Cooked/raw only applies to ingredients that carry a conversion factor
+// (rice, flours, dals, potatoes, chicken, egg). Fats, dairy, vegetables and
+// nuts have a null factor and no cooked/raw distinction, so the toggle is
+// hidden and the entered grams are used directly.
+function showsCookedToggle(ingredient) {
+  return ingredient.cooked_conversion_factor != null;
+}
+
 function promptGramAmount(ingredient, clickedDiv) {
+  const hasToggle = showsCookedToggle(ingredient);
+  const toggleHtml = hasToggle
+    ? '<span class="cooked-toggle"> ' +
+        '<label><input type="radio" name="cooked-weight" value="raw"> Raw weight</label> ' +
+        '<label><input type="radio" name="cooked-weight" value="cooked" checked> Cooked weight</label>' +
+      '</span> '
+    : '';
+
   const form = document.createElement('div');
   form.innerHTML =
     '<span>' + ingredient.name + '</span> ' +
     '<input type="number" min="1" max="2000" value="100" id="gram-input"> ' +
     '<span>g</span> ' +
+    toggleHtml +
     '<button id="gram-add-btn">Add</button> ' +
     '<button id="gram-cancel-btn">Cancel</button>';
 
@@ -51,7 +68,12 @@ function promptGramAmount(ingredient, clickedDiv) {
   form.querySelector('#gram-add-btn').addEventListener('click', function() {
     const gramAmount = parseInt(form.querySelector('#gram-input').value, 10);
     if (!gramAmount || gramAmount <= 0) return;
-    addIngredientToMeal(ingredient.id, gramAmount);
+    let isCooked = false;
+    if (hasToggle) {
+      const selected = form.querySelector('input[name="cooked-weight"]:checked');
+      isCooked = selected ? selected.value === 'cooked' : true;
+    }
+    addIngredientToMeal(ingredient.id, gramAmount, isCooked);
   });
 
   form.querySelector('#gram-cancel-btn').addEventListener('click', function() {
@@ -63,8 +85,10 @@ function promptGramAmount(ingredient, clickedDiv) {
   });
 }
 
-function addIngredientToMeal(id, gramAmount) {
-  state.mealItems.push({ type: 'ingredient', id: id, gramAmount: gramAmount });
+function addIngredientToMeal(id, gramAmount, isCooked) {
+  const item = { type: 'ingredient', id: id, gramAmount: gramAmount };
+  if (isCooked === true) item.isCooked = true;
+  state.mealItems.push(item);
   document.getElementById('ingredient-search').value = '';
   document.getElementById('ingredient-results').innerHTML = '';
   renderMealItems();
@@ -183,7 +207,12 @@ function renderMealItems() {
     if (item.type === 'dish') {
       label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' serving(s)  [DISH]';
     } else {
-      label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' g';
+      const ing = getIngredientById(item.id);
+      let weightNote = '';
+      if (ing && ing.cooked_conversion_factor != null) {
+        weightNote = item.isCooked === true ? ' (cooked)' : ' (raw)';
+      }
+      label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' g' + weightNote;
     }
 
     const removeBtn = document.createElement('button');

@@ -1,15 +1,16 @@
 // results.js — renders score cards into the results view.
 
+// Band cutoffs: Low < 35, Moderate 35–64, High ≥ 65 (recalibrated in Step 34).
 const DIABETES_BAND_TEXT = {
-  Low: 'This meal contributes minimally to diabetes risk factors.',
-  Moderate: 'This meal has notable diabetes risk-relevant features.',
-  High: 'This meal meaningfully elevates diabetes risk factors.'
+  Low: 'This meal contributes minimally to diabetes risk factors (score under 35).',
+  Moderate: 'This meal has notable diabetes risk-relevant features (score 35–64).',
+  High: 'This meal meaningfully elevates diabetes risk factors (score 65 or above).'
 };
 
 const CVD_BAND_TEXT = {
-  Low: 'This meal contributes minimally to cardiovascular risk factors.',
-  Moderate: 'This meal has notable cardiovascular risk-relevant features.',
-  High: 'This meal meaningfully elevates cardiovascular risk factors.'
+  Low: 'This meal contributes minimally to cardiovascular risk factors (score under 35).',
+  Moderate: 'This meal has notable cardiovascular risk-relevant features (score 35–64).',
+  High: 'This meal meaningfully elevates cardiovascular risk factors (score 65 or above).'
 };
 
 // Mirrors getGI()'s fallback chain to detect when a food-group default GI
