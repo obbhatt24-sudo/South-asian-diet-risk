@@ -57,40 +57,51 @@ function computeMealGL(mealItems) {
   return gl;
 }
 
+// Continuous piecewise-linear so that a GL improvement always shows up as a
+// score delta — hard buckets flattened real swaps (e.g. white -> basmati rice).
 function glSubScore(gl) {
-  if (gl < 10) return 0;
-  if (gl < 20) return 20;
-  if (gl < 30) return 32;
-  return 40;
+  if (gl <= 0) return 0;
+  if (gl <= 10) return gl * 1.0;             // 0-10 -> 0-10 pts
+  if (gl <= 20) return 10 + (gl - 10) * 1.5; // 10-20 -> 10-25 pts
+  if (gl <= 40) return 25 + (gl - 20) * 0.5; // 20-40 -> 25-35 pts
+  return Math.min(40, 35 + (gl - 40) * 0.1); // 40+ -> 35-40 pts (asymptote)
 }
 
+const STARCH_ROLE_TAGS = ['starch_source', 'sweetener'];
+
+// Only starch/sweetener ingredients belong in this ratio at all. Dal, rajma,
+// spinach and potato carry carbs but no whole_grain tag, and counting them as
+// refined was scoring legume- and vegetable-heavy meals as if they were sugar.
 function refinedCarbShare(mealItems) {
-  let totalCarbs = 0;
+  let totalStarchCarbs = 0;
   let refinedCarbs = 0;
+
+  const accumulate = (ing, scale) => {
+    const hasStarchRole = ing.role_tags.some((tag) => STARCH_ROLE_TAGS.includes(tag));
+    if (!hasStarchRole) return;
+    const carbG = ing.nutrients_per_100g.carbohydrate_g * scale;
+    totalStarchCarbs += carbG;
+    if (!ing.role_tags.includes('whole_grain')) refinedCarbs += carbG;
+  };
 
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
       const ing = getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'refinedCarbShare'); continue; }
-      const carbG = ing.nutrients_per_100g.carbohydrate_g * (item.gramAmount / 100);
-      totalCarbs += carbG;
-      if (!ing.role_tags.includes('whole_grain')) refinedCarbs += carbG;
+      accumulate(ing, item.gramAmount / 100);
     } else if (item.type === 'dish') {
       const dish = getDishById(item.id);
       if (!dish) continue;
-      totalCarbs += dish.nutrients_per_serving.carbohydrate_g * item.servings;
       for (const di of dish.ingredients) {
         const ing = getIngredientById(di.ingredient_id);
         if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'refinedCarbShare'); continue; }
-        if (ing.role_tags.includes('whole_grain')) continue;
-        const scale = (di.amount_g / 100) * (item.servings / dish.servings);
-        refinedCarbs += ing.nutrients_per_100g.carbohydrate_g * scale;
+        accumulate(ing, (di.amount_g / 100) * (item.servings / dish.servings));
       }
     }
   }
 
-  if (totalCarbs === 0) return 0;
-  return refinedCarbs / totalCarbs;
+  if (totalStarchCarbs === 0) return 0;
+  return refinedCarbs / totalStarchCarbs;
 }
 
 // India: moderate band starts at 25% refined carb share; US: 20%
