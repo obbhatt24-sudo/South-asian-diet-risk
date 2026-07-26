@@ -37,12 +37,56 @@ function renderIngredientResults(results, query) {
   });
 }
 
+// Append USDA fallback results below the local results, separated by a
+// divider. USDA foods show a 'USDA' badge instead of a diet_type badge and,
+// once clicked, are registered so they resolve like local ingredients.
+function appendUSDAResults(foods, query) {
+  const container = document.getElementById('ingredient-results');
+  if (!container || !foods || foods.length === 0) return;
+
+  // Guard against stale async: only append if the search box still shows the
+  // query these results were fetched for.
+  const searchInput = document.getElementById('ingredient-search');
+  if (!searchInput || searchInput.value.trim() !== query) return;
+
+  const divider = document.createElement('div');
+  divider.className = 'results-divider';
+  divider.textContent = 'More foods (USDA)';
+  container.appendChild(divider);
+
+  foods.forEach(function(food) {
+    const div = document.createElement('div');
+    div.className = 'ingredient-result';
+    div.style.cursor = 'pointer';
+
+    div.innerHTML =
+      '<strong>' + food.name + '</strong> ' +
+      '<span class="diet-badge usda-badge">USDA</span> ' +
+      '<span style="font-size:0.8em; color:#666;">' + food.food_group + '</span>';
+
+    div.addEventListener('click', function() {
+      registerExternalIngredient(food);
+      promptGramAmount(food, div);
+    });
+
+    container.appendChild(div);
+  });
+}
+
 // Cooked/raw only applies to ingredients that carry a conversion factor
 // (rice, flours, dals, potatoes, chicken, egg). Fats, dairy, vegetables and
 // nuts have a null factor and no cooked/raw distinction, so the toggle is
 // hidden and the entered grams are used directly.
 function showsCookedToggle(ingredient) {
-  return ingredient.cooked_conversion_factor != null;
+  if (ingredient.cooked_conversion_factor != null) return true;
+  // USDA foods carry no conversion factor, but starch and legume items still
+  // offer the cooked/raw toggle so the choice is available for them.
+  if (ingredient._isExternal && Array.isArray(ingredient.role_tags) &&
+      (ingredient.role_tags.includes('starch_source') ||
+       ingredient.role_tags.includes('legume_protein'))) {
+    return true;
+  }
+  return false;
 }
 
 function promptGramAmount(ingredient, clickedDiv) {
@@ -313,8 +357,15 @@ function initMealBuilder() {
 
   searchInput.addEventListener('input', function() {
     const query = searchInput.value.trim();
+    // 1-2. Local search renders immediately (fast, no network).
     const results = searchIngredients(query, !nonvegToggle.checked);
     renderIngredientResults(results, query);
+    // 3-5. Sparse local results fall back to USDA, appended asynchronously.
+    if (results.length < 3) {
+      searchUSDA(query).then(function(usdaResults) {
+        appendUSDAResults(usdaResults, query);
+      });
+    }
   });
 
   dishSearchInput.addEventListener('input', function() {

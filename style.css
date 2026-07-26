@@ -259,6 +259,19 @@ button.apply-btn:hover {
   color: #B71C1C;
 }
 
+.results-divider {
+  font-size: 0.8rem;
+  color: #888;
+  padding: 6px 0;
+  border-top: 1px solid #EEE;
+  margin-top: 4px;
+}
+
+.usda-badge {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
 .dish-badge {
   display: inline-block;
   padding: 1px 6px;

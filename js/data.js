@@ -64,6 +64,91 @@ function getIngredientById(id) {
   return _ingById[id] || null;
 }
 
+// ===== USDA FoodData Central fallback =====
+// External foods fetched from USDA are cached into _ingById on add so that
+// getIngredientById / computeMealNutrients resolve them exactly like local
+// ingredients (their schema is identical).
+function registerExternalIngredient(food) {
+  if (food && food.id && !_ingById[food.id]) {
+    _ingById[food.id] = food;
+  }
+}
+
+async function searchUSDA(query) {
+  if (!query || query.length < 2) return [];
+  const url = `https://api.nal.usda.gov/fdc/v1/foods/search` +
+    `?query=${encodeURIComponent(query)}` +
+    `&dataType=Foundation,SR%20Legacy` +
+    `&pageSize=8` +
+    `&api_key=${USDA_API_KEY}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return (data.foods || []).map(f => normaliseUSDAFood(f));
+  } catch(e) {
+    console.warn('USDA search failed:', e.message);
+    return [];
+  }
+}
+
+function normaliseUSDAFood(f) {
+  // Map USDA nutrient IDs to our schema
+  const get = (id) => {
+    const n = (f.foodNutrients || []).find(n => n.nutrientId === id);
+    return n ? Math.round(n.value * 10) / 10 : 0;
+  };
+  return {
+    id: 'usda_' + f.fdcId,
+    source_code: String(f.fdcId),
+    name: f.description,
+    food_group: f.foodCategory || 'General',
+    diet_type: inferDietType(f.description),
+    role_tags: inferRoleTags(f.description, f.foodCategory),
+    nutrients_per_100g: {
+      energy_kcal: get(1008),
+      protein_g:   get(1003),
+      carbohydrate_g: get(1005),
+      fiber_g:     get(1079),
+      total_fat_g: get(1004),
+      saturated_fat_g: get(1258),
+      sugars_g:    get(2000),
+      sodium_mg:   get(1093)
+    },
+    glycemic_index: null,
+    cooked_conversion_factor: null,
+    source: 'USDA FoodData Central',
+    _isExternal: true   // flag for UI display
+  };
+}
+
+function inferDietType(name) {
+  const n = name.toLowerCase();
+  if (/beef|pork|lamb|chicken|turkey|fish|salmon|tuna|shrimp|prawn|meat/.test(n))
+    return 'non_veg';
+  if (/egg/.test(n)) return 'egg';
+  return 'veg';
+}
+
+function inferRoleTags(name, category) {
+  const n = (name + ' ' + (category||'')).toLowerCase();
+  const tags = [];
+  if (/rice|bread|pasta|oat|wheat|flour|grain|cereal|corn|maize/.test(n))
+    tags.push('starch_source');
+  if (/oil|butter|ghee|fat|lard/.test(n)) tags.push('cooking_fat');
+  if (/bean|lentil|chickpea|dal|pea|legume/.test(n)) tags.push('legume_protein');
+  if (/milk|yogurt|cheese|paneer|curd|dairy/.test(n)) tags.push('dairy_protein');
+  if (/chicken|beef|fish|salmon|tuna|egg|meat|pork|lamb/.test(n))
+    tags.push('animal_protein');
+  if (/nut|almond|cashew|walnut|seed|peanut/.test(n)) tags.push('nut_seed');
+  if (/sugar|honey|syrup|jaggery|sweetener/.test(n)) tags.push('sweetener');
+  if (/spinach|broccoli|carrot|tomato|onion|vegetable|salad/.test(n))
+    tags.push('vegetable');
+  if (/potato|yam|cassava|plantain/.test(n)) tags.push('starchy_vegetable');
+  if (/whole.?wheat|whole.?grain|brown.?rice|oat|barley|millet|quinoa/.test(n))
+    tags.push('whole_grain');
+  return tags.length > 0 ? tags : ['vegetable']; // safe default
+}
+
 // Scoring loops skip ingredients they cannot resolve; warn once per id so
 // data problems are visible without spamming the console (score() runs
 // many times per recommendation pass).
