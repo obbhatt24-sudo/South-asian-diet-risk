@@ -272,6 +272,15 @@ button.apply-btn:hover {
   color: #1565C0;
 }
 
+/* Weight-basis hint shown next to the gram input when adding a USDA food
+   (which basis its nutrient data is on). Muted so it reads as guidance,
+   not a control. */
+.basis-hint {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #888;
+}
+
 .dish-badge {
   display: inline-block;
   padding: 1px 6px;

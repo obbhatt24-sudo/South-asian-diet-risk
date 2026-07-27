@@ -155,9 +155,23 @@ function normaliseUSDAFood(f) {
     _usdaName: f.description.toLowerCase(),
     glycemic_index: null,
     cooked_conversion_factor: null,
+    // USDA distinguishes cooked vs uncooked as separate foods, so the nutrient
+    // data is already on a fixed basis. Parse that basis from the description so
+    // the UI can label it (and prompt the user for the matching weight) instead
+    // of offering a cosmetic cooked/raw toggle that a null factor can't honour.
+    _weightBasis: inferWeightBasis(f.description),
     source: 'USDA FoodData Central',
     _isExternal: true   // flag for UI display
   };
+}
+
+// 'cooked' | 'dry' | null. Word-boundary matches so "dry" doesn't fire on
+// words like "hydrated"; unqualified entries return null (basis unknown).
+function inferWeightBasis(name) {
+  const n = (name || '').toLowerCase();
+  if (/\b(cooked|boiled|steamed)\b/.test(n)) return 'cooked';
+  if (/\b(raw|dry|dried|uncooked)\b/.test(n)) return 'dry';
+  return null;
 }
 
 function inferDietType(name) {

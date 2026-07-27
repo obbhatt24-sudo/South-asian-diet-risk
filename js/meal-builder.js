@@ -79,13 +79,10 @@ function appendUSDAResults(foods, query) {
 // hidden and the entered grams are used directly.
 function showsCookedToggle(ingredient) {
   if (ingredient.cooked_conversion_factor != null) return true;
-  // USDA foods carry no conversion factor, but starch and legume items still
-  // offer the cooked/raw toggle so the choice is available for them.
-  if (ingredient._isExternal && Array.isArray(ingredient.role_tags) &&
-      (ingredient.role_tags.includes('starch_source') ||
-       ingredient.role_tags.includes('legume_protein'))) {
-    return true;
-  }
+  // USDA foods carry no conversion factor, so a cooked/raw toggle can't convert
+  // anything (effectiveGrams would ignore it). USDA already publishes cooked and
+  // uncooked forms as separate foods, so instead of a cosmetic toggle the entry's
+  // fixed basis is parsed from its name and labelled in the meal list.
   return false;
 }
 
@@ -98,11 +95,22 @@ function promptGramAmount(ingredient, clickedDiv) {
       '</span> '
     : '';
 
+  // For USDA foods (no toggle), tell the user which weight to enter so the
+  // fixed-basis nutrient data isn't mis-applied (e.g. weighing a cooked serving
+  // of a dry-basis entry would massively overstate the portion).
+  let basisHint = '';
+  if (!hasToggle && ingredient._isExternal && ingredient._weightBasis) {
+    basisHint = ingredient._weightBasis === 'cooked'
+      ? '<span class="basis-hint"> (enter cooked weight)</span> '
+      : '<span class="basis-hint"> (enter dry/uncooked weight)</span> ';
+  }
+
   const form = document.createElement('div');
   form.innerHTML =
     '<span>' + ingredient.name + '</span> ' +
     '<input type="number" min="1" max="2000" value="100" id="gram-input"> ' +
     '<span>g</span> ' +
+    basisHint +
     toggleHtml +
     '<button id="gram-add-btn">Add</button> ' +
     '<button id="gram-cancel-btn">Cancel</button>';
@@ -255,6 +263,10 @@ function renderMealItems() {
       let weightNote = '';
       if (ing && ing.cooked_conversion_factor != null) {
         weightNote = item.isCooked === true ? ' (cooked)' : ' (raw)';
+      } else if (ing && ing._isExternal && ing._weightBasis) {
+        // USDA data is on a fixed basis parsed from the food name; show it so the
+        // user can see whether the grams they entered should be cooked or dry.
+        weightNote = ing._weightBasis === 'cooked' ? ' (cooked basis)' : ' (dry basis)';
       }
       label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' g' + weightNote;
     }
