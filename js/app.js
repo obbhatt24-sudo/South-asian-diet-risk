@@ -82,7 +82,8 @@ document.getElementById('cvd-history').addEventListener('change', function() {
 const SEARCH_TABS = [
   { tab: 'tab-ingredient', panel: 'ingredient-search-panel' },
   { tab: 'tab-dish',       panel: 'dish-search-panel' },
-  { tab: 'tab-packaged',   panel: 'packaged-search-panel' }
+  { tab: 'tab-packaged',   panel: 'packaged-search-panel' },
+  { tab: 'tab-scan',       panel: 'scan-panel' }
 ];
 
 function selectSearchTab(activeTabId) {
@@ -98,7 +99,18 @@ function selectSearchTab(activeTabId) {
 SEARCH_TABS.forEach(function(entry) {
   document.getElementById(entry.tab).addEventListener('click', function() {
     selectSearchTab(entry.tab);
+    // The Scan tab drives the camera: start it on entry, and stop it whenever
+    // the user switches to any other search source.
+    if (entry.tab === 'tab-scan') {
+      startScanner();
+    } else {
+      stopScanner();
+    }
   });
+});
+
+document.getElementById('stop-scanner').addEventListener('click', function() {
+  stopScanner();
 });
 
 function enableUI() {
@@ -110,6 +122,8 @@ function initUI() {
   loadData().then(() => { console.log('Data loaded'); enableUI(); });
   showView('meal-builder');
   document.getElementById('context-description').textContent = CONTEXT_DESCRIPTIONS['india'];
+  document.getElementById('cache-counter').textContent =
+    `${getScanCacheSize()} products in local database`;
   console.log('App initialised, state:', state);
 }
 

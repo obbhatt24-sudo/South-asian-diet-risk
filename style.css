@@ -412,6 +412,16 @@ button.apply-btn:hover {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ===== Barcode scanner ===== */
+
+#scanner-container { width: 100%; max-width: 400px; margin: 0 auto; }
+.scan-status { color: #2E5F8A; font-style: italic; font-size: 0.9rem; }
+.scan-error  { color: #B71C1C; font-size: 0.9rem; }
+.scan-hint   { color: #888; font-size: 0.85rem; }
+.scanned-product { background: #F5F5F5; border-radius: 8px;
+  padding: 14px; margin-top: 10px; }
+.scanned-nutrients { font-size: 0.85rem; color: #555; margin: 6px 0; }
+
 /* ===== Mobile ===== */
 
 @media (max-width: 600px) {

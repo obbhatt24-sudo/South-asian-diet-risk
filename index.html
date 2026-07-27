@@ -39,6 +39,7 @@
         <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel">Ingredients</button>
         <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel">Dishes</button>
         <button id="tab-packaged" class="tab" role="tab" aria-selected="false" aria-controls="packaged-search-panel">Packaged</button>
+        <button id="tab-scan" class="tab" role="tab" aria-selected="false" aria-controls="scan-panel">📷 Scan</button>
       </div>
 
       <div id="ingredient-search-panel" role="tabpanel">
@@ -64,6 +65,13 @@
         <p class="packaged-note">Packaged food data from Open Food Facts
           (community-contributed). Nutrient values may vary from actual products.
           Always check the product label.</p>
+      </div>
+
+      <div id="scan-panel" role="tabpanel" style="display:none">
+        <p>Point your camera at a product barcode.</p>
+        <div id="scanner-container"></div>
+        <div id="scan-result"></div>
+        <button id="stop-scanner" style="display:none">Stop scanner</button>
       </div>
 
       <div id="meal-items"><p>No items yet.</p></div>
@@ -156,8 +164,14 @@
 
   </main>
 
+  <footer>
+    <p id="cache-counter"></p>
+  </footer>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/scanner.js"></script>
   <script src="js/scorer.js"></script>
   <script src="js/recommender.js"></script>
   <script src="js/meal-builder.js"></script>

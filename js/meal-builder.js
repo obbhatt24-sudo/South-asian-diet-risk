@@ -192,7 +192,18 @@ function promptGramAmount(ingredient, clickedDiv) {
   });
 }
 
-function addIngredientToMeal(id, gramAmount, isCooked) {
+// Third argument is overloaded: a boolean isCooked from the local/USDA gram
+// prompt, or a full ingredientRecord for externally-sourced products (scanned
+// barcodes, and any other food not present in ingredients.json). When a record
+// is supplied it is registered so getIngredientById / computeMealNutrients
+// resolve it directly by id, exactly like a local ingredient.
+function addIngredientToMeal(id, gramAmount, isCookedOrRecord) {
+  let isCooked = false;
+  if (isCookedOrRecord && typeof isCookedOrRecord === 'object') {
+    registerExternalIngredient(isCookedOrRecord);
+  } else if (isCookedOrRecord === true) {
+    isCooked = true;
+  }
   const item = { type: 'ingredient', id: id, gramAmount: gramAmount };
   if (isCooked === true) item.isCooked = true;
   state.mealItems.push(item);
