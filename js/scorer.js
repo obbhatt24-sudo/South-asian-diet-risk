@@ -235,11 +235,25 @@ function getMufaSfaRatio(mealItems) {
   const accumulate = (ing, scale) => {
     const sfa = ing.nutrients_per_100g.saturated_fat_g * scale;
     totalSfa += sfa;
-    if (ing.nutrients_per_100g.mufa_g !== undefined) {
+    if (ing.nutrients_per_100g.mufa_g !== undefined && ing.nutrients_per_100g.mufa_g !== null) {
       totalMufa += ing.nutrients_per_100g.mufa_g * scale;
     } else {
-      const fallbackRatio =
-        MUFA_SFA_FALLBACK[ing.name.toLowerCase()] ?? MUFA_SFA_FALLBACK_DEFAULT;
+      let fallbackRatio;
+      if (ing._isExternal && ing._usdaName) {
+        // USDA foods carry no MUFA data and name their oils "Oil, olive, ..."
+        // (word order reversed from our table's "olive oil"), so match a
+        // fallback key when ALL its words appear anywhere in the USDA name,
+        // order-independent (e.g. 'olive oil' matches 'oil, olive, extra virgin').
+        const nameWords = new Set(ing._usdaName.split(/[^a-z]+/).filter(Boolean));
+        const matchKey = Object.keys(MUFA_SFA_FALLBACK)
+          .find((k) => k.split(' ').every((w) => nameWords.has(w)));
+        fallbackRatio = matchKey
+          ? MUFA_SFA_FALLBACK[matchKey]
+          : MUFA_SFA_FALLBACK_DEFAULT;
+      } else {
+        fallbackRatio =
+          MUFA_SFA_FALLBACK[ing.name.toLowerCase()] ?? MUFA_SFA_FALLBACK_DEFAULT;
+      }
       totalMufa += sfa * fallbackRatio;
       usedFallback = true;
     }

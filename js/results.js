@@ -175,6 +175,18 @@ function renderResults(result, recs) {
     'does not eliminate this baseline risk (MASALA Study; Tsimikas et al.).';
   container.appendChild(cvdRiskNote);
 
+  // computeMealNutrients() flags meals containing USDA foods with unreported
+  // nutrients (those read as null, summed as 0). Warn that scores for those
+  // items may be understated.
+  if (nutrients._hasIncompleteData) {
+    const incompleteNote = document.createElement('p');
+    incompleteNote.className = 'risk-note';
+    incompleteNote.textContent = 'Some ingredients had incomplete nutrition ' +
+      'data (marked N/A in the USDA database). Scores may be slightly ' +
+      'understated for those items.';
+    container.appendChild(incompleteNote);
+  }
+
   renderRecommendations(recs, result);
 }
 

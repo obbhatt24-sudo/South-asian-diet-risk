@@ -1,5 +1,7 @@
 const FOOD_GROUP_GI = {
   'Cereals and millets': 72,
+  'Cereals and millets (refined)': 72,
+  'Cereals and millets (whole grain)': 53,
   'Pulses and legumes': 30,
   'Vegetables': 20,
   'Starchy vegetables': 65,
@@ -91,19 +93,55 @@ async function searchUSDA(query) {
   }
 }
 
+// Translate a USDA foodCategory string into one of the app's food_group keys
+// so getGI()'s FOOD_GROUP_GI lookup resolves a glycemic index for USDA foods
+// (their raw categories like "Cereal Grains and Pasta" don't match the table).
+// Falls back to role_tags when the category text doesn't match, then to a safe
+// low-GI default so a mis-categorised food never inflates the score.
+function mapUSDACategory(usdaCategory, roleTags) {
+  const c = (usdaCategory || '').toLowerCase();
+  if (/cereal|grain|rice|pasta|bread|flour|oat/.test(c))
+    return roleTags.includes('whole_grain')
+      ? 'Cereals and millets (whole grain)'
+      : 'Cereals and millets (refined)';
+  if (/legume|bean|lentil|pea/.test(c))   return 'Pulses and legumes';
+  if (/vegetable/.test(c))                return 'Vegetables';
+  if (/fruit/.test(c))                    return 'Fruits';
+  if (/dairy|milk|cheese|yogurt/.test(c)) return 'Dairy';
+  if (/fat|oil|butter/.test(c))           return 'Fats and oils';
+  if (/nut|seed/.test(c))                 return 'Nuts and seeds';
+  if (/sugar|sweet|candy/.test(c))        return 'Sugars and sweets';
+  if (/beef|pork|poultry|fish|seafood|egg|meat/.test(c))
+    return 'Meat, poultry, fish, eggs';
+  if (/potato|starch/.test(c))            return 'Starchy vegetables';
+  // Fallback: infer from role_tags
+  if (roleTags.includes('legume_protein'))  return 'Pulses and legumes';
+  if (roleTags.includes('starch_source'))   return 'Cereals and millets (refined)';
+  if (roleTags.includes('vegetable'))       return 'Vegetables';
+  if (roleTags.includes('cooking_fat'))     return 'Fats and oils';
+  if (roleTags.includes('dairy_protein'))   return 'Dairy';
+  if (roleTags.includes('animal_protein'))  return 'Meat, poultry, fish, eggs';
+  if (roleTags.includes('nut_seed'))        return 'Nuts and seeds';
+  if (roleTags.includes('sweetener'))       return 'Sugars and sweets';
+  return 'Vegetables';  // safe default (GI 20, won't inflate scores)
+}
+
 function normaliseUSDAFood(f) {
-  // Map USDA nutrient IDs to our schema
+  // Map USDA nutrient IDs to our schema. A nutrient the USDA record does not
+  // report returns null (not 0) so genuinely-missing data can be flagged as
+  // incomplete rather than silently read as zero (which understates scores).
   const get = (id) => {
     const n = (f.foodNutrients || []).find(n => n.nutrientId === id);
-    return n ? Math.round(n.value * 10) / 10 : 0;
+    return n ? Math.round(n.value * 10) / 10 : null;
   };
+  const inferredRoleTags = inferRoleTags(f.description, f.foodCategory);
   return {
     id: 'usda_' + f.fdcId,
     source_code: String(f.fdcId),
     name: f.description,
-    food_group: f.foodCategory || 'General',
+    food_group: mapUSDACategory(f.foodCategory, inferredRoleTags),
     diet_type: inferDietType(f.description),
-    role_tags: inferRoleTags(f.description, f.foodCategory),
+    role_tags: inferredRoleTags,
     nutrients_per_100g: {
       energy_kcal: get(1008),
       protein_g:   get(1003),
@@ -114,6 +152,7 @@ function normaliseUSDAFood(f) {
       sugars_g:    get(2000),
       sodium_mg:   get(1093)
     },
+    _usdaName: f.description.toLowerCase(),
     glycemic_index: null,
     cooked_conversion_factor: null,
     source: 'USDA FoodData Central',
@@ -204,6 +243,10 @@ function computeMealNutrients(mealItems) {
     sugars_g: 0,
     sodium_mg: 0
   };
+  // Captured before any flag is added so the summing loop only iterates the
+  // real nutrient keys, never the _hasIncompleteData marker.
+  const nutrientKeys = Object.keys(totals);
+  let hasIncompleteData = false;
 
   for (const item of mealItems) {
     let nutrients = null;
@@ -222,10 +265,15 @@ function computeMealNutrients(mealItems) {
     }
 
     if (!nutrients) continue;
-    for (const key of Object.keys(totals)) {
-      totals[key] += (nutrients[key] || 0) * scale;
+    // USDA foods report null for nutrients the database is missing. Treat null
+    // as 0 for the arithmetic, but flag the meal so the UI can warn that scores
+    // may be slightly understated for those items.
+    for (const key of nutrientKeys) {
+      if (nutrients[key] === null) hasIncompleteData = true;
+      totals[key] += (nutrients[key] ?? 0) * scale;
     }
   }
 
+  if (hasIncompleteData) totals._hasIncompleteData = true;
   return totals;
 }
