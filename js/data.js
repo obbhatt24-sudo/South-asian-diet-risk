@@ -188,6 +188,106 @@ function inferRoleTags(name, category) {
   return tags.length > 0 ? tags : ['vegetable']; // safe default
 }
 
+// ===== Open Food Facts packaged-product source =====
+// OFF products carry the same schema as local ingredients (nutrients_per_100g,
+// role_tags, food_group) so once registered they resolve identically. Lookups
+// are cached in localStorage for 24h to avoid re-hitting the network for the
+// same query — OFF search is a slow, community-hosted endpoint.
+const OFF_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+
+function readOFFCache(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const entry = JSON.parse(raw);
+    if (!entry || typeof entry.ts !== 'number') return null;
+    if (Date.now() - entry.ts > OFF_CACHE_TTL_MS) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    return entry.data;
+  } catch(e) {
+    return null;
+  }
+}
+
+function writeOFFCache(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data: data }));
+  } catch(e) {
+    // localStorage may be full or unavailable (private mode) — caching is a
+    // best-effort optimisation, so a failure here is non-fatal.
+  }
+}
+
+async function searchOpenFoodFacts(query) {
+  if (!query || query.length < 2) return [];
+  // Serve from the 24h cache before touching the network.
+  const cacheKey = 'off_search_' + query;
+  const cached = readOFFCache(cacheKey);
+  if (cached) return cached;
+
+  const url = `https://world.openfoodfacts.org/cgi/search.pl` +
+    `?search_terms=${encodeURIComponent(query)}` +
+    `&search_simple=1&action=process&json=1&page_size=8` +
+    `&fields=product_name,brands,nutriscore_grade,nova_group,` +
+    `nutriments,image_small_url,code`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const products = (data.products || [])
+      .filter(p => p.product_name && p.nutriments)
+      .map(p => normaliseOFFProduct(p));
+    writeOFFCache(cacheKey, products);
+    return products;
+  } catch(e) {
+    console.warn('Open Food Facts search failed:', e.message);
+    return [];
+  }
+}
+
+async function lookupOFFByBarcode(barcode) {
+  const url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.status !== 1) return null;
+    return normaliseOFFProduct(data.product);
+  } catch(e) {
+    console.warn('OFF barcode lookup failed:', e.message);
+    return null;
+  }
+}
+
+function normaliseOFFProduct(p) {
+  const n = p.nutriments || {};
+  return {
+    id: 'off_' + (p.code || Math.random().toString(36).slice(2)),
+    source_code: p.code || '',
+    name: p.product_name + (p.brands ? ' (' + p.brands + ')' : ''),
+    food_group: 'Packaged product',
+    diet_type: 'veg',  // conservative default; OFF data is unreliable for this
+    role_tags: inferRoleTags(p.product_name || '', ''),
+    nutrients_per_100g: {
+      energy_kcal:    Math.round(n['energy-kcal_100g'] || 0),
+      protein_g:      Math.round((n['proteins_100g'] || 0) * 10) / 10,
+      carbohydrate_g: Math.round((n['carbohydrates_100g'] || 0) * 10) / 10,
+      fiber_g:        Math.round((n['fiber_100g'] || 0) * 10) / 10,
+      total_fat_g:    Math.round((n['fat_100g'] || 0) * 10) / 10,
+      saturated_fat_g: Math.round((n['saturated-fat_100g'] || 0) * 10) / 10,
+      sugars_g:       Math.round((n['sugars_100g'] || 0) * 10) / 10,
+      sodium_mg:      Math.round((n['sodium_100g'] || 0) * 1000 * 10) / 10
+    },
+    glycemic_index: null,
+    cooked_conversion_factor: null,
+    nutriscore: p.nutriscore_grade || null,
+    nova_group: p.nova_group || null,
+    source: 'Open Food Facts',
+    _isExternal: true,
+    _isPackaged: true
+  };
+}
+
 // Scoring loops skip ingredients they cannot resolve; warn once per id so
 // data problems are visible without spamming the console (score() runs
 // many times per recommendation pass).

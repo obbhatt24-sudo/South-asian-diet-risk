@@ -73,12 +73,66 @@ function appendUSDAResults(foods, query) {
   });
 }
 
+// Nutri-Score (a–e) and NOVA group (1–4) badges for Open Food Facts products.
+// Return '' when the value is missing so the badge simply doesn't appear.
+function nutriScoreBadgeHtml(grade) {
+  if (!grade) return '';
+  const g = String(grade).toLowerCase();
+  return '<span class="diet-badge nutriscore-' + g + '">Nutri-Score ' +
+    g.toUpperCase() + '</span>';
+}
+
+function novaBadgeHtml(nova) {
+  if (nova === null || nova === undefined || nova === '') return '';
+  const n = String(nova);
+  return '<span class="diet-badge nova-badge nova-' + n + '">NOVA ' + n + '</span>';
+}
+
+// Render Open Food Facts results into the Packaged panel. Products carry the
+// ingredient schema, so a click registers them (like USDA) and reuses the
+// shared gram-amount prompt.
+function renderPackagedResults(results, query) {
+  const container = document.getElementById('packaged-results');
+  container.innerHTML = '';
+
+  if (query.length < 2) {
+    return;
+  }
+
+  if (results.length === 0) {
+    container.innerHTML = `<p class='empty-state'>No packaged foods found matching "${query}". Try a different spelling or brand.</p>`;
+    return;
+  }
+
+  results.forEach(function(product) {
+    const div = document.createElement('div');
+    div.className = 'ingredient-result';
+    div.style.cursor = 'pointer';
+
+    div.innerHTML =
+      '<strong>' + product.name + '</strong> ' +
+      nutriScoreBadgeHtml(product.nutriscore) + ' ' +
+      novaBadgeHtml(product.nova_group) + ' ' +
+      '<span class="diet-badge packaged-badge">PACKAGED</span>';
+
+    div.addEventListener('click', function() {
+      registerExternalIngredient(product);
+      promptGramAmount(product, div);
+    });
+
+    container.appendChild(div);
+  });
+}
+
 // Cooked/raw only applies to ingredients that carry a conversion factor
 // (rice, flours, dals, potatoes, chicken, egg). Fats, dairy, vegetables and
 // nuts have a null factor and no cooked/raw distinction, so the toggle is
 // hidden and the entered grams are used directly.
 function showsCookedToggle(ingredient) {
   if (ingredient.cooked_conversion_factor != null) return true;
+  // Packaged (Open Food Facts) products have a null conversion factor and no
+  // cooked/raw distinction, so a toggle would be cosmetic — always hide it.
+  if (ingredient._isPackaged) return false;
   // USDA foods carry no conversion factor, but starch and legume items still
   // offer the cooked/raw toggle so the choice is available for them.
   if (ingredient._isExternal && Array.isArray(ingredient.role_tags) &&
@@ -121,6 +175,15 @@ function promptGramAmount(ingredient, clickedDiv) {
   });
 
   form.querySelector('#gram-cancel-btn').addEventListener('click', function() {
+    // Packaged products live in their own panel; re-render from the cached
+    // OFF search rather than the local ingredient list.
+    if (ingredient._isPackaged) {
+      const pkgQuery = document.getElementById('packaged-search').value.trim();
+      searchOpenFoodFacts(pkgQuery).then(function(pkgResults) {
+        renderPackagedResults(pkgResults, pkgQuery);
+      });
+      return;
+    }
     const searchInput = document.getElementById('ingredient-search');
     const query = searchInput.value.trim();
     const nonvegToggle = document.getElementById('nonveg-toggle');
@@ -135,6 +198,11 @@ function addIngredientToMeal(id, gramAmount, isCooked) {
   state.mealItems.push(item);
   document.getElementById('ingredient-search').value = '';
   document.getElementById('ingredient-results').innerHTML = '';
+  // A packaged product may have been added from the Packaged panel; clear it too.
+  const packagedSearch = document.getElementById('packaged-search');
+  const packagedResults = document.getElementById('packaged-results');
+  if (packagedSearch) packagedSearch.value = '';
+  if (packagedResults) packagedResults.innerHTML = '';
   renderMealItems();
   updateNutrientTotals();
   updateCalculateButton();
@@ -248,6 +316,8 @@ function renderMealItems() {
     div.className = 'meal-item';
 
     const label = document.createElement('span');
+    // Nutri-Score / NOVA badges for packaged products, shown after the label.
+    let badgesSpan = null;
     if (item.type === 'dish') {
       label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' serving(s)  [DISH]';
     } else {
@@ -257,6 +327,16 @@ function renderMealItems() {
         weightNote = item.isCooked === true ? ' (cooked)' : ' (raw)';
       }
       label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' g' + weightNote;
+
+      if (ing && ing._isPackaged) {
+        const badgesHtml = nutriScoreBadgeHtml(ing.nutriscore) + ' ' +
+          novaBadgeHtml(ing.nova_group);
+        if (badgesHtml.trim()) {
+          badgesSpan = document.createElement('span');
+          badgesSpan.className = 'meal-item-badges';
+          badgesSpan.innerHTML = ' ' + badgesHtml;
+        }
+      }
     }
 
     const removeBtn = document.createElement('button');
@@ -275,6 +355,7 @@ function renderMealItems() {
     });
 
     div.appendChild(label);
+    if (badgesSpan) div.appendChild(badgesSpan);
     div.appendChild(removeBtn);
     div.appendChild(editBtn);
     container.appendChild(div);
@@ -372,6 +453,26 @@ function initMealBuilder() {
     const query = dishSearchInput.value.trim();
     const results = searchDishes(query, !nonvegToggle.checked);
     renderDishResults(results, query);
+  });
+
+  // Packaged (Open Food Facts) search is a network call, so debounce input by
+  // 500ms to avoid firing a request on every keystroke.
+  const packagedSearchInput = document.getElementById('packaged-search');
+  let packagedDebounce = null;
+  packagedSearchInput.addEventListener('input', function() {
+    const query = packagedSearchInput.value.trim();
+    clearTimeout(packagedDebounce);
+    if (query.length < 2) {
+      renderPackagedResults([], query);
+      return;
+    }
+    packagedDebounce = setTimeout(function() {
+      searchOpenFoodFacts(query).then(function(results) {
+        // Guard against stale async: only render if the box still shows this query.
+        if (packagedSearchInput.value.trim() !== query) return;
+        renderPackagedResults(results, query);
+      });
+    }, 500);
   });
 
   nonvegToggle.addEventListener('change', function() {

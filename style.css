@@ -272,6 +272,40 @@ button.apply-btn:hover {
   color: #1565C0;
 }
 
+/* Open Food Facts packaged-product badges (all reuse the .diet-badge shape) */
+.packaged-badge {
+  background: #ECEFF1;
+  color: #455A64;
+}
+
+/* Nutri-Score grade badges (official Nutri-Score colours) */
+.nutriscore-a { background: #038141; color: white; }
+.nutriscore-b { background: #85BB2F; color: white; }
+.nutriscore-c { background: #FECB02; color: #333; }
+.nutriscore-d { background: #EE8100; color: white; }
+.nutriscore-e { background: #E63312; color: white; }
+
+/* NOVA processing-group badges (1 least to 4 most processed) */
+.nova-1 { background: #2E7D32; color: white; }
+.nova-2 { background: #FECB02; color: #333; }
+.nova-3 { background: #EE8100; color: white; }
+.nova-4 { background: #E63312; color: white; }
+
+.packaged-note {
+  font-size: 0.8rem;
+  color: #666;
+  font-style: italic;
+  border-top: 1px solid #EEE;
+  padding-top: 8px;
+  margin-top: 10px;
+}
+
+.empty-state {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
+
 .dish-badge {
   display: inline-block;
   padding: 1px 6px;

@@ -38,6 +38,7 @@
       <div role="tablist">
         <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel">Ingredients</button>
         <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel">Dishes</button>
+        <button id="tab-packaged" class="tab" role="tab" aria-selected="false" aria-controls="packaged-search-panel">Packaged</button>
       </div>
 
       <div id="ingredient-search-panel" role="tabpanel">
@@ -54,6 +55,15 @@
         <input id="dish-search" type="text"
                placeholder="Search dishes (e.g. dal tadka, chole bhature)..." />
         <div id="dish-results"></div>
+      </div>
+
+      <div id="packaged-search-panel" role="tabpanel" style="display:none">
+        <input id="packaged-search" type="text"
+               placeholder="Search packaged foods (e.g. Marie biscuits, Amul butter)..." />
+        <div id="packaged-results"></div>
+        <p class="packaged-note">Packaged food data from Open Food Facts
+          (community-contributed). Nutrient values may vary from actual products.
+          Always check the product label.</p>
       </div>
 
       <div id="meal-items"><p>No items yet.</p></div>

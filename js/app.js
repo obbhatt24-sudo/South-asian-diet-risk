@@ -78,18 +78,27 @@ document.getElementById('cvd-history').addEventListener('change', function() {
     this.value === 'yes' ? true : this.value === 'no' ? false : null;
 });
 
-document.getElementById('tab-ingredient').addEventListener('click', function() {
-  document.getElementById('ingredient-search-panel').style.display = 'block';
-  document.getElementById('dish-search-panel').style.display = 'none';
-  document.getElementById('tab-ingredient').classList.add('active');
-  document.getElementById('tab-dish').classList.remove('active');
-});
+// Search-source tabs: each entry pairs a tab button with the panel it controls.
+const SEARCH_TABS = [
+  { tab: 'tab-ingredient', panel: 'ingredient-search-panel' },
+  { tab: 'tab-dish',       panel: 'dish-search-panel' },
+  { tab: 'tab-packaged',   panel: 'packaged-search-panel' }
+];
 
-document.getElementById('tab-dish').addEventListener('click', function() {
-  document.getElementById('dish-search-panel').style.display = 'block';
-  document.getElementById('ingredient-search-panel').style.display = 'none';
-  document.getElementById('tab-dish').classList.add('active');
-  document.getElementById('tab-ingredient').classList.remove('active');
+function selectSearchTab(activeTabId) {
+  SEARCH_TABS.forEach(function(entry) {
+    const isActive = entry.tab === activeTabId;
+    const tabBtn = document.getElementById(entry.tab);
+    tabBtn.classList.toggle('active', isActive);
+    tabBtn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    document.getElementById(entry.panel).style.display = isActive ? 'block' : 'none';
+  });
+}
+
+SEARCH_TABS.forEach(function(entry) {
+  document.getElementById(entry.tab).addEventListener('click', function() {
+    selectSearchTab(entry.tab);
+  });
 });
 
 function enableUI() {
