@@ -100,5 +100,83 @@
     "gi": 29,
     "source": "Foster-Powell et al.",
     "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_040",
+    "gi": 66,
+    "source": "Published Indian study values",
+    "preparation": "Cooked (upma)"
+  },
+  {
+    "ingredient_id": "ing_041",
+    "gi": 72,
+    "source": "Published values",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_043",
+    "gi": 28,
+    "source": "Published besan/legume-flour values",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_045",
+    "gi": 75,
+    "source": "Foster-Powell et al.",
+    "preparation": "—"
+  },
+  {
+    "ingredient_id": "ing_046",
+    "gi": 69,
+    "source": "Foster-Powell et al.",
+    "preparation": "—"
+  },
+  {
+    "ingredient_id": "ing_047",
+    "gi": 55,
+    "source": "Atkinson et al. 2021",
+    "preparation": "Cooked porridge"
+  },
+  {
+    "ingredient_id": "ing_048",
+    "gi": 53,
+    "source": "Atkinson et al. 2021",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_050",
+    "gi": 85,
+    "source": "Published values",
+    "preparation": "Cooked"
+  },
+  {
+    "ingredient_id": "ing_054",
+    "gi": 48,
+    "source": "Foster-Powell et al.",
+    "preparation": "Boiled"
+  },
+  {
+    "ingredient_id": "ing_055",
+    "gi": 25,
+    "source": "Published soy-protein values",
+    "preparation": "Rehydrated"
+  },
+  {
+    "ingredient_id": "ing_090",
+    "gi": 25,
+    "source": "Foster-Powell et al.",
+    "preparation": "Raw"
+  },
+  {
+    "ingredient_id": "ing_098",
+    "gi": 42,
+    "source": "Atkinson et al. 2021",
+    "preparation": "Raw"
+  },
+  {
+    "ingredient_id": "ing_099",
+    "gi": 64,
+    "source": "Foster-Powell et al.",
+    "preparation": "Raw"
   }
 ]
