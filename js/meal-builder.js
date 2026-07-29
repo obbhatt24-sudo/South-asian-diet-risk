@@ -432,14 +432,23 @@ function startEditMealItem(item, index, label, name) {
 function updateNutrientTotals() {
   const totals = computeMealNutrients(state.mealItems);
   const container = document.getElementById('meal-nutrient-totals');
-  container.innerHTML =
-    'Energy: ' + totals.energy_kcal.toFixed(1) + ' kcal | ' +
-    'Carbs: ' + totals.carbohydrate_g.toFixed(1) + ' g | ' +
-    'Fiber: ' + totals.fiber_g.toFixed(1) + ' g | ' +
-    'Fat: ' + totals.total_fat_g.toFixed(1) + ' g | ' +
-    'Sat Fat: ' + totals.saturated_fat_g.toFixed(1) + ' g | ' +
-    'Protein: ' + totals.protein_g.toFixed(1) + ' g | ' +
-    'Sodium: ' + totals.sodium_mg.toFixed(1) + ' mg';
+
+  const chips = [
+    { value: totals.energy_kcal.toFixed(0),      label: 'kcal' },
+    { value: totals.carbohydrate_g.toFixed(1),   label: 'carbs' },
+    { value: totals.fiber_g.toFixed(1),          label: 'fiber' },
+    { value: totals.total_fat_g.toFixed(1),      label: 'fat' },
+    { value: totals.saturated_fat_g.toFixed(1),  label: 'sat fat' },
+    { value: totals.protein_g.toFixed(1),        label: 'protein' },
+    { value: totals.sodium_mg.toFixed(0),        label: 'sodium' }
+  ];
+
+  container.innerHTML = chips.map(function(chip) {
+    return '<div class="nutrient-chip">' +
+      '<span class="nutrient-chip-value">' + chip.value + '</span>' +
+      '<span class="nutrient-chip-label">' + chip.label + '</span>' +
+      '</div>';
+  }).join('');
 }
 
 function initMealBuilder() {

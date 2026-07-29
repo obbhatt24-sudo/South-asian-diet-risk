@@ -9,25 +9,29 @@
 <body>
 
   <header>
-    <h1>South Asian Diet Risk Calculator</h1>
-    <fieldset>
-      <legend>Context</legend>
-      <label>
-        <input type="radio" name="context" value="india" checked />
-        India
-      </label>
-      <label>
-        <input type="radio" name="context" value="us" />
-        US South Asian
-      </label>
-    </fieldset>
-    <p id="context-description"></p>
+    <div class="header-inner">
+      <h1>South Asian Diet Risk Calculator</h1>
+      <fieldset>
+        <legend>Context</legend>
+        <label>
+          <input type="radio" name="context" value="india" checked />
+          India
+        </label>
+        <label>
+          <input type="radio" name="context" value="us" />
+          US South Asian
+        </label>
+      </fieldset>
+      <p id="context-description"></p>
+    </div>
   </header>
 
   <nav>
-    <button data-view="meal-builder">Build Meal</button>
-    <button data-view="results">Results</button>
-    <button data-view="about">About</button>
+    <div class="nav-inner">
+      <button data-view="meal-builder">Build Meal</button>
+      <button data-view="results">Results</button>
+      <button data-view="about">About</button>
+    </div>
   </nav>
 
   <main>
@@ -35,7 +39,7 @@
     <section id="meal-builder">
       <h2>Build your meal</h2>
 
-      <div role="tablist">
+      <div class="tab-bar" role="tablist">
         <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel">Ingredients</button>
         <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel">Dishes</button>
         <button id="tab-packaged" class="tab" role="tab" aria-selected="false" aria-controls="packaged-search-panel">Packaged</button>
@@ -77,7 +81,7 @@
       <div id="meal-items"><p>No items yet.</p></div>
       <div id="meal-nutrient-totals"></div>
 
-      <div id="personal-context">
+      <div id="personal-context" class="card">
         <h3>Personal context (optional — not stored)</h3>
 
         <label>BMI category

@@ -18,6 +18,9 @@ function showView(id) {
   ['meal-builder', 'results', 'about'].forEach(function(viewId) {
     document.getElementById(viewId).style.display = viewId === id ? 'block' : 'none';
   });
+  document.querySelectorAll('nav button').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.view === id);
+  });
 }
 
 document.querySelectorAll('[data-view]').forEach(function(btn) {
