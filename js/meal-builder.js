@@ -4,6 +4,11 @@ const DIET_BADGE = {
   non_veg: { label: 'non-veg', color: 'red'    }
 };
 
+// Last dish search query and non-veg inclusion flag, remembered so the serving
+// prompt's Cancel button can restore the dish results it replaced.
+let _lastDishQuery = '';
+let _includeNonVeg = false;
+
 function renderIngredientResults(results, query) {
   const container = document.getElementById('ingredient-results');
   container.innerHTML = '';
@@ -219,6 +224,21 @@ function addIngredientToMeal(id, gramAmount, isCookedOrRecord) {
   updateCalculateButton();
 }
 
+// Human-readable serving size for a dish search result. Prefers the recorded
+// serving_size_g, falls back to an estimate from total_weight_g / servings.
+function formatDishServingInfo(dish) {
+  // serving_size_g is the weight of one serving
+  if (dish.serving_size_g) {
+    return `1 serving = ${dish.serving_size_g}g`;
+  }
+  // Fallback: estimate from total_weight_g / servings
+  if (dish.total_weight_g && dish.servings) {
+    const est = Math.round(dish.total_weight_g / dish.servings);
+    return `1 serving ≈ ${est}g (estimated)`;
+  }
+  return '1 serving (size not recorded)';
+}
+
 function renderDishResults(results, query) {
   const container = document.getElementById('dish-results');
   container.innerHTML = '';
@@ -235,14 +255,15 @@ function renderDishResults(results, query) {
 
   results.forEach(function(dish) {
     const div = document.createElement('div');
-    div.className = 'dish-result';
+    div.className = 'search-result dish-result';
     div.style.cursor = 'pointer';
 
     const badge = DIET_BADGE[dish.diet_type] || { label: dish.diet_type, color: 'gray' };
 
     div.innerHTML =
-      '<strong>' + dish.name + '</strong> ' +
-      '<span style="color:' + badge.color + '; font-size:0.85em;">' + badge.label + '</span>';
+      '<span class="search-result-name">' + dish.name + '</span> ' +
+      '<span class="diet-badge ' + dish.diet_type + '">' + badge.label + '</span> ' +
+      '<span class="dish-serving-size">' + formatDishServingInfo(dish) + '</span>';
 
     div.addEventListener('click', function() {
       promptServingCount(dish, div);
@@ -253,28 +274,52 @@ function renderDishResults(results, query) {
 }
 
 function promptServingCount(dish, clickedDiv) {
-  const form = document.createElement('div');
-  form.innerHTML =
-    '<span>' + dish.name + '</span> ' +
-    '<input type="number" min="0.5" max="10" step="0.5" value="1" id="serving-input"> ' +
-    '<span>servings</span> ' +
-    '<button id="serving-add-btn">Add</button> ' +
-    '<button id="serving-cancel-btn">Cancel</button>';
+  const resultDiv = document.createElement('div');
+  clickedDiv.replaceWith(resultDiv);
 
-  clickedDiv.replaceWith(form);
+  const servingG = dish.serving_size_g ||
+    (dish.total_weight_g && dish.servings
+       ? Math.round(dish.total_weight_g / dish.servings) : null);
 
-  form.querySelector('#serving-add-btn').addEventListener('click', function() {
-    const servings = parseFloat(form.querySelector('#serving-input').value);
+  // Build the prompt HTML with a live gram counter
+  resultDiv.innerHTML = `
+    <div class='serving-prompt'>
+      <span class='serving-prompt-name'>${dish.name}</span>
+      <div class='serving-prompt-controls'>
+        <input type='number' id='serving-input'
+               min='0.5' max='10' step='0.5' value='1' />
+        <span>serving(s)</span>
+        ${servingG ? `<span id='serving-gram-display'
+          class='serving-gram-display'>= ${servingG}g</span>` : ''}
+      </div>
+      ${servingG ? `<p class='serving-size-note'>
+        1 serving = ${servingG}g
+        ${dish.serving_size_g ? '' : ' (estimated)'}
+      </p>` : ''}
+      <div class='serving-prompt-actions'>
+        <button id='add-serving-btn'>Add to meal</button>
+        <button id='cancel-serving-btn'>Cancel</button>
+      </div>
+    </div>`;
+
+  // Update gram display as serving count changes
+  if (servingG) {
+    document.getElementById('serving-input').addEventListener('input', e => {
+      const g = Math.round(parseFloat(e.target.value || 1) * servingG);
+      const el = document.getElementById('serving-gram-display');
+      if (el) el.textContent = `= ${g}g`;
+    });
+  }
+
+  document.getElementById('add-serving-btn').addEventListener('click', () => {
+    const servings = parseFloat(
+      document.getElementById('serving-input').value);
     if (!servings || servings <= 0) return;
     addDishToMeal(dish.id, servings);
   });
-
-  form.querySelector('#serving-cancel-btn').addEventListener('click', function() {
-    const searchInput = document.getElementById('dish-search');
-    const query = searchInput.value.trim();
-    const nonvegToggle = document.getElementById('nonveg-toggle');
-    const results = searchDishes(query, !nonvegToggle.checked);
-    renderDishResults(results, query);
+  document.getElementById('cancel-serving-btn').addEventListener('click', () => {
+    const results = searchDishes(_lastDishQuery, _includeNonVeg);
+    renderDishResults(results, _lastDishQuery);
   });
 }
 
@@ -300,6 +345,114 @@ function updateCalculateButton() {
   document.getElementById('calculate-btn').disabled = state.mealItems.length === 0;
 }
 
+// Expanded meal-list card for a dish item: name, serving/gram total, a
+// collapsible per-ingredient breakdown scaled to the chosen serving count.
+function renderDishMealItem(item, index) {
+  const dish = getDishById(item.id);
+  if (!dish) return '<div>Unknown dish</div>';
+
+  const servingG = dish.serving_size_g ||
+    (dish.total_weight_g && dish.servings
+      ? Math.round(dish.total_weight_g / dish.servings) : null);
+  const totalG = servingG ? Math.round(servingG * item.servings) : null;
+
+  const servingText = servingG
+    ? `${item.servings} serving${item.servings !== 1 ? 's' : ''} (${totalG}g total)`
+    : `${item.servings} serving${item.servings !== 1 ? 's' : ''}`;
+
+  // Build ingredient list
+  const ingredientRows = (dish.ingredients || []).map(di => {
+    const ing = getIngredientById(di.ingredient_id);
+    const scaledG = Math.round(di.amount_g * item.servings / (dish.servings || 1));
+    return `
+      <div class='dish-ingredient-row'>
+        <span class='dish-ing-name'>${ing ? ing.name : di.ingredient_id}</span>
+        <span class='dish-ing-amount'>${scaledG}g</span>
+      </div>`;
+  }).join('');
+
+  const detailId = `dish-detail-${index}`;
+
+  return `
+    <div class='meal-item dish-meal-item'>
+      <div class='meal-item-main'>
+        <span class='meal-item-name'>${dish.name}</span>
+        <span class='diet-badge dish-badge'>DISH</span>
+        <span class='meal-item-qty'>${servingText}</span>
+      </div>
+      <div class='meal-item-actions'>
+        <button onclick='toggleDishDetail("${detailId}")'>
+          ▼ Ingredients
+        </button>
+        <button onclick='editMealItem(${index})'>Edit</button>
+        <button onclick='removeFromMeal(${index})'>Remove</button>
+      </div>
+      <div id='${detailId}' class='dish-ingredient-list' style='display:none'>
+        <div class='dish-ingredient-header'>
+          <span>Ingredient</span>
+          <span>Amount (${item.servings} serving${item.servings !== 1 ? 's' : ''})</span>
+        </div>
+        ${ingredientRows}
+        ${servingG ? `<div class='dish-total-row'>
+          <span>Total weight</span>
+          <span>${totalG}g</span>
+        </div>` : ''}
+      </div>
+    </div>`;
+}
+
+// Global: toggles a dish's ingredient breakdown open/closed and flips the
+// button caret. Referenced from the inline onclick in renderDishMealItem.
+function toggleDishDetail(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const isOpen = el.style.display !== 'none';
+  el.style.display = isOpen ? 'none' : 'block';
+  // Update the button text
+  const btn = el.previousElementSibling.querySelector('button:first-child');
+  if (btn) btn.textContent = isOpen ? '▼ Ingredients' : '▲ Ingredients';
+}
+
+// Global: remove a meal item by index. Referenced from the inline onclick in
+// renderDishMealItem.
+function removeFromMeal(index) {
+  state.mealItems.splice(index, 1);
+  renderMealItems();
+  updateNutrientTotals();
+  updateCalculateButton();
+}
+
+// Global: inline-edit a dish item's serving count. Referenced from the inline
+// onclick in renderDishMealItem.
+function editMealItem(index) {
+  const item = state.mealItems[index];
+  if (!item || item.type !== 'dish') return;
+  const node = document.getElementById('dish-meal-item-' + index);
+  const main = node ? node.querySelector('.meal-item-main') : null;
+  if (!main) return;
+
+  const dish = getDishById(item.id);
+  const name = dish ? dish.name : item.id;
+  main.innerHTML =
+    '<span class="meal-item-name">' + name + '</span> ' +
+    '<input type="number" min="0.5" max="10" step="0.5" value="' + item.servings +
+      '" id="edit-serving-input"> ' +
+    '<span>serving(s)</span> ' +
+    '<button id="edit-serving-save">Save</button> ' +
+    '<button id="edit-serving-cancel">Cancel</button>';
+
+  document.getElementById('edit-serving-save').addEventListener('click', function() {
+    const v = parseFloat(document.getElementById('edit-serving-input').value);
+    if (!v || v <= 0) return;
+    state.mealItems[index].servings = v;
+    renderMealItems();
+    updateNutrientTotals();
+  });
+  document.getElementById('edit-serving-cancel').addEventListener('click', function() {
+    renderMealItems();
+  });
+}
+
 function renderMealItems() {
   const container = document.getElementById('meal-items');
   container.innerHTML = '';
@@ -310,18 +463,25 @@ function renderMealItems() {
   }
 
   state.mealItems.forEach(function(item, index) {
+    // Dish items render an expanded card with a collapsible ingredient
+    // breakdown; the inline onclick handlers call the global helpers below.
+    if (item.type === 'dish') {
+      const temp = document.createElement('div');
+      temp.innerHTML = renderDishMealItem(item, index).trim();
+      const node = temp.firstElementChild;
+      if (node) {
+        node.id = 'dish-meal-item-' + index;
+        container.appendChild(node);
+      }
+      return;
+    }
+
     let name = '';
     let quantity = '';
 
-    if (item.type === 'ingredient') {
-      const ing = getIngredientById(item.id);
-      name = ing ? ing.name : item.id;
-      quantity = item.gramAmount;
-    } else if (item.type === 'dish') {
-      const dish = getDishById(item.id);
-      name = dish ? dish.name : item.id;
-      quantity = item.servings;
-    }
+    const ingItem = getIngredientById(item.id);
+    name = ingItem ? ingItem.name : item.id;
+    quantity = item.gramAmount;
 
     const div = document.createElement('div');
     div.className = 'meal-item';
@@ -329,9 +489,7 @@ function renderMealItems() {
     const label = document.createElement('span');
     // Nutri-Score / NOVA badges for packaged products, shown after the label.
     let badgesSpan = null;
-    if (item.type === 'dish') {
-      label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' serving(s)  [DISH]';
-    } else {
+    {
       const ing = getIngredientById(item.id);
       let weightNote = '';
       if (ing && ing.cooked_conversion_factor != null) {
@@ -471,7 +629,9 @@ function initMealBuilder() {
 
   dishSearchInput.addEventListener('input', function() {
     const query = dishSearchInput.value.trim();
-    const results = searchDishes(query, !nonvegToggle.checked);
+    _lastDishQuery = query;
+    _includeNonVeg = !nonvegToggle.checked;
+    const results = searchDishes(query, _includeNonVeg);
     renderDishResults(results, query);
   });
 
@@ -501,7 +661,9 @@ function initMealBuilder() {
     renderIngredientResults(results, query);
 
     const dishQuery = dishSearchInput.value.trim();
-    const dishResults = searchDishes(dishQuery, !nonvegToggle.checked);
+    _lastDishQuery = dishQuery;
+    _includeNonVeg = !nonvegToggle.checked;
+    const dishResults = searchDishes(dishQuery, _includeNonVeg);
     renderDishResults(dishResults, dishQuery);
   });
 

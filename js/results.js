@@ -349,6 +349,49 @@ function buildScoreSummary(result, mealItems) {
   ].join('\n');
 }
 
+// Collapsible per-dish nutrient breakdown, shown on each score card when the
+// meal contains at least one dish item. Each row reuses the shared
+// computeMealNutrients / computeMealGL helpers scoped to a single dish item.
+function renderDishContributions(mealItems, scoreResult) {
+  const dishItems = mealItems.filter(item => item.type === 'dish');
+  if (dishItems.length === 0) return '';
+
+  const rows = dishItems.map(item => {
+    const dish = getDishById(item.id);
+    if (!dish) return '';
+
+    const servingG = dish.serving_size_g ||
+      (dish.total_weight_g && dish.servings
+        ? Math.round(dish.total_weight_g / dish.servings) : null);
+    const totalG = servingG
+      ? Math.round(servingG * item.servings) : null;
+
+    // Compute this dish's nutrient contribution
+    const dishNutrients = computeMealNutrients([item]);
+    const dishGL = computeMealGL([item]);
+
+    return `
+      <div class='dish-contribution-row'>
+        <div class='dish-contrib-name'>
+          ${dish.name}
+          ${totalG ? `<span class='dish-contrib-weight'>${totalG}g total</span>` : ''}
+        </div>
+        <div class='dish-contrib-stats'>
+          <span>GL ${dishGL.toFixed(1)}</span>
+          <span>Fiber ${dishNutrients.fiber_g.toFixed(1)}g</span>
+          <span>Sat fat ${dishNutrients.saturated_fat_g.toFixed(1)}g</span>
+          <span>Sodium ${Math.round(dishNutrients.sodium_mg)}mg</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <details class='dish-contributions'>
+      <summary>Dish contributions to score</summary>
+      <div class='dish-contrib-list'>${rows}</div>
+    </details>`;
+}
+
 function renderResults(result, recs) {
   const container = document.getElementById('scores-container');
   container.innerHTML = '';
@@ -367,10 +410,13 @@ function renderResults(result, recs) {
   if (mealUsedGiDefaults(state.mealItems)) {
     diabetesNotes.push('* GL estimated from food-group defaults for some ingredients.');
   }
-  container.appendChild(buildScoreCard(
+  const dishContribHtml = renderDishContributions(state.mealItems, result);
+  const diabetesCard = buildScoreCard(
     'Diabetes Risk Score', d, DIABETES_BAND_TEXT[d.band],
     renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes
-  ));
+  );
+  if (dishContribHtml) diabetesCard.insertAdjacentHTML('beforeend', dishContribHtml);
+  container.appendChild(diabetesCard);
 
   const diabetesRiskNote = document.createElement('p');
   diabetesRiskNote.className = 'risk-note';
@@ -383,10 +429,12 @@ function renderResults(result, recs) {
   if (c.usedFallback) {
     cvdNotes.push('* Fat quality estimated from food-group data.');
   }
-  container.appendChild(buildScoreCard(
+  const cvdCard = buildScoreCard(
     'CVD Risk Score', c, CVD_BAND_TEXT[c.band],
     renderCvdBreakdown(c), generateWhyText(c, 'cvd'), cvdNotes
-  ));
+  );
+  if (dishContribHtml) cvdCard.insertAdjacentHTML('beforeend', dishContribHtml);
+  container.appendChild(cvdCard);
 
   const cvdRiskNote = document.createElement('p');
   cvdRiskNote.className = 'risk-note';
