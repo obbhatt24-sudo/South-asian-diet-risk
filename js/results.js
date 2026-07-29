@@ -38,86 +38,315 @@ function mealUsedGiDefaults(mealItems) {
   return false;
 }
 
-function buildBreakdownNote(text) {
-  const note = document.createElement('p');
-  note.className = 'breakdown-note';
-  note.textContent = text;
-  return note;
+// Reference meals used to give the user a sense of scale for their own score.
+const REFERENCE_MEALS = [
+  { name: 'Dal + roti + sabzi',       diabetes: 22, cvd: 18, quality: 'good' },
+  { name: 'Rajma chawal',             diabetes: 38, cvd: 25, quality: 'moderate' },
+  { name: 'White rice + dal makhani', diabetes: 52, cvd: 42, quality: 'moderate' },
+  { name: 'Chole bhature',            diabetes: 65, cvd: 35, quality: 'high' }
+];
+
+function bandBarClass(score) {
+  return score < 35 ? 'bar-low' : score < 65 ? 'bar-moderate' : 'bar-high';
 }
 
-// Each row is { label, pts } for a scored sub-factor, or { label, na: true }
-// for an unavailable one (shown muted, 0 pts, no bold). An optional `note`
-// renders directly below its row.
-function buildScoreCard(title, scoreObj, description, rows, notes) {
+// Renders an array of breakdown rows to HTML. Each row is either
+// { na: true, label, sublabel, detail } (data unavailable) or
+// { label, sublabel, value, max, detail, tip?, inverted? }.
+function renderBreakdownRows(rows) {
+  return rows.map(function(row) {
+    if (row.na) {
+      return `
+        <div class='breakdown-row na'>
+          <div class='breakdown-labels'>
+            <span class='breakdown-label'>${row.label}</span>
+            <span class='breakdown-sublabel'>${row.sublabel}</span>
+          </div>
+          <div class='breakdown-detail'>
+            <span class='breakdown-pts'>N/A</span>
+            <span class='breakdown-fact'>${row.detail}</span>
+          </div>
+        </div>
+      `;
+    }
+    const frac = row.value / row.max;
+    const bandCls = frac > 0.66 ? 'bar-high' : frac > 0.33 ? 'bar-moderate' : 'bar-low';
+    return `
+      <div class='breakdown-row'>
+        <div class='breakdown-labels'>
+          <span class='breakdown-label'>${row.label}</span>
+          <span class='breakdown-sublabel'>${row.sublabel}</span>
+        </div>
+        <div class='breakdown-bar-wrap'>
+          <div class='breakdown-bar ${row.inverted ? 'bar-inverted ' : ''}${bandCls}'
+            style='width: ${Math.round(frac * 100)}%'>
+          </div>
+        </div>
+        <div class='breakdown-detail'>
+          <span class='breakdown-pts'>${row.value}/${row.max} pts</span>
+          <span class='breakdown-fact'>${row.detail}</span>
+        </div>
+        ${row.tip ? `<p class='breakdown-tip'>💡 ${row.tip}</p>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+// d = result.diabetes from score(); d.fiberG is bridged in from meal nutrients.
+function renderDiabetesBreakdown(d) {
+  const rows = [
+    {
+      label: 'Blood sugar spike',
+      sublabel: 'How fast this meal raises blood sugar',
+      value: d.subScores.glycemic_load,
+      max: 40,
+      detail: `Glycemic load: ${d.gl.toFixed(1)}`,
+      tip: d.subScores.glycemic_load > 20
+        ? 'Try swapping white rice for basmati or adding a dal side.'
+        : null
+    },
+    {
+      label: 'Refined carbohydrates',
+      sublabel: 'Share of carbs from white rice, maida, or added sugar',
+      value: d.subScores.refined_carb,
+      max: 25,
+      detail: `${Math.round(d.refShare * 100)}% refined carbs`,
+      tip: d.subScores.refined_carb > 10
+        ? 'Whole grains like atta, jowar, or brown rice reduce this.'
+        : null
+    },
+    {
+      label: 'Fibre content',
+      sublabel: 'Fibre slows digestion and blunts blood sugar spikes',
+      value: d.subScores.fiber,
+      max: 20,
+      detail: `${d.fiberG != null ? d.fiberG.toFixed(1) : '?'}g fibre in this meal`,
+      tip: d.subScores.fiber > 10
+        ? 'Add vegetables, dal, or whole grains to increase fibre.'
+        : null,
+      inverted: true  // higher score = worse (less fibre)
+    },
+    {
+      label: 'Protein quality',
+      sublabel: 'Legumes and dairy protein help regulate blood sugar',
+      value: d.subScores.protein_quality,
+      max: 15,
+      detail: `${Math.round(d.protShare * 100)}% from legumes/dairy/fish`,
+      tip: d.subScores.protein_quality > 8
+        ? 'Adding dal, curd, or paneer improves protein quality.'
+        : null,
+      inverted: true
+    }
+  ];
+  return renderBreakdownRows(rows);
+}
+
+// Same visual pattern as the diabetes breakdown. c.satFatG / c.fiberG are
+// bridged in from meal nutrients; fat_quality and sodium may be null.
+function renderCvdBreakdown(c) {
+  const rows = [
+    {
+      label: 'Saturated fat',
+      sublabel: 'Ghee, cream, and coconut oil raise LDL cholesterol',
+      value: c.subScores.saturated_fat,
+      max: 40,
+      detail: `${c.satFatG != null ? c.satFatG.toFixed(1) : '?'}g saturated fat`,
+      tip: c.subScores.saturated_fat > 20
+        ? 'Cook with less ghee, cream, or coconut oil to reduce this.'
+        : null
+    },
+    c.subScores.fat_quality === null
+      ? {
+          label: 'Fat type balance',
+          sublabel: 'Ratio of healthy unsaturated to saturated fat',
+          na: true,
+          detail: 'Fat type data unavailable'
+        }
+      : {
+          label: 'Fat type balance',
+          sublabel: 'Ratio of healthy unsaturated to saturated fat',
+          value: c.subScores.fat_quality,
+          max: 30,
+          detail: `MUFA:SFA ratio ${c.ratio.toFixed(2)}`,
+          tip: c.subScores.fat_quality > 15
+            ? 'Replacing ghee or coconut oil with mustard oil would improve this.'
+            : null,
+          inverted: true
+        },
+    {
+      label: 'Fibre content',
+      sublabel: 'Fibre slows digestion and blunts blood sugar spikes',
+      value: c.subScores.fiber,
+      max: 20,
+      detail: `${c.fiberG != null ? c.fiberG.toFixed(1) : '?'}g fibre in this meal`,
+      tip: c.subScores.fiber > 10
+        ? 'Add vegetables, dal, or whole grains to increase fibre.'
+        : null,
+      inverted: true
+    },
+    c.subScores.sodium === null
+      ? {
+          label: 'Sodium',
+          sublabel: 'High sodium raises blood pressure over time',
+          na: true,
+          detail: 'Salt input not provided'
+        }
+      : {
+          label: 'Sodium',
+          sublabel: 'High sodium raises blood pressure over time',
+          value: c.subScores.sodium,
+          max: 10,
+          detail: `${Math.round(c.totalSodium)}mg sodium`,
+          tip: c.subScores.sodium > 5
+            ? 'Use less added salt and fewer pickles or papad.'
+            : null
+        }
+  ];
+  return renderBreakdownRows(rows);
+}
+
+// Plain-English summary of what is driving a score, from its flags.
+function generateWhyText(scoreResult, scoreType) {
+  const flags = scoreResult.flags;
+  if (flags.length === 0) {
+    return scoreType === 'diabetes'
+      ? 'This meal scores well across all diabetes risk factors.'
+      : 'This meal scores well across all cardiovascular risk factors.';
+  }
+
+  const explanations = {
+    high_glycemic_load:
+      'The main driver is a high glycemic load — this meal raises' +
+      ' blood sugar quickly, which is a primary diabetes risk factor' +
+      ' in South Asian populations.',
+    high_refined_carb_share:
+      'A high proportion of the carbohydrates come from refined' +
+      ' sources (white rice, maida, or sugar) rather than whole grains.',
+    low_fiber:
+      'This meal is low in dietary fibre, which normally slows' +
+      ' digestion and reduces blood sugar spikes after eating.',
+    poor_protein_quality:
+      'Most of the protein comes from sources that do not actively' +
+      ' help regulate blood sugar — adding legumes or dairy would improve this.',
+    high_saturated_fat:
+      'The meal is high in saturated fat (likely from ghee, cream,' +
+      ' or coconut oil), which raises LDL cholesterol over time.',
+    poor_fat_quality:
+      'The balance of fats leans heavily toward saturated fat.' +
+      ' Replacing ghee or coconut oil with mustard oil would improve this.',
+    high_sodium:
+      'Sodium is elevated in this meal, which contributes to' +
+      ' blood pressure risk over time.'
+  };
+
+  // Take the top 2 flags by sub-score severity
+  const topFlags = flags.slice(0, 2);
+  return topFlags
+    .map(function(f) { return explanations[f] || ''; })
+    .filter(Boolean)
+    .join(' ');
+}
+
+// scoreObj = result.diabetes|cvd; breakdownHtml/whyText are pre-rendered HTML/
+// text; notes is an array of caveat strings shown below the breakdown.
+function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, notes) {
   const bandClass = scoreObj.band.toLowerCase();
+  const contextText = state.context === 'us'
+    ? 'US South Asian context'
+    : 'India context';
+  const notesHtml = notes
+    .map(function(n) { return `<p class='breakdown-note'>${n}</p>`; })
+    .join('');
 
   const card = document.createElement('div');
   card.className = 'score-card ' + bandClass;
-
-  const heading = document.createElement('h3');
-  heading.textContent = title;
-
-  const number = document.createElement('div');
-  number.className = 'score-number';
-  number.textContent = String(scoreObj.score);
-
-  const bandLabel = document.createElement('div');
-  bandLabel.className = 'score-band ' + bandClass;
-  bandLabel.textContent = scoreObj.band;
-
-  const contextLabel = document.createElement('div');
-  contextLabel.className = 'score-context';
-  contextLabel.textContent = state.context === 'us'
-    ? 'US South Asian context'
-    : 'India context';
-
-  const desc = document.createElement('p');
-  desc.className = 'score-description';
-  desc.textContent = description;
-
-  const details = document.createElement('details');
-  const summary = document.createElement('summary');
-  summary.textContent = 'Show breakdown';
-  details.appendChild(summary);
-
-  for (const rowSpec of rows) {
-    const row = document.createElement('div');
-    row.className = rowSpec.na ? 'breakdown-row na' : 'breakdown-row';
-
-    const label = document.createElement('span');
-    label.textContent = rowSpec.label;
-    row.appendChild(label);
-
-    const pts = document.createElement('span');
-    if (rowSpec.na) {
-      pts.textContent = '0 pts';
-    } else {
-      pts.className = 'pts';
-      pts.textContent = rowSpec.pts + ' pts';
-    }
-    row.appendChild(pts);
-
-    details.appendChild(row);
-    if (rowSpec.note) {
-      details.appendChild(buildBreakdownNote(rowSpec.note));
-    }
-  }
-  for (const noteText of notes) {
-    details.appendChild(buildBreakdownNote(noteText));
-  }
-
-  card.appendChild(heading);
-  card.appendChild(number);
-  if (scoreObj.score === 0) {
-    const minimal = document.createElement('div');
-    minimal.className = 'score-minimal';
-    minimal.textContent = 'Minimal risk contribution';
-    card.appendChild(minimal);
-  }
-  [bandLabel, contextLabel, desc, details].forEach(function(el) {
-    card.appendChild(el);
-  });
+  card.innerHTML = `
+    <h3>${title}</h3>
+    <div class='score-header'>
+      <div class='score-number'>${scoreObj.score}</div>
+      <div class='score-meta'>
+        <span class='score-band-label ${bandClass}'>${scoreObj.band} risk contribution</span>
+        <span class='score-out-of'>out of 100</span>
+        <span class='score-context-label'>${contextText}</span>
+      </div>
+    </div>
+    <div class='score-bar-full'>
+      <div class='score-bar-fill' style='width: ${scoreObj.score}%'></div>
+    </div>
+    ${scoreObj.score === 0 ? "<div class='score-minimal'>Minimal risk contribution</div>" : ''}
+    <p class='score-description'>${description}</p>
+    <details>
+      <summary>Show breakdown</summary>
+      ${breakdownHtml}
+      ${notesHtml}
+    </details>
+    <details class='why-details'>
+      <summary>What is driving this?</summary>
+      <div class='why-panel'>${whyText}</div>
+    </details>
+  `;
   return card;
+}
+
+// A row for the "How does this compare?" chart. Your meal is highlighted.
+function renderReferenceAnchors(diabetesScore, cvdScore) {
+  const container = document.getElementById('anchor-bars');
+  if (!container) return;
+
+  const rows = REFERENCE_MEALS.map(function(m) {
+    return { name: m.name, score: m.diabetes, yours: false };
+  });
+  rows.push({ name: 'Your meal', score: diabetesScore.score, yours: true });
+  rows.sort(function(a, b) { return a.score - b.score; });
+
+  container.innerHTML = rows.map(function(r) {
+    return `
+      <div class='anchor-row${r.yours ? ' your-meal' : ''}'>
+        <span class='anchor-name'>${r.name}</span>
+        <div class='anchor-bar-wrap'>
+          <div class='anchor-bar-fill ${r.yours ? '' : bandBarClass(r.score)}'
+            style='width: ${r.score}%'></div>
+        </div>
+        <span class='anchor-score'>${r.score}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// Plain-text meal summary for the clipboard / print.
+function buildScoreSummary(result, mealItems) {
+  const d = result.diabetes;
+  const c = result.cvd;
+  const mealNames = mealItems
+    .slice(0, 5)
+    .map(function(item) {
+      if (item.type === 'ingredient') return getIngredientById(item.id)?.name;
+      if (item.type === 'dish') return getDishById(item.id)?.name;
+      return 'Unknown';
+    })
+    .filter(Boolean)
+    .join(', ');
+
+  return [
+    'South Asian Diet Risk Calculator',
+    '────────────────────────────────',
+    `Meal: ${mealNames}`,
+    '',
+    `Diabetes risk score: ${d.score}/100 (${d.band})`,
+    `  Blood sugar spike: ${d.subScores.glycemic_load}/40 pts (GL ${d.gl.toFixed(1)})`,
+    `  Refined carbs: ${d.subScores.refined_carb}/25 pts`,
+    `  Fibre: ${d.subScores.fiber}/20 pts`,
+    `  Protein quality: ${d.subScores.protein_quality}/15 pts`,
+    '',
+    `CVD risk score: ${c.score}/100 (${c.band})`,
+    `  Saturated fat: ${c.subScores.saturated_fat}/40 pts`,
+    `  Fat type balance: ${c.subScores.fat_quality ?? 'N/A'}/30 pts`,
+    `  Fibre: ${c.subScores.fiber}/20 pts`,
+    `  Sodium: ${c.subScores.sodium ?? 'N/A'}/10 pts`,
+    '',
+    'Scores are educational, not diagnostic.',
+    'South Asian Diet Risk Calculator — github.com/obbhatt24-sudo/South-asian-diet-risk'
+  ].join('\n');
 }
 
 function renderResults(result, recs) {
@@ -128,18 +357,19 @@ function renderResults(result, recs) {
   const d = result.diabetes;
   const c = result.cvd;
 
-  const diabetesRows = [
-    { label: 'Glycemic Load: GL=' + d.gl.toFixed(1), pts: d.subScores.glycemic_load },
-    { label: 'Refined Carbs: ' + Math.round(d.refShare * 100) + '% refined', pts: d.subScores.refined_carb },
-    { label: 'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g', pts: d.subScores.fiber },
-    { label: 'Protein Quality: ' + Math.round(d.protShare * 100) + '% quality protein', pts: d.subScores.protein_quality }
-  ];
+  // Bridge meal-level nutrient values onto the score objects so the breakdown
+  // rows can show real figures without changing scorer.js.
+  d.fiberG = nutrients.fiber_g;
+  c.satFatG = nutrients.saturated_fat_g;
+  c.fiberG = nutrients.fiber_g;
+
   const diabetesNotes = [];
   if (mealUsedGiDefaults(state.mealItems)) {
     diabetesNotes.push('* GL estimated from food-group defaults for some ingredients.');
   }
   container.appendChild(buildScoreCard(
-    'Diabetes Risk Score', d, DIABETES_BAND_TEXT[d.band], diabetesRows, diabetesNotes
+    'Diabetes Risk Score', d, DIABETES_BAND_TEXT[d.band],
+    renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes
   ));
 
   const diabetesRiskNote = document.createElement('p');
@@ -149,22 +379,13 @@ function renderResults(result, recs) {
     'fully captured by meal-level scoring (ICMR-INDIAB, 2023).';
   container.appendChild(diabetesRiskNote);
 
-  const fatQualityRow = c.ratio === null
-    ? { label: 'Fat quality: N/A — fat type data unavailable', na: true }
-    : { label: 'Fat Quality: ratio=' + c.ratio.toFixed(2), pts: c.subScores.fat_quality };
+  const cvdNotes = [];
   if (c.usedFallback) {
-    fatQualityRow.note = '* Fat quality estimated from food-group data.';
+    cvdNotes.push('* Fat quality estimated from food-group data.');
   }
-  const cvdRows = [
-    { label: 'Saturated Fat: ' + nutrients.saturated_fat_g.toFixed(1) + 'g', pts: c.subScores.saturated_fat },
-    fatQualityRow,
-    { label: 'Fiber: ' + nutrients.fiber_g.toFixed(1) + 'g', pts: c.subScores.fiber },
-    c.totalSodium === null
-      ? { label: 'Sodium: N/A — salt input not provided', na: true }
-      : { label: 'Sodium: ' + Math.round(c.totalSodium) + 'mg', pts: c.subScores.sodium }
-  ];
   container.appendChild(buildScoreCard(
-    'CVD Risk Score', c, CVD_BAND_TEXT[c.band], cvdRows, []
+    'CVD Risk Score', c, CVD_BAND_TEXT[c.band],
+    renderCvdBreakdown(c), generateWhyText(c, 'cvd'), cvdNotes
   ));
 
   const cvdRiskNote = document.createElement('p');
@@ -185,6 +406,20 @@ function renderResults(result, recs) {
       'data (marked N/A in the USDA database). Scores may be slightly ' +
       'understated for those items.';
     container.appendChild(incompleteNote);
+  }
+
+  renderReferenceAnchors(d, c);
+
+  const copyBtn = document.getElementById('copy-score-btn');
+  if (copyBtn) {
+    copyBtn.textContent = 'Copy score summary';
+    copyBtn.onclick = function() {
+      navigator.clipboard.writeText(buildScoreSummary(result, state.mealItems))
+        .then(function() {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function() { copyBtn.textContent = 'Copy score summary'; }, 2000);
+        });
+    };
   }
 
   renderRecommendations(recs, result);

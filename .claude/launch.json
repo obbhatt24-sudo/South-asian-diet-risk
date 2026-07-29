@@ -37,6 +37,13 @@
       "autoPort": false
     },
     {
+      "name": "south-asian-diet-alt5",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5190"],
+      "port": 5190,
+      "autoPort": false
+    },
+    {
       "name": "rag-server",
       "runtimeExecutable": "cmd",
       "runtimeArgs": [

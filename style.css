@@ -87,8 +87,8 @@ nav button:hover {
 }
 
 .score-number {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 3.5rem;
+  font-weight: 800;
   line-height: 1;
 }
 
@@ -442,3 +442,59 @@ button.apply-btn:hover {
     min-width: 80px;
   }
 }
+
+/* ===== Step 39: scoring transparency ===== */
+
+.score-header { display: flex; align-items: center; gap: 16px; }
+.score-meta { display: flex; flex-direction: column; }
+.score-out-of { font-size: 0.8rem; color: #888; }
+.score-context-label { font-size: 0.8rem; color: #888; font-style: italic; }
+.score-band-label { font-weight: 700; font-size: 0.95rem; }
+.score-band-label.low { color: #2E7D32; }
+.score-band-label.moderate { color: #E65100; }
+.score-band-label.high { color: #B71C1C; }
+
+.score-bar-full { height: 8px; background: #EEE; border-radius: 4px;
+  margin: 12px 0; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.score-card.low  .score-bar-fill { background: #2E7D32; }
+.score-card.moderate .score-bar-fill { background: #E65100; }
+.score-card.high .score-bar-fill { background: #B71C1C; }
+
+.breakdown-bar-wrap { height: 8px; background: #EEE; border-radius: 4px;
+  width: 120px; overflow: hidden; flex-shrink: 0; }
+.breakdown-bar { height: 100%; border-radius: 4px; }
+.bar-low { background: #2E7D32; }
+.bar-moderate { background: #E65100; }
+.bar-high { background: #B71C1C; }
+
+.breakdown-row { display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 10px 0; border-bottom: 1px solid #F0F0F0; align-items: center; }
+.breakdown-labels { flex: 1; min-width: 180px; }
+.breakdown-label { font-weight: 600; font-size: 0.9rem; display: block; }
+.breakdown-sublabel { font-size: 0.78rem; color: #666; }
+.breakdown-detail { font-size: 0.8rem; color: #555; min-width: 120px; }
+.breakdown-pts { font-weight: bold; margin-right: 6px; }
+.breakdown-tip { font-size: 0.8rem; color: #1565C0; margin: 4px 0 0;
+  padding: 6px 10px; background: #EEF4FF; border-radius: 4px;
+  width: 100%; }
+
+.why-panel { font-size: 0.9rem; line-height: 1.6; color: #333;
+  padding: 10px 0; }
+
+#reference-anchors { margin: 20px 0; }
+#reference-anchors h3 { font-size: 1rem; color: #444; margin-bottom: 12px; }
+.anchor-row { display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px; font-size: 0.85rem; }
+.anchor-name { width: 180px; flex-shrink: 0; color: #555; }
+.anchor-bar-wrap { flex: 1; height: 6px; background: #EEE;
+  border-radius: 3px; overflow: hidden; }
+.anchor-bar-fill { height: 100%; border-radius: 3px; }
+.anchor-score { width: 30px; text-align: right; color: #555; }
+.anchor-row.your-meal .anchor-name { font-weight: bold; color: #1A2D45; }
+.anchor-row.your-meal .anchor-bar-fill { background: #1A2D45; }
+
+#copy-score-btn { background: white; border: 1px solid #2E5F8A;
+  color: #2E5F8A; padding: 8px 16px; border-radius: 6px;
+  cursor: pointer; font-size: 0.9rem; margin-top: 16px; }
+#copy-score-btn:hover { background: #EAF2FB; }
