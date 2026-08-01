@@ -77,7 +77,17 @@
       "Bash(git --no-pager log --oneline -1)",
       "Bash(cat)",
       "Bash(rm -f /tmp/step31_msg.txt)",
-      "Bash(git --no-pager log -1)"
+      "Bash(git --no-pager log -1)",
+      "Bash(curl -s -o /dev/null -D - -X OPTIONS https://south-asian-diet-risk.onrender.com/explain -H 'Origin: https://obbhatt24-sudo.github.io' -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type' --max-time 60)",
+      "Bash(grep -i \"\\\\.env$\")",
+      "Bash(xargs -0 grep -lE \"sk-ant-|pa-[A-Za-z0-9]|VOYAGE.*=.*[A-Za-z0-9]{20}|ANTHROPIC.*=.*sk-\")",
+      "Bash(node -e \"const d=require\\('./data/ingredients.json'\\); console.log\\('count',d.length\\); console.log\\(JSON.stringify\\(d[0],null,2\\)\\);\")",
+      "PowerShell($d = Get-Content \"data\\\\ingredients.json\" -Raw | ConvertFrom-Json; \"count: $\\($d.Count\\)\"; $d[0] | ConvertTo-Json -Depth 5)",
+      "PowerShell($d = Get-Content \"data\\\\ingredients.json\" -Raw | ConvertFrom-Json; $d | ForEach-Object { \"$\\($_.id\\) | $\\($_.name\\) | $\\($_.role_tags -join ','\\)\" })",
+      "PowerShell($py = \\(Get-Command python -ErrorAction SilentlyContinue\\); if\\($py\\){ \"python: $\\($py.Source\\)\"; python --version } else { \"no python\" }; $node = \\(Get-Command node -ErrorAction SilentlyContinue\\); if\\($node\\){ \"node: $\\($node.Source\\)\" } else { \"no node\" })",
+      "PowerShell(python \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\1f61f52c-69bc-4425-baa5-cf29f05edf49\\\\scratchpad\\\\add_factor.py\")",
+      "PowerShell($d = Get-Content \"data\\\\dishes.json\" -Raw | ConvertFrom-Json; foreach\\($id in @\\('dish_002','dish_003','dish_006','dish_008','dish_010'\\)\\){ $x = $d | Where-Object { $_.id -eq $id }; \"=== $id | $\\($x.name\\) | servings=$\\($x.servings\\) | diet=$\\($x.diet_type\\) ===\"; $x.ingredients | ForEach-Object { \"   $\\($_.ingredient_id\\)  $\\($_.amount_g\\)g\" } })",
+      "Bash(git --no-pager log --oneline -2)"
     ]
   }
 }
