@@ -87,7 +87,8 @@
       "PowerShell($py = \\(Get-Command python -ErrorAction SilentlyContinue\\); if\\($py\\){ \"python: $\\($py.Source\\)\"; python --version } else { \"no python\" }; $node = \\(Get-Command node -ErrorAction SilentlyContinue\\); if\\($node\\){ \"node: $\\($node.Source\\)\" } else { \"no node\" })",
       "PowerShell(python \"C:\\\\Users\\\\obbha\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-obbha-OneDrive-South-asian-diet-risk-cd\\\\1f61f52c-69bc-4425-baa5-cf29f05edf49\\\\scratchpad\\\\add_factor.py\")",
       "PowerShell($d = Get-Content \"data\\\\dishes.json\" -Raw | ConvertFrom-Json; foreach\\($id in @\\('dish_002','dish_003','dish_006','dish_008','dish_010'\\)\\){ $x = $d | Where-Object { $_.id -eq $id }; \"=== $id | $\\($x.name\\) | servings=$\\($x.servings\\) | diet=$\\($x.diet_type\\) ===\"; $x.ingredients | ForEach-Object { \"   $\\($_.ingredient_id\\)  $\\($_.amount_g\\)g\" } })",
-      "Bash(git --no-pager log --oneline -2)"
+      "Bash(git --no-pager log --oneline -2)",
+      "Bash(node -e \"const w=require\\('./data/ml_weights.json'\\); console.log\\('version',w.version\\); console.log\\('keys',Object.keys\\(w\\)\\); console.log\\('diab keys',Object.keys\\(w.diabetes\\)\\); console.log\\('feature_cols',w.diabetes.feature_cols\\); console.log\\('init_score',w.diabetes.init_score,'lr',w.diabetes.learning_rate\\); console.log\\('calibration',w.diabetes.calibration\\); console.log\\('test_auc',w.diabetes.test_auc,'asian_auc',w.diabetes.asian_auc\\); console.log\\('trees is array of arrays?',Array.isArray\\(w.diabetes.trees\\), Array.isArray\\(w.diabetes.trees[0]\\)\\); console.log\\('sample tree node',JSON.stringify\\(w.diabetes.trees[0][0]\\).slice\\(0,200\\)\\);\")"
     ]
   }
 }

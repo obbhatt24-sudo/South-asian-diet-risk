@@ -53,6 +53,8 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
   _lastRecs = recs;
   _lastMealItems = [...state.mealItems];
   loadExplanation(result, recs, state.mealItems);
+  getMLPersonalRiskContext(state.personalContext, state.mealItems, state.addedSodiumMg)
+    .then(mlResult => renderMLContext(mlResult));
   showView('results');
 });
 
@@ -80,6 +82,15 @@ document.getElementById('cvd-history').addEventListener('change', function() {
   state.personalContext.cvdFamilyHistory =
     this.value === 'yes' ? true : this.value === 'no' ? false : null;
 });
+
+document.getElementById('age-input').addEventListener('input', function(e) {
+  state.personalContext.age = parseInt(e.target.value) || 40;
+});
+document.getElementById('sedentary-input').addEventListener('change', function(e) {
+  state.personalContext.sedentaryHrs = parseInt(e.target.value);
+});
+state.personalContext.age = 40;
+state.personalContext.sedentaryHrs = 6;
 
 // Search-source tabs: each entry pairs a tab button with the panel it controls.
 const SEARCH_TABS = [

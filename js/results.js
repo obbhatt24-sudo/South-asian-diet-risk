@@ -575,3 +575,58 @@ function applyRecommendation(rec, index) {
   );
   renderResults(result, recs);
 }
+
+// Renders the ML personal risk context panel. mlResult comes from
+// getMLPersonalRiskContext(); passing null (or a failed load) clears the panel.
+function renderMLContext(mlResult) {
+  const panel = document.getElementById('ml-context-panel');
+  if (!panel) return;
+
+  if (!mlResult) {
+    panel.innerHTML = '';
+    return;
+  }
+
+  const bandClass = b => b.toLowerCase();
+
+  panel.innerHTML = `
+    <div class='ml-context-card'>
+      <div class='ml-context-header'>
+        <span class='ml-context-label'>Your personal risk context</span>
+        <span class='ml-context-subtitle'>
+          Based on your age, BMI, and activity level — independent of today's meal
+        </span>
+      </div>
+      <div class='ml-context-scores'>
+        <div class='ml-context-score-item'>
+          <span class='ml-context-score-label'>Diabetes context</span>
+          <span class='ml-context-score-value ${bandClass(mlResult.diabetes.band)}'>
+            ${mlResult.diabetes.score}
+          </span>
+          <span class='ml-context-score-band'>${mlResult.diabetes.band}</span>
+        </div>
+        <div class='ml-context-score-item'>
+          <span class='ml-context-score-label'>CVD context</span>
+          <span class='ml-context-score-value ${bandClass(mlResult.cvd.band)}'>
+            ${mlResult.cvd.score}
+          </span>
+          <span class='ml-context-score-band'>${mlResult.cvd.band}</span>
+        </div>
+      </div>
+      <p class='ml-context-note'>
+        These scores reflect where you sit in the risk distribution of similar
+        South Asians based on population data (NHANES 2011–2018).
+        A higher context score means your baseline risk is elevated —
+        making dietary choices like this meal more impactful.
+      </p>
+      <details class='ml-context-info'>
+        <summary>About this model</summary>
+        <p>Trained on NHANES 2011–2018 dietary and health data.
+        Validated on non-Hispanic Asian subsample:
+        diabetes AUC ${mlResult.modelInfo.asianDiabetesAUC?.toFixed(3)},
+        CVD AUC ${mlResult.modelInfo.asianCVDAUC?.toFixed(3)}.</p>
+        <p>This is not a clinical risk assessment. Consult a healthcare
+        provider for personal health decisions.</p>
+      </details>
+    </div>`;
+}

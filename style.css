@@ -838,3 +838,51 @@ input:focus, select:focus {
   font-size: 0.78rem; color: var(--color-text-muted);
 }
 .dish-contrib-stats span { white-space: nowrap; }
+
+/* ML personal risk context panel (Step 50) */
+.ml-context-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid #7B1FA2;
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+  margin-top: var(--space-md);
+}
+.ml-context-header { margin-bottom: var(--space-md); }
+.ml-context-label {
+  font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #7B1FA2; display: block;
+}
+.ml-context-subtitle {
+  font-size: 0.78rem; color: var(--color-text-faint);
+  font-style: italic; display: block; margin-top: 2px;
+}
+.ml-context-scores {
+  display: flex; gap: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+.ml-context-score-item { display: flex; flex-direction: column; gap: 2px; }
+.ml-context-score-label {
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--color-text-muted);
+}
+.ml-context-score-value {
+  font-size: 2.2rem; font-weight: 800;
+  line-height: 1; letter-spacing: -0.03em;
+}
+.ml-context-score-value.low      { color: var(--color-low); }
+.ml-context-score-value.moderate { color: var(--color-moderate); }
+.ml-context-score-value.high     { color: var(--color-high); }
+.ml-context-score-band {
+  font-size: 0.8rem; color: var(--color-text-muted); font-weight: 600;
+}
+.ml-context-note {
+  font-size: 0.82rem; line-height: 1.6;
+  color: var(--color-text-muted); margin-bottom: var(--space-sm);
+}
+.ml-context-info {
+  font-size: 0.78rem; color: var(--color-text-faint); line-height: 1.6;
+}
+.ml-context-info p { margin: 4px 0; }
