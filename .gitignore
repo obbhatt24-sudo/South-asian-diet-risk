@@ -14,3 +14,6 @@ server/*
 .env
 
 # embeddings.json is committed so Render has it at build time (small, ~350KB)
+ml/nhanes_data/
+ml/.ipynb_checkpoints/
+ml/*.pkl
