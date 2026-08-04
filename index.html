@@ -198,6 +198,22 @@
         South Asians have higher cardiometabolic risk at lower BMI values.</p>
     </section>
 
+    <section id="history" style="display:none">
+      <h2>Meal history</h2>
+      <div id="history-loading" class="history-loading">Loading...</div>
+      <div id="history-content" style="display:none">
+        <div id="trend-chart-container" class="card">
+          <div class="card-title">Score trends — last 30 meals</div>
+          <canvas id="trend-chart" height="120"></canvas>
+        </div>
+        <div id="meal-history-list"></div>
+      </div>
+      <p id="history-empty" style="display:none"
+         class="empty-state">No meals saved yet.</p>
+      <p id="history-error" style="display:none;color:var(--color-high)"
+         class="empty-state"></p>
+    </section>
+
   </main>
 
   <footer>
@@ -205,6 +221,7 @@
   </footer>
 
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="js/config.js"></script>
   <script src="js/data.js"></script>
   <script src="js/scanner.js"></script>
@@ -216,6 +233,7 @@
   <script src="js/explainer.js"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/history.js"></script>
   <script src="js/app.js"></script>
 
   <div id="auth-modal" style="display:none"
