@@ -630,3 +630,66 @@ function renderMLContext(mlResult) {
       </details>
     </div>`;
 }
+
+async function saveMealToHistory() {
+  const btn    = document.getElementById('save-meal-btn');
+  const status = document.getElementById('save-meal-status');
+
+  if (!isSignedIn()) {
+    status.textContent = 'Sign in to save meals.';
+    return;
+  }
+
+  if (!state._lastScoreResult) {
+    status.textContent = 'No meal to save — calculate first.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  status.textContent = '';
+
+  // Build a human-readable meal name from the top ingredients/dishes
+  const topItems = state.mealItems.slice(0, 3).map(item => {
+    if (item.type === 'ingredient') return getIngredientById(item.id)?.name || 'ingredient';
+    if (item.type === 'dish') return getDishById(item.id)?.name || 'dish';
+    return 'item';
+  });
+  const mealName = topItems.join(' + ') + (state.mealItems.length > 3 ? ' +more' : '');
+
+  const result = state._lastScoreResult;
+
+  const mealData = {
+    meal_name:          mealName,
+    context:            state.context,
+    meal_items:         state.mealItems,
+    diabetes_score:     result.diabetes.score,
+    diabetes_band:      result.diabetes.band,
+    cvd_score:          result.cvd.score,
+    cvd_band:           result.cvd.band,
+    diabetes_sub_scores: result.diabetes.subScores,
+    cvd_sub_scores:     result.cvd.subScores,
+    flags:              [...new Set([...result.diabetes.flags, ...result.cvd.flags])],
+    recommendations:    state._lastRecs || [],
+    personal_context:   state.personalContext,
+    added_sodium_mg:    state.addedSodiumMg,
+  };
+
+  const { error } = await saveMeal(mealData);
+
+  btn.disabled = false;
+  btn.textContent = '💾 Save this meal to history';
+
+  if (error) {
+    status.textContent = 'Error saving: ' + error.message;
+    status.style.color = 'var(--color-high)';
+  } else {
+    status.textContent = '✓ Meal saved to your history';
+    status.style.color = 'var(--color-low)';
+    btn.textContent = '✓ Saved';
+    setTimeout(() => {
+      btn.textContent = '💾 Save this meal to history';
+      status.textContent = '';
+    }, 3000);
+  }
+}

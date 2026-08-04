@@ -52,6 +52,8 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
   _lastScoreResult = result;
   _lastRecs = recs;
   _lastMealItems = [...state.mealItems];
+  state._lastScoreResult = result;
+  state._lastRecs = recs;
   loadExplanation(result, recs, state.mealItems);
   getMLPersonalRiskContext(state.personalContext, state.mealItems, state.addedSodiumMg)
     .then(mlResult => renderMLContext(mlResult));
