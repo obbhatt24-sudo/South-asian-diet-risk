@@ -24,6 +24,10 @@
         </label>
       </fieldset>
       <p id="context-description"></p>
+      <div class="header-auth">
+        <span id="user-info" class="user-info"></span>
+        <button id="auth-btn" onclick="handleAuthBtnClick()">Sign in</button>
+      </div>
     </div>
   </header>
 
@@ -32,6 +36,7 @@
       <button data-view="meal-builder">Build Meal</button>
       <button data-view="results">Results</button>
       <button data-view="about">About</button>
+      <button data-view="history" style="display:none">History</button>
     </div>
   </nav>
 
@@ -205,7 +210,32 @@
   <script src="js/ml-scorer.js"></script>
   <script src="js/explainer.js"></script>
   <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
+
+  <div id="auth-modal" style="display:none"
+       class="modal-overlay" onclick="hideAuthModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="hideAuthModal()">✕</button>
+      <h2 id="auth-modal-title" class="modal-title">Sign in</h2>
+      <div id="auth-mode" data-mode="signin">
+        <button class="btn-google" onclick="handleGoogleSignIn()">
+          Continue with Google
+        </button>
+        <div class="auth-divider"><span>or</span></div>
+        <input type="email" id="auth-email" placeholder="Email address" />
+        <input type="password" id="auth-password" placeholder="Password" />
+        <p id="auth-error" class="auth-error"></p>
+        <button id="auth-submit-btn" class="btn-primary"
+          onclick='handleEmailAuth(document.getElementById("auth-mode").dataset.mode)'>
+          Sign in
+        </button>
+        <button class="btn-link" id="auth-toggle-link" onclick="toggleAuthMode()">
+          New user? Create account
+        </button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

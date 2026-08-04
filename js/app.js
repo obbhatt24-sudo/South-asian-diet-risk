@@ -133,6 +133,7 @@ function enableUI() {
 }
 
 function initUI() {
+  initAuth();
   loadData().then(() => { console.log('Data loaded'); enableUI(); });
   showView('meal-builder');
   document.getElementById('context-description').textContent = CONTEXT_DESCRIPTIONS['india'];
