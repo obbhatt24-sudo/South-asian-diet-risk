@@ -1052,3 +1052,43 @@ input:focus, select:focus {
 }
 .btn-ai-overview:hover { background: var(--color-teal-light); }
 .btn-ai-overview:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.ai-overview {
+  background: var(--color-teal-light);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-teal);
+  padding: var(--space-md);
+  margin-top: var(--space-md);
+}
+.ai-overview-header {
+  display: flex; flex-direction: column; gap: 2px;
+  margin-bottom: var(--space-sm);
+}
+.ai-overview-label {
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--color-teal);
+}
+.ai-overview-note {
+  font-size: 0.72rem; color: var(--color-text-faint); font-style: italic;
+}
+.ai-overview-text {
+  font-size: 0.9rem; line-height: 1.7; color: var(--color-text);
+  white-space: pre-wrap;
+}
+.ai-overview-sources {
+  margin-top: var(--space-sm); font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+.ai-overview-sources ul {
+  margin: 6px 0 0 16px; line-height: 1.6;
+}
+.ai-overview-loading {
+  display: flex; align-items: center; gap: var(--space-sm);
+  font-size: 0.85rem; color: var(--color-text-muted);
+  font-style: italic; padding: var(--space-sm) 0;
+}
+.ai-overview-error {
+  font-size: 0.82rem; color: var(--color-high);
+  padding: var(--space-sm) 0;
+}

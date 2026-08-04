@@ -120,6 +120,78 @@ change the user could make, if any recommendation was provided.'''
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class TopicRequest(BaseModel):
+    flag: str
+    context: str = 'india'  # 'india' | 'us'
+
+
+@app.post('/topic')
+async def topic_overview(req: TopicRequest):
+    try:
+        # Build a retrieval query from the flag
+        flag_queries = {
+            'high_glycemic_load':      'glycemic load blood sugar South Asian diabetes rice',
+            'high_refined_carb_share': 'refined carbohydrates white rice maida insulin resistance diabetes',
+            'low_fiber':               'dietary fibre fiber blood sugar cardiovascular South Asian',
+            'poor_protein_quality':    'protein quality legume dairy diabetes South Asian',
+            'high_saturated_fat':      'saturated fat ghee LDL cholesterol cardiovascular South Asian',
+            'poor_fat_quality':        'MUFA SFA ratio mustard oil ghee cardiovascular fat quality',
+            'high_sodium':             'sodium blood pressure cardiovascular South Asian salt',
+        }
+        context_phrase = 'India ICMR-INDIAB' if req.context == 'india' else 'US South Asian MASALA'
+        query = flag_queries.get(req.flag, req.flag) + ' ' + context_phrase
+
+        chunks = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS)
+        context_block = '\n\n'.join(
+            f'[{c["source"]}]: {c["text"]}' for c in chunks
+        )
+
+        topic_labels = {
+            'high_glycemic_load':      'Glycemic Load and Blood Sugar',
+            'high_refined_carb_share': 'Refined Carbohydrates and Diabetes Risk',
+            'low_fiber':               'Dietary Fibre and Metabolic Health',
+            'poor_protein_quality':    'Protein Quality and Diabetes Risk',
+            'high_saturated_fat':      'Saturated Fat and Cardiovascular Risk',
+            'poor_fat_quality':        'Fat Quality: MUFA vs SFA in South Asian Diets',
+            'high_sodium':             'Sodium Intake and Blood Pressure',
+        }
+        topic_label = topic_labels.get(req.flag, req.flag)
+
+        system_prompt = '''You are a nutrition scientist writing an accessible
+educational overview for a health-conscious South Asian audience.
+Write 3-4 paragraphs covering: (1) what this risk factor is and how it works
+biologically, (2) why South Asians are specifically affected, (3) what the
+research evidence says about dietary modification, and (4) practical implications.
+Cite sources by name in parentheses. Do not give medical advice.
+Use plain English. Avoid jargon without explanation.'''
+
+        user_prompt = f'''Topic: {topic_label}
+Context: {req.context} South Asian population
+
+Research passages:
+{context_block}
+
+Write a 3-4 paragraph educational overview of this topic for
+South Asian individuals interested in their dietary health.
+Cite the provided sources. Do not reproduce full sentences from the sources.
+End with one practical takeaway sentence.'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=600,
+            system=system_prompt,
+            messages=[{'role': 'user', 'content': user_prompt}]
+        )
+
+        return {
+            'overview': response.content[0].text,
+            'chunks_used': [{'id': c['id'], 'source': c['source'],
+                             'citation': c['full_citation']} for c in chunks]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get('/health')
 async def health():
     return {'status': 'ok'}
