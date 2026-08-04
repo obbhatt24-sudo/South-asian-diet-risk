@@ -27,8 +27,90 @@ async function loadHistory() {
   }
 
   content.style.display = 'block';
+  renderPatternSummary(meals);
   renderTrendChart(meals);
   renderMealHistoryList(meals);
+}
+
+function renderPatternSummary(meals) {
+  const panel = document.getElementById('pattern-summary');
+  if (!meals || meals.length < 3) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = 'block';
+
+  // Average scores across all meals
+  const avgD = Math.round(meals.reduce((s, m) => s + m.diabetes_score, 0) / meals.length);
+  const avgC = Math.round(meals.reduce((s, m) => s + m.cvd_score, 0) / meals.length);
+  const dBand = avgD < 35 ? 'Low' : avgD < 65 ? 'Moderate' : 'High';
+  const cBand = avgC < 35 ? 'Low' : avgC < 65 ? 'Moderate' : 'High';
+
+  // Most consistently fired flag
+  const flagCounts = {};
+  meals.forEach(m => (m.flags || []).forEach(f => {
+    flagCounts[f] = (flagCounts[f] || 0) + 1;
+  }));
+  const topFlag = Object.entries(flagCounts)
+    .sort((a, b) => b[1] - a[1])[0];
+
+  const flagLabels = {
+    high_glycemic_load:      'high glycemic load (blood sugar spikes)',
+    high_refined_carb_share: 'high refined carbohydrate share',
+    low_fiber:               'low dietary fibre',
+    poor_protein_quality:    'low quality protein sources',
+    high_saturated_fat:      'high saturated fat',
+    poor_fat_quality:        'poor fat type balance',
+    high_sodium:             'high sodium',
+  };
+
+  // Week-over-week comparison
+  const now = Date.now();
+  const week1 = meals.filter(m => now - new Date(m.created_at) < 7*24*3600*1000);
+  const week2 = meals.filter(m => {
+    const age = now - new Date(m.created_at);
+    return age >= 7*24*3600*1000 && age < 14*24*3600*1000;
+  });
+
+  let trendHTML = '';
+  if (week1.length >= 2 && week2.length >= 2) {
+    const w1AvgD = Math.round(week1.reduce((s,m) => s+m.diabetes_score,0)/week1.length);
+    const w2AvgD = Math.round(week2.reduce((s,m) => s+m.diabetes_score,0)/week2.length);
+    const diff = w2AvgD - w1AvgD;
+    if (diff > 3) {
+      trendHTML = `<p class='pattern-trend improved'>
+        ↓ Diabetes score improved by ${diff} points vs last week.</p>`;
+    } else if (diff < -3) {
+      trendHTML = `<p class='pattern-trend worsened'>
+        ↑ Diabetes score increased by ${Math.abs(diff)} points vs last week.</p>`;
+    } else {
+      trendHTML = `<p class='pattern-trend stable'>
+        → Scores are stable week-over-week.</p>`;
+    }
+  }
+
+  panel.innerHTML = `
+    <div class='card-title'>Your meal patterns</div>
+    <div class='pattern-averages'>
+      <div class='pattern-avg-item'>
+        <span class='pattern-avg-label'>Avg diabetes score</span>
+        <span class='pattern-avg-value ${dBand.toLowerCase()}'>${avgD}</span>
+        <span class='pattern-avg-band'>${dBand}</span>
+      </div>
+      <div class='pattern-avg-item'>
+        <span class='pattern-avg-label'>Avg CVD score</span>
+        <span class='pattern-avg-value ${cBand.toLowerCase()}'>${avgC}</span>
+        <span class='pattern-avg-band'>${cBand}</span>
+      </div>
+    </div>
+    ${topFlag ? `
+    <p class='pattern-flag'>
+      Most consistent risk factor across your meals:
+      <strong>${flagLabels[topFlag[0]] || topFlag[0]}</strong>
+      (flagged in ${topFlag[1]} of ${meals.length} meals).
+    </p>` : ''}
+    ${trendHTML}
+  `;
 }
 
 function renderTrendChart(meals) {

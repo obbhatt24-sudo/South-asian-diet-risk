@@ -1003,3 +1003,22 @@ input:focus, select:focus {
 .history-json { font-size: 0.72rem; background: var(--color-bg);
   padding: 10px; border-radius: var(--radius-sm);
   overflow-x: auto; white-space: pre-wrap; }
+
+.pattern-card { margin-bottom: var(--space-md); }
+.pattern-averages { display: flex; gap: var(--space-xl);
+  margin: var(--space-md) 0; }
+.pattern-avg-item { display: flex; flex-direction: column; gap: 2px; }
+.pattern-avg-label { font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--color-text-muted); }
+.pattern-avg-value { font-size: 2.2rem; font-weight: 800;
+  line-height: 1; letter-spacing: -0.03em; }
+.pattern-avg-value.low { color: var(--color-low); }
+.pattern-avg-value.moderate { color: var(--color-moderate); }
+.pattern-avg-value.high { color: var(--color-high); }
+.pattern-avg-band { font-size: 0.8rem; color: var(--color-text-muted); }
+.pattern-flag { font-size: 0.88rem; color: var(--color-text);
+  line-height: 1.5; margin: var(--space-sm) 0; }
+.pattern-trend { font-size: 0.85rem; font-weight: 600; margin-top: 4px; }
+.pattern-trend.improved { color: var(--color-low); }
+.pattern-trend.worsened { color: var(--color-high); }
+.pattern-trend.stable   { color: var(--color-text-muted); }
