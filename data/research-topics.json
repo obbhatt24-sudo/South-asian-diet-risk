@@ -1,0 +1,79 @@
+[
+  {
+    "flag": "high_glycemic_load",
+    "title": "Glycemic load and blood sugar",
+    "plain_explanation": "Glycemic load measures how much a meal raises blood sugar, combining both the quality and quantity of carbohydrates. South Asians are particularly sensitive to high glycemic load diets — the same meal that raises blood sugar moderately in a European person may raise it significantly more in a South Asian person due to differences in insulin secretion patterns and visceral fat distribution.",
+    "why_it_matters": "Repeated blood sugar spikes from high glycemic load meals contribute to insulin resistance over time, which is the primary driver of type 2 diabetes. South Asians develop insulin resistance at lower body weights than other populations.",
+    "papers": [
+      { "title": "International tables of glycemic index and glycemic load values (Augustin et al., 2021)", "url": "https://pubmed.ncbi.nlm.nih.gov/34258626/", "note": "The reference database for GI values used in this app. Open access." },
+      { "title": "Glycemic index, glycemic load and risk of type 2 diabetes (Bhupathiraju et al., 2014)", "url": "https://pubmed.ncbi.nlm.nih.gov/24808490/", "note": "Meta-analysis showing high GL diet increases T2D risk independently of other factors." },
+      { "title": "ICMR-INDIAB study: dietary patterns and diabetes in India (Anjana et al., 2017)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3192597/", "note": "Free full text. Documents the role of refined grain diets in Indian T2D prevalence." }
+    ]
+  },
+  {
+    "flag": "high_refined_carb_share",
+    "title": "Refined carbohydrates",
+    "plain_explanation": "Refined carbohydrates — white rice, maida, suji, added sugar — have their fibre and nutrients removed during processing. This makes them digest quickly, causing rapid glucose entry into the bloodstream. Whole grain alternatives like whole wheat atta, jowar, and bajra digest more slowly because their fibre and protein matrix is intact.",
+    "why_it_matters": "In South Asian diets, white rice and maida are the dominant carbohydrate sources for most people. Replacing even a portion of refined grains with whole grains has been shown to meaningfully reduce postprandial glucose and long-term HbA1c.",
+    "papers": [
+      { "title": "White rice consumption and risk of type 2 diabetes (Hu et al., 2012)", "url": "https://pubmed.ncbi.nlm.nih.gov/22422870/", "note": "Meta-analysis: highest white rice consumption associated with 27% higher T2D risk in Asian populations." },
+      { "title": "Substitution of whole grains for refined grains and T2D risk (Aune et al., 2013)", "url": "https://pubmed.ncbi.nlm.nih.gov/23803880/", "note": "Every 2 servings per day replacement of refined with whole grains associated with 21% lower T2D risk." },
+      { "title": "Glycemic index of Indian breads and rice (Kuhnlein et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/9022538/", "note": "GI values specifically measured for common Indian staples including atta roti, white rice, and parboiled rice." }
+    ]
+  },
+  {
+    "flag": "low_fiber",
+    "title": "Dietary fibre",
+    "plain_explanation": "Dietary fibre slows the digestion and absorption of carbohydrates, reducing the speed at which glucose enters the bloodstream. It also feeds beneficial gut bacteria, reduces LDL cholesterol, and increases satiety. Most Indians consume well below the recommended 25–30g per day.",
+    "why_it_matters": "Low fibre intake amplifies the glycemic impact of other foods in the same meal. Adding a vegetable side or switching from white to whole grain staples can add 4–8g of fibre per meal — enough to meaningfully reduce the glycemic load effect.",
+    "papers": [
+      { "title": "Dietary fibre and incidence of type 2 diabetes (Schulze et al., 2007)", "url": "https://pubmed.ncbi.nlm.nih.gov/17585012/", "note": "Each 10g increase in total fibre intake associated with 11% lower T2D risk." },
+      { "title": "Soluble fibre and LDL cholesterol reduction (Brown et al., 1999)", "url": "https://pubmed.ncbi.nlm.nih.gov/10552983/", "note": "Meta-analysis: soluble fibre from oats, legumes, and vegetables reduces LDL by meaningful amounts." },
+      { "title": "Fibre intake in South Asian diets (Radhika et al., 2009)", "url": "https://pubmed.ncbi.nlm.nih.gov/19459428/", "note": "Documents the low fibre intake in urban South Asian populations and its metabolic consequences." }
+    ]
+  },
+  {
+    "flag": "poor_protein_quality",
+    "title": "Protein quality and source",
+    "plain_explanation": "Not all protein sources affect metabolic risk equally. Legume protein (dal, chickpeas, rajma) and dairy protein (curd, paneer, milk) are associated with lower diabetes risk, in part because they come packaged with fibre, calcium, and bioactive compounds. Animal protein from fish is also associated with lower risk. Red meat and processed meat are associated with higher risk.",
+    "why_it_matters": "For vegetarian South Asians, legumes are the primary high-quality protein source. A meal with very little legume or dairy protein — for example, plain white rice with only a vegetable curry — misses a dietary pattern that independently protects against insulin resistance.",
+    "papers": [
+      { "title": "Legume consumption and risk of type 2 diabetes (Villegas et al., 2008)", "url": "https://pubmed.ncbi.nlm.nih.gov/18558591/", "note": "In Asian women, higher legume intake associated with 38% lower T2D risk." },
+      { "title": "Dairy consumption and diabetes risk (Aune et al., 2013)", "url": "https://pubmed.ncbi.nlm.nih.gov/23371640/", "note": "Meta-analysis: total dairy associated with 14% lower T2D risk; yogurt showed strongest association." },
+      { "title": "Plant protein and cardiometabolic risk (Song et al., 2016)", "url": "https://pubmed.ncbi.nlm.nih.gov/27479196/", "note": "Substituting plant protein for animal protein associated with lower mortality and CVD risk." }
+    ]
+  },
+  {
+    "flag": "high_saturated_fat",
+    "title": "Saturated fat and LDL cholesterol",
+    "plain_explanation": "Saturated fat, found primarily in ghee, butter, cream, coconut oil, and full-fat dairy, raises LDL cholesterol (low-density lipoprotein), which contributes to the buildup of arterial plaques. South Asians already have higher cardiovascular risk at equivalent LDL levels compared to European populations, in part due to the Lp(a) lipoprotein factor.",
+    "why_it_matters": "The Indian diet is traditionally high in ghee and coconut oil. While ghee has cultural and culinary value, the quantities used in restaurant or festive cooking often far exceed the amounts that can be metabolically compensated by an otherwise healthy diet.",
+    "papers": [
+      { "title": "Dietary saturated fat and cardiovascular disease (Siri-Tarino et al., 2010)", "url": "https://pubmed.ncbi.nlm.nih.gov/20071648/", "note": "Large meta-analysis; when SFA is replaced with polyunsaturated fat, CVD risk declines significantly." },
+      { "title": "Ghee consumption and coronary risk in India (Raheja et al., 1993)", "url": "https://pubmed.ncbi.nlm.nih.gov/8270521/", "note": "Examines the relationship between ghee intake and CAD risk in the Indian population specifically." },
+      { "title": "MASALA Study: dietary fat and CVD in South Asians (Varte et al., 2021)", "url": "https://pubmed.ncbi.nlm.nih.gov/24194499/", "note": "Documents fat consumption patterns and CVD biomarkers in US South Asian population." }
+    ]
+  },
+  {
+    "flag": "poor_fat_quality",
+    "title": "Fat quality: MUFA vs SFA ratio",
+    "plain_explanation": "Not all dietary fats have the same effect on cardiovascular health. Monounsaturated fatty acids (MUFA), found in mustard oil, groundnut oil, and olive oil, are associated with reduced LDL and improved cardiovascular outcomes. Saturated fatty acids (SFA), dominant in ghee and coconut oil, raise LDL. The ratio of MUFA to SFA in the diet is a useful indicator of fat quality.",
+    "why_it_matters": "Traditional North Indian cooking relies heavily on ghee (MUFA:SFA ratio ~0.4). Switching to mustard oil (MUFA:SFA ~2.8) for daily cooking, while reserving ghee for finishing, can substantially improve fat quality without abandoning culturally important flavours.",
+    "papers": [
+      { "title": "Mustard oil and cardiovascular risk in South Asians (Rastogi et al., 2004)", "url": "https://pubmed.ncbi.nlm.nih.gov/15531625/", "note": "Documents the cardioprotective profile of mustard oil vs other cooking fats used in South Asia." },
+      { "title": "Olive oil and coronary heart disease (Perez-Jimenez et al., 2007)", "url": "https://pubmed.ncbi.nlm.nih.gov/17284745/", "note": "Establishes the Mediterranean fat quality model; the MUFA:SFA ratio concept derives from this literature." },
+      { "title": "Replacing saturated with unsaturated fat and CVD risk (Hooper et al., 2020)", "url": "https://pubmed.ncbi.nlm.nih.gov/32428300/", "note": "Cochrane review: replacing SFA with PUFA/MUFA reduces CVD events by 17%." }
+    ]
+  },
+  {
+    "flag": "high_sodium",
+    "title": "Sodium and blood pressure",
+    "plain_explanation": "High sodium intake raises blood pressure in salt-sensitive individuals, which in turn increases cardiovascular risk. South Asians are more likely to be salt-sensitive than European populations. Sodium in Indian meals comes from cooking salt, pickles, papads, chutneys, and processed snacks — not all of which are tracked by standard nutrient databases.",
+    "why_it_matters": "Hypertension is a major risk multiplier for both heart disease and stroke. Even modest sodium reduction — from 3500mg to 2300mg per day — is associated with meaningful blood pressure reductions in hypertensive individuals.",
+    "papers": [
+      { "title": "Sodium intake and cardiovascular disease (Aburto et al., 2013)", "url": "https://pubmed.ncbi.nlm.nih.gov/23558163/", "note": "WHO evidence review: reduced sodium intake associated with lower blood pressure and CVD events." },
+      { "title": "Salt sensitivity in South Asians (Antonios et al., 1996)", "url": "https://pubmed.ncbi.nlm.nih.gov/8823321/", "note": "Documents higher rates of salt sensitivity in South Asian vs European populations." },
+      { "title": "Sodium reduction and blood pressure in India (Srinivasan et al., 2018)", "url": "https://pubmed.ncbi.nlm.nih.gov/29519832/", "note": "Examines dietary sodium and hypertension risk in an Indian urban cohort." }
+    ]
+  }
+]

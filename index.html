@@ -37,6 +37,7 @@
       <button data-view="results">Results</button>
       <button data-view="about">About</button>
       <button data-view="history" style="display:none">History</button>
+      <button data-view="learn-more">Learn More</button>
     </div>
   </nav>
 
@@ -215,6 +216,16 @@
          class="empty-state"></p>
     </section>
 
+    <section id='learn-more' style='display:none'>
+      <h2>Learn more</h2>
+      <p class='learn-more-intro'>
+        Explore the research behind each risk factor scored in this app.
+        Each topic includes a plain-English explanation, the specific South Asian
+        relevance, and links to freely accessible research papers.
+      </p>
+      <div id='learn-more-topics'></div>
+    </section>
+
   </main>
 
   <footer>
@@ -235,6 +246,7 @@
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/history.js"></script>
+  <script src="js/learn-more.js"></script>
   <script src="js/app.js"></script>
 
   <div id="auth-modal" style="display:none"

@@ -1022,3 +1022,33 @@ input:focus, select:focus {
 .pattern-trend.improved { color: var(--color-low); }
 .pattern-trend.worsened { color: var(--color-high); }
 .pattern-trend.stable   { color: var(--color-text-muted); }
+
+.learn-more-intro { color: var(--color-text-muted); font-size: 0.9rem;
+  margin-bottom: var(--space-lg); line-height: 1.6; }
+.topic-card { margin-bottom: var(--space-md); }
+.topic-title { font-size: 1.1rem; font-weight: 700;
+  color: var(--color-navy); margin-bottom: var(--space-sm); }
+.topic-explanation { font-size: 0.9rem; line-height: 1.65;
+  color: var(--color-text); margin-bottom: var(--space-sm); }
+.topic-why { font-size: 0.88rem; line-height: 1.6;
+  color: var(--color-text); margin-bottom: var(--space-md); }
+.topic-papers-heading { font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-text-muted);
+  margin-bottom: var(--space-sm); }
+.paper-item { margin-bottom: var(--space-sm); }
+.paper-link { font-size: 0.88rem; color: var(--color-navy-light);
+  text-decoration: none; font-weight: 500; }
+.paper-link:hover { text-decoration: underline; }
+.paper-note { font-size: 0.78rem; color: var(--color-text-muted);
+  margin-top: 2px; line-height: 1.5; }
+.btn-ai-overview {
+  background: none;
+  border: 1px solid var(--color-teal);
+  color: var(--color-teal);
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body);
+  margin-top: var(--space-md); transition: all 0.15s;
+}
+.btn-ai-overview:hover { background: var(--color-teal-light); }
+.btn-ai-overview:disabled { opacity: 0.5; cursor: not-allowed; }

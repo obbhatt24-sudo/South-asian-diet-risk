@@ -15,13 +15,14 @@ const CONTEXT_DESCRIPTIONS = {
 };
 
 function showView(id) {
-  ['meal-builder', 'results', 'about', 'history'].forEach(function(viewId) {
+  ['meal-builder', 'results', 'about', 'history', 'learn-more'].forEach(function(viewId) {
     document.getElementById(viewId).style.display = viewId === id ? 'block' : 'none';
   });
   document.querySelectorAll('nav button').forEach(function(btn) {
     btn.classList.toggle('active', btn.dataset.view === id);
   });
   if (id === 'history' && isSignedIn()) loadHistory();
+  if (id === 'learn-more') initLearnMore();
 }
 
 document.querySelectorAll('[data-view]').forEach(function(btn) {
