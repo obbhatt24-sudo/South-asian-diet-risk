@@ -11,66 +11,70 @@
 
   <header>
     <div class="header-inner">
-      <h1>South Asian Diet Risk Calculator</h1>
+      <h1 data-i18n="app.title">South Asian Diet Risk Calculator</h1>
       <fieldset>
         <legend>Context</legend>
         <label>
           <input type="radio" name="context" value="india" checked />
-          India
+          <span data-i18n="context.india_label">India</span>
         </label>
         <label>
           <input type="radio" name="context" value="us" />
-          US South Asian
+          <span data-i18n="context.us_label">US South Asian</span>
         </label>
       </fieldset>
       <p id="context-description"></p>
+      <div id="lang-switcher" class="lang-switcher"></div>
       <div class="header-auth">
         <span id="user-info" class="user-info"></span>
-        <button id="auth-btn" onclick="handleAuthBtnClick()">Sign in</button>
+        <button id="auth-btn" data-i18n="auth.sign_in" onclick="handleAuthBtnClick()">Sign in</button>
       </div>
     </div>
   </header>
 
   <nav>
     <div class="nav-inner">
-      <button data-view="meal-builder">Build Meal</button>
-      <button data-view="results">Results</button>
-      <button data-view="about">About</button>
-      <button data-view="history" style="display:none">History</button>
-      <button data-view="learn-more">Learn More</button>
+      <button data-view="meal-builder" data-i18n="nav.build_meal">Build Meal</button>
+      <button data-view="results" data-i18n="nav.results">Results</button>
+      <button data-view="about" data-i18n="nav.about">About</button>
+      <button data-view="history" data-i18n="nav.history" style="display:none">History</button>
+      <button data-view="learn-more" data-i18n="nav.learn_more">Learn More</button>
     </div>
   </nav>
 
   <main>
 
     <section id="meal-builder">
-      <h2>Build your meal</h2>
+      <h2 data-i18n="meal_builder.heading">Build your meal</h2>
 
       <div class="tab-bar" role="tablist">
-        <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel">Ingredients</button>
-        <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel">Dishes</button>
-        <button id="tab-packaged" class="tab" role="tab" aria-selected="false" aria-controls="packaged-search-panel">Packaged</button>
-        <button id="tab-scan" class="tab" role="tab" aria-selected="false" aria-controls="scan-panel">📷 Scan</button>
+        <button id="tab-ingredient" class="tab active" role="tab" aria-selected="true" aria-controls="ingredient-search-panel" data-i18n="meal_builder.tab_ingredients">Ingredients</button>
+        <button id="tab-dish" class="tab" role="tab" aria-selected="false" aria-controls="dish-search-panel" data-i18n="meal_builder.tab_dishes">Dishes</button>
+        <button id="tab-packaged" class="tab" role="tab" aria-selected="false" aria-controls="packaged-search-panel" data-i18n="meal_builder.tab_packaged">Packaged</button>
+        <button id="tab-scan" class="tab" role="tab" aria-selected="false" aria-controls="scan-panel">📷 <span data-i18n="meal_builder.tab_scan">Scan</span></button>
       </div>
 
       <div id="ingredient-search-panel" role="tabpanel">
         <input id="ingredient-search" type="text"
+               data-i18n-placeholder="meal_builder.search_ingredients"
                placeholder="Search ingredients (e.g. rice, ghee, dal)..." />
         <label>
           <input type="checkbox" id="nonveg-toggle" />
-          Include non-vegetarian
+          <span data-i18n="meal_builder.include_nonveg">Include non-vegetarian</span>
         </label>
         <div id="ingredient-results"></div>
       </div>
 
       <div id="dish-search-panel" role="tabpanel" style="display:none">
         <input id="dish-search" type="text"
+               data-i18n-placeholder="meal_builder.search_dishes"
                placeholder="Search dishes (e.g. dal tadka, chole bhature)..." />
         <div id="dish-results"></div>
       </div>
 
       <div id="packaged-search-panel" role="tabpanel" style="display:none">
         <input id="packaged-search" type="text"
+               data-i18n-placeholder="meal_builder.search_packaged"
                placeholder="Search packaged foods (e.g. Marie biscuits, Amul butter)..." />
         <div id="packaged-results"></div>
         <p class="packaged-note">Packaged food data from Open Food Facts
@@ -89,9 +93,9 @@
       <div id="meal-nutrient-totals"></div>
 
       <div id="personal-context" class="card">
-        <h3>Personal context (optional — not stored)</h3>
+        <h3 data-i18n="meal_builder.personal_context_heading">Personal context (optional — not stored)</h3>
 
-        <label>BMI category
+        <label><span data-i18n="meal_builder.bmi_label">BMI category</span>
           <select id="bmi-input">
             <option value="normal" selected>Not specified / Normal (18.5–22.9)</option>
             <option value="underweight">Underweight (&lt;18.5)</option>
@@ -99,7 +103,7 @@
             <option value="obese">Obese (≥25) — Asian cutoff</option>
           </select>
         </label>
-        <p class="bmi-note">Asian cutoffs: overweight ≥23, obese ≥25 (WHO/SEARO).
+        <p class="bmi-note" data-i18n="meal_builder.bmi_note">Asian cutoffs: overweight ≥23, obese ≥25 (WHO/SEARO).
           Western standard uses ≥25 for overweight.</p>
 
         <label>Waist circumference (optional)
@@ -111,13 +115,13 @@
           South Asian risk thresholds: men ≥90cm, women ≥80cm (IDF/WHO).
         </p>
 
-        <label>Your age
+        <label><span data-i18n="meal_builder.age_label">Your age</span>
           <input type="number" id="age-input" min="18" max="90"
                  placeholder="e.g. 35" style="width:80px" />
           <span style="font-size:0.8rem;color:#888"> years</span>
         </label>
 
-        <label>Sedentary time
+        <label><span data-i18n="meal_builder.sedentary_label">Sedentary time</span>
           <select id="sedentary-input">
             <option value="4">Active — mostly on feet (4 hrs sitting)</option>
             <option value="6" selected>Moderate — mix of sitting and moving (6 hrs)</option>
@@ -126,38 +130,38 @@
           </select>
         </label>
 
-        <label>Family history of type 2 diabetes
+        <label><span data-i18n="meal_builder.t2d_history_label">Family history of type 2 diabetes</span>
           <select id="t2d-history">
-            <option value="unknown" selected>Unknown / not specified</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="unknown" selected data-i18n="meal_builder.unknown">Unknown / not specified</option>
+            <option value="yes" data-i18n="meal_builder.yes">Yes</option>
+            <option value="no" data-i18n="meal_builder.no">No</option>
           </select>
         </label>
 
-        <label>Family history of heart disease or stroke
+        <label><span data-i18n="meal_builder.cvd_history_label">Family history of heart disease or stroke</span>
           <select id="cvd-history">
-            <option value="unknown" selected>Unknown / not specified</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="unknown" selected data-i18n="meal_builder.unknown">Unknown / not specified</option>
+            <option value="yes" data-i18n="meal_builder.yes">Yes</option>
+            <option value="no" data-i18n="meal_builder.no">No</option>
           </select>
         </label>
 
         <label>Salt added during cooking
           <select id="salt-input">
-            <option value="null" selected>Not specified</option>
-            <option value="200">Light (~200mg sodium)</option>
-            <option value="400">Moderate (~400mg sodium)</option>
-            <option value="800">Heavy (~800mg sodium)</option>
+            <option value="null" selected data-i18n="meal_builder.salt_none">Not specified</option>
+            <option value="200" data-i18n="meal_builder.salt_light">Light (~200mg sodium)</option>
+            <option value="400" data-i18n="meal_builder.salt_moderate">Moderate (~400mg sodium)</option>
+            <option value="800" data-i18n="meal_builder.salt_heavy">Heavy (~800mg sodium)</option>
           </select>
         </label>
       </div>
 
-      <button id="calculate-btn" disabled>Calculate meal risk</button>
+      <button id="calculate-btn" data-i18n="meal_builder.calculate" disabled>Calculate meal risk</button>
     </section>
 
     <section id="results" style="display:none">
-      <h2>Your meal risk scores</h2>
-      <div id="disclaimer-banner">
+      <h2 data-i18n="scores.heading">Your meal risk scores</h2>
+      <div id="disclaimer-banner" data-i18n="disclaimer.main">
         These scores are educational tools, not medical diagnoses.
         Consult a qualified healthcare provider for personal health decisions.
         Scores reflect a single meal, not your overall dietary pattern.
@@ -167,13 +171,13 @@
       </div>
       <div id="scores-container"></div>
       <div id="reference-anchors">
-        <h3>How does this compare?</h3>
+        <h3 data-i18n="scores.how_compare">How does this compare?</h3>
         <div id="anchor-bars"></div>
       </div>
-      <button id="copy-score-btn">Copy score summary</button>
+      <button id="copy-score-btn" data-i18n="scores.copy_summary">Copy score summary</button>
       <button id='save-meal-btn' style='display:none'
               onclick='saveMealToHistory()'>
-        💾 Save this meal to history
+        💾 <span data-i18n="scores.save_meal">Save this meal to history</span>
       </button>
       <p id='save-meal-status' class='save-status'></p>
       <div id="recommendations-container"></div>
@@ -182,7 +186,7 @@
         <h3>Research explanation</h3>
         <p class="explanation-loading">Calculate a meal to see an explanation.</p>
       </div>
-      <button id="back-btn">Back to meal builder</button>
+      <button id="back-btn" data-i18n="scores.back">Back to meal builder</button>
     </section>
 
     <section id="about" style="display:none">
@@ -209,25 +213,25 @@
     </section>
 
     <section id="history" style="display:none">
-      <h2>Meal history</h2>
-      <div id="history-loading" class="history-loading">Loading...</div>
+      <h2 data-i18n="history.heading">Meal history</h2>
+      <div id="history-loading" class="history-loading" data-i18n="history.loading">Loading...</div>
       <div id="history-content" style="display:none">
         <div id='pattern-summary' class='card pattern-card'></div>
         <div id="trend-chart-container" class="card">
-          <div class="card-title">Score trends — last 30 meals</div>
+          <div class="card-title" data-i18n="history.trend_title">Score trends — last 30 meals</div>
           <canvas id="trend-chart" height="120"></canvas>
         </div>
         <div id="meal-history-list"></div>
       </div>
       <p id="history-empty" style="display:none"
-         class="empty-state">No meals saved yet.</p>
+         class="empty-state" data-i18n="history.empty">No meals saved yet.</p>
       <p id="history-error" style="display:none;color:var(--color-high)"
          class="empty-state"></p>
     </section>
 
     <section id='learn-more' style='display:none'>
-      <h2>Learn more</h2>
-      <p class='learn-more-intro'>
+      <h2 data-i18n="learn_more.heading">Learn more</h2>
+      <p class='learn-more-intro' data-i18n="learn_more.intro">
         Explore the research behind each risk factor scored in this app.
         Each topic includes a plain-English explanation, the specific South Asian
         relevance, and links to freely accessible research papers.
@@ -243,6 +247,7 @@
 
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/config.js"></script>
   <script src="js/data.js"></script>
   <script src="js/scanner.js"></script>
@@ -262,20 +267,20 @@
        class="modal-overlay" onclick="hideAuthModal()">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="hideAuthModal()">✕</button>
-      <h2 id="auth-modal-title" class="modal-title">Sign in</h2>
+      <h2 id="auth-modal-title" class="modal-title" data-i18n="auth.sign_in">Sign in</h2>
       <div id="auth-mode" data-mode="signin">
-        <button class="btn-google" onclick="handleGoogleSignIn()">
+        <button class="btn-google" data-i18n="auth.google" onclick="handleGoogleSignIn()">
           Continue with Google
         </button>
         <div class="auth-divider"><span>or</span></div>
-        <input type="email" id="auth-email" placeholder="Email address" />
-        <input type="password" id="auth-password" placeholder="Password" />
+        <input type="email" id="auth-email" data-i18n-placeholder="auth.email_placeholder" placeholder="Email address" />
+        <input type="password" id="auth-password" data-i18n-placeholder="auth.password_placeholder" placeholder="Password" />
         <p id="auth-error" class="auth-error"></p>
-        <button id="auth-submit-btn" class="btn-primary"
+        <button id="auth-submit-btn" class="btn-primary" data-i18n="auth.sign_in"
           onclick='handleEmailAuth(document.getElementById("auth-mode").dataset.mode)'>
           Sign in
         </button>
-        <button class="btn-link" id="auth-toggle-link" onclick="toggleAuthMode()">
+        <button class="btn-link" id="auth-toggle-link" data-i18n="auth.new_user" onclick="toggleAuthMode()">
           New user? Create account
         </button>
       </div>

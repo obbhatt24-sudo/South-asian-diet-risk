@@ -65,7 +65,8 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
 document.querySelectorAll('input[name="context"]').forEach(function(radio) {
   radio.addEventListener('change', function() {
     state.context = radio.value;
-    document.getElementById('context-description').textContent = CONTEXT_DESCRIPTIONS[radio.value];
+    document.getElementById('context-description').textContent =
+      typeof t === 'function' ? t(`context.${radio.value}_description`) : CONTEXT_DESCRIPTIONS[radio.value];
   });
 });
 
@@ -140,13 +141,16 @@ function enableUI() {
   initMealBuilder();
 }
 
-function initUI() {
+async function initUI() {
+  await initI18n();
   initAuth();
   loadData().then(() => { console.log('Data loaded'); enableUI(); });
   showView('meal-builder');
-  document.getElementById('context-description').textContent = CONTEXT_DESCRIPTIONS['india'];
+  document.getElementById('context-description').textContent =
+    t(`context.${state.context}_description`);
   document.getElementById('cache-counter').textContent =
     `${getScanCacheSize()} products in local database`;
+  applyTranslations();
   console.log('App initialised, state:', state);
 }
 

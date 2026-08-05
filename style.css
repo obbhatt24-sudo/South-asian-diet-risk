@@ -973,6 +973,31 @@ input:focus, select:focus {
 }
 .header-auth button:hover { background: rgba(255,255,255,0.25); }
 
+/* Language switcher */
+.lang-switcher {
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 3px;
+}
+.lang-btn {
+  background: none; border: none;
+  padding: 3px 8px; border-radius: 14px;
+  font-size: 0.75rem; cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-body);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.lang-btn.active {
+  background: white;
+  color: var(--color-navy);
+  font-weight: 600;
+}
+.lang-btn:hover:not(.active) {
+  color: white;
+  background: rgba(255,255,255,0.2);
+}
+
 /* ==================================================================
    Meal history view
    ================================================================== */
