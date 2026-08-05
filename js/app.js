@@ -93,8 +93,12 @@ document.getElementById('age-input').addEventListener('input', function(e) {
 document.getElementById('sedentary-input').addEventListener('change', function(e) {
   state.personalContext.sedentaryHrs = parseInt(e.target.value);
 });
+document.getElementById('waist-input').addEventListener('input', e => {
+  state.personalContext.waistCm = parseInt(e.target.value) || null;
+});
 state.personalContext.age = 40;
 state.personalContext.sedentaryHrs = 6;
+state.personalContext.waistCm = null;
 
 // Search-source tabs: each entry pairs a tab button with the panel it controls.
 const SEARCH_TABS = [

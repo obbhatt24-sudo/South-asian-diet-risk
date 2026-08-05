@@ -7,7 +7,7 @@
 // the rule-based meal score in scorer.js.
 
 const ML_FEATURE_COLS = [
-  'feature_age', 'feature_bmi', 'feature_sedentary_hrs',
+  'feature_age', 'feature_bmi', 'feature_waist_cm', 'feature_sedentary_hrs',
   'feature_glycemic_load', 'feature_refined_carb_share',
   'feature_fiber_per_1000kcal', 'feature_protein_pct_energy',
   'feature_sfa_pct_energy', 'feature_mufa_sfa_ratio', 'feature_sodium_mg'
@@ -63,6 +63,11 @@ function buildMLFeatures(personalContext, mealItems, addedSodiumMg) {
   return {
     feature_age:                 personalContext.age || 40,
     feature_bmi:                 bmiMap[personalContext.bmiCategory] || 22,
+    feature_waist_cm:            personalContext.waistCm
+                                   ? Math.min(Math.max(personalContext.waistCm, 50), 160)
+                                   : (personalContext.bmiCategory === 'obese' ? 102
+                                      : personalContext.bmiCategory === 'overweight' ? 90
+                                      : 80),  // fallback estimate from BMI category if waist not entered
     feature_sedentary_hrs:       personalContext.sedentaryHrs || 6,
     feature_glycemic_load:       gl * DAILY_SCALE,
     feature_refined_carb_share:  refinedCarbShare(mealItems),
