@@ -1,17 +1,8 @@
 // results.js — renders score cards into the results view.
 
 // Band cutoffs: Low < 35, Moderate 35–64, High ≥ 65 (recalibrated in Step 34).
-const DIABETES_BAND_TEXT = {
-  Low: 'This meal contributes minimally to diabetes risk factors (score under 35).',
-  Moderate: 'This meal has notable diabetes risk-relevant features (score 35–64).',
-  High: 'This meal meaningfully elevates diabetes risk factors (score 65 or above).'
-};
-
-const CVD_BAND_TEXT = {
-  Low: 'This meal contributes minimally to cardiovascular risk factors (score under 35).',
-  Moderate: 'This meal has notable cardiovascular risk-relevant features (score 35–64).',
-  High: 'This meal meaningfully elevates cardiovascular risk factors (score 65 or above).'
-};
+// Band descriptions are now sourced from the i18n files
+// (scores.band_desc_low / _moderate / _high) via t().
 
 // Mirrors getGI()'s fallback chain to detect when a food-group default GI
 // was used (no per-ingredient GI and no curated override).
@@ -96,8 +87,8 @@ function renderBreakdownRows(rows) {
 function renderDiabetesBreakdown(d) {
   const rows = [
     {
-      label: 'Blood sugar spike',
-      sublabel: 'How fast this meal raises blood sugar',
+      label: t('sub_scores.glycemic_load_label'),
+      sublabel: t('sub_scores.glycemic_load_sub'),
       value: d.subScores.glycemic_load,
       max: 40,
       detail: `Glycemic load: ${d.gl.toFixed(1)}`,
@@ -106,8 +97,8 @@ function renderDiabetesBreakdown(d) {
         : null
     },
     {
-      label: 'Refined carbohydrates',
-      sublabel: 'Share of carbs from white rice, maida, or added sugar',
+      label: t('sub_scores.refined_carb_label'),
+      sublabel: t('sub_scores.refined_carb_sub'),
       value: d.subScores.refined_carb,
       max: 25,
       detail: `${Math.round(d.refShare * 100)}% refined carbs`,
@@ -116,8 +107,8 @@ function renderDiabetesBreakdown(d) {
         : null
     },
     {
-      label: 'Fibre content',
-      sublabel: 'Fibre slows digestion and blunts blood sugar spikes',
+      label: t('sub_scores.fiber_label'),
+      sublabel: t('sub_scores.fiber_sub'),
       value: d.subScores.fiber,
       max: 20,
       detail: `${d.fiberG != null ? d.fiberG.toFixed(1) : '?'}g fibre in this meal`,
@@ -127,8 +118,8 @@ function renderDiabetesBreakdown(d) {
       inverted: true  // higher score = worse (less fibre)
     },
     {
-      label: 'Protein quality',
-      sublabel: 'Legumes and dairy protein help regulate blood sugar',
+      label: t('sub_scores.protein_label'),
+      sublabel: t('sub_scores.protein_sub'),
       value: d.subScores.protein_quality,
       max: 15,
       detail: `${Math.round(d.protShare * 100)}% from legumes/dairy/fish`,
@@ -146,8 +137,8 @@ function renderDiabetesBreakdown(d) {
 function renderCvdBreakdown(c) {
   const rows = [
     {
-      label: 'Saturated fat',
-      sublabel: 'Ghee, cream, and coconut oil raise LDL cholesterol',
+      label: t('sub_scores.sat_fat_label'),
+      sublabel: t('sub_scores.sat_fat_sub'),
       value: c.subScores.saturated_fat,
       max: 40,
       detail: `${c.satFatG != null ? c.satFatG.toFixed(1) : '?'}g saturated fat`,
@@ -157,14 +148,14 @@ function renderCvdBreakdown(c) {
     },
     c.subScores.fat_quality === null
       ? {
-          label: 'Fat type balance',
-          sublabel: 'Ratio of healthy unsaturated to saturated fat',
+          label: t('sub_scores.fat_quality_label'),
+          sublabel: t('sub_scores.fat_quality_sub'),
           na: true,
           detail: 'Fat type data unavailable'
         }
       : {
-          label: 'Fat type balance',
-          sublabel: 'Ratio of healthy unsaturated to saturated fat',
+          label: t('sub_scores.fat_quality_label'),
+          sublabel: t('sub_scores.fat_quality_sub'),
           value: c.subScores.fat_quality,
           max: 30,
           detail: `MUFA:SFA ratio ${c.ratio.toFixed(2)}`,
@@ -174,8 +165,8 @@ function renderCvdBreakdown(c) {
           inverted: true
         },
     {
-      label: 'Fibre content',
-      sublabel: 'Fibre slows digestion and blunts blood sugar spikes',
+      label: t('sub_scores.fiber_label'),
+      sublabel: t('sub_scores.fiber_sub'),
       value: c.subScores.fiber,
       max: 20,
       detail: `${c.fiberG != null ? c.fiberG.toFixed(1) : '?'}g fibre in this meal`,
@@ -186,14 +177,14 @@ function renderCvdBreakdown(c) {
     },
     c.subScores.sodium === null
       ? {
-          label: 'Sodium',
-          sublabel: 'High sodium raises blood pressure over time',
+          label: t('sub_scores.sodium_label'),
+          sublabel: t('sub_scores.sodium_sub'),
           na: true,
           detail: 'Salt input not provided'
         }
       : {
-          label: 'Sodium',
-          sublabel: 'High sodium raises blood pressure over time',
+          label: t('sub_scores.sodium_label'),
+          sublabel: t('sub_scores.sodium_sub'),
           value: c.subScores.sodium,
           max: 10,
           detail: `${Math.round(c.totalSodium)}mg sodium`,
@@ -206,43 +197,20 @@ function renderCvdBreakdown(c) {
 }
 
 // Plain-English summary of what is driving a score, from its flags.
+// Explanation text lives in the i18n files under why_text.* so it can be
+// localised; see generateWhyText() below.
 function generateWhyText(scoreResult, scoreType) {
   const flags = scoreResult.flags;
   if (flags.length === 0) {
     return scoreType === 'diabetes'
-      ? 'This meal scores well across all diabetes risk factors.'
-      : 'This meal scores well across all cardiovascular risk factors.';
+      ? t('why_text.none_diabetes')
+      : t('why_text.none_cvd');
   }
-
-  const explanations = {
-    high_glycemic_load:
-      'The main driver is a high glycemic load — this meal raises' +
-      ' blood sugar quickly, which is a primary diabetes risk factor' +
-      ' in South Asian populations.',
-    high_refined_carb_share:
-      'A high proportion of the carbohydrates come from refined' +
-      ' sources (white rice, maida, or sugar) rather than whole grains.',
-    low_fiber:
-      'This meal is low in dietary fibre, which normally slows' +
-      ' digestion and reduces blood sugar spikes after eating.',
-    poor_protein_quality:
-      'Most of the protein comes from sources that do not actively' +
-      ' help regulate blood sugar — adding legumes or dairy would improve this.',
-    high_saturated_fat:
-      'The meal is high in saturated fat (likely from ghee, cream,' +
-      ' or coconut oil), which raises LDL cholesterol over time.',
-    poor_fat_quality:
-      'The balance of fats leans heavily toward saturated fat.' +
-      ' Replacing ghee or coconut oil with mustard oil would improve this.',
-    high_sodium:
-      'Sodium is elevated in this meal, which contributes to' +
-      ' blood pressure risk over time.'
-  };
 
   // Take the top 2 flags by sub-score severity
   const topFlags = flags.slice(0, 2);
   return topFlags
-    .map(function(f) { return explanations[f] || ''; })
+    .map(function(f) { return t('why_text.' + f); })
     .filter(Boolean)
     .join(' ');
 }
@@ -252,8 +220,8 @@ function generateWhyText(scoreResult, scoreType) {
 function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, notes) {
   const bandClass = scoreObj.band.toLowerCase();
   const contextText = state.context === 'us'
-    ? 'US South Asian context'
-    : 'India context';
+    ? t('scores.context_us')
+    : t('scores.context_india');
   const notesHtml = notes
     .map(function(n) { return `<p class='breakdown-note'>${n}</p>`; })
     .join('');
@@ -265,23 +233,23 @@ function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, no
     <div class='score-header'>
       <div class='score-number'>${scoreObj.score}</div>
       <div class='score-meta'>
-        <span class='score-band-label ${bandClass}'>${scoreObj.band} risk contribution</span>
-        <span class='score-out-of'>out of 100</span>
+        <span class='score-band-label ${bandClass}'>${t('scores.band_' + bandClass)} ${t('scores.risk_contribution')}</span>
+        <span class='score-out-of'>${t('scores.out_of')}</span>
         <span class='score-context-label'>${contextText}</span>
       </div>
     </div>
     <div class='score-bar-full'>
       <div class='score-bar-fill' style='width: ${scoreObj.score}%'></div>
     </div>
-    ${scoreObj.score === 0 ? "<div class='score-minimal'>Minimal risk contribution</div>" : ''}
+    ${scoreObj.score === 0 ? `<div class='score-minimal'>${t('scores.minimal')}</div>` : ''}
     <p class='score-description'>${description}</p>
     <details>
-      <summary>Show breakdown</summary>
+      <summary>${t('scores.show_breakdown')}</summary>
       ${breakdownHtml}
       ${notesHtml}
     </details>
     <details class='why-details'>
-      <summary>What is driving this?</summary>
+      <summary>${t('scores.what_driving')}</summary>
       <div class='why-panel'>${whyText}</div>
     </details>
   `;
@@ -412,7 +380,7 @@ function renderResults(result, recs) {
   }
   const dishContribHtml = renderDishContributions(state.mealItems, result);
   const diabetesCard = buildScoreCard(
-    'Diabetes Risk Score', d, DIABETES_BAND_TEXT[d.band],
+    t('scores.diabetes_title'), d, t('scores.band_desc_' + d.band.toLowerCase()),
     renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes
   );
   if (dishContribHtml) diabetesCard.insertAdjacentHTML('beforeend', dishContribHtml);
@@ -430,7 +398,7 @@ function renderResults(result, recs) {
     cvdNotes.push('* Fat quality estimated from food-group data.');
   }
   const cvdCard = buildScoreCard(
-    'CVD Risk Score', c, CVD_BAND_TEXT[c.band],
+    t('scores.cvd_title'), c, t('scores.band_desc_' + c.band.toLowerCase()),
     renderCvdBreakdown(c), generateWhyText(c, 'cvd'), cvdNotes
   );
   if (dishContribHtml) cvdCard.insertAdjacentHTML('beforeend', dishContribHtml);
@@ -460,12 +428,12 @@ function renderResults(result, recs) {
 
   const copyBtn = document.getElementById('copy-score-btn');
   if (copyBtn) {
-    copyBtn.textContent = 'Copy score summary';
+    copyBtn.textContent = t('scores.copy_summary');
     copyBtn.onclick = function() {
       navigator.clipboard.writeText(buildScoreSummary(result, state.mealItems))
         .then(function() {
-          copyBtn.textContent = 'Copied!';
-          setTimeout(function() { copyBtn.textContent = 'Copy score summary'; }, 2000);
+          copyBtn.textContent = t('scores.copied');
+          setTimeout(function() { copyBtn.textContent = t('scores.copy_summary'); }, 2000);
         });
     };
   }
@@ -480,13 +448,13 @@ function renderRecommendations(recs, currentScores) {
   if (recs.length === 0) {
     const none = document.createElement('div');
     none.className = 'no-recs';
-    none.textContent = 'No high-impact swaps found — this meal scores well on risk factors.';
+    none.textContent = t('recommendations.no_recs');
     container.appendChild(none);
     return;
   }
 
   const heading = document.createElement('h3');
-  heading.textContent = 'Suggested improvements';
+  heading.textContent = t('recommendations.heading');
   container.appendChild(heading);
 
   recs.forEach(function(rec, index) {
@@ -496,7 +464,11 @@ function renderRecommendations(recs, currentScores) {
 
     const badge = document.createElement('span');
     badge.className = 'rec-badge';
-    badge.textContent = isReduce ? 'Tip' : rec.intervention === 'replace' ? 'Swap' : 'Add';
+    badge.textContent = isReduce
+      ? t('recommendations.tip_badge')
+      : rec.intervention === 'replace'
+        ? t('recommendations.swap_badge')
+        : t('recommendations.add_badge');
     card.appendChild(badge);
 
     const instruction = document.createElement('p');
@@ -507,18 +479,21 @@ function renderRecommendations(recs, currentScores) {
     const impact = document.createElement('div');
     impact.className = 'rec-impact';
     if (isReduce) {
-      impact.textContent = 'Estimated to reduce your ' + rec.scoreName + ' score by ~' +
-        rec.delta + ' points if quantity is halved.';
+      impact.textContent = t('recommendations.estimated_reduction',
+        { name: rec.scoreName, delta: rec.delta });
       card.appendChild(impact);
     } else {
-      impact.textContent = 'Your ' + rec.scoreName + ' score would drop from ' +
-        currentScores[rec.scoreName].score + ' → ' + rec.previewScore;
+      impact.textContent = t('recommendations.score_drop', {
+        name: rec.scoreName,
+        from: currentScores[rec.scoreName].score,
+        to: rec.previewScore
+      });
       card.appendChild(impact);
 
       const applyBtn = document.createElement('button');
       applyBtn.className = 'apply-btn';
       applyBtn.id = 'apply-' + index;
-      applyBtn.textContent = 'Apply this swap';
+      applyBtn.textContent = t('recommendations.apply');
       applyBtn.addEventListener('click', function() {
         applyRecommendation(rec, index);
       });
@@ -646,7 +621,7 @@ async function saveMealToHistory() {
   }
 
   btn.disabled = true;
-  btn.textContent = 'Saving...';
+  btn.textContent = t('scores.saving');
   status.textContent = '';
 
   // Build a human-readable meal name from the top ingredients/dishes
@@ -678,7 +653,7 @@ async function saveMealToHistory() {
   const { error } = await saveMeal(mealData);
 
   btn.disabled = false;
-  btn.textContent = '💾 Save this meal to history';
+  btn.textContent = '💾 ' + t('scores.save_meal');
 
   if (error) {
     status.textContent = 'Error saving: ' + error.message;
@@ -686,9 +661,9 @@ async function saveMealToHistory() {
   } else {
     status.textContent = '✓ Meal saved to your history';
     status.style.color = 'var(--color-low)';
-    btn.textContent = '✓ Saved';
+    btn.textContent = '✓ ' + t('scores.saved');
     setTimeout(() => {
-      btn.textContent = '💾 Save this meal to history';
+      btn.textContent = '💾 ' + t('scores.save_meal');
       status.textContent = '';
     }, 3000);
   }

@@ -4,7 +4,13 @@
     "source_ingredient_id": "ing_001",
     "intervention": "replace",
     "target_ingredient_id": "ing_002",
-    "instruction_text": "Swap white rice for basmati rice — its lower GI (54 vs 73) meaningfully reduces the glycemic load of this meal.",
+    "instruction_text": {
+      "en": "Swap white rice for basmati rice — its lower GI (54 vs 73) meaningfully reduces the glycemic load of this meal.",
+      "hi": "सफेद चावल को बासमती चावल से बदलें — इसका कम GI (54 बनाम 73) इस भोजन के ग्लाइसेमिक लोड को उल्लेखनीय रूप से कम करता है।",
+      "gu": "સફેદ ચોખાને બાસમતી ચોખાથી બદલો — તેનો ઓછો GI (54 વિરુદ્ધ 73) આ ભોજનના ગ્લાયસેમિક લોડને નોંધપાત્ર રીતે ઘટાડે છે.",
+      "ta": "வெள்ளை அரிசியை பாஸ்மதி அரிசியுடன் மாற்றவும் — அதன் குறைந்த GI (54 vs 73) இந்த உணவின் கிளைசெமிக் சுமையை கணிசமாகக் குறைக்கிறது.",
+      "te": "తెల్ల బియ్యాన్ని బాస్మతి బియ్యంతో మార్చండి — దాని తక్కువ GI (54 vs 73) ఈ భోజనం యొక్క గ్లైసెమిక్ లోడ్‌ను గణనీయంగా తగ్గిస్తుంది."
+    },
     "reason": "Basmati rice has a substantially lower GI than common milled white rice due to its longer grain and higher amylose content."
   },
   {
@@ -12,7 +18,13 @@
     "source_ingredient_id": "ing_004",
     "intervention": "replace",
     "target_ingredient_id": "ing_039",
-    "instruction_text": "Swap maida bhature for missi roti (besan + atta blend) — much lower GI and higher protein and fiber.",
+    "instruction_text": {
+      "en": "Swap maida bhature for missi roti (besan + atta blend) — much lower GI and higher protein and fiber.",
+      "hi": "मैदा भटूरे को मिस्सी रोटी (बेसन + आटा मिश्रण) से बदलें — बहुत कम GI और अधिक प्रोटीन और फाइबर।",
+      "gu": "મેંદા ભટૂરાને મિસ્સી રોટલી (ચણાનો લોટ + ઘઉંનો લોટ મિશ્રણ) થી બદલો — ઘણો ઓછો GI અને વધુ પ્રોટીન અને ફાઇબર.",
+      "ta": "மைதா பட்டூராவை மிஸ்ஸி ரொட்டியுடன் (கடலை மாவு + கோதுமை மாவு கலவை) மாற்றவும் — மிகக் குறைந்த GI மற்றும் அதிக புரதம் மற்றும் நார்ச்சத்து.",
+      "te": "మైదా భటూరాను మిస్సీ రొట్టెతో (శనగపిండి + గోధుమ పిండి మిశ్రమం) మార్చండి — చాలా తక్కువ GI మరియు ఎక్కువ ప్రోటీన్ మరియు పీచు."
+    },
     "reason": "Missi roti made from a chickpea flour and whole wheat blend has a GI around 28 vs maida's 76, and adds protein and fiber."
   },
   {
@@ -20,7 +32,13 @@
     "source_ingredient_id": "ing_009",
     "intervention": "reduce",
     "target_ingredient_id": null,
-    "instruction_text": "Use 1 tsp of ghee instead of 2–3 tsp when finishing the dish — the flavour carries at lower quantity.",
+    "instruction_text": {
+      "en": "Use 1 tsp of ghee instead of 2–3 tsp when finishing the dish — the flavour carries at lower quantity.",
+      "hi": "व्यंजन को अंतिम रूप देते समय 2–3 चम्मच के बजाय 1 चम्मच घी का उपयोग करें — कम मात्रा में भी स्वाद बना रहता है।",
+      "gu": "વાનગી પૂરી કરતી વખતે 2–3 ચમચીને બદલે 1 ચમચી ઘી વાપરો — ઓછી માત્રામાં પણ સ્વાદ જળવાઈ રહે છે.",
+      "ta": "உணவை முடிக்கும்போது 2–3 தேக்கரண்டிக்குப் பதிலாக 1 தேக்கரண்டி நெய் பயன்படுத்தவும் — குறைந்த அளவிலும் சுவை நிலைத்திருக்கும்.",
+      "te": "వంటకాన్ని పూర్తి చేసేటప్పుడు 2–3 టీస్పూన్‌లకు బదులుగా 1 టీస్పూన్ నెయ్యి వాడండి — తక్కువ పరిమాణంలోనూ రుచి నిలుస్తుంది."
+    },
     "reason": "Ghee is predominantly saturated fat (62g/100g); small reductions meaningfully lower meal-level saturated fat."
   },
   {
@@ -28,7 +46,13 @@
     "source_ingredient_id": "ing_012",
     "intervention": "replace",
     "target_ingredient_id": "ing_010",
-    "instruction_text": "Replace coconut oil with mustard oil — mustard oil has a much better unsaturated fat profile for heart health.",
+    "instruction_text": {
+      "en": "Replace coconut oil with mustard oil — mustard oil has a much better unsaturated fat profile for heart health.",
+      "hi": "नारियल तेल को सरसों के तेल से बदलें — सरसों के तेल में हृदय स्वास्थ्य के लिए बेहतर असंतृप्त वसा प्रोफ़ाइल होती है।",
+      "gu": "નાળિયેર તેલને રાઈના તેલથી બદલો — રાઈના તેલમાં હૃદયના સ્વાસ્થ્ય માટે વધુ સારી અસંતૃપ્ત ચરબીની પ્રોફાઇલ છે.",
+      "ta": "தேங்காய் எண்ணெயை கடுகு எண்ணெயுடன் மாற்றவும் — கடுகு எண்ணெயில் இதய ஆரோக்கியத்திற்கு மிகச் சிறந்த நிறைவுறா கொழுப்பு அமைப்பு உள்ளது.",
+      "te": "కొబ్బరి నూనెను ఆవ నూనెతో మార్చండి — ఆవ నూనెలో గుండె ఆరోగ్యానికి మెరుగైన అసంతృప్త కొవ్వు ప్రొఫైల్ ఉంది."
+    },
     "reason": "Coconut oil is ~83% saturated fat; mustard oil is ~12% saturated fat with a high MUFA:SFA ratio."
   },
   {
@@ -36,7 +60,13 @@
     "source_ingredient_id": "ing_009",
     "intervention": "reduce",
     "target_ingredient_id": null,
-    "instruction_text": "Reduce ghee quantity — its low MUFA:SFA ratio is the main driver of the fat quality score. Use 1 tsp instead of 2.",
+    "instruction_text": {
+      "en": "Reduce ghee quantity — its low MUFA:SFA ratio is the main driver of the fat quality score. Use 1 tsp instead of 2.",
+      "hi": "घी की मात्रा कम करें — इसका कम MUFA:SFA अनुपात वसा गुणवत्ता स्कोर का मुख्य कारण है। 2 के बजाय 1 चम्मच का उपयोग करें।",
+      "gu": "ઘીની માત્રા ઘટાડો — તેનો ઓછો MUFA:SFA ગુણોત્તર ચરબી ગુણવત્તા સ્કોરનું મુખ્ય કારણ છે. 2ને બદલે 1 ચમચી વાપરો.",
+      "ta": "நெய்யின் அளவைக் குறைக்கவும் — அதன் குறைந்த MUFA:SFA விகிதம் கொழுப்பு தர மதிப்பெண்ணின் முக்கியக் காரணம். 2க்குப் பதிலாக 1 தேக்கரண்டி பயன்படுத்தவும்.",
+      "te": "నెయ్యి పరిమాణాన్ని తగ్గించండి — దాని తక్కువ MUFA:SFA నిష్పత్తి కొవ్వు నాణ్యత స్కోర్‌కు ప్రధాన కారణం. 2కి బదులుగా 1 టీస్పూన్ వాడండి."
+    },
     "reason": "Ghee has a MUFA:SFA ratio well below 0.5, pushing the meal into the lowest fat quality band."
   },
   {
@@ -44,7 +74,13 @@
     "source_ingredient_id": "ing_011",
     "intervention": "replace",
     "target_ingredient_id": "ing_010",
-    "instruction_text": "Replace refined sunflower oil with mustard oil — mustard oil has a higher MUFA:SFA ratio and is the traditional South Asian cooking oil.",
+    "instruction_text": {
+      "en": "Replace refined sunflower oil with mustard oil — mustard oil has a higher MUFA:SFA ratio and is the traditional South Asian cooking oil.",
+      "hi": "रिफाइंड सूरजमुखी तेल को सरसों के तेल से बदलें — सरसों के तेल में अधिक MUFA:SFA अनुपात होता है और यह पारंपरिक दक्षिण एशियाई खाना पकाने का तेल है।",
+      "gu": "રિફાઇન્ડ સૂર્યમુખી તેલને રાઈના તેલથી બદલો — રાઈના તેલમાં વધુ MUFA:SFA ગુણોત્તર છે અને તે પરંપરાગત દક્ષિણ એશિયન રસોઈ તેલ છે.",
+      "ta": "சுத்திகரிக்கப்பட்ட சூரியகாந்தி எண்ணெயை கடுகு எண்ணெயுடன் மாற்றவும் — கடுகு எண்ணெயில் அதிக MUFA:SFA விகிதம் உள்ளது மற்றும் இது பாரம்பரிய தென் ஆசிய சமையல் எண்ணெய்.",
+      "te": "శుద్ధి చేసిన పొద్దుతిరుగుడు నూనెను ఆవ నూనెతో మార్చండి — ఆవ నూనెలో అధిక MUFA:SFA నిష్పత్తి ఉంది మరియు ఇది సాంప్రదాయ దక్షిణ ఆసియా వంట నూనె."
+    },
     "reason": "Sunflower oil is predominantly PUFA with moderate MUFA; mustard oil has a higher MUFA content and is the MASALA SAM score reference fat."
   },
   {
@@ -52,7 +88,13 @@
     "source_ingredient_id": "ing_038",
     "intervention": "replace",
     "target_ingredient_id": "ing_021",
-    "instruction_text": "Replace cream with curd (yogurt) in the gravy — similar creamy texture, much lower saturated fat.",
+    "instruction_text": {
+      "en": "Replace cream with curd (yogurt) in the gravy — similar creamy texture, much lower saturated fat.",
+      "hi": "ग्रेवी में क्रीम को दही से बदलें — समान मलाईदार बनावट, बहुत कम संतृप्त वसा।",
+      "gu": "ગ્રેવીમાં ક્રીમને દહીંથી બદલો — સમાન ક્રીમી ટેક્સચર, ઘણી ઓછી સંતૃપ્ત ચરબી.",
+      "ta": "கிரேவியில் கிரீமை தயிருடன் மாற்றவும் — ஒத்த கிரீமி அமைப்பு, மிகக் குறைந்த நிறைவுற்ற கொழுப்பு.",
+      "te": "గ్రేవీలో క్రీమ్‌ను పెరుగుతో మార్చండి — సారూప్య క్రీమీ ఆకృతి, చాలా తక్కువ సంతృప్త కొవ్వు."
+    },
     "reason": "Heavy cream is ~23g saturated fat per 100g; full-fat curd is ~2g per 100g, with added probiotic benefit."
   },
   {
@@ -60,7 +102,13 @@
     "source_ingredient_id": null,
     "intervention": "add",
     "target_ingredient_id": "ing_017",
-    "instruction_text": "Add a vegetable side (spinach, methi, or bhindi) to boost fiber. This meal is low in fiber.",
+    "instruction_text": {
+      "en": "Add a vegetable side (spinach, methi, or bhindi) to boost fiber. This meal is low in fiber.",
+      "hi": "फाइबर बढ़ाने के लिए एक सब्जी (पालक, मेथी, या भिंडी) जोड़ें। इस भोजन में फाइबर कम है।",
+      "gu": "ફાઇબર વધારવા માટે એક શાકભાજી (પાલક, મેથી, અથવા ભીંડા) ઉમેરો. આ ભોજનમાં ફાઇબર ઓછું છે.",
+      "ta": "நார்ச்சத்தை அதிகரிக்க ஒரு காய்கறி பக்க உணவை (கீரை, வெந்தயம், அல்லது வெண்டைக்காய்) சேர்க்கவும். இந்த உணவில் நார்ச்சத்து குறைவாக உள்ளது.",
+      "te": "పీచును పెంచడానికి ఒక కూరగాయ (పాలకూర, మెంతి, లేదా బెండకాయ) జోడించండి. ఈ భోజనంలో పీచు తక్కువగా ఉంది."
+    },
     "reason": "Fiber is independently protective for both T2D and CVD; non-starchy green vegetables are the lowest-calorie way to add fiber to a South Asian meal."
   },
   {
@@ -68,7 +116,13 @@
     "source_ingredient_id": null,
     "intervention": "add",
     "target_ingredient_id": "ing_016",
-    "instruction_text": "Add a small portion of moong dal or masoor dal — legume protein is independently protective for both diabetes and heart disease risk in South Asian populations.",
+    "instruction_text": {
+      "en": "Add a small portion of moong dal or masoor dal — legume protein is independently protective for both diabetes and heart disease risk in South Asian populations.",
+      "hi": "मूंग दाल या मसूर दाल का एक छोटा हिस्सा जोड़ें — दक्षिण एशियाई आबादी में दाल का प्रोटीन मधुमेह और हृदय रोग दोनों के जोखिम के लिए स्वतंत्र रूप से सुरक्षात्मक है।",
+      "gu": "મગની દાળ અથવા મસૂરની દાળનો એક નાનો ભાગ ઉમેરો — દક્ષિણ એશિયન વસ્તીમાં કઠોળનું પ્રોટીન ડાયાબિટીસ અને હૃદય રોગ બંનેના જોખમ માટે સ્વતંત્ર રીતે રક્ષણાત્મક છે.",
+      "ta": "ஒரு சிறிய அளவு பாசிப்பருப்பு அல்லது மைசூர் பருப்பைச் சேர்க்கவும் — தென் ஆசிய மக்களிடையே பயறு புரதம் நீரிழிவு மற்றும் இதய நோய் ஆபத்து இரண்டிற்கும் தனித்தனியாக பாதுகாப்பு அளிக்கிறது.",
+      "te": "కొద్ది మొత్తంలో పెసర పప్పు లేదా మసూర్ పప్పును జోడించండి — దక్షిణ ఆసియా జనాభాలో పప్పుధాన్య ప్రోటీన్ మధుమేహం మరియు గుండె జబ్బు ప్రమాదం రెండింటికీ స్వతంత్రంగా రక్షణ కల్పిస్తుంది."
+    },
     "reason": "ICMR-INDIAB found legume and dairy protein independently associated with lower T2D risk; replacing 5% of carbohydrate energy with plant protein was significantly protective."
   }
 ]

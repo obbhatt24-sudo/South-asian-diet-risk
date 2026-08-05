@@ -63,7 +63,22 @@
     "save_meal": "Save this meal to history",
     "saving": "Saving...",
     "saved": "Saved!",
-    "back": "Back to meal builder"
+    "back": "Back to meal builder",
+    "risk_contribution": "risk contribution",
+    "minimal": "Minimal risk contribution",
+    "context_india": "India context",
+    "context_us": "US South Asian context"
+  },
+  "why_text": {
+    "high_glycemic_load": "The main driver is a high glycemic load — this meal raises blood sugar quickly, which is a primary diabetes risk factor in South Asian populations.",
+    "high_refined_carb_share": "A high proportion of the carbohydrates come from refined sources (white rice, maida, or sugar) rather than whole grains.",
+    "low_fiber": "This meal is low in dietary fibre, which normally slows digestion and reduces blood sugar spikes after eating.",
+    "poor_protein_quality": "Most of the protein comes from sources that do not actively help regulate blood sugar — adding legumes or dairy would improve this.",
+    "high_saturated_fat": "The meal is high in saturated fat (likely from ghee, cream, or coconut oil), which raises LDL cholesterol over time.",
+    "poor_fat_quality": "The balance of fats leans heavily toward saturated fat. Replacing ghee or coconut oil with mustard oil would improve this.",
+    "high_sodium": "Sodium is elevated in this meal, which contributes to blood pressure risk over time.",
+    "none_diabetes": "This meal scores well across all diabetes risk factors.",
+    "none_cvd": "This meal scores well across all cardiovascular risk factors."
   },
   "sub_scores": {
     "glycemic_load_label": "Blood sugar spike",

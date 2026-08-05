@@ -32,7 +32,8 @@ async function fetchExplanation(scoreResult, mealItems) {
     sfa_g: computeMealNutrients(mealItems).saturated_fat_g,
     mufa_sfa_ratio: c.ratio ?? null,
     top_ingredients: topIngredients,
-    top_recommendation: null  // filled in below if recs available
+    top_recommendation: null,  // filled in below if recs available
+    language: getCurrentLang()
   };
 
   return payload;

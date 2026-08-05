@@ -34,6 +34,16 @@ def get_embeddings():
     return _embeddings
 
 
+# Appended to the system prompt so the model responds in the user's language.
+LANGUAGE_INSTRUCTIONS = {
+    'en': 'Respond in English.',
+    'hi': 'Respond entirely in Hindi (Devanagari script). Use formal Hindi.',
+    'gu': 'Respond entirely in Gujarati (Gujarati script). Use formal Gujarati.',
+    'ta': 'Respond entirely in Tamil (Tamil script). Use formal Tamil.',
+    'te': 'Respond entirely in Telugu (Telugu script). Use formal Telugu.',
+}
+
+
 class ExplainRequest(BaseModel):
     diabetes_score: int
     diabetes_band: str
@@ -48,6 +58,7 @@ class ExplainRequest(BaseModel):
     mufa_sfa_ratio: float | None
     top_ingredients: list[str]  # top 3 by weight
     top_recommendation: str | None
+    language: str = 'en'
 
 
 @app.post('/explain')
@@ -76,12 +87,14 @@ async def explain(req: ExplainRequest):
             f'[{c["source"]}]: {c["text"]}' for c in chunks
         )
 
-        system_prompt = '''You are a nutrition research assistant explaining
+        lang_instruction = LANGUAGE_INSTRUCTIONS.get(req.language, 'Respond in English.')
+        system_prompt = f'''You are a nutrition research assistant explaining
 meal-level dietary risk to a health-conscious South Asian individual.
 Use only the research passages provided. Cite sources by name in parentheses.
 Do not invent statistics. Do not give medical advice or use alarming language.
 Write in plain English, 3-5 sentences. Focus on what the numbers mean
-and what the most impactful change would be.'''
+and what the most impactful change would be.
+{lang_instruction}'''
 
         user_prompt = f'''
 Meal scores:
@@ -123,6 +136,7 @@ change the user could make, if any recommendation was provided.'''
 class TopicRequest(BaseModel):
     flag: str
     context: str = 'india'  # 'india' | 'us'
+    language: str = 'en'
 
 
 @app.post('/topic')
@@ -157,13 +171,15 @@ async def topic_overview(req: TopicRequest):
         }
         topic_label = topic_labels.get(req.flag, req.flag)
 
-        system_prompt = '''You are a nutrition scientist writing an accessible
+        lang_instruction = LANGUAGE_INSTRUCTIONS.get(req.language, 'Respond in English.')
+        system_prompt = f'''You are a nutrition scientist writing an accessible
 educational overview for a health-conscious South Asian audience.
 Write 3-4 paragraphs covering: (1) what this risk factor is and how it works
 biologically, (2) why South Asians are specifically affected, (3) what the
 research evidence says about dietary modification, and (4) practical implications.
 Cite sources by name in parentheses. Do not give medical advice.
-Use plain English. Avoid jargon without explanation.'''
+Use plain English. Avoid jargon without explanation.
+{lang_instruction}'''
 
         user_prompt = f'''Topic: {topic_label}
 Context: {req.context} South Asian population

@@ -226,6 +226,12 @@ function findCandidate(flag, mealItems, context) {
         .find((tag) => overrideTarget.role_tags.includes(tag));
       overridePortion = ADD_PORTIONS[portionTag] ?? null;
     }
+    // instruction_text is a { en, hi, gu, ta, te } object (Step 59);
+    // fall back to English if the active language is missing.
+    const lang = getCurrentLang();
+    const instructionText = typeof override.instruction_text === 'string'
+      ? override.instruction_text
+      : (override.instruction_text[lang] || override.instruction_text['en']);
     return makeCandidate({
       standardPortion: overridePortion,
       flag,
@@ -236,7 +242,7 @@ function findCandidate(flag, mealItems, context) {
         : null,
       targetId: override.target_ingredient_id,
       targetName: overrideTarget?.name ?? null,
-      instructionText: override.instruction_text,
+      instructionText: instructionText,
       fromOverride: true,
       fromDishId: override.source_ingredient_id === sourceRecord?.id
         ? source?.fromDishId ?? null

@@ -42,8 +42,9 @@ async function generateAIOverview(topicIndex, flag) {
   const btn       = document.getElementById(`ai-btn-${topicIndex}`);
   const container = document.getElementById(`ai-overview-${topicIndex}`);
 
-  // Check sessionStorage cache first
-  const cacheKey = OVERVIEW_CACHE_KEY + flag + '_' + state.context;
+  // Check sessionStorage cache first (keyed by language so a language switch
+  // does not surface an overview cached in the previous language).
+  const cacheKey = OVERVIEW_CACHE_KEY + flag + '_' + state.context + '_' + getCurrentLang();
   const cached = sessionStorage.getItem(cacheKey);
   if (cached) {
     renderAIOverview(container, JSON.parse(cached));
@@ -63,7 +64,7 @@ async function generateAIOverview(topicIndex, flag) {
     const response = await fetch(RAG_SERVER_URL + '/topic', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ flag, context: state.context }),
+      body: JSON.stringify({ flag, context: state.context, language: getCurrentLang() }),
       signal: AbortSignal.timeout(45000)
     });
 
