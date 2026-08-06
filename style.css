@@ -1122,6 +1122,18 @@ input:focus, select:focus {
 .btn-ai-overview:hover { background: var(--color-teal-light); }
 .btn-ai-overview:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.btn-ingredient-deep {
+  background: none;
+  border: 1px solid var(--color-teal);
+  color: var(--color-teal);
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body);
+  margin-top: var(--space-sm); transition: all 0.15s;
+}
+.btn-ingredient-deep:hover { background: var(--color-teal-light); }
+.btn-ingredient-deep:disabled { opacity: 0.5; cursor: not-allowed; }
+
 .ai-overview {
   background: var(--color-teal-light);
   border-radius: var(--radius-md);

@@ -78,6 +78,8 @@ function showScannedProduct(product, barcode) {
     </div>`;
   // Store the product temporarily for addScannedProduct()
   window._pendingScannedProduct = product;
+  // Cache by id so the deep-dive ingredient analysis can resolve it later.
+  _scannedProductCache[product.id] = product;
   // Render the red/amber/green ingredient-list analysis for the scanned product.
   const analysisEl = document.getElementById('scan-ingredient-analysis');
   if (analysisEl) showIngredientAnalysis(product, analysisEl);

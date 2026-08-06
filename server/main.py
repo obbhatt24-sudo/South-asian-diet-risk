@@ -208,6 +208,86 @@ End with one practical takeaway sentence.'''
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class IngredientAnalysisRequest(BaseModel):
+    product_name: str
+    ingredients_text: str
+    red_flags: list[str]    # short names of red-flagged ingredients
+    amber_flags: list[str]  # short names of amber-flagged ingredients
+    nutriscore: str | None
+    nova_group: int | None
+    context: str = 'india'
+    language: str = 'en'
+
+
+@app.post('/ingredient-analysis')
+async def ingredient_analysis(req: IngredientAnalysisRequest):
+    try:
+        # Build retrieval query from the flagged ingredients
+        query_parts = []
+        for flag in req.red_flags[:3]:
+            if 'refined' in flag.lower() or 'maida' in flag.lower():
+                query_parts.append('refined wheat flour glycemic index diabetes South Asian')
+            elif 'palm oil' in flag.lower() or 'hydrogenated' in flag.lower():
+                query_parts.append('palm oil saturated fat cardiovascular LDL South Asian')
+            elif 'sugar' in flag.lower():
+                query_parts.append('added sugar glycemic load insulin resistance South Asian')
+        for flag in req.amber_flags[:2]:
+            if 'sodium' in flag.lower() or 'salt' in flag.lower():
+                query_parts.append('sodium blood pressure South Asian salt sensitivity')
+        if not query_parts:
+            query_parts = ['packaged food processing cardiovascular diabetes risk']
+
+        context_phrase = 'India ICMR-INDIAB' if req.context == 'india' else 'US South Asian MASALA'
+        query = ' '.join(query_parts) + ' ' + context_phrase
+
+        chunks = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS)
+        context_block = '\n\n'.join(
+            f'[{c["source"]}]: {c["text"]}' for c in chunks
+        )
+
+        lang_instruction = LANGUAGE_INSTRUCTIONS.get(req.language, 'Respond in English.')
+
+        system_prompt = f'''You are a nutrition scientist analysing
+packaged food ingredients for a South Asian audience concerned about
+diabetes and cardiovascular disease risk.
+Use only the research passages provided. Cite sources by name.
+Do not give medical advice. Be specific about which ingredients
+are most concerning and why, given South Asian metabolic risk patterns.
+Write 3-4 paragraphs. {lang_instruction}'''
+
+        nova_text = f'NOVA group {req.nova_group} (ultra-processed)' if req.nova_group == 4 else ''
+        user_prompt = f'''
+Product: {req.product_name}
+Nutri-Score: {req.nutriscore or 'not available'}  {nova_text}
+Ingredients: {req.ingredients_text[:500]}
+High-risk ingredients identified: {', '.join(req.red_flags) or 'none'}
+Moderate-concern ingredients: {', '.join(req.amber_flags) or 'none'}
+Context: {req.context} South Asian population
+
+Research passages:
+{context_block}
+
+Explain in 3-4 paragraphs how this product's specific ingredient
+combination affects South Asian diabetes and CVD risk.
+Focus on the high-risk ingredients and their cumulative effect.
+End with one practical recommendation.'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=600,
+            system=system_prompt,
+            messages=[{'role': 'user', 'content': user_prompt}]
+        )
+
+        return {
+            'analysis': response.content[0].text,
+            'chunks_used': [{'id': c['id'], 'source': c['source'],
+                             'citation': c['full_citation']} for c in chunks]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get('/health')
 async def health():
     return {'status': 'ok'}

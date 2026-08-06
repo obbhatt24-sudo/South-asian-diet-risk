@@ -158,6 +158,7 @@
     "amber_flags": "Moderate concerns",
     "green_flags": "Beneficial ingredients",
     "generate_deep": "✦ Generate detailed ingredient analysis",
+    "generating": "✦ Analysing ingredients...",
     "no_flags": "No high-risk ingredients identified in this product.",
     "disclaimer": "Analysis based on ingredient list only. Always check the nutrition label."
   }

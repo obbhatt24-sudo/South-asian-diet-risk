@@ -9,6 +9,12 @@ const DIET_BADGE = {
 let _lastDishQuery = '';
 let _includeNonVeg = false;
 
+// Products shown in the Packaged/Scan panels, cached by product.id so the
+// deep-dive ingredient analysis can resolve a product from its button's id.
+// Populated by renderPackagedResults (searched) and showScannedProduct (scanned).
+const _scannedProductCache = {};   // product.id -> scanned product
+const _searchedProductCache = {};  // product.id -> searched product
+
 function renderIngredientResults(results, query) {
   const container = document.getElementById('ingredient-results');
   container.innerHTML = '';
@@ -110,6 +116,9 @@ function renderPackagedResults(results, query) {
   }
 
   results.forEach(function(product) {
+    // Cache by id so the deep-dive button can resolve this product later.
+    _searchedProductCache[product.id] = product;
+
     const div = document.createElement('div');
     div.className = 'ingredient-result packaged-result';
 
@@ -176,6 +185,92 @@ async function showIngredientAnalysis(product, containerEl) {
       ${renderFlags(analysis.amber, 'flag-amber', t('packaged.amber_flags'))}
       ${renderFlags(analysis.green, 'flag-green', t('packaged.green_flags'))}
       <p class='analysis-disclaimer'>${t('packaged.disclaimer')}</p>
+      <button class='btn-ingredient-deep'
+              id='deep-btn-${product.id}'
+              onclick='generateIngredientDeepDive("${product.id}",
+                       this.closest(".ingredient-analysis"))'>
+        ${t('packaged.generate_deep')}
+      </button>
+      <div id='deep-analysis-${product.id}'></div>
+    </div>`;
+}
+
+// On demand, call the RAG /ingredient-analysis endpoint for a deep, cited
+// explanation of a packaged product's ingredient combination. Results are
+// cached in sessionStorage per product + language so re-opening is instant.
+async function generateIngredientDeepDive(productId, containerEl) {
+  const product = _scannedProductCache[productId]
+               || _searchedProductCache[productId];
+  if (!product) return;
+
+  const btn = document.getElementById(`deep-btn-${productId}`);
+  const outputEl = document.getElementById(`deep-analysis-${productId}`);
+
+  // Check sessionStorage cache
+  const cacheKey = `deep_${productId}_${getCurrentLang()}`;
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached) {
+    renderDeepAnalysis(outputEl, JSON.parse(cached));
+    btn.style.display = 'none';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = t('packaged.generating') || 'Generating...';
+  outputEl.innerHTML = '<div class="explanation-loading"><div class="explanation-spinner"></div> Analysing ingredients...</div>';
+
+  // Get the current analysis flags
+  const analysis = await analyseIngredientList(product._rawIngredients || '');
+
+  try {
+    const res = await fetch(RAG_SERVER_URL + '/ingredient-analysis', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        product_name: product.name,
+        ingredients_text: product._rawIngredients || '',
+        red_flags: analysis.red.map(f => f.short),
+        amber_flags: analysis.amber.map(f => f.short),
+        nutriscore: product.nutriscore || null,
+        nova_group: product.nova_group || null,
+        context: state.context,
+        language: getCurrentLang(),
+      }),
+      signal: AbortSignal.timeout(45000)
+    });
+
+    if (!res.ok) throw new Error('Server error');
+    const data = await res.json();
+
+    sessionStorage.setItem(cacheKey, JSON.stringify(data));
+    renderDeepAnalysis(outputEl, data);
+    btn.style.display = 'none';
+  } catch(err) {
+    outputEl.innerHTML = `<p class='ai-overview-error'>
+      Analysis unavailable${err.name === 'TimeoutError'
+        ? ' (server warming up — try again)'
+        : ''}.</p>`;
+    btn.disabled = false;
+    btn.textContent = t('packaged.generate_deep');
+  }
+}
+
+function renderDeepAnalysis(containerEl, data) {
+  const citations = (data.chunks_used || []).map(c =>
+    `<li><em>${c.source}</em>: ${c.citation}</li>`
+  ).join('');
+
+  containerEl.innerHTML = `
+    <div class='ai-overview' style='margin-top: var(--space-sm)'>
+      <div class='ai-overview-header'>
+        <span class='ai-overview-label'>${t('packaged.generate_deep')}</span>
+        <span class='ai-overview-note'>${t('learn_more.ai_overview_note')}</span>
+      </div>
+      <div class='ai-overview-text'>${data.analysis}</div>
+      <details class='ai-overview-sources'>
+        <summary>${t('learn_more.sources_used')}</summary>
+        <ul>${citations}</ul>
+      </details>
     </div>`;
 }
 

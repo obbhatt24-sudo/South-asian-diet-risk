@@ -121,6 +121,13 @@
       "autoPort": false
     },
     {
+      "name": "south-asian-diet-step61",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5202"],
+      "port": 5202,
+      "autoPort": false
+    },
+    {
       "name": "rag-server",
       "runtimeExecutable": "cmd",
       "runtimeArgs": [
