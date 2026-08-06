@@ -19,15 +19,18 @@ let _ingById = {};
 let _dishById = {};
 let _giOverrides = {};
 let _recOverrides = [];
+let _ingredientFlags = null;
 let _dataLoaded = false;
 
 async function loadData() {
-  const [ingredients, dishes, giOverrides, recOverrides] = await Promise.all([
-    fetch('data/ingredients.json').then(r => r.json()),
-    fetch('data/dishes.json').then(r => r.json()),
-    fetch('data/gi-overrides.json').then(r => r.json()),
-    fetch('data/rec-overrides.json').then(r => r.json())
-  ]);
+  const [ingredients, dishes, giOverrides, recOverrides, ingredientFlags] =
+    await Promise.all([
+      fetch('data/ingredients.json').then(r => r.json()),
+      fetch('data/dishes.json').then(r => r.json()),
+      fetch('data/gi-overrides.json').then(r => r.json()),
+      fetch('data/rec-overrides.json').then(r => r.json()),
+      fetch('data/ingredient-flags.json').then(r => r.json())
+    ]);
 
   _ingredients = ingredients;
   _dishes = dishes;
@@ -35,7 +38,44 @@ async function loadData() {
   _dishById = Object.fromEntries(dishes.map(d => [d.id, d]));
   _giOverrides = Object.fromEntries(giOverrides.map(o => [o.ingredient_id, o.gi]));
   _recOverrides = recOverrides;
+  _ingredientFlags = ingredientFlags;
   _dataLoaded = true;
+}
+
+// ===== Packaged-product ingredient-list analysis =====
+// Maps regex patterns over a raw Open Food Facts ingredient string to a set of
+// red/amber/green risk flags (data/ingredient-flags.json). Explanations are
+// localised via the explanation_<lang> keys, falling back to English.
+async function loadIngredientFlags() {
+  if (_ingredientFlags) return _ingredientFlags;
+  const res = await fetch('data/ingredient-flags.json');
+  _ingredientFlags = await res.json();
+  return _ingredientFlags;
+}
+
+async function analyseIngredientList(ingredientListString) {
+  // ingredientListString: raw ingredient text from Open Food Facts
+  // e.g. 'Refined wheat flour, sugar, palm oil, salt, raising agents...'
+  const flags = await loadIngredientFlags();
+  const text  = ingredientListString.toLowerCase();
+  const lang  = getCurrentLang();
+
+  const results = { red: [], amber: [], green: [] };
+  const seen = new Set();
+
+  for (const flag of flags) {
+    const regex = new RegExp(flag.pattern, 'i');
+    if (regex.test(text) && !seen.has(flag.short)) {
+      seen.add(flag.short);
+      const explanation = flag[`explanation_${lang}`] || flag.explanation;
+      results[flag.risk].push({
+        short: flag.short,
+        explanation,
+        flagType: flag.flag
+      });
+    }
+  }
+  return results;
 }
 
 function searchIngredients(query, includeNonVeg) {
@@ -231,7 +271,7 @@ async function searchOpenFoodFacts(query) {
     `?search_terms=${encodeURIComponent(query)}` +
     `&search_simple=1&action=process&json=1&page_size=8` +
     `&fields=product_name,brands,nutriscore_grade,nova_group,` +
-    `nutriments,image_small_url,code`;
+    `nutriments,image_small_url,code,ingredients_text,ingredients_text_en`;
   try {
     const res = await fetch(url);
     const data = await res.json();
@@ -282,6 +322,7 @@ function normaliseOFFProduct(p) {
     cooked_conversion_factor: null,
     nutriscore: p.nutriscore_grade || null,
     nova_group: p.nova_group || null,
+    _rawIngredients: p.ingredients_text || p.ingredients_text_en || '',
     source: 'Open Food Facts',
     _isExternal: true,
     _isPackaged: true

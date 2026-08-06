@@ -111,22 +111,72 @@ function renderPackagedResults(results, query) {
 
   results.forEach(function(product) {
     const div = document.createElement('div');
-    div.className = 'ingredient-result';
-    div.style.cursor = 'pointer';
+    div.className = 'ingredient-result packaged-result';
 
-    div.innerHTML =
+    // The clickable header adds the product to the meal; the analysis block
+    // below it is informational, so the click target is the header only.
+    const header = document.createElement('div');
+    header.className = 'packaged-result-header';
+    header.style.cursor = 'pointer';
+    header.innerHTML =
       '<strong>' + product.name + '</strong> ' +
       nutriScoreBadgeHtml(product.nutriscore) + ' ' +
       novaBadgeHtml(product.nova_group) + ' ' +
       '<span class="diet-badge packaged-badge">PACKAGED</span>';
-
-    div.addEventListener('click', function() {
+    header.addEventListener('click', function() {
       registerExternalIngredient(product);
       promptGramAmount(product, div);
     });
+    div.appendChild(header);
+
+    // Ingredient-list analysis, rendered asynchronously into its own container.
+    const analysisEl = document.createElement('div');
+    analysisEl.className = 'ingredient-analysis-wrap';
+    div.appendChild(analysisEl);
+    showIngredientAnalysis(product, analysisEl);
 
     container.appendChild(div);
   });
+}
+
+// Renders the red/amber/green ingredient-list breakdown for a packaged product
+// into containerEl. Used by both the Packaged search panel and the barcode
+// scanner's scanned-product panel.
+async function showIngredientAnalysis(product, containerEl) {
+  const ingredientText = product._rawIngredients || '';
+  if (!ingredientText) {
+    containerEl.innerHTML = '<p class="no-ingredients">No ingredient list available.</p>';
+    return;
+  }
+
+  const analysis = await analyseIngredientList(ingredientText);
+
+  const renderFlags = (flags, cssClass, label) => {
+    if (flags.length === 0) return '';
+    return `
+      <div class='flag-group ${cssClass}'>
+        <span class='flag-group-label'>${label}</span>
+        ${flags.map(f => `
+          <div class='flag-item'>
+            <span class='flag-name'>${f.short}</span>
+            <span class='flag-explanation'>${f.explanation}</span>
+          </div>
+        `).join('')}
+      </div>`;
+  };
+
+  const noFlags = analysis.red.length === 0 && analysis.amber.length === 0
+               && analysis.green.length === 0;
+
+  containerEl.innerHTML = `
+    <div class='ingredient-analysis'>
+      <div class='analysis-heading'>${t('packaged.analysis_heading')}</div>
+      ${noFlags ? `<p class='no-flags'>${t('packaged.no_flags')}</p>` : ''}
+      ${renderFlags(analysis.red,   'flag-red',   t('packaged.red_flags'))}
+      ${renderFlags(analysis.amber, 'flag-amber', t('packaged.amber_flags'))}
+      ${renderFlags(analysis.green, 'flag-green', t('packaged.green_flags'))}
+      <p class='analysis-disclaimer'>${t('packaged.disclaimer')}</p>
+    </div>`;
 }
 
 // Cooked/raw only applies to ingredients that carry a conversion factor

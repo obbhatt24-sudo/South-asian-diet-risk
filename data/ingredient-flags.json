@@ -1,0 +1,222 @@
+[
+  {
+    "pattern": "refined wheat flour|maida|refined flour",
+    "risk": "red",
+    "flag": "high_glycemic_load",
+    "short": "Refined wheat flour (maida)",
+    "explanation": "High GI refined grain — rapidly raises blood sugar. A primary diabetes risk driver in South Asian diets.",
+    "explanation_hi": "उच्च GI परिष्कृत अनाज — रक्त शर्करा तेजी से बढ़ाता है।",
+    "explanation_gu": "ઊંચી GI પરિષ્કૃત ઘઉ — ઝડપથી રક્ત શર્કરા વધારે છે।",
+    "explanation_ta": "அதிக GI சுத்திகரிக்கப்பட்ட மாவு — இரத்த சர்க்கரையை விரைவாக உயர்த்துகிறது.",
+    "explanation_te": "అధిక GI శుద్ధి చేసిన పిండి — రక్తంలో చక్కెరను వేగంగా పెంచుతుంది."
+  },
+  {
+    "pattern": "palm oil|hydrogenated vegetable oil|vanaspati|partially hydrogenated",
+    "risk": "red",
+    "flag": "high_saturated_fat",
+    "short": "Palm oil / hydrogenated fat",
+    "explanation": "High in saturated fat or trans fat. Raises LDL cholesterol and increases CVD risk. Extremely common in South Asian packaged snacks.",
+    "explanation_hi": "संतृप्त वसा या ट्रांस फैट में उच्च। LDL कोलेस्ट्रॉल बढ़ाता है।",
+    "explanation_gu": "સંતૃપ્ત ચરબી અથવા ટ્રાન્સ ફેટ્સ — LDL કોલેસ્ટ્રોલ વધારે છે।",
+    "explanation_ta": "நிறைவுற்ற கொழுப்பு — LDL கொழுப்பை உயர்த்துகிறது.",
+    "explanation_te": "సంతృప్త కొవ్వు — LDL కొలెస్ట్రాల్ పెంచుతుంది."
+  },
+  {
+    "pattern": "sugar|sucrose|glucose syrup|high fructose|corn syrup|dextrose|fructose",
+    "risk": "red",
+    "flag": "high_glycemic_load",
+    "short": "Added sugar",
+    "explanation": "Added sugar directly raises glycemic load and contributes to insulin resistance. South Asians develop insulin resistance at lower sugar intake thresholds than European populations.",
+    "explanation_hi": "अतिरिक्त चीनी ग्लाइसेमिक लोड बढ़ाती है और इंसुलिन प्रतिरोध में योगदान करती है।",
+    "explanation_gu": "ઉમેરેલી ખાંડ ગ્લાઇસેમિક લોડ વધારે છે।",
+    "explanation_ta": "சேர்க்கப்பட்ட சர்க்கரை கிளைசெமிக் சுமையை அதிகரிக்கிறது.",
+    "explanation_te": "జోడించిన చక్కెర గ్లైసెమిక్ లోడ్ పెంచుతుంది."
+  },
+  {
+    "pattern": "sodium|salt|monosodium glutamate|msg|sodium bicarbonate|baking soda|sodium benzoate",
+    "risk": "amber",
+    "flag": "high_sodium",
+    "short": "Sodium / salt",
+    "explanation": "Multiple sodium sources indicate high total sodium. South Asians have higher rates of salt sensitivity, making sodium a significant blood pressure risk factor.",
+    "explanation_hi": "कई सोडियम स्रोत उच्च रक्तचाप के जोखिम का संकेत देते हैं।",
+    "explanation_gu": "બહુ સોડિયમ સ્ત્રોત ઉચ્ચ રક્તચાપ જોખમ સૂચવે છે।",
+    "explanation_ta": "பல சோடியம் மூலங்கள் உயர் இரத்த அழுத்த ஆபத்தை குறிக்கின்றன.",
+    "explanation_te": "అనేక సోడియం వనరులు అధిక రక్తపోటు ప్రమాదాన్ని సూచిస్తాయి."
+  },
+  {
+    "pattern": "coconut oil|coconut fat",
+    "risk": "amber",
+    "flag": "high_saturated_fat",
+    "short": "Coconut oil",
+    "explanation": "Nearly 90% saturated fat — the highest of any cooking oil. Common in South Indian cooking and packaged snacks. Raises LDL significantly.",
+    "explanation_hi": "लगभग 90% संतृप्त वसा। LDL बढ़ाता है।",
+    "explanation_gu": "90% સંતૃપ્ત ચરબી। LDL વધારે છે।",
+    "explanation_ta": "90% நிறைவுற்ற கொழுப்பு. LDL அதிகரிக்கிறது.",
+    "explanation_te": "90% సంతృప్త కొవ్వు. LDL పెంచుతుంది."
+  },
+  {
+    "pattern": "whole wheat|atta|wholegrain|whole grain|oats|ragi|bajra|jowar",
+    "risk": "green",
+    "flag": "low_refined_carb",
+    "short": "Whole grain",
+    "explanation": "Whole grain ingredient — lower GI, higher fiber than refined alternatives. A protective dietary factor for both diabetes and CVD.",
+    "explanation_hi": "साबुत अनाज — कम GI, अधिक फाइबर।",
+    "explanation_gu": "આખા અનાજ — ઓછી GI, વધુ ફાઇબર।",
+    "explanation_ta": "முழு தானியம் — குறைந்த GI, அதிக நார்ச்சத்து.",
+    "explanation_te": "తృణధాన్యం — తక్కువ GI, అధిక పీచు."
+  },
+  {
+    "pattern": "dal|lentil|chickpea|chana|rajma|moong|masoor|toor|urad",
+    "risk": "green",
+    "flag": "good_protein",
+    "short": "Legume / dal",
+    "explanation": "Legume protein is independently protective against both diabetes and CVD in South Asian populations. A beneficial ingredient.",
+    "explanation_hi": "दाल प्रोटीन मधुमेह और हृदय रोग दोनों से सुरक्षात्मक है।",
+    "explanation_gu": "કઠોળ પ્રોટીન ડાયાબિટીસ અને CVD બંનેથી રક્ષણ આપે છે।",
+    "explanation_ta": "பருப்பு புரதம் நீரிழிவு மற்றும் இதய நோய் இரண்டையும் தடுக்கிறது.",
+    "explanation_te": "పప్పు ప్రోటీన్ మధుమేహం మరియు గుండె జబ్బులు రెండింటికీ రక్షణగా ఉంటుంది."
+  },
+  {
+    "pattern": "mustard oil|rapeseed oil",
+    "risk": "green",
+    "flag": "good_fat_quality",
+    "short": "Mustard oil",
+    "explanation": "High MUFA:SFA ratio (≈2.8) — the best fat quality of traditional South Asian cooking oils. Cardioprotective when used in moderate amounts.",
+    "explanation_hi": "उच्च MUFA:SFA अनुपात — हृदय के लिए लाभदायक।",
+    "explanation_gu": "ઉચ્ચ MUFA:SFA રેશિયો — હૃદય માટે ફાયદાકારક।",
+    "explanation_ta": "அதிக MUFA:SFA விகிதம் — இதயத்திற்கு நல்லது.",
+    "explanation_te": "అధిక MUFA:SFA నిష్పత్తి — హృదయానికి మంచిది."
+  },
+  {
+    "pattern": "artificial colour|artificial color|tartrazine|sunset yellow|carmoisine|allura red|brilliant blue|e102|e110|e122|e129|e133",
+    "risk": "amber",
+    "flag": "additive",
+    "short": "Artificial colours",
+    "explanation": "Synthetic food dyes. Not directly a diabetes or CVD risk factor, but indicate a highly processed product. The Southampton Six dyes are linked to hyperactivity in children.",
+    "explanation_hi": "कृत्रिम रंग। अत्यधिक प्रसंस्कृत उत्पाद का संकेत।",
+    "explanation_gu": "કૃત્રિમ રંગ। અત્યંત પ્રોસેસ્ડ ઉત્પાદનનો સંકેત।",
+    "explanation_ta": "செயற்கை வண்ணங்கள். மிகவும் பதப்படுத்தப்பட்ட உணவின் அறிகுறி.",
+    "explanation_te": "కృత్రిమ రంగులు. అత్యంత ప్రాసెస్ చేయబడిన ఆహారం యొక్క సంకేతం."
+  },
+  {
+    "pattern": "preservative|sodium benzoate|potassium sorbate|sodium nitrite|bha|bht|tbhq",
+    "risk": "amber",
+    "flag": "additive",
+    "short": "Preservatives",
+    "explanation": "Chemical preservatives extend shelf life. Not a direct diabetes or CVD risk, but indicate ultra-processed food status (NOVA group 4).",
+    "explanation_hi": "रासायनिक परिरक्षक — अल्ट्रा-प्रोसेस्ड खाद्य का संकेत।",
+    "explanation_gu": "રાસાયણિક સંરક્ષકો — અલ્ટ્રા-પ્રોસેસ્ડ ખોરાકનો સંકેત।",
+    "explanation_ta": "இரசாயன பதப்படுத்திகள் — அல்ட்ரா-செயலாக்கப்பட்ட உணவின் அறிகுறி.",
+    "explanation_te": "రసాయన సంరక్షకాలు — అల్ట్రా-ప్రాసెస్ చేయబడిన ఆహారం యొక్క సంకేతం."
+  },
+  {
+    "pattern": "ghee|clarified butter|butter|milk fat|butterfat|milk solids",
+    "risk": "amber",
+    "flag": "high_saturated_fat",
+    "short": "Ghee / butter",
+    "explanation": "High in saturated fat (~60%). A traditional South Asian cooking fat used for centuries, but in packaged quantities it still raises LDL cholesterol. Moderation matters more than avoidance.",
+    "explanation_hi": "संतृप्त वसा में उच्च (~60%)। पारंपरिक वसा, लेकिन LDL बढ़ा सकता है।",
+    "explanation_gu": "સંતૃપ્ત ચરબીમાં ઊંચું (~60%)। પરંપરાગત ચરબી, પણ LDL વધારી શકે છે।",
+    "explanation_ta": "நிறைவுற்ற கொழுப்பு அதிகம் (~60%). பாரம்பரிய கொழுப்பு, ஆனால் LDL உயர்த்தலாம்.",
+    "explanation_te": "సంతృప్త కొవ్వు ఎక్కువ (~60%). సంప్రదాయ కొవ్వు, కానీ LDL పెంచవచ్చు."
+  },
+  {
+    "pattern": "sunflower oil|vegetable oil|soybean oil|refined oil|cottonseed oil|safflower oil",
+    "risk": "amber",
+    "flag": "poor_fat_quality",
+    "short": "Sunflower / vegetable oil",
+    "explanation": "Refined seed oils high in omega-6 with a poor MUFA:SFA balance. Not harmful in small amounts, but a lower-quality fat than mustard or olive oil.",
+    "explanation_hi": "परिष्कृत बीज तेल — मस्टर्ड तेल से कम गुणवत्ता का वसा।",
+    "explanation_gu": "પરિષ્કૃત બીજ તેલ — સરસવના તેલ કરતાં નીચી ગુણવત્તાની ચરબી।",
+    "explanation_ta": "சுத்திகரிக்கப்பட்ட விதை எண்ணெய் — கடுகு எண்ணெயை விட தரம் குறைவு.",
+    "explanation_te": "శుద్ధి చేసిన గింజ నూనె — ఆవ నూనె కంటే తక్కువ నాణ్యత."
+  },
+  {
+    "pattern": "corn starch|maize starch|tapioca starch|modified starch|corn flour|potato starch",
+    "risk": "amber",
+    "flag": "high_glycemic_load",
+    "short": "Starch filler",
+    "explanation": "Refined starch is a high-GI filler with almost no fibre or protein. Rapidly digested, it adds glycemic load without nutritional value.",
+    "explanation_hi": "परिष्कृत स्टार्च — उच्च GI भराव, फाइबर या प्रोटीन नहीं।",
+    "explanation_gu": "પરિષ્કૃત સ્ટાર્ચ — ઊંચી GI ફિલર, ફાઇબર કે પ્રોટીન નહીં।",
+    "explanation_ta": "சுத்திகரிக்கப்பட்ட மாவுச்சத்து — அதிக GI நிரப்பி, நார்ச்சத்து இல்லை.",
+    "explanation_te": "శుద్ధి చేసిన పిండి పదార్థం — అధిక GI ఫిల్లర్, పీచు లేదు."
+  },
+  {
+    "pattern": "whole oats|oat flour|rolled oats|oat bran|oat fibre|oat fiber",
+    "risk": "green",
+    "flag": "low_refined_carb",
+    "short": "Oats",
+    "explanation": "Whole oats are a low-GI, high-fibre grain. Their beta-glucan fibre lowers blood cholesterol and blunts post-meal blood sugar spikes.",
+    "explanation_hi": "जई — कम GI, उच्च फाइबर। कोलेस्ट्रॉल कम करता है।",
+    "explanation_gu": "ઓટ્સ — ઓછી GI, વધુ ફાઇબર। કોલેસ્ટ્રોલ ઘટાડે છે।",
+    "explanation_ta": "ஓட்ஸ் — குறைந்த GI, அதிக நார்ச்சத்து. கொலஸ்ட்ராலைக் குறைக்கிறது.",
+    "explanation_te": "ఓట్స్ — తక్కువ GI, అధిక పీచు. కొలెస్ట్రాల్ తగ్గిస్తుంది."
+  },
+  {
+    "pattern": "inulin|chicory root|chicory|fructo-oligosaccharide|oligofructose|\\bfos\\b",
+    "risk": "green",
+    "flag": "good_fiber",
+    "short": "Prebiotic fibre (inulin)",
+    "explanation": "Inulin and chicory-derived fibres are prebiotics that feed gut bacteria and add soluble fibre. A beneficial addition that improves the fibre profile.",
+    "explanation_hi": "इनुलिन — प्रीबायोटिक घुलनशील फाइबर, आंत के लिए लाभदायक।",
+    "explanation_gu": "ઇન્યુલિન — પ્રીબાયોટિક દ્રાવ્ય ફાઇબર, આંતરડા માટે ફાયદાકારક।",
+    "explanation_ta": "இனுலின் — ப்ரீபயாட்டிக் கரையக்கூடிய நார்ச்சத்து, குடலுக்கு நல்லது.",
+    "explanation_te": "ఇన్యులిన్ — ప్రీబయోటిక్ కరిగే పీచు, పేగుకు మంచిది."
+  },
+  {
+    "pattern": "whey protein|soy protein|pea protein|milk protein|casein|protein isolate|protein concentrate",
+    "risk": "green",
+    "flag": "good_protein",
+    "short": "Added protein",
+    "explanation": "Concentrated dairy or plant protein raises the protein content, improving satiety and blunting the glycemic response of the product.",
+    "explanation_hi": "सांद्रित प्रोटीन — तृप्ति बढ़ाता है और रक्त शर्करा प्रतिक्रिया कम करता है।",
+    "explanation_gu": "કેન્દ્રિત પ્રોટીન — તૃપ્તિ વધારે અને રક્ત શર્કરા પ્રતિભાવ ઘટાડે છે।",
+    "explanation_ta": "செறிவூட்டப்பட்ட புரதம் — நிறைவை அதிகரித்து சர்க்கரை எதிர்வினையைக் குறைக்கிறது.",
+    "explanation_te": "గాఢమైన ప్రోటీన్ — తృప్తిని పెంచి చక్కెర ప్రతిస్పందనను తగ్గిస్తుంది."
+  },
+  {
+    "pattern": "natural flavour|natural flavor|nature identical|flavouring|flavoring|flavour \\(|flavor \\(",
+    "risk": "amber",
+    "flag": "additive",
+    "short": "Natural flavours",
+    "explanation": "\"Natural flavours\" is an unspecified additive blend. Not a direct diabetes or CVD risk, but it marks a processed product whose full composition is not disclosed.",
+    "explanation_hi": "\"प्राकृतिक स्वाद\" — अनिर्दिष्ट योजक, प्रसंस्कृत उत्पाद का संकेत।",
+    "explanation_gu": "\"કુદરતી સ્વાદ\" — અનિર્દિષ્ટ ઉમેરણ, પ્રોસેસ્ડ ઉત્પાદનનો સંકેત।",
+    "explanation_ta": "\"இயற்கை சுவை\" — குறிப்பிடப்படாத சேர்க்கை, பதப்படுத்தப்பட்ட உணவின் அறிகுறி.",
+    "explanation_te": "\"సహజ రుచులు\" — పేర్కొనని సంకలితం, ప్రాసెస్ చేయబడిన ఆహారం యొక్క సంకేతం."
+  },
+  {
+    "pattern": "emulsifier|lecithin|mono- and diglycerides|monoglyceride|diglyceride|polysorbate|e471|e322",
+    "risk": "amber",
+    "flag": "additive",
+    "short": "Emulsifiers",
+    "explanation": "Emulsifiers like lecithin and mono- and diglycerides bind fat and water. Not a direct diabetes or CVD risk, but they indicate an ultra-processed formulation.",
+    "explanation_hi": "इमल्सीफायर — अल्ट्रा-प्रोसेस्ड फॉर्मूलेशन का संकेत।",
+    "explanation_gu": "ઇમલ્સિફાયર — અલ્ટ્રા-પ્રોસેસ્ડ ફોર્મ્યુલેશનનો સંકેત।",
+    "explanation_ta": "எமல்சிஃபையர்கள் — அல்ட்ரா-செயலாக்கப்பட்ட கலவையின் அறிகுறி.",
+    "explanation_te": "ఎమల్సిఫైయర్లు — అల్ట్రా-ప్రాసెస్ చేయబడిన సూత్రీకరణ యొక్క సంకేతం."
+  },
+  {
+    "pattern": "jaggery|khandsari|\\bgur\\b|palm jaggery",
+    "risk": "amber",
+    "flag": "high_glycemic_load",
+    "short": "Jaggery / khandsari",
+    "explanation": "Less refined than white sugar and retains trace minerals, but its glycemic load is nearly as high. Still an added sugar — use sparingly.",
+    "explanation_hi": "गुड़ — चीनी से कम परिष्कृत, पर ग्लाइसेमिक लोड लगभग समान। कम प्रयोग करें।",
+    "explanation_gu": "ગોળ — ખાંડ કરતાં ઓછું પરિષ્કૃત, પણ ગ્લાઇસેમિક લોડ લગભગ સમાન। ઓછું વાપરો।",
+    "explanation_ta": "வெல்லம் — சர்க்கரையை விட குறைவாக சுத்திகரிக்கப்பட்டது, ஆனால் கிளைசெமிக் சுமை கிட்டத்தட்ட சமம்.",
+    "explanation_te": "బెల్లం — చక్కెర కంటే తక్కువ శుద్ధి, కానీ గ్లైసెమిక్ లోడ్ దాదాపు సమానం."
+  },
+  {
+    "pattern": "aspartame|saccharin|sucralose|acesulfame|neotame|e950|e951|e954|e955",
+    "risk": "amber",
+    "flag": "additive",
+    "short": "Artificial sweetener",
+    "explanation": "Non-nutritive sweeteners avoid sugar's glycemic load, but they mark a highly processed product and their long-term metabolic effects remain debated.",
+    "explanation_hi": "कृत्रिम मिठास — चीनी से बचाता है, पर अत्यधिक प्रसंस्कृत उत्पाद का संकेत।",
+    "explanation_gu": "કૃત્રિમ ગળપણ — ખાંડ ટાળે છે, પણ અત્યંત પ્રોસેસ્ડ ઉત્પાદનનો સંકેત।",
+    "explanation_ta": "செயற்கை இனிப்பூட்டி — சர்க்கரையைத் தவிர்க்கிறது, ஆனால் மிகவும் பதப்படுத்தப்பட்ட உணவின் அறிகுறி.",
+    "explanation_te": "కృత్రిమ స్వీటెనర్ — చక్కెరను తప్పిస్తుంది, కానీ అత్యంత ప్రాసెస్ చేయబడిన ఆహారం యొక్క సంకేతం."
+  }
+]

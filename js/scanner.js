@@ -74,9 +74,13 @@ function showScannedProduct(product, barcode) {
       <label>Amount: <input type='number' id='scan-grams' value='100'
              min='1' max='2000'> g</label>
       <button onclick='addScannedProduct()'>Add to meal</button>
+      <div id='scan-ingredient-analysis' class='ingredient-analysis-wrap'></div>
     </div>`;
   // Store the product temporarily for addScannedProduct()
   window._pendingScannedProduct = product;
+  // Render the red/amber/green ingredient-list analysis for the scanned product.
+  const analysisEl = document.getElementById('scan-ingredient-analysis');
+  if (analysisEl) showIngredientAnalysis(product, analysisEl);
   updateCacheCounter();
 }
 
