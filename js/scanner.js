@@ -43,7 +43,9 @@ async function handleScan(barcode) {
   // Check local cache first
   const cached = getFromScanCache(barcode);
   if (cached) {
-    showScannedProduct(cached, barcode);
+    // Step 64: route through the contribution pipeline (DB check / contribute /
+    // use-anyway) instead of directly showing the scanned product.
+    await handleScannedBarcode(barcode, cached);
     return;
   }
 
@@ -57,7 +59,9 @@ async function handleScan(barcode) {
   }
 
   saveToScanCache(barcode, product);
-  showScannedProduct(product, barcode);
+  // Step 64: route through the contribution pipeline (DB check / contribute /
+  // use-anyway) instead of directly showing the scanned product.
+  await handleScannedBarcode(barcode, product);
 }
 
 function showScannedProduct(product, barcode) {

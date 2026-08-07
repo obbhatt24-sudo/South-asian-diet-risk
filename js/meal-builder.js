@@ -754,6 +754,223 @@ function updateNutrientTotals() {
   }).join('');
 }
 
+// ===== Step 64 — barcode contribution pipeline =====
+// After a scan resolves an Open Food Facts product, check whether it already
+// lives in our Supabase `ingredients` table. If approved, use the stored
+// record; if pending, fall back to the live OFF data; otherwise offer the user
+// the chance to contribute it for review.
+//
+// NOTE ON DATA SHAPES: the scan pipeline (lookupOFFByBarcode / the scan cache)
+// hands us an ALREADY-normalised product — the shape normaliseOFFProduct
+// returns: { id, name, nutrients_per_100g:{…}, role_tags, _rawIngredients,
+// nutriscore, … }. It does NOT carry the raw OFF fields (product_name, brands,
+// categories_tags, ingredients_text). The helpers below read the normalised
+// fields, and _asNormalisedOFF() also accepts a raw OFF product for safety.
+function _asNormalisedOFF(offProduct) {
+  if (offProduct && offProduct.nutrients_per_100g) return offProduct; // already normalised
+  return normaliseOFFProduct(offProduct);                            // raw OFF → normalise
+}
+
+async function handleScannedBarcode(barcode, offProduct) {
+  const product = _asNormalisedOFF(offProduct);
+  window._lastScanned = product;
+
+  // Check if this barcode already exists in our ingredient database. RLS only
+  // exposes approved rows to the public, so a pending row generally reads back
+  // as "not found" for non-owners, and we fall through to the contribute prompt.
+  // maybeSingle() returns null (not a 406) on zero rows — the common "not in
+  // database" case — so the normal path stays quiet in the console.
+  const { data: existing } = await _supabase
+    .from('ingredients')
+    .select('id, name, status')
+    .eq('id', `off_${barcode}`)
+    .maybeSingle();
+
+  if (existing && existing.status === 'approved') {
+    // Already in database — use it directly. Pass the scanned product as the
+    // record too so it resolves even if it was approved after page load.
+    addIngredientToMeal(existing.id, 100, product);
+    showScanSuccess(`${existing.name} (from database)`);
+    return;
+  }
+
+  if (existing && existing.status === 'pending') {
+    // Pending review — use Open Food Facts data for now.
+    showScanStatus('Product is pending database review — using Open Food Facts data.');
+    addPackagedProductToMeal(product);
+    return;
+  }
+
+  // Not in database — offer to contribute.
+  showContributePrompt(barcode, product);
+}
+
+function showContributePrompt(barcode, offProduct) {
+  const productName = offProduct.name || offProduct.product_name || 'Unknown product';
+  const nutrients   = offProduct.nutrients_per_100g || {};
+
+  // Preserve the full scan UX: the card keeps the grams input and the
+  // red/amber/green ingredient-list analysis (with its deep-dive button) that
+  // the direct scanned-product view had, adding the contribute action on top.
+  // Cache by id so the deep-dive analysis can resolve this product later.
+  _scannedProductCache[offProduct.id] = offProduct;
+  window._lastScanned = offProduct;
+
+  document.getElementById('scan-result').innerHTML = `
+    <div class='scan-product-card'>
+      <div class='scan-product-name'>${productName}</div>
+      <div class='scan-product-nutrients'>
+        Per 100g: ${nutrients.energy_kcal?.toFixed(0) || '?'} kcal |
+        Carbs ${nutrients.carbohydrate_g?.toFixed(1) || '?'}g |
+        Fat ${nutrients.total_fat_g?.toFixed(1) || '?'}g |
+        Protein ${nutrients.protein_g?.toFixed(1) || '?'}g
+      </div>
+      <label class='scan-grams-label'>Amount:
+        <input type='number' id='scan-grams' value='100' min='1' max='2000'> g
+      </label>
+      <div class='contribute-prompt'>
+        <p>This product is not yet in our database.</p>
+        <button onclick='contributeIngredient("${barcode}", this)'
+                class='btn-contribute'>
+          Add to database for review
+        </button>
+        <button onclick='useScannedOFFDataAnyway()'
+                class='btn-use-anyway'>
+          Use Open Food Facts data (not saved)
+        </button>
+      </div>
+      <div id='scan-ingredient-analysis' class='ingredient-analysis-wrap'></div>
+    </div>`;
+
+  // Render the red/amber/green ingredient-list analysis for the scanned product.
+  const analysisEl = document.getElementById('scan-ingredient-analysis');
+  if (analysisEl) showIngredientAnalysis(offProduct, analysisEl);
+}
+
+// Read the grams from the scan card's Amount input, defaulting to 100 g.
+function _scanGrams() {
+  const el = document.getElementById('scan-grams');
+  const g  = el ? parseInt(el.value, 10) : 100;
+  return (!g || g < 1) ? 100 : g;
+}
+
+// "Use Open Food Facts data (not saved)" button: add the scanned product to the
+// meal at the chosen grams without contributing it to the database.
+function useScannedOFFDataAnyway() {
+  const p = window._lastScanned;
+  if (!p) return;
+  addPackagedProductToMeal(p, _scanGrams());
+  showScanSuccess(p.name || 'product');
+}
+
+async function contributeIngredient(barcode, btn) {
+  if (!isSignedIn()) {
+    alert('Sign in to contribute ingredients to the database.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const offProduct = window._lastScanned;
+  const nutrients  = offProduct.nutrients_per_100g || {};
+
+  // The `ingredients` table is a JSON-native envelope: { id, name, data (jsonb),
+  // status }. `data` must hold the full ingredient-shaped object so that, once
+  // approved, loadIngredientsFromSupabase (which unwraps row.data) resolves and
+  // scores it exactly like a local ingredient. We therefore store the normalised
+  // product plus contribution metadata inside `data`.
+  const productData = {
+    ...offProduct,
+    id:               `off_${barcode}`,
+    name:             offProduct.name || `Product ${barcode}`,
+    food_group:       offProduct.food_group || 'Packaged product',
+    category:         inferCategoryFromOFF(offProduct),
+    diet_type:        inferDietTypeFromOFF(offProduct),
+    glycemic_index:   null,   // cannot determine from a packaged product
+    // Packaged products carry no cooked/raw distinction — a null factor keeps
+    // showsCookedToggle() from offering a (meaningless) cooked-weight toggle.
+    cooked_conversion_factor: null,
+    source:               'open_food_facts',
+    contributor_user_id:  getUser().id,
+    region:               null,
+    _nutrientSnapshot:    nutrients,
+  };
+
+  const { error } = await _supabase
+    .from('ingredients')
+    .insert({
+      id:     productData.id,
+      name:   productData.name,
+      data:   productData,
+      status: 'pending',
+    });
+
+  if (error) {
+    btn.disabled = false;
+    btn.textContent = 'Retry';
+    console.error('Contribution error:', error);
+    alert('Could not submit: ' + error.message);
+  } else {
+    // Capture the chosen grams before the card is replaced by the status text.
+    const grams = _scanGrams();
+    btn.textContent = '✓ Submitted for review';
+    // Add to meal using Open Food Facts data in the meantime.
+    addPackagedProductToMeal(offProduct, grams);
+    showScanStatus('Thank you! This product will be reviewed and added to the database.');
+  }
+}
+
+function inferCategoryFromOFF(offProduct) {
+  const cats = offProduct.categories_tags || [];
+  if (cats.some(c => c.includes('cereal') || c.includes('grain'))) return 'starch_source';
+  if (cats.some(c => c.includes('dairy')  || c.includes('milk')))  return 'dairy';
+  if (cats.some(c => c.includes('legume') || c.includes('pulse'))) return 'legume';
+  if (cats.some(c => c.includes('oil')    || c.includes('fat')))   return 'fat_source';
+  if (cats.some(c => c.includes('vegetable')))                     return 'vegetable';
+  if (cats.some(c => c.includes('meat')   || c.includes('fish')))  return 'protein_source';
+  if (cats.some(c => c.includes('snack')  || c.includes('biscuit'))) return 'snack';
+  // Normalised OFF products drop categories_tags; fall back to the role_tags
+  // inferred from the product name (see inferRoleTags in data.js).
+  const roles = offProduct.role_tags || [];
+  if (roles.includes('starch_source'))  return 'starch_source';
+  if (roles.includes('legume_protein')) return 'legume';
+  if (roles.includes('fat_source'))     return 'fat_source';
+  return 'other';
+}
+
+function inferDietTypeFromOFF(offProduct) {
+  // Normalised products expose the raw ingredient string as _rawIngredients.
+  const ingredients = (offProduct._rawIngredients ||
+                       offProduct.ingredients_text || '').toLowerCase();
+  if (/beef|pork|lamb|mutton|chicken|fish|prawn|shrimp|seafood|meat/.test(ingredients))
+    return 'non_veg';
+  if (/egg|mayonnaise/.test(ingredients)) return 'egg';
+  return 'veg';
+}
+
+// Add an Open Food Facts product to the current meal at the given grams
+// (default 100 g), registering it so getIngredientById / computeMealNutrients
+// resolve it like any ingredient. Deliberately writes no scan-panel message so
+// callers keep control of the status text they've already shown.
+function addPackagedProductToMeal(offProduct, grams) {
+  const product = _asNormalisedOFF(offProduct);
+  if (!product || !product.id) return;
+  addIngredientToMeal(product.id, grams || 100, product);
+}
+
+// Replace the scan panel with a plain status message.
+function showScanStatus(msg) {
+  const el = document.getElementById('scan-result');
+  if (el) el.innerHTML = `<p class='scan-status'>${msg}</p>`;
+}
+
+// Replace the scan panel with a success confirmation.
+function showScanSuccess(msg) {
+  const el = document.getElementById('scan-result');
+  if (el) el.innerHTML = `<p class='scan-status'>✓ Added ${msg} to meal.</p>`;
+}
+
 function initMealBuilder() {
   const searchInput = document.getElementById('ingredient-search');
   const dishSearchInput = document.getElementById('dish-search');
