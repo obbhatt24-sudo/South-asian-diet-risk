@@ -17,3 +17,6 @@ server/*
 ml/nhanes_data/
 ml/.ipynb_checkpoints/
 ml/*.pkl
+
+# Migration script holds the Supabase SERVICE ROLE key when run — never commit
+scripts/migrate-to-supabase.js

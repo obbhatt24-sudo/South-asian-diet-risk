@@ -23,10 +23,14 @@ let _ingredientFlags = null;
 let _dataLoaded = false;
 
 async function loadData() {
+  // Ingredients and dishes are served from Supabase (JSON-native envelope: each
+  // row is { id, name, data, status } where `data` holds the full object). The
+  // remaining datasets (overrides, flags) stay as bundled JSON. data/*.json for
+  // ingredients and dishes is kept in the repo as an offline fallback.
   const [ingredients, dishes, giOverrides, recOverrides, ingredientFlags] =
     await Promise.all([
-      fetch('data/ingredients.json').then(r => r.json()),
-      fetch('data/dishes.json').then(r => r.json()),
+      loadIngredientsFromSupabase(),
+      loadDishesFromSupabase(),
       fetch('data/gi-overrides.json').then(r => r.json()),
       fetch('data/rec-overrides.json').then(r => r.json()),
       fetch('data/ingredient-flags.json').then(r => r.json())
@@ -40,6 +44,45 @@ async function loadData() {
   _recOverrides = recOverrides;
   _ingredientFlags = ingredientFlags;
   _dataLoaded = true;
+
+  console.log(`Loaded ${_ingredients.length} ingredients, ${_dishes.length} dishes`);
+}
+
+// Fetch approved ingredients from Supabase and unwrap the jsonb envelope back to
+// the original ingredient shape (row.data), so every downstream consumer reads
+// ing.nutrients_per_100g / food_group / glycemic_index exactly as it did from
+// the JSON file. Falls back to data/ingredients.json on any error or if the
+// table is empty (e.g. created but not yet migrated).
+async function loadIngredientsFromSupabase() {
+  try {
+    const { data, error } = await _supabase
+      .from('ingredients')
+      .select('id, name, data, status')
+      .eq('status', 'approved')
+      .order('name');
+    if (error) throw error;
+    if (!data || data.length === 0) throw new Error('no approved ingredients returned');
+    return data.map(row => row.data);
+  } catch (e) {
+    console.warn('Supabase ingredients failed, falling back to JSON:', e.message || e);
+    return fetch('data/ingredients.json').then(r => r.json());
+  }
+}
+
+async function loadDishesFromSupabase() {
+  try {
+    const { data, error } = await _supabase
+      .from('dishes')
+      .select('id, name, data, status')
+      .eq('status', 'approved')
+      .order('name');
+    if (error) throw error;
+    if (!data || data.length === 0) throw new Error('no approved dishes returned');
+    return data.map(row => row.data);
+  } catch (e) {
+    console.warn('Supabase dishes failed, falling back to JSON:', e.message || e);
+    return fetch('data/dishes.json').then(r => r.json());
+  }
 }
 
 // ===== Packaged-product ingredient-list analysis =====
@@ -81,6 +124,8 @@ async function analyseIngredientList(ingredientListString) {
 function searchIngredients(query, includeNonVeg) {
   if (query.length < 2) return [];
   const q = query.toLowerCase();
+  // For now, filter client-side (fine up to ~1000 ingredients).
+  // TODO: switch to Supabase full-text search (idx_ingredients_name) at 500+.
   return _ingredients
     .filter(i => {
       if (!i.name.toLowerCase().includes(q)) return false;
