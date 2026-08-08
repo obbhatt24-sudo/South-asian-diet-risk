@@ -39,16 +39,66 @@ const ADD_PORTIONS = {
 const CARB_QUALITY_REF_G = 100;
 const FAT_QUALITY_REF_G = 30;
 
+// ===== Step 66 — cooking method modifiers =====
+// Cooking methods change how a starch/legume/vegetable scores. We attach a
+// _modifiedIngredient to each ingredient item that carries a cooking_method so
+// the nutrient/GL computations below read the modified ingredient transparently
+// (they fall back to getIngredientById when none is attached).
+//
+// The per-100g nutrient block is intentionally NOT mutated: GI is applied via a
+// _modifiedGI field (computeMealGL uses it in place of getGI), and the fat that
+// frying/tempering adds is applied separately by cookingAddedFat() so the shared
+// ingredient records stay pristine. NOTE: the Step-65 cooking-modifiers.js
+// helper (applycooking_modifier) operates on a flat gi/carb_g/fat_g shape that
+// does not match our nutrients_per_100g records, so the working logic lives here.
+function applyCookingModifierToIngredient(ing, methodId) {
+  const method = (_cookingMethods || []).find((m) => m.id === methodId);
+  if (!method) return ing;
+  const modified = { ...ing, _cookingMethodId: methodId, _cookingNote: method.note };
+  const baseGI = getGI(ing.id);
+  if (baseGI !== null && method.gi_multiplier && method.gi_multiplier !== 1.0) {
+    modified._modifiedGI = Math.round(baseGI * method.gi_multiplier);
+  }
+  return modified;
+}
+
+function applyAllCookingModifiers(mealItems) {
+  return mealItems.map((item) => {
+    if (item.type !== 'ingredient' || !item.cooking_method) return item;
+    const ing = getIngredientById(item.id);
+    if (!ing) return item;
+    return { ...item, _modifiedIngredient: applyCookingModifierToIngredient(ing, item.cooking_method) };
+  });
+}
+
+// Fat (and saturated fat) contributed purely by the cooking method — deep or
+// shallow frying, oil tempering — scaled to each item's effective grams. Kept
+// separate from computeMealNutrients so the per-100g data is never mutated.
+function cookingAddedFat(mealItems) {
+  let total_fat_g = 0;
+  let saturated_fat_g = 0;
+  for (const item of mealItems) {
+    if (item.type !== 'ingredient' || !item.cooking_method) continue;
+    const method = (_cookingMethods || []).find((m) => m.id === item.cooking_method);
+    if (!method || !method.fat_add_per_100g) continue;
+    const ing = getIngredientById(item.id);
+    const scale = effectiveGrams(item, ing) / 100;
+    total_fat_g += method.fat_add_per_100g * scale;
+    saturated_fat_g += (method.saturated_fat_add_per_100g || 0) * scale;
+  }
+  return { total_fat_g, saturated_fat_g };
+}
+
 // ADR-08: dish GL is computed from the dish's ingredient list, not a dish-level GI.
 function computeMealGL(mealItems) {
   let gl = 0;
 
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
-      const ing = getIngredientById(item.id);
+      const ing = item._modifiedIngredient || getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealGL'); continue; }
       const carbG = ing.nutrients_per_100g.carbohydrate_g * (effectiveGrams(item, ing) / 100);
-      const gi = getGI(item.id);
+      const gi = ing._modifiedGI != null ? ing._modifiedGI : getGI(item.id);
       if (gi === null) continue;
       gl += (gi * carbG) / 100;
     } else if (item.type === 'dish') {
@@ -98,7 +148,7 @@ function refinedCarbShare(mealItems) {
 
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
-      const ing = getIngredientById(item.id);
+      const ing = item._modifiedIngredient || getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'refinedCarbShare'); continue; }
       accumulate(ing, item.gramAmount / 100);
     } else if (item.type === 'dish') {
@@ -138,7 +188,7 @@ function proteinQualityShare(mealItems) {
 
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
-      const ing = getIngredientById(item.id);
+      const ing = item._modifiedIngredient || getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'proteinQualityShare'); continue; }
       const proteinG = ing.nutrients_per_100g.protein_g * (item.gramAmount / 100);
       totalProtein += proteinG;
@@ -184,10 +234,13 @@ function getBmiMultiplier(bmiCategory) {
 }
 
 function diabetesScore(mealItems, context, personalContext) {
+  // Cooking methods change GI (and thus glycemic load); carbohydrate and fibre
+  // are unchanged, so the nutrient totals are read from the unmodified items.
+  const items = applyAllCookingModifiers(mealItems);
   const nutrients = computeMealNutrients(mealItems);
-  const gl = computeMealGL(mealItems);
-  const refShare = refinedCarbShare(mealItems);
-  const protShare = proteinQualityShare(mealItems);
+  const gl = computeMealGL(items);
+  const refShare = refinedCarbShare(items);
+  const protShare = proteinQualityShare(items);
 
   // Carb-quality penalties scale with the carbohydrate the meal delivers (see
   // CARB_QUALITY_REF_G). Glycemic load is not scaled — it already depends on
@@ -261,7 +314,7 @@ function getMufaSfaRatio(mealItems) {
 
   for (const item of mealItems) {
     if (item.type === 'ingredient') {
-      const ing = getIngredientById(item.id);
+      const ing = item._modifiedIngredient || getIngredientById(item.id);
       if (!ing) { warnUnresolvedIngredient(item.id, 'getMufaSfaRatio'); continue; }
       accumulate(ing, item.gramAmount / 100);
     } else if (item.type === 'dish') {
@@ -296,12 +349,19 @@ function sodiumSubScore(sodiumMg) {
 }
 
 function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
+  const items = applyAllCookingModifiers(mealItems);
   const nutrients = computeMealNutrients(mealItems);
   const totalSodium = addedSodiumMg !== null
     ? nutrients.sodium_mg + addedSodiumMg
     : null;
 
-  const { ratio, usedFallback } = getMufaSfaRatio(mealItems);
+  // Frying / tempering adds fat on top of the raw ingredient's own fat; fold it
+  // into the saturated-fat sub-score and the total-fat scaling factor.
+  const addedFat = cookingAddedFat(mealItems);
+  const totalFatG = nutrients.total_fat_g + addedFat.total_fat_g;
+  const saturatedFatG = nutrients.saturated_fat_g + addedFat.saturated_fat_g;
+
+  const { ratio, usedFallback } = getMufaSfaRatio(items);
   const sodiumSub = sodiumSubScore(totalSodium);
   const fatQualSub = fatQualitySubScore(ratio);
 
@@ -309,10 +369,10 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   // (see CARB_QUALITY_REF_G / FAT_QUALITY_REF_G). Saturated fat and sodium are
   // left unscaled — they already scale with absolute grams/mg.
   const carbScale = Math.min(1, nutrients.carbohydrate_g / CARB_QUALITY_REF_G);
-  const fatScale = Math.min(1, nutrients.total_fat_g / FAT_QUALITY_REF_G);
+  const fatScale = Math.min(1, totalFatG / FAT_QUALITY_REF_G);
 
   const subScores = {
-    saturated_fat: sfaSubScore(nutrients.saturated_fat_g),
+    saturated_fat: sfaSubScore(saturatedFatG),
     fat_quality: fatQualSub === null ? null : Math.round(fatQualSub * fatScale),
     fiber: Math.round(fiberSubScore(nutrients.fiber_g) * carbScale),
     sodium: sodiumSub // may be null

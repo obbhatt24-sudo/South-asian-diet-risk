@@ -83,6 +83,26 @@ function renderBreakdownRows(rows) {
   }).join('');
 }
 
+// Step 66 — when an ingredient uses a cooking method that changes its GI, show
+// the exact GI shift used in the glycemic-load calculation (e.g. pressure-
+// cooked rice reduces GI from 73 to 60). Returns '' when nothing was modified.
+function renderCookingMethodNotes() {
+  const notes = [];
+  for (const item of state.mealItems) {
+    if (item.type !== 'ingredient' || !item.cooking_method) continue;
+    const method = (_cookingMethods || []).find((m) => m.id === item.cooking_method);
+    if (!method || !method.gi_multiplier || method.gi_multiplier === 1.0) continue;
+    const ing = getIngredientById(item.id);
+    const baseGI = getGI(item.id);
+    if (!ing || baseGI === null) continue;
+    const newGI = Math.round(baseGI * method.gi_multiplier);
+    const verb = newGI < baseGI ? 'reduces' : 'raises';
+    notes.push(`Note: ${method.name.toLowerCase()} ${ing.name.toLowerCase()} ` +
+      `${verb} GI from ${baseGI} to ${newGI} in this calculation.`);
+  }
+  return notes.map((n) => `<p class='breakdown-note'>${n}</p>`).join('');
+}
+
 // d = result.diabetes from score(); d.fiberG is bridged in from meal nutrients.
 function renderDiabetesBreakdown(d) {
   const rows = [
@@ -129,7 +149,11 @@ function renderDiabetesBreakdown(d) {
       inverted: true
     }
   ];
-  return renderBreakdownRows(rows);
+  // Place any cooking-method GI notes directly below the glycemic-load row.
+  const cookingNotes = renderCookingMethodNotes();
+  if (!cookingNotes) return renderBreakdownRows(rows);
+  return renderBreakdownRows([rows[0]]) + cookingNotes +
+    renderBreakdownRows(rows.slice(1));
 }
 
 // Same visual pattern as the diabetes breakdown. c.satFatG / c.fiberG are

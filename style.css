@@ -1213,3 +1213,19 @@ input:focus, select:focus {
   font-size: 0.82rem; color: var(--color-text-muted);
   cursor: pointer; font-family: var(--font-body);
 }
+
+/* Step 66 — cooking method selectors */
+.cooking-method-select {
+  font-size: 0.75rem; padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  cursor: pointer; font-family: var(--font-body);
+  margin-top: 4px;
+}
+.cooking-note {
+  font-size: 0.78rem; color: var(--color-teal);
+  font-style: italic; padding: 4px 0;
+  transition: opacity 0.3s;
+}

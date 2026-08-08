@@ -598,6 +598,75 @@ function editMealItem(index) {
   });
 }
 
+// ===== Step 66 — cooking method selectors =====
+// Local ingredients carry role_tags + food_group, not the single `category`
+// field the cooking-methods dataset keys on (starch_source / legume / vegetable
+// / dairy / protein_source / fat_source / snack). Map an ingredient onto one of
+// those categories; return null for ingredients where a cooking choice makes no
+// sense (fats, nuts, spices, condiments, sweeteners) so no selector is shown.
+function ingredientCookingCategory(ing) {
+  const tags = ing.role_tags || [];
+  if (tags.includes('starch_source') || tags.includes('starchy_vegetable')) return 'starch_source';
+  if (tags.includes('legume_protein')) return 'legume';
+  if (tags.includes('animal_protein')) return 'protein_source';
+  if (tags.includes('dairy_protein')) return 'dairy';
+  if (tags.includes('vegetable')) return 'vegetable';
+  return null;
+}
+
+function renderCookingMethodSelector(item, index) {
+  const ing = getIngredientById(item.id);
+  if (!ing) return '';
+
+  const category = ingredientCookingCategory(ing);
+  if (!category) return '';
+
+  const methods = getCookingMethodsForCategory(category);
+  if (methods.length <= 1) return '';  // no choice to offer
+
+  const lang = getCurrentLang();
+  const current = item.cooking_method ||
+    (methods.some(m => m.id === 'boiled') ? 'boiled' : methods[0].id);
+
+  return `
+    <select class='cooking-method-select'
+            onchange='setCookingMethod(${index}, this.value)'>
+      ${methods.map(m => `
+        <option value='${m.id}'
+          ${m.id === current ? 'selected' : ''}>
+          ${m[`name_${lang}`] || m.name}
+        </option>`,
+      ).join('')}
+    </select>`;
+}
+
+function setCookingMethod(index, methodId) {
+  state.mealItems[index].cooking_method = methodId;
+  renderMealItems();
+  updateNutrientTotals();
+  // Show the GI impact note
+  const method = _cookingMethods.find(m => m.id === methodId);
+  if (method && method.gi_multiplier !== 1.0) {
+    const pct = Math.round((1 - method.gi_multiplier) * 100);
+    const msg = pct > 0
+      ? `↓ GI reduced by ~${pct}% (${method.note})`
+      : `↑ GI increased by ~${Math.abs(pct)}%`;
+    showCookingNote(msg);
+  }
+}
+
+function showCookingNote(msg) {
+  let note = document.getElementById('cooking-method-note');
+  if (!note) {
+    note = document.createElement('p');
+    note.id = 'cooking-method-note';
+    note.className = 'cooking-note';
+    document.getElementById('meal-items').after(note);
+  }
+  note.textContent = msg;
+  setTimeout(() => { note.textContent = ''; }, 4000);
+}
+
 function renderMealItems() {
   const container = document.getElementById('meal-items');
   container.innerHTML = '';
@@ -672,6 +741,17 @@ function renderMealItems() {
     if (badgesSpan) div.appendChild(badgesSpan);
     div.appendChild(removeBtn);
     div.appendChild(editBtn);
+
+    // Step 66 — cooking method selector, shown only when the ingredient's
+    // category offers a real choice of methods.
+    const selectorHtml = renderCookingMethodSelector(item, index);
+    if (selectorHtml) {
+      const wrap = document.createElement('span');
+      wrap.innerHTML = selectorHtml.trim();
+      const sel = wrap.firstElementChild;
+      if (sel) div.appendChild(sel);
+    }
+
     container.appendChild(div);
   });
 
