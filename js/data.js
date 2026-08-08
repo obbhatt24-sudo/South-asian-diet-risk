@@ -33,7 +33,8 @@ async function loadData() {
       loadDishesFromSupabase(),
       fetch('data/gi-overrides.json').then(r => r.json()),
       fetch('data/rec-overrides.json').then(r => r.json()),
-      fetch('data/ingredient-flags.json').then(r => r.json())
+      fetch('data/ingredient-flags.json').then(r => r.json()),
+      loadCookingMethods()
     ]);
 
   _ingredients = ingredients;
