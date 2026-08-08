@@ -288,6 +288,61 @@ End with one practical recommendation.'''
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class ParseMealRequest(BaseModel):
+    transcript: str
+    ingredient_names: list[str] = []  # local ingredient DB names, for matching
+    language: str = 'en'
+
+
+@app.post('/parse-meal')
+async def parse_meal(req: ParseMealRequest):
+    """Parse a spoken meal description into structured ingredient items.
+
+    Runs the LLM call server-side so the Anthropic API key stays secret —
+    the browser cannot call api.anthropic.com directly. Returns a JSON
+    array the frontend feeds straight into applyVoiceMealItems().
+    """
+    try:
+        ingredient_list = ', '.join(req.ingredient_names[:100])
+        system_prompt = f'''You are a nutrition assistant helping parse
+a spoken meal description into structured ingredients.
+Respond ONLY with a JSON array. No other text.
+Each item: {{ "name": string, "grams": number, "cooking_method": string|null }}
+Use only ingredient names from this list where possible: {ingredient_list}
+For cooking_method, use one of: boiled, pressure_cooked, steamed,
+deep_fried, shallow_fried, roasted_dry, cooled_reheated, fermented,
+sprouted, raw, tadka, or null if not specified.
+The meal may be described in a language other than English; still return
+ingredient names drawn from the (English) list above where they match.
+Estimate grams from common serving descriptions:
+  1 cup cooked rice = 180g
+  1 roti/chapati = 40g
+  1 small bowl dal = 150g
+  1 medium bowl sabzi = 120g
+  1 serving = use typical South Asian serving size
+If a quantity is not mentioned, estimate a typical single serving.'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=500,
+            system=system_prompt,
+            messages=[{'role': 'user',
+                       'content': f'Parse this meal: "{req.transcript}"'}],
+        )
+
+        text = response.content[0].text.strip()
+        clean = text.replace('```json', '').replace('```', '').strip()
+        items = json.loads(clean)
+        if not isinstance(items, list):
+            items = []
+        return {'items': items}
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502,
+                            detail='Could not parse meal into structured items')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get('/health')
 async def health():
     return {'status': 'ok'}
