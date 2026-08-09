@@ -59,6 +59,7 @@ class ExplainRequest(BaseModel):
     top_ingredients: list[str]  # top 3 by weight
     top_recommendation: str | None
     language: str = 'en'
+    diabetes_context: str | None = 't2d'  # 't1d' | 't2d' | None (default 't2d')
 
 
 @app.post('/explain')
@@ -81,14 +82,38 @@ async def explain(req: ExplainRequest):
         )
         query = ' '.join(query_parts) + ' ' + context_phrase
 
-        chunks = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS)
+        if req.diabetes_context == 't1d':
+            # Steer retrieval toward T1D dosing/CGM material, then prefer chunks
+            # explicitly tagged 'type1_diabetes': pull a wider pool and re-rank so
+            # tagged chunks sort ahead of untagged ones (ties broken by similarity).
+            query += ' type 1 diabetes insulin dosing CGM bolus glucose management'
+            pool = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS * 3)
+            pool.sort(
+                key=lambda c: ('type1_diabetes' in c.get('relevance_tags', []),
+                               c['similarity']),
+                reverse=True,
+            )
+            chunks = pool[:MAX_CHUNKS]
+        else:
+            chunks = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS)
 
         context_block = ''.join(
             f'[{c["source"]}]: {c["text"]}' for c in chunks
         )
 
         lang_instruction = LANGUAGE_INSTRUCTIONS.get(req.language, 'Respond in English.')
-        system_prompt = f'''You are a nutrition research assistant explaining
+        if req.diabetes_context == 't1d':
+            system_prompt = f'''You are a nutrition scientist explaining meal composition
+to a person with Type 1 diabetes who uses a CGM and insulin pump.
+Focus on: (1) how this meal's glycemic load affects bolus insulin timing,
+(2) how fat and protein content causes delayed glucose rise requiring dual-wave
+or extended bolus, (3) how fiber content moderates glucose absorption speed.
+Do NOT frame this as disease risk reduction — frame it as glucose management
+and dosing accuracy. Cite sources. Do not give medical advice.
+Use plain English. 3 paragraphs.
+{lang_instruction}'''
+        else:
+            system_prompt = f'''You are a nutrition research assistant explaining
 meal-level dietary risk to a health-conscious South Asian individual.
 Use only the research passages provided. Cite sources by name in parentheses.
 Do not invent statistics. Do not give medical advice or use alarming language.
@@ -137,6 +162,7 @@ class TopicRequest(BaseModel):
     flag: str
     context: str = 'india'  # 'india' | 'us'
     language: str = 'en'
+    diabetes_context: str | None = 't2d'  # 't1d' | 't2d' | None (default 't2d')
 
 
 @app.post('/topic')
@@ -154,6 +180,9 @@ async def topic_overview(req: TopicRequest):
         }
         context_phrase = 'India ICMR-INDIAB' if req.context == 'india' else 'US South Asian MASALA'
         query = flag_queries.get(req.flag, req.flag) + ' ' + context_phrase
+
+        if req.diabetes_context == 't1d':
+            query += ' type 1 diabetes insulin dosing CGM'
 
         chunks = retrieve(query, get_embeddings(), top_k=MAX_CHUNKS)
         context_block = '\n\n'.join(
