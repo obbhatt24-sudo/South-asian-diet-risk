@@ -169,3 +169,105 @@ async function applyVoiceMealItems(parsedItems) {
     voiceStatus.style.color = 'var(--color-high)';
   }
 }
+
+async function startCookingMethodVoice() {
+  if (!isVoiceSupported()) {
+    alert('Voice input is not supported in this browser.');
+    return;
+  }
+
+  const lang = getCurrentLang();
+  const btn = document.getElementById('cooking-voice-btn');
+  const status = document.getElementById('cooking-voice-status');
+
+  const recognition = initVoiceRecognition();
+  recognition.lang = VOICE_LANG_MAP[lang] || 'en-IN';
+
+  btn.classList.add('listening');
+  btn.textContent = '⏹ Stop';
+  status.textContent = 'Listening... describe how your food was cooked.';
+
+  let transcript = '';
+
+  recognition.onresult = (e) => {
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) transcript += e.results[i][0].transcript;
+    }
+    status.textContent = transcript;
+  };
+
+  recognition.onend = async () => {
+    btn.classList.remove('listening');
+    btn.textContent = '🎤 Describe how it was cooked';
+    if (!transcript.trim()) return;
+    await parseCookingMethodsFromTranscript(transcript);
+  };
+
+  recognition.start();
+}
+
+async function parseCookingMethodsFromTranscript(transcript) {
+  const status = document.getElementById('cooking-voice-status');
+  status.textContent = 'Applying cooking methods...';
+
+  // Index into state.mealItems is preserved so assignments map back exactly.
+  const currentItems = state.mealItems
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => item.type === 'ingredient')
+    .map(({ item, index }) => ({
+      index,
+      name: getIngredientById(item.id)?.name || item.id
+    }));
+
+  const methodIds = (_cookingMethods || [])
+    .map(m => m.id + ' (' + m.name + ')');
+
+  // The LLM parse runs on the backend (RAG_SERVER_URL, defined in
+  // explainer.js) so the Anthropic API key stays server-side — the browser
+  // cannot and must not call api.anthropic.com directly.
+  try {
+    const response = await fetch(RAG_SERVER_URL + '/parse-cooking-methods', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        transcript: transcript,
+        ingredient_names: currentItems.map(i => i.name),
+        method_ids: methodIds,
+        language: getCurrentLang()
+      }),
+      signal: AbortSignal.timeout(60000)  // cover Render free-tier cold starts
+    });
+
+    if (!response.ok) throw new Error('Server error: ' + response.status);
+    const data = await response.json();
+    const assignments = data.assignments || [];
+
+    let applied = 0;
+    for (const assignment of assignments) {
+      if (!assignment.ingredient_name || !assignment.method_id) continue;
+      const match = currentItems.find(item =>
+        item.name.toLowerCase().includes(
+          assignment.ingredient_name.toLowerCase())
+      );
+      if (match) {
+        state.mealItems[match.index].cooking_method = assignment.method_id;
+        applied++;
+      }
+    }
+
+    renderMealItems();
+    updateNutrientTotals();
+    status.textContent = `Applied cooking methods to ${applied} ingredient${applied !== 1 ? 's' : ''}.`;
+    status.style.color = 'var(--color-low)';
+
+  } catch(err) {
+    if (err.name === 'TimeoutError') {
+      status.textContent =
+        'Cooking-method parsing timed out (server warming up). Try again.';
+    } else {
+      status.textContent = 'Could not parse cooking methods.';
+    }
+    status.style.color = 'var(--color-high)';
+    console.error('Cooking-method parse error:', err);
+  }
+}

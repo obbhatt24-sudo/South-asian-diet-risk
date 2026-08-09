@@ -343,6 +343,64 @@ If a quantity is not mentioned, estimate a typical single serving.'''
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class ParseCookingRequest(BaseModel):
+    transcript: str
+    ingredient_names: list[str] = []  # names of ingredients currently in the meal
+    method_ids: list[str] = []        # available cooking-method ids (id + name)
+    language: str = 'en'
+
+
+# Fallback set if the client sends no method_ids — matches data/cooking-methods.json
+DEFAULT_METHOD_IDS = [
+    'boiled', 'pressure_cooked', 'steamed', 'deep_fried', 'shallow_fried',
+    'roasted_dry', 'cooled_reheated', 'fermented', 'sprouted', 'raw', 'tadka',
+]
+
+
+@app.post('/parse-cooking-methods')
+async def parse_cooking_methods(req: ParseCookingRequest):
+    """Parse a spoken description of how food was cooked into per-ingredient
+    cooking-method assignments.
+
+    Runs the LLM call server-side so the Anthropic API key stays secret —
+    the browser cannot call api.anthropic.com directly. Returns a JSON array
+    of { ingredient_name, method_id } the frontend maps onto its meal items.
+    """
+    try:
+        ingredient_list = ', '.join(req.ingredient_names[:100])
+        method_list = ', '.join(req.method_ids) if req.method_ids \
+            else ', '.join(DEFAULT_METHOD_IDS)
+        system_prompt = f'''You are parsing a description of cooking methods.
+Respond ONLY with a JSON array. No other text.
+Each item: {{ "ingredient_name": string, "method_id": string }}
+Available method IDs: {method_list}
+Match ingredient names to this list: {ingredient_list}
+The description may be in a language other than English; still return
+ingredient names drawn from the (English) list above where they match.
+Only include an item when the description clearly states how that
+ingredient was cooked.'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=300,
+            system=system_prompt,
+            messages=[{'role': 'user',
+                       'content': f'Cooking description: "{req.transcript}"'}],
+        )
+
+        text = response.content[0].text.strip()
+        clean = text.replace('```json', '').replace('```', '').strip()
+        assignments = json.loads(clean)
+        if not isinstance(assignments, list):
+            assignments = []
+        return {'assignments': assignments}
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502,
+                            detail='Could not parse cooking methods')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get('/health')
 async def health():
     return {'status': 'ok'}

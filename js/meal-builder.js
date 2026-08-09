@@ -488,6 +488,12 @@ function addDishToMeal(id, servings) {
 
 function updateCalculateButton() {
   document.getElementById('calculate-btn').disabled = state.mealItems.length === 0;
+
+  const cookingVoiceBtn = document.getElementById('cooking-voice-btn');
+  if (cookingVoiceBtn) {
+    const hasIngredient = state.mealItems.some(item => item.type === 'ingredient');
+    cookingVoiceBtn.style.display = hasIngredient ? 'inline-block' : 'none';
+  }
 }
 
 // Expanded meal-list card for a dish item: name, serving/gram total, a

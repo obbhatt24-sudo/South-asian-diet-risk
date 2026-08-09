@@ -1259,3 +1259,16 @@ input:focus, select:focus {
   font-size: 0.72rem; color: var(--color-text-faint);
   font-style: italic; margin-bottom: var(--space-sm);
 }
+.btn-mic-secondary {
+  background: none;
+  border: 1px solid var(--color-navy);
+  color: var(--color-navy);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body);
+  margin-top: var(--space-sm);
+  transition: all 0.15s;
+}
+.btn-mic-secondary.listening { border-color: var(--color-high);
+  color: var(--color-high); }
