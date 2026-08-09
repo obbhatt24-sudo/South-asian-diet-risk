@@ -14,7 +14,8 @@
     "india_label": "India",
     "us_label": "US South Asian",
     "india_description": "Risk based on dietary patterns typical in India, where refined cereals and low protein intake are primary drivers (ICMR-INDIAB).",
-    "us_description": "Risk based on dietary patterns of South Asians in the US, where physical inactivity and dietary fat quality are additional documented risk factors (MASALA Study)."
+    "us_description": "Risk based on dietary patterns of South Asians in the US, where physical inactivity and dietary fat quality are additional documented risk factors (MASALA Study).",
+    "t1d_description": "Type 1 diabetes mode: the diabetes score reflects glucose management and dosing complexity for this meal, not long-term population risk."
   },
   "meal_builder": {
     "heading": "Build your meal",
@@ -47,6 +48,7 @@
   "scores": {
     "heading": "Your meal risk scores",
     "diabetes_title": "Diabetes Risk Score",
+    "diabetes_title_t1d": "Glucose Management Score",
     "cvd_title": "CVD Risk Score",
     "out_of": "out of 100",
     "band_low": "Low",
@@ -77,6 +79,7 @@
     "high_saturated_fat": "The meal is high in saturated fat (likely from ghee, cream, or coconut oil), which raises LDL cholesterol over time.",
     "poor_fat_quality": "The balance of fats leans heavily toward saturated fat. Replacing ghee or coconut oil with mustard oil would improve this.",
     "high_sodium": "Sodium is elevated in this meal, which contributes to blood pressure risk over time.",
+    "high_saturated_fat_dairy_source": "This meal is high in saturated fat, but most of it comes from dairy (paneer, curd, milk, or yogurt), which current evidence suggests carries a smaller cardiovascular risk than saturated fat from other sources.",
     "none_diabetes": "This meal scores well across all diabetes risk factors.",
     "none_cvd": "This meal scores well across all cardiovascular risk factors."
   },
@@ -94,7 +97,11 @@
     "fat_quality_label": "Fat type balance",
     "fat_quality_sub": "Ratio of healthy unsaturated to saturated fat",
     "sodium_label": "Sodium",
-    "sodium_sub": "High sodium raises blood pressure over time"
+    "sodium_sub": "High sodium raises blood pressure over time",
+    "glucose_spike_speed_label": "Glucose spike speed",
+    "fat_protein_impact_label": "Fat/protein impact",
+    "fat_protein_impact_sub": "Fat and protein slow digestion and delay the glucose rise",
+    "fat_protein_delay_explanation": "This meal has significant fat and protein content that may cause a delayed glucose rise 2-4 hours after eating. Consider an extended or dual-wave bolus if using an insulin pump."
   },
   "recommendations": {
     "heading": "Suggested improvements",

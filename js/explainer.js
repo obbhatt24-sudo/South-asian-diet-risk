@@ -25,7 +25,10 @@ async function fetchExplanation(scoreResult, mealItems) {
     cvd_score: c.score,
     cvd_band: c.band,
     flags: allFlags,
-    context: state.context,
+    // The server's `context` field is India/US population framing only, so
+    // it always uses baseContext; T1D mode is conveyed separately via
+    // diabetes_context (see server/main.py's /explain, Step 70).
+    context: state.baseContext,
     gl: d.gl,
     ref_carb_share: d.refShare,
     fiber_g: computeMealNutrients(mealItems).fiber_g,
@@ -33,7 +36,8 @@ async function fetchExplanation(scoreResult, mealItems) {
     mufa_sfa_ratio: c.ratio ?? null,
     top_ingredients: topIngredients,
     top_recommendation: null,  // filled in below if recs available
-    language: getCurrentLang()
+    language: getCurrentLang(),
+    diabetes_context: state.context === 't1d' ? 't1d' : 't2d'
   };
 
   return payload;

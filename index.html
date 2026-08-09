@@ -114,6 +114,12 @@
       <div id="personal-context" class="card">
         <h3 data-i18n="meal_builder.personal_context_heading">Personal context (optional — not stored)</h3>
 
+        <label class='context-option'>
+          <input type='checkbox' id='t1d-toggle'
+                 onchange='state.context = this.checked ? "t1d" : state.baseContext'>
+          I have Type 1 diabetes
+        </label>
+
         <label><span data-i18n="meal_builder.bmi_label">BMI category</span>
           <select id="bmi-input">
             <option value="normal" selected>Not specified / Normal (18.5–22.9)</option>

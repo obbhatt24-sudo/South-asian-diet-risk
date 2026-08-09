@@ -1,5 +1,6 @@
 const state = {
   context: 'india',
+  baseContext: 'india', // last-selected India/US context; restored when the T1D toggle is unchecked
   mealItems: [],
   personalContext: {
     bmiCategory: 'normal',
@@ -64,9 +65,15 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
 
 document.querySelectorAll('input[name="context"]').forEach(function(radio) {
   radio.addEventListener('change', function() {
-    state.context = radio.value;
-    document.getElementById('context-description').textContent =
-      typeof t === 'function' ? t(`context.${radio.value}_description`) : CONTEXT_DESCRIPTIONS[radio.value];
+    state.baseContext = radio.value;
+    const t1dToggle = document.getElementById('t1d-toggle');
+    // A T1D toggle already checked stays in T1D mode — India/US only sets
+    // the population context used for framing, not the T1D scoring mode.
+    if (!t1dToggle || !t1dToggle.checked) {
+      state.context = radio.value;
+      document.getElementById('context-description').textContent =
+        typeof t === 'function' ? t(`context.${radio.value}_description`) : CONTEXT_DESCRIPTIONS[radio.value];
+    }
   });
 });
 

@@ -45,6 +45,8 @@ async function generateAIOverview(topicIndex, flag) {
   // Check sessionStorage cache first (keyed by language so a language switch
   // does not surface an overview cached in the previous language).
   const cacheKey = OVERVIEW_CACHE_KEY + flag + '_' + state.context + '_' + getCurrentLang();
+  // ^ still keyed by state.context (not baseContext) so a T1D-mode overview
+  // is cached separately from the population-level one.
   const cached = sessionStorage.getItem(cacheKey);
   if (cached) {
     renderAIOverview(container, JSON.parse(cached));
@@ -64,7 +66,12 @@ async function generateAIOverview(topicIndex, flag) {
     const response = await fetch(RAG_SERVER_URL + '/topic', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ flag, context: state.context, language: getCurrentLang() }),
+      body: JSON.stringify({
+        flag,
+        context: state.baseContext,
+        language: getCurrentLang(),
+        diabetes_context: state.context === 't1d' ? 't1d' : 't2d'
+      }),
       signal: AbortSignal.timeout(45000)
     });
 

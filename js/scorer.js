@@ -39,6 +39,21 @@ const ADD_PORTIONS = {
 const CARB_QUALITY_REF_G = 100;
 const FAT_QUALITY_REF_G = 30;
 
+// Step 71: dairy SFA (paneer, curd, milk, yogurt) carries a different
+// cardiovascular risk profile than SFA from other sources per recent
+// dairy-matrix evidence. When dairy sources supply most of a meal's
+// saturated fat, the saturated_fat sub-score gets a partial exemption
+// instead of the full penalty.
+const DAIRY_SFA_SHARE_THRESHOLD = 0.70;
+const DAIRY_SFA_EXEMPTION_FACTOR = 0.85; // sub-score * this = 15% reduction
+
+// Step 71: T1D "dosing complexity" mode — fat and protein slow gastric
+// emptying and delay a meal's glucose rise by 2-4 hours, which the standard
+// glycemic-load framing does not capture. These thresholds flag meals likely
+// to need an extended/dual-wave bolus.
+const T1D_FAT_DELAY_THRESHOLD_G = 20;
+const T1D_PROTEIN_DELAY_THRESHOLD_G = 25;
+
 // ===== Step 66 — cooking method modifiers =====
 // Cooking methods change how a starch/legume/vegetable scores. We attach a
 // _modifiedIngredient to each ingredient item that carries a cooking_method so
@@ -166,9 +181,11 @@ function refinedCarbShare(mealItems) {
   return refinedCarbs / totalStarchCarbs;
 }
 
-// India: moderate band starts at 25% refined carb share; US: 20%
+// India: moderate band starts at 25% refined carb share; US: 20%. Step 71:
+// T1D mode is not modulated by population context, so it uses the midpoint
+// rather than either India/US threshold.
 function refinedCarbSubScore(share, context) {
-  const modThreshold = context === 'india' ? 0.25 : 0.20;
+  const modThreshold = context === 'india' ? 0.25 : context === 'us' ? 0.20 : 0.225;
   if (share < modThreshold) return 0;
   if (share < 0.50) return 10;
   if (share < 0.75) return 18;
@@ -218,11 +235,19 @@ function proteinQualitySubScore(share) {
   return 15;
 }
 
+// Step 71: raised from >=6/>=3/<3 to >=8/>=4/<4 (Reynolds et al. 2019).
 function fiberSubScore(fiberG) {
-  if (fiberG >= 6) return 0;
+  if (fiberG >= 8) return 0;
   if (fiberG >= 4) return 5;
-  if (fiberG >= 2) return 12;
   return 20;
+}
+
+// Step 71: T1D-only sub-score. Higher fat/protein delays the glucose rise
+// (gastric emptying), so it is scored independently of glycemic load rather
+// than folded into it.
+function fatProteinImpactSubScore(fatG, proteinG) {
+  const raw = (fatG * 0.6 + proteinG * 0.4) / 10;
+  return Math.max(0, Math.min(20, raw));
 }
 
 function getBmiMultiplier(bmiCategory) {
@@ -247,12 +272,24 @@ function diabetesScore(mealItems, context, personalContext) {
   // carbohydrate. Sub-scores are rounded so the breakdown UI shows whole points.
   const carbScale = Math.min(1, nutrients.carbohydrate_g / CARB_QUALITY_REF_G);
 
+  // Step 71: T1D mode reframes this as dosing complexity rather than
+  // long-term risk contribution and adds a fat/protein delayed-rise
+  // sub-score. It is not scaled by carbScale — it reflects the meal's
+  // absolute fat/protein load, which drives delayed absorption regardless
+  // of how much carbohydrate is also present.
+  const isT1D = context === 't1d';
+
   const subScores = {
     glycemic_load: Math.round(glSubScore(gl)),
     refined_carb: Math.round(refinedCarbSubScore(refShare, context) * carbScale),
     fiber: Math.round(fiberSubScore(nutrients.fiber_g) * carbScale),
     protein_quality: Math.round(proteinQualitySubScore(protShare) * carbScale)
   };
+  if (isT1D) {
+    subScores.fat_protein_impact = Math.round(
+      fatProteinImpactSubScore(nutrients.total_fat_g, nutrients.protein_g)
+    );
+  }
 
   const rawSum = Object.values(subScores).reduce((sum, v) => sum + v, 0);
 
@@ -268,7 +305,22 @@ function diabetesScore(mealItems, context, personalContext) {
   if (subScores.fiber > 0) flags.push('low_fiber');
   if (subScores.protein_quality > 0) flags.push('poor_protein_quality');
 
-  return { score: finalScore, band, subScores, flags, gl, refShare, protShare };
+  const result = {
+    score: finalScore,
+    band,
+    subScores,
+    flags,
+    gl,
+    refShare,
+    protShare,
+    type: isT1D ? 'dosing_complexity' : 'risk_contribution'
+  };
+  if (isT1D) {
+    result.fat_protein_delay_flag =
+      nutrients.total_fat_g > T1D_FAT_DELAY_THRESHOLD_G ||
+      nutrients.protein_g > T1D_PROTEIN_DELAY_THRESHOLD_G;
+  }
+  return result;
 }
 
 function sfaSubScore(sfaG) {
@@ -332,6 +384,40 @@ function getMufaSfaRatio(mealItems) {
   return { ratio: totalMufa / totalSfa, usedFallback };
 }
 
+// Step 71: share of the meal's saturated fat contributed by dairy sources
+// (paneer, curd, milk, yogurt — identified by food_group, not ghee/butter,
+// which are classified as 'Fats and Oils'). Used to grant the SFA sub-score
+// a partial exemption when dairy dominates the meal's saturated fat.
+function dairySfaShare(mealItems) {
+  let totalSfa = 0;
+  let dairySfa = 0;
+
+  const accumulate = (ing, scale) => {
+    const sfa = ing.nutrients_per_100g.saturated_fat_g * scale;
+    totalSfa += sfa;
+    if ((ing.food_group || '').toLowerCase() === 'dairy') dairySfa += sfa;
+  };
+
+  for (const item of mealItems) {
+    if (item.type === 'ingredient') {
+      const ing = item._modifiedIngredient || getIngredientById(item.id);
+      if (!ing) { warnUnresolvedIngredient(item.id, 'dairySfaShare'); continue; }
+      accumulate(ing, item.gramAmount / 100);
+    } else if (item.type === 'dish') {
+      const dish = getDishById(item.id);
+      if (!dish) continue;
+      for (const di of dish.ingredients) {
+        const ing = getIngredientById(di.ingredient_id);
+        if (!ing) { warnUnresolvedIngredient(di.ingredient_id, 'dairySfaShare'); continue; }
+        accumulate(ing, (di.amount_g / 100) * (item.servings / dish.servings));
+      }
+    }
+  }
+
+  if (totalSfa === 0) return 0;
+  return dairySfa / totalSfa;
+}
+
 function fatQualitySubScore(ratio) {
   if (ratio === null) return null;
   if (ratio > 2.0) return 0;
@@ -365,6 +451,17 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   const sodiumSub = sodiumSubScore(totalSodium);
   const fatQualSub = fatQualitySubScore(ratio);
 
+  // Step 71: dairy SFA partial exemption — dairy sources (paneer, curd, milk,
+  // yogurt) carry a different cardiovascular risk profile than SFA from other
+  // sources, so when they supply most of the meal's saturated fat the
+  // sub-score is reduced instead of triggering the full penalty.
+  const dairyShare = dairySfaShare(items);
+  const isDairySfaSource = dairyShare > DAIRY_SFA_SHARE_THRESHOLD;
+  let saturatedFatSub = sfaSubScore(saturatedFatG);
+  if (isDairySfaSource) {
+    saturatedFatSub = Math.round(saturatedFatSub * DAIRY_SFA_EXEMPTION_FACTOR);
+  }
+
   // Fat-quality penalty scales with total fat, fiber penalty with carbohydrate
   // (see CARB_QUALITY_REF_G / FAT_QUALITY_REF_G). Saturated fat and sodium are
   // left unscaled — they already scale with absolute grams/mg.
@@ -372,7 +469,7 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   const fatScale = Math.min(1, totalFatG / FAT_QUALITY_REF_G);
 
   const subScores = {
-    saturated_fat: sfaSubScore(saturatedFatG),
+    saturated_fat: saturatedFatSub,
     fat_quality: fatQualSub === null ? null : Math.round(fatQualSub * fatScale),
     fiber: Math.round(fiberSubScore(nutrients.fiber_g) * carbScale),
     sodium: sodiumSub // may be null
@@ -388,7 +485,9 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   const band = finalScore < 35 ? 'Low' : finalScore < 65 ? 'Moderate' : 'High';
 
   const flags = [];
-  if (subScores.saturated_fat > 0) flags.push('high_saturated_fat');
+  if (subScores.saturated_fat > 0) {
+    flags.push(isDairySfaSource ? 'high_saturated_fat_dairy_source' : 'high_saturated_fat');
+  }
   if (subScores.fat_quality !== null && subScores.fat_quality > 0) flags.push('poor_fat_quality');
   if (subScores.fiber > 0) flags.push('low_fiber');
   if (sodiumSub !== null && sodiumSub > 0) flags.push('high_sodium');
@@ -400,7 +499,8 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
     flags,
     ratio,
     usedFallback,
-    totalSodium
+    totalSodium,
+    dairySfaShare: dairyShare
   };
 }
 

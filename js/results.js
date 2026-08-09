@@ -105,9 +105,12 @@ function renderCookingMethodNotes() {
 
 // d = result.diabetes from score(); d.fiberG is bridged in from meal nutrients.
 function renderDiabetesBreakdown(d) {
+  const isT1D = d.type === 'dosing_complexity';
   const rows = [
     {
-      label: t('sub_scores.glycemic_load_label'),
+      // Step 71: T1D framing relabels this row "Glucose spike speed" — the
+      // sub-score itself is unchanged, only the wording.
+      label: isT1D ? t('sub_scores.glucose_spike_speed_label') : t('sub_scores.glycemic_load_label'),
       sublabel: t('sub_scores.glycemic_load_sub'),
       value: d.subScores.glycemic_load,
       max: 40,
@@ -149,11 +152,27 @@ function renderDiabetesBreakdown(d) {
       inverted: true
     }
   ];
+  if (isT1D && d.subScores.fat_protein_impact !== undefined) {
+    rows.push({
+      label: t('sub_scores.fat_protein_impact_label'),
+      sublabel: t('sub_scores.fat_protein_impact_sub'),
+      value: d.subScores.fat_protein_impact,
+      max: 20,
+      detail: `${d.subScores.fat_protein_impact}/20 pts`,
+      tip: d.subScores.fat_protein_impact > 10
+        ? 'A large fat/protein load like this often needs an extended or dual-wave bolus.'
+        : null,
+      inverted: true
+    });
+  }
   // Place any cooking-method GI notes directly below the glycemic-load row.
   const cookingNotes = renderCookingMethodNotes();
-  if (!cookingNotes) return renderBreakdownRows(rows);
+  const delayFlagNote = isT1D && d.fat_protein_delay_flag
+    ? `<p class='breakdown-note t1d-delay-flag'>${t('sub_scores.fat_protein_delay_explanation')}</p>`
+    : '';
+  if (!cookingNotes) return renderBreakdownRows(rows) + delayFlagNote;
   return renderBreakdownRows([rows[0]]) + cookingNotes +
-    renderBreakdownRows(rows.slice(1));
+    renderBreakdownRows(rows.slice(1)) + delayFlagNote;
 }
 
 // Same visual pattern as the diabetes breakdown. c.satFatG / c.fiberG are
@@ -243,7 +262,7 @@ function generateWhyText(scoreResult, scoreType) {
 // text; notes is an array of caveat strings shown below the breakdown.
 function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, notes) {
   const bandClass = scoreObj.band.toLowerCase();
-  const contextText = state.context === 'us'
+  const contextText = state.baseContext === 'us'
     ? t('scores.context_us')
     : t('scores.context_india');
   const notesHtml = notes
@@ -403,8 +422,11 @@ function renderResults(result, recs) {
     diabetesNotes.push('* GL estimated from food-group defaults for some ingredients.');
   }
   const dishContribHtml = renderDishContributions(state.mealItems, result);
+  const diabetesTitle = d.type === 'dosing_complexity'
+    ? t('scores.diabetes_title_t1d')
+    : t('scores.diabetes_title');
   const diabetesCard = buildScoreCard(
-    t('scores.diabetes_title'), d, t('scores.band_desc_' + d.band.toLowerCase()),
+    diabetesTitle, d, t('scores.band_desc_' + d.band.toLowerCase()),
     renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes
   );
   if (dishContribHtml) diabetesCard.insertAdjacentHTML('beforeend', dishContribHtml);
