@@ -239,15 +239,64 @@ function renderCvdBreakdown(c) {
   return renderBreakdownRows(rows);
 }
 
+// Same visual pattern as the diabetes/cvd breakdowns. h.satFatG / h.sugarG
+// are bridged in from meal nutrients.
+function renderHypertensionBreakdown(h) {
+  const rows = [
+    {
+      label: t('sub_scores.sodium_label'),
+      sublabel: t('sub_scores.sodium_sub'),
+      value: h.subScores.sodium,
+      max: 50,
+      detail: `${Math.round(h.sodiumMg)}mg sodium`,
+      tip: h.subScores.sodium >= 35
+        ? 'Use less added salt and fewer pickles or papad.'
+        : null
+    },
+    {
+      label: t('sub_scores.potassium_label'),
+      sublabel: t('sub_scores.potassium_sub'),
+      value: h.subScores.potassium_protection,
+      max: 20,
+      detail: `${Math.round(h.potassiumGrams)}g from potassium-rich foods`,
+      tip: h.subScores.potassium_protection < 5
+        ? 'Add banana, spinach, tomato, dal, or potato to help protect against high blood pressure.'
+        : null,
+      inverted: true
+    },
+    {
+      label: t('sub_scores.sat_fat_label'),
+      sublabel: t('sub_scores.sat_fat_sub'),
+      value: h.subScores.saturated_fat,
+      max: 15,
+      detail: `${h.satFatG != null ? h.satFatG.toFixed(1) : '?'}g saturated fat`,
+      tip: h.subScores.saturated_fat >= 12
+        ? 'Cook with less ghee, cream, or coconut oil to reduce this.'
+        : null
+    },
+    {
+      label: t('sub_scores.added_sugar_label'),
+      sublabel: t('sub_scores.added_sugar_sub'),
+      value: h.subScores.added_sugar,
+      max: 15,
+      detail: `${h.sugarG != null ? h.sugarG.toFixed(1) : '?'}g sugar`,
+      tip: h.subScores.added_sugar >= 12
+        ? 'Cut back on sweetened drinks, desserts, and added sugar.'
+        : null
+    }
+  ];
+  return renderBreakdownRows(rows);
+}
+
 // Plain-English summary of what is driving a score, from its flags.
 // Explanation text lives in the i18n files under why_text.* so it can be
 // localised; see generateWhyText() below.
 function generateWhyText(scoreResult, scoreType) {
   const flags = scoreResult.flags;
   if (flags.length === 0) {
-    return scoreType === 'diabetes'
-      ? t('why_text.none_diabetes')
-      : t('why_text.none_cvd');
+    if (scoreType === 'diabetes') return t('why_text.none_diabetes');
+    if (scoreType === 'hypertension') return t('why_text.none_hypertension');
+    return t('why_text.none_cvd');
   }
 
   // Take the top 2 flags by sub-score severity
@@ -260,7 +309,7 @@ function generateWhyText(scoreResult, scoreType) {
 
 // scoreObj = result.diabetes|cvd; breakdownHtml/whyText are pre-rendered HTML/
 // text; notes is an array of caveat strings shown below the breakdown.
-function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, notes) {
+function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, notes, cardType) {
   const bandClass = scoreObj.band.toLowerCase();
   const contextText = state.baseContext === 'us'
     ? t('scores.context_us')
@@ -270,7 +319,7 @@ function buildScoreCard(title, scoreObj, description, breakdownHtml, whyText, no
     .join('');
 
   const card = document.createElement('div');
-  card.className = 'score-card ' + bandClass;
+  card.className = 'score-card ' + (cardType ? cardType + ' ' : '') + bandClass;
   card.innerHTML = `
     <h3>${title}</h3>
     <div class='score-header'>
@@ -427,7 +476,8 @@ function renderResults(result, recs) {
     : t('scores.diabetes_title');
   const diabetesCard = buildScoreCard(
     diabetesTitle, d, t('scores.band_desc_' + d.band.toLowerCase()),
-    renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes
+    renderDiabetesBreakdown(d), generateWhyText(d, 'diabetes'), diabetesNotes,
+    'diabetes'
   );
   if (dishContribHtml) diabetesCard.insertAdjacentHTML('beforeend', dishContribHtml);
   container.appendChild(diabetesCard);
@@ -445,7 +495,8 @@ function renderResults(result, recs) {
   }
   const cvdCard = buildScoreCard(
     t('scores.cvd_title'), c, t('scores.band_desc_' + c.band.toLowerCase()),
-    renderCvdBreakdown(c), generateWhyText(c, 'cvd'), cvdNotes
+    renderCvdBreakdown(c), generateWhyText(c, 'cvd'), cvdNotes,
+    'cvd'
   );
   if (dishContribHtml) cvdCard.insertAdjacentHTML('beforeend', dishContribHtml);
   container.appendChild(cvdCard);
@@ -457,6 +508,18 @@ function renderResults(result, recs) {
     'modifiable by diet and not captured by this score. A low CVD score ' +
     'does not eliminate this baseline risk (MASALA Study; Tsimikas et al.).';
   container.appendChild(cvdRiskNote);
+
+  const h = result.hypertension;
+  h.satFatG = nutrients.saturated_fat_g;
+  h.sugarG = nutrients.sugars_g;
+
+  const hypertensionCard = buildScoreCard(
+    t('scores.hypertension_title'), h, t('scores.band_desc_' + h.band.toLowerCase()),
+    renderHypertensionBreakdown(h), generateWhyText(h, 'hypertension'), [],
+    'hypertension'
+  );
+  if (dishContribHtml) hypertensionCard.insertAdjacentHTML('beforeend', dishContribHtml);
+  container.appendChild(hypertensionCard);
 
   // computeMealNutrients() flags meals containing USDA foods with unreported
   // nutrients (those read as null, summed as 0). Warn that scores for those

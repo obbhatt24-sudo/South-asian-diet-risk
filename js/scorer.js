@@ -504,10 +504,90 @@ function cvdScore(mealItems, addedSodiumMg, context, personalContext) {
   };
 }
 
+// Step 72: ingredients whose potassium content is protective against high
+// blood pressure. The DB keys ingredients as ing_NNN rather than descriptive
+// slugs, so this is a mapping to the actual ids (comment names the food).
+const POTASSIUM_RICH_IDS = [
+  'ing_013', // Chana dal
+  'ing_014', // Masoor dal
+  'ing_015', // Toor dal
+  'ing_016', // Moong dal
+  'ing_017', // Spinach
+  'ing_019', // Tomato
+  'ing_023', // Potato
+  'ing_024', // Sweet potato
+  'ing_035', // Chickpeas (kabuli chana)
+  'ing_036', // Kidney beans (rajma)
+  'ing_053', // Chana (whole black, kala chana)
+  'ing_067', // Beetroot
+  'ing_146'  // Raw banana (kachcha kela)
+];
+
+function hypertensionScore(mealItems, addedSodiumMg, context) {
+  const nutrients = computeMealNutrients(mealItems);
+
+  // Total sodium including added salt
+  const sodiumTotal = (nutrients.sodium_mg || 0) + (addedSodiumMg || 0);
+
+  // SUB-SCORE 1: Sodium (0-50 pts, higher = worse)
+  // South Asian threshold: stricter than US due to higher salt sensitivity
+  const sodiumThreshold = context === 'india' ? 700 : 800;
+  const sodiumScore = sodiumTotal <= sodiumThreshold * 0.5 ? 5
+    : sodiumTotal <= sodiumThreshold ? 20
+    : sodiumTotal <= sodiumThreshold * 1.5 ? 35
+    : 50;
+
+  // SUB-SCORE 2: Potassium-rich foods (0-20 pts, protective — subtracted
+  // from the raw score rather than added, since more potassium is better)
+  const potassiumItems = mealItems.filter((item) => {
+    if (item.type !== 'ingredient') return false;
+    const ing = getIngredientById(item.id);
+    return ing && (POTASSIUM_RICH_IDS.includes(item.id) ||
+      (ing.role_tags && ing.role_tags.includes('potassium_rich')));
+  });
+  const potassiumGrams = potassiumItems.reduce((sum, item) => sum + item.gramAmount, 0);
+  const potassiumProtection = Math.min(20, Math.round(potassiumGrams / 15));
+
+  // SUB-SCORE 3: Saturated fat (0-15 pts)
+  const sfaPct = (nutrients.saturated_fat_g * 9) /
+    Math.max(nutrients.energy_kcal || 500, 500);
+  const sfaScore = sfaPct < 0.07 ? 3 : sfaPct < 0.12 ? 8 : sfaPct < 0.18 ? 12 : 15;
+
+  // SUB-SCORE 4: Added sugar (0-15 pts)
+  const sugarG = nutrients.sugars_g || 0;
+  const sugarScore = sugarG < 5 ? 2 : sugarG < 15 ? 7 : sugarG < 25 ? 12 : 15;
+
+  const rawScore = sodiumScore + sfaScore + sugarScore - potassiumProtection;
+  const finalScore = Math.max(0, Math.min(100, Math.round(rawScore / 0.95)));
+
+  const band = finalScore < 35 ? 'Low' : finalScore < 65 ? 'Moderate' : 'High';
+
+  const flags = [];
+  if (sodiumScore >= 35) flags.push('high_sodium');
+  if (sfaScore >= 12)    flags.push('high_saturated_fat');
+  if (sugarScore >= 12)  flags.push('high_added_sugar');
+  if (potassiumProtection < 5) flags.push('low_potassium');
+
+  return {
+    score: finalScore,
+    band,
+    flags,
+    subScores: {
+      sodium: sodiumScore,
+      potassium_protection: potassiumProtection,
+      saturated_fat: sfaScore,
+      added_sugar: sugarScore
+    },
+    sodiumMg: sodiumTotal,
+    potassiumGrams
+  };
+}
+
 // Master entry point — the rest of the app only ever calls score().
 function score(mealItems, addedSodiumMg, context, personalContext) {
   return {
     diabetes: diabetesScore(mealItems, context, personalContext),
-    cvd: cvdScore(mealItems, addedSodiumMg, context, personalContext)
+    cvd: cvdScore(mealItems, addedSodiumMg, context, personalContext),
+    hypertension: hypertensionScore(mealItems, addedSodiumMg, context)
   };
 }

@@ -23,6 +23,10 @@
   --color-high-bg:     #FFEBEE;
   --color-high-border: #EF9A9A;
 
+  /* Hypertension card accent */
+  --color-purple:      #7B1FA2;
+  --color-purple-bg:   #F3E5F5;
+
   /* Neutrals */
   --color-bg:          #F7F8FA;
   --color-surface:     #FFFFFF;
@@ -219,6 +223,17 @@ section {
 }
 .score-card.high {
   border-left-color: var(--color-high);
+  background: linear-gradient(to right, var(--color-high-bg) 0%, white 60%);
+}
+
+.score-card.hypertension { border-left-color: var(--color-purple); }
+.score-card.hypertension.low {
+  background: linear-gradient(to right, var(--color-low-bg) 0%, white 60%);
+}
+.score-card.hypertension.moderate {
+  background: linear-gradient(to right, var(--color-moderate-bg) 0%, white 60%);
+}
+.score-card.hypertension.high {
   background: linear-gradient(to right, var(--color-high-bg) 0%, white 60%);
 }
 

@@ -75,5 +75,16 @@
       { "title": "Salt sensitivity in South Asians (Antonios et al., 1996)", "url": "https://pubmed.ncbi.nlm.nih.gov/8823321/", "note": "Documents higher rates of salt sensitivity in South Asian vs European populations." },
       { "title": "Sodium reduction and blood pressure in India (Srinivasan et al., 2018)", "url": "https://pubmed.ncbi.nlm.nih.gov/29519832/", "note": "Examines dietary sodium and hypertension risk in an Indian urban cohort." }
     ]
+  },
+  {
+    "flag": "high_sodium",
+    "title": "Sodium, blood pressure, and South Asian salt sensitivity",
+    "plain_explanation": "Sodium raises blood pressure by causing the kidneys to retain water, increasing blood volume. South Asians are more likely to be salt-sensitive than European populations — meaning the same sodium intake produces a larger blood pressure increase. This makes dietary sodium management particularly important for South Asian cardiovascular health.",
+    "why_it_matters": "Hypertension is the leading modifiable risk factor for stroke globally. In South Asian populations, hypertension often coexists with diabetes and dyslipidemia — a cluster that dramatically amplifies cardiovascular risk. Even modest sodium reduction (500mg/day) has been shown to lower blood pressure significantly in salt-sensitive individuals.",
+    "papers": [
+      { "title": "Effect of lower sodium intake on health — WHO systematic review (Aburto et al. 2013)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4547643/", "note": "WHO-commissioned systematic review of sodium intake and cardiovascular outcomes." },
+      { "title": "Salt sensitivity in South Asians (Antonios & MacGregor 1995)", "url": "https://pubmed.ncbi.nlm.nih.gov/7540903/", "note": "Documents the elevated prevalence of salt-sensitive blood pressure response in South Asian populations." },
+      { "title": "Legume consumption reduces blood pressure (Jayalath et al. 2014)", "url": "https://pubmed.ncbi.nlm.nih.gov/24014659/", "note": "Meta-analysis: legume intake (dal, chana, rajma) associated with meaningful systolic blood pressure reduction." }
+    ]
   }
 ]
