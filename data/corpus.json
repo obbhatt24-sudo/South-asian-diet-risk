@@ -4,7 +4,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "south_asian_metabolic_risk",
-    "relevance_tags": ["diabetes", "india", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "india",
+      "general"
+    ],
     "placeholder": false,
     "text": "The ICMR-INDIAB study, a nationally representative survey of Indian adults, documented a rising and heterogeneous burden of type 2 diabetes and prediabetes across states, with urban prevalence substantially exceeding rural prevalence. A defining feature of South Asian metabolic risk is that type 2 diabetes develops at a lower body mass index and a younger age than in Western populations. Many affected individuals are not obese by conventional thresholds, so BMI alone underestimates true metabolic risk in this group. This 'thin-fat' phenotype means diabetes prevention efforts calibrated to European BMI cut-offs miss a large share of at-risk South Asians."
   },
@@ -13,7 +17,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "dietary_glycemic_load",
-    "relevance_tags": ["glycemic_load", "diabetes", "india"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "india"
+    ],
     "placeholder": true,
     "text": "Indian dietary patterns are heavily cereal-based, with polished white rice and refined wheat contributing the majority of daily energy in many regions. This produces a high dietary glycemic load, which is associated with elevated postprandial glucose and greater risk of incident type 2 diabetes. In ICMR-INDIAB dietary analyses, higher carbohydrate quantity paired with a high glycemic index of the staple cereal is a leading modifiable driver of diabetes risk. Reducing the glycemic load of the staple — for example by lowering portion size or shifting to lower-GI grains — is a practical lever in this population."
   },
@@ -22,7 +30,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "refined_carbohydrates",
-    "relevance_tags": ["high_refined_carb", "diabetes", "india"],
+    "relevance_tags": [
+      "high_refined_carb",
+      "diabetes",
+      "india"
+    ],
     "placeholder": true,
     "text": "A high share of total energy from refined carbohydrates — milled rice, maida, and added sugars — characterizes the transitioning Indian diet. Refined grains are rapidly digested, producing sharp glucose and insulin excursions that, when repeated over years, promote insulin resistance. In INDIAB cohort data this refined-carbohydrate load tracks with markers of dysglycemia and central adiposity. Replacing a portion of refined cereal with whole grains and legumes lowers the refined-carbohydrate fraction and is associated with more favorable glycemic profiles."
   },
@@ -31,7 +43,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "dietary_fiber",
-    "relevance_tags": ["low_fiber", "diabetes", "india"],
+    "relevance_tags": [
+      "low_fiber",
+      "diabetes",
+      "india"
+    ],
     "placeholder": true,
     "text": "Despite a plant-forward reputation, many Indian diets are low in dietary fiber because the dominant cereals are refined and vegetable and whole-legume intake is often modest relative to total calories. Low fiber intake removes a key brake on carbohydrate digestion, contributing to steeper postprandial glucose elevation. Higher intake of soluble fiber from legumes, whole grains, and vegetables slows gastric emptying and glucose absorption. Increasing fiber is one of the most consistent dietary strategies for blunting postprandial glucose in South Asian eaters."
   },
@@ -40,7 +56,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "protein_quality",
-    "relevance_tags": ["poor_protein_quality", "diabetes", "india"],
+    "relevance_tags": [
+      "poor_protein_quality",
+      "diabetes",
+      "india"
+    ],
     "placeholder": true,
     "text": "Meals dominated by cereal with a small legume or dairy share deliver a low proportion of high-quality protein, which weakens the satiety and glycemic-buffering benefits that protein provides. In South Asian dietary patterns, a higher legume and dairy contribution improves the protein-to-carbohydrate balance of the plate and is associated with better glycemic outcomes. Legumes additionally contribute fiber and resistant starch, compounding the benefit. Raising the quality and share of protein is a meaningful risk modifier in South Asian type 2 diabetes risk."
   },
@@ -49,7 +69,12 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "south_asian_bmi_thresholds",
-    "relevance_tags": ["diabetes", "cvd", "india", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "india",
+      "general"
+    ],
     "placeholder": true,
     "text": "WHO and SEARO guidance recommends lower BMI action points for South Asian and other Asian populations, with overweight defined at a BMI of 23 kg/m2 or above and obesity at 25 kg/m2 or above, rather than the 25 and 30 cut-offs used for European populations. These lower thresholds reflect the observation that South Asians reach an equivalent burden of diabetes and cardiovascular risk at a lower body weight. Applying the standard cut-offs would misclassify many high-risk South Asians as normal weight. Clinical and dietary risk tools for this group should therefore adopt the lower action points."
   },
@@ -58,7 +83,12 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "south_asian_metabolic_risk",
-    "relevance_tags": ["diabetes", "cvd", "india", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "india",
+      "general"
+    ],
     "placeholder": true,
     "text": "South Asians carry a predisposition to visceral (abdominal) fat accumulation, storing more fat around the internal organs per unit of body mass index than European populations. Visceral fat is metabolically active and strongly linked to insulin resistance, dyslipidemia, and cardiovascular risk, which helps explain the excess metabolic disease seen at relatively low BMI. Waist circumference and waist-to-hip ratio therefore capture South Asian risk better than BMI alone. This central-adiposity pattern is a core reason conventional weight thresholds understate risk in this population."
   },
@@ -67,7 +97,11 @@
     "source": "ICMR-INDIAB",
     "full_citation": "Anjana RM, et al. Prevalence of diabetes and prediabetes in 15 states of India: results from the ICMR-INDIAB population-based cross-sectional study. Lancet Diabetes Endocrinol. 2017;5(8):585-596.",
     "section": "dietary_glycemic_load",
-    "relevance_tags": ["glycemic_load", "diabetes", "india"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "india"
+    ],
     "placeholder": true,
     "text": "Because postprandial glucose spikes carry particular weight for South Asian metabolic risk, meal-level glycemic load is a useful screening metric for this population. A meal glycemic load in the high range (roughly 20 or more) produces clinically meaningful postprandial glucose elevation, whereas keeping a single meal below about 10 sits in the low range. High-glycemic-load meals built on large portions of polished rice or refined wheat are a repeated daily exposure worth flagging. Lowering portion size or substituting lower-GI staples moves a meal out of the high-load range."
   },
@@ -76,7 +110,12 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, Kandula N, Herrington D, et al. Mediators of Atherosclerosis in South Asians Living in America (MASALA) Study: Objectives, Methods, and Cohort Description. Clin Cardiol. 2013;36(12):713-720.",
     "section": "south_asian_metabolic_risk",
-    "relevance_tags": ["diabetes", "cvd", "us_south_asian", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "us_south_asian",
+      "general"
+    ],
     "placeholder": false,
     "text": "The MASALA study is a prospective, community-based cohort of 906 South Asians aged 40-79 living in the United States, designed with methods parallel to the Multi-Ethnic Study of Atherosclerosis (MESA) to enable direct cross-ethnic comparison. Its central rationale is that South Asians have high rates of cardiovascular disease that traditional risk factors do not fully explain, even at relatively low body mass index. The cohort undergoes coronary artery calcium scoring, carotid imaging, oral glucose tolerance testing, and CT-based visceral fat measurement. MASALA provides some of the strongest US evidence that South Asians carry elevated cardiometabolic risk compared with other ethnic groups at equivalent BMI."
   },
@@ -85,7 +124,11 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
     "section": "saturated_fat",
-    "relevance_tags": ["high_saturated_fat", "cvd", "us_south_asian"],
+    "relevance_tags": [
+      "high_saturated_fat",
+      "cvd",
+      "us_south_asian"
+    ],
     "placeholder": true,
     "text": "Traditional South Asian diets in the US often include substantial saturated fat from ghee (clarified butter) and full-fat dairy, both used generously in home cooking. High saturated fat intake raises LDL cholesterol, a principal driver of atherosclerotic cardiovascular disease. In MASALA dietary data, dietary patterns richer in these saturated-fat sources are associated with less favorable lipid profiles and greater subclinical atherosclerosis. Substituting a portion of ghee and full-fat dairy with unsaturated cooking fats is a direct lever for lowering LDL in this group."
   },
@@ -94,7 +137,11 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
     "section": "fat_quality_mufa_sfa",
-    "relevance_tags": ["poor_fat_quality", "cvd", "us_south_asian"],
+    "relevance_tags": [
+      "poor_fat_quality",
+      "cvd",
+      "us_south_asian"
+    ],
     "placeholder": true,
     "text": "Beyond the quantity of fat, the quality of cooking fat — captured by the ratio of monounsaturated to saturated fatty acids (MUFA:SFA) — shapes cardiovascular risk in South Asian diets. Cooking fats with a low MUFA:SFA ratio, such as ghee and coconut oil, push the lipid profile toward higher LDL, whereas high-MUFA oils are comparatively cardioprotective. Among MASALA participants, fat quality is a meaningful correlate of CVD biomarkers independent of total fat intake. Shifting the cooking oil rather than only cutting total fat is therefore an efficient intervention."
   },
@@ -103,7 +150,11 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
     "section": "dietary_fiber",
-    "relevance_tags": ["low_fiber", "cvd", "us_south_asian"],
+    "relevance_tags": [
+      "low_fiber",
+      "cvd",
+      "us_south_asian"
+    ],
     "placeholder": true,
     "text": "Fiber intake in US South Asian dietary patterns is frequently below recommended levels, particularly when refined cereals displace whole grains, legumes, and vegetables. Higher dietary fiber is consistently associated with lower LDL cholesterol and reduced cardiovascular risk. In MASALA dietary data, greater fiber intake tracks with a more favorable cardiometabolic profile. Because legumes are already culturally central to South Asian cuisine, increasing whole-legume and whole-grain portions is a low-friction way to raise fiber and lower CVD risk."
   },
@@ -112,7 +163,11 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and MASALA lipoprotein(a) analyses.",
     "section": "lp_a_cvd_risk",
-    "relevance_tags": ["cvd", "us_south_asian", "general"],
+    "relevance_tags": [
+      "cvd",
+      "us_south_asian",
+      "general"
+    ],
     "placeholder": true,
     "text": "Lipoprotein(a), or Lp(a), is a genetically determined, largely diet-independent lipoprotein that raises atherosclerotic and thrombotic cardiovascular risk. Elevated Lp(a) is disproportionately common in South Asians, with roughly a quarter of the population carrying clinically high levels. Because Lp(a) is not meaningfully modified by diet, its high prevalence adds a non-dietary layer of CVD risk on top of dietary factors in South Asians. This makes aggressive management of the modifiable dietary drivers — LDL, saturated fat, and fat quality — especially important when Lp(a) is already elevated."
   },
@@ -121,7 +176,11 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, Kandula N, Herrington D, et al. Mediators of Atherosclerosis in South Asians Living in America (MASALA) Study: Objectives, Methods, and Cohort Description. Clin Cardiol. 2013;36(12):713-720.",
     "section": "south_asian_metabolic_risk",
-    "relevance_tags": ["cvd", "us_south_asian", "general"],
+    "relevance_tags": [
+      "cvd",
+      "us_south_asian",
+      "general"
+    ],
     "placeholder": false,
     "text": "Comparing South Asians in India with South Asians in the United States highlights different dominant risk drivers across contexts. In India, high dietary glycemic load from refined cereals and rising diabetes prevalence are prominent, whereas in the US context reduced physical activity and dietary fat quality — a shift toward higher saturated-fat, lower-MUFA cooking patterns — feature strongly. MASALA participants are overwhelmingly immigrants who have lived in the US for decades, capturing this acculturated risk profile. Recognizing which drivers dominate in a given setting helps target dietary advice appropriately."
   },
@@ -130,7 +189,12 @@
     "source": "MASALA",
     "full_citation": "Kanaya AM, et al. MASALA Study cohort. Clin Cardiol. 2013;36(12):713-720; and subsequent MASALA dietary analyses.",
     "section": "dietary_fat_south_asian",
-    "relevance_tags": ["high_saturated_fat", "poor_fat_quality", "cvd", "us_south_asian"],
+    "relevance_tags": [
+      "high_saturated_fat",
+      "poor_fat_quality",
+      "cvd",
+      "us_south_asian"
+    ],
     "placeholder": true,
     "text": "Traditional South Asian cooking fats differ sharply in their cardiovascular profile. Ghee and coconut oil are dominated by saturated fatty acids and have a low MUFA:SFA ratio, whereas mustard oil is rich in monounsaturated and omega-3 fatty acids with a high MUFA:SFA ratio. For US South Asians, replacing ghee and coconut oil with mustard or other high-MUFA oils improves the overall fat quality of the diet without requiring a change in cooking style. This substitution is one of the most actionable dietary changes for reducing CVD risk in the community."
   },
@@ -139,7 +203,11 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "glycemic_index_values",
-    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "The glycemic index (GI) ranks a carbohydrate food by how much it raises blood glucose relative to a reference (glucose = 100), on a per-gram-of-carbohydrate basis. High-GI foods are defined as 70 or above, medium as 56-69, and low as 55 or below. Glycemic load (GL) scales GI by the actual amount of available carbohydrate in a portion, calculated as GI multiplied by grams of carbohydrate divided by 100. GL therefore captures both the quality and the quantity of carbohydrate in a real serving, making it more representative of a food's glycemic impact than GI alone."
   },
@@ -148,7 +216,11 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "glycemic_index_values",
-    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "White rice shows wide variation in glycemic index across varieties and preparation, but the 2021 international tables report an average GI of about 73 for white rice, versus about 65 for brown rice. GI values for rice were highest in Asian samples, averaging around 74. Milling removes the fibrous bran and germ, and softer cooking further gelatinizes the starch, both of which raise the GI. Because polished white rice is a staple in South Asian meals, its high GI is a primary contributor to meal glycemic load."
   },
@@ -157,7 +229,11 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "glycemic_index_values",
-    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "Basmati rice has a glycemic index of approximately 54, meaningfully lower than standard milled white rice at around 73. The difference is driven largely by basmati's higher amylose content; amylose is a linear starch that gelatinizes and digests more slowly than the branched amylopectin that predominates in stickier, lower-amylose rices. As a result, swapping ordinary white rice for basmati is a simple, culturally acceptable way to reduce the glycemic load of a South Asian meal. This substitution underlies a common lower-GI recommendation in the calculator."
   },
@@ -166,7 +242,11 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "glycemic_index_values",
-    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "Legumes are consistently low-GI foods worldwide, and the common Indian dals sit at the very bottom of the scale: chana dal around 8, toor (pigeon pea) dal around 29, and masoor (red lentil) around 31. Two mechanisms slow their digestion — a high content of resistant starch and viscous fiber, and an intact protein-and-cell-wall matrix that limits enzyme access to the starch. Pairing a low-GI dal with a higher-GI cereal lowers the overall glycemic load of the combined meal. This is why legume-forward meals are a cornerstone of lower-glycemic South Asian eating."
   },
@@ -175,7 +255,12 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "glycemic_index_values",
-    "relevance_tags": ["glycemic_load", "high_refined_carb", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "high_refined_carb",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "Whole-grain and refined versions of the same cereal differ substantially in glycemic index. Whole wheat atta, used for roti and chapati, has a GI of roughly 62, whereas refined maida (white flour) used in naan, bhature, and many restaurant breads sits around 76. The intact bran and germ in atta supply fiber and slow starch digestion, blunting the glucose response relative to maida. Choosing whole-wheat over refined-flour breads is therefore a straightforward way to reduce the refined-carbohydrate load and glycemic impact of a meal."
   },
@@ -184,7 +269,11 @@
     "source": "Augustin et al. 2020",
     "full_citation": "Atkinson FS, Brand-Miller JC, Foster-Powell K, et al. International tables of glycemic index and glycemic load values 2021: a systematic review. Am J Clin Nutr. 2021;114(5):1625-1632.",
     "section": "dietary_glycemic_load",
-    "relevance_tags": ["glycemic_load", "diabetes", "general"],
+    "relevance_tags": [
+      "glycemic_load",
+      "diabetes",
+      "general"
+    ],
     "placeholder": false,
     "text": "At the meal level, glycemic load is commonly categorized as low below about 10, medium at roughly 11-19, and high at 20 or above. Prospective cohort evidence indicates that dietary glycemic load is a stronger and more consistent predictor of type 2 diabetes and cardiovascular risk than glycemic index alone, because it accounts for portion size and total carbohydrate. This is why a meal-level GL estimate, rather than the GI of any single ingredient, is the more meaningful output for risk scoring. Keeping habitual meals out of the high-GL range is a practical dietary target."
   },
@@ -193,7 +282,11 @@
     "source": "Edible-Oils",
     "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
     "section": "fat_quality_mufa_sfa",
-    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "relevance_tags": [
+      "poor_fat_quality",
+      "cvd",
+      "general"
+    ],
     "placeholder": false,
     "text": "The balance of fatty acids in a cooking oil, and in particular its ratio of monounsaturated to saturated fat (MUFA:SFA), predicts its effect on the blood lipid profile and hence the LDL:HDL ratio. Monounsaturated fat lowers LDL cholesterol while tending to preserve or raise HDL, whereas saturated fat raises LDL. Oils with a higher MUFA:SFA ratio, generally above about 1.5, are considered cardioprotective, while low-ratio fats worsen the lipid picture. Selecting a high-MUFA oil is therefore a fat-quality decision that operates independently of simply reducing total fat."
   },
@@ -202,7 +295,11 @@
     "source": "Edible-Oils",
     "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
     "section": "fat_quality_mufa_sfa",
-    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "relevance_tags": [
+      "poor_fat_quality",
+      "cvd",
+      "general"
+    ],
     "placeholder": false,
     "text": "Mustard oil, widely used in North and East India, has a favorable fatty-acid profile: it is high in monounsaturated fat and low in saturated fat (about 8% SFA), giving it a high MUFA:SFA ratio and a near-ideal omega-6 to omega-3 balance. By contrast, ghee is predominantly saturated and has a low MUFA:SFA ratio of roughly 0.4, placing it at the opposite end of the fat-quality spectrum. Epidemiologic data cited in the edible-oils literature associate mustard oil use with lower ischemic heart disease risk compared with several other cooking fats. Its combination of high MUFA and plant omega-3 content underlies this benefit."
   },
@@ -211,7 +308,11 @@
     "source": "Edible-Oils",
     "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
     "section": "saturated_fat",
-    "relevance_tags": ["high_saturated_fat", "cvd", "general"],
+    "relevance_tags": [
+      "high_saturated_fat",
+      "cvd",
+      "general"
+    ],
     "placeholder": false,
     "text": "Ghee (clarified butter) is an animal fat in which roughly 60% of the fat is saturated, so it raises total and LDL cholesterol when consumed in typical South Asian quantities. Because ghee is often added generously as a finishing fat, small quantities add up quickly across a day's meals. Saturated fat elevates LDL cholesterol, the central lipid driver of atherosclerotic cardiovascular disease. Reducing the amount of ghee used, or replacing part of it with a high-MUFA oil, lowers the meal's saturated-fat load and its LDL-raising effect."
   },
@@ -220,7 +321,12 @@
     "source": "Edible-Oils",
     "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
     "section": "dietary_fat_south_asian",
-    "relevance_tags": ["high_saturated_fat", "poor_fat_quality", "cvd", "india"],
+    "relevance_tags": [
+      "high_saturated_fat",
+      "poor_fat_quality",
+      "cvd",
+      "india"
+    ],
     "placeholder": false,
     "text": "Coconut oil, common in South Indian cooking, is nearly 90% saturated fat, dominated by lauric acid, giving it a very low MUFA:SFA ratio of roughly 0.1. Although its saturated fat is largely medium-chain, coconut oil still raises LDL cholesterol and is not a heart-neutral substitute for unsaturated oils. Its extreme saturation places it among the least favorable common cooking fats for cardiovascular risk. Where coconut oil is used as a primary cooking medium, shifting toward a high-MUFA oil meaningfully improves dietary fat quality."
   },
@@ -229,7 +335,11 @@
     "source": "Edible-Oils",
     "full_citation": "Bharti, Indoria D, Solanki RL, Meena BS. A Comparative Impact Study of Edible Oils on Health. Int J Curr Microbiol App Sci. 2017;6(11):601-612.",
     "section": "dietary_fat_south_asian",
-    "relevance_tags": ["poor_fat_quality", "cvd", "general"],
+    "relevance_tags": [
+      "poor_fat_quality",
+      "cvd",
+      "general"
+    ],
     "placeholder": false,
     "text": "Replacing saturated-fat-dominant cooking fats such as ghee and coconut oil with high-MUFA oils like mustard or groundnut (peanut) oil improves the diet's fat quality and is associated with lower LDL cholesterol. In the edible-oils review, mustard oil use was linked to a substantially reduced risk of ischemic heart disease relative to some other cooking media. Because the substitution keeps the cooking method and cuisine intact, it is a practical and culturally acceptable intervention. This swap is a recurring recommendation for poor-fat-quality meals in the calculator."
   },
@@ -238,7 +348,11 @@
     "source": "WHO-SEARO",
     "full_citation": "WHO Expert Consultation. Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies. Lancet. 2004;363(9403):157-163.",
     "section": "south_asian_bmi_thresholds",
-    "relevance_tags": ["diabetes", "cvd", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "general"
+    ],
     "placeholder": true,
     "text": "The WHO Expert Consultation concluded that many Asian populations, including South Asians, experience elevated risk of type 2 diabetes and cardiovascular disease at BMI levels below the standard international overweight cut-off of 25. To address this, lower action points were proposed, with added risk emerging around a BMI of 23 and higher risk around 27.5. The core finding is that a South Asian at a BMI of 23 can carry metabolic risk equivalent to a European population at a BMI of 25. Risk tools for South Asians should therefore trigger dietary and lifestyle action at these lower thresholds."
   },
@@ -247,7 +361,11 @@
     "source": "WHO-SEARO",
     "full_citation": "WHO Expert Consultation. Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies. Lancet. 2004;363(9403):157-163.",
     "section": "south_asian_bmi_thresholds",
-    "relevance_tags": ["diabetes", "cvd", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "general"
+    ],
     "placeholder": true,
     "text": "The mechanism behind lower BMI thresholds for South Asians is body-composition rather than body-weight: at a given BMI, South Asians carry a higher proportion of body fat and, in particular, more visceral abdominal fat than other ethnic groups. Visceral fat drives insulin resistance and an atherogenic lipid profile, so the same BMI corresponds to greater metabolic risk. This is why waist circumference and central-adiposity measures complement BMI in this population. The elevated fat-per-BMI relationship justifies the lower overweight and obesity action points."
   },
@@ -256,8 +374,1004 @@
     "source": "WHO-SEARO",
     "full_citation": "Synthesis of WHO/SEARO BMI guidance and ICMR-INDIAB / MASALA cohort findings on South Asian metabolic risk.",
     "section": "south_asian_metabolic_risk",
-    "relevance_tags": ["diabetes", "cvd", "india", "us_south_asian", "general"],
+    "relevance_tags": [
+      "diabetes",
+      "cvd",
+      "india",
+      "us_south_asian",
+      "general"
+    ],
     "placeholder": true,
     "text": "South Asian metabolic risk arises from an interaction of dietary patterns and genetic or developmental predisposition, not diet alone. Even after accounting for high-glycemic-load, low-fiber, and poor-fat-quality dietary patterns, South Asians retain excess diabetes and cardiovascular risk attributable to factors such as a thin-fat body composition, greater visceral adiposity, and a higher prevalence of elevated lipoprotein(a). This means dietary improvement is necessary but not sufficient, and its benefits compound against an elevated genetic baseline. Framing risk as diet acting on top of predisposition helps set realistic expectations for how much diet change can shift an individual's risk."
+  },
+  {
+    "id": "paper_zeevi_2015_chunk_1",
+    "source": "Zeevi et al. 2015 — Cell",
+    "full_citation": "Zeevi D, Korem T, Zmora N, et al. Personalized nutrition by prediction of glycemic responses. Cell. 2015;163(5):1079-1094.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "glycemic_variability",
+      "cgm",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "In a cohort of 800 non-diabetic adults wearing continuous glucose monitors, Zeevi and colleagues showed that the same standardised food produces markedly different post-meal glucose responses in different people. The study measured real-world glucose responses to more than 46,000 meals, establishing that a single population glycemic index poorly predicts any given person’s actual response."
+  },
+  {
+    "id": "paper_zeevi_2015_chunk_2",
+    "source": "Zeevi et al. 2015 — Cell",
+    "full_citation": "Zeevi D, Korem T, Zmora N, et al. Personalized nutrition by prediction of glycemic responses. Cell. 2015;163(5):1079-1094.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "glycemic_variability",
+      "individual_variation",
+      "glycemic_load"
+    ],
+    "placeholder": false,
+    "text": "Individual glycemic responses to identical meals varied enormously — up to roughly a four-fold difference between people eating exactly the same food. This means published glycemic-index values, which are population averages, explain only a fraction of the variation seen in real postprandial glucose rises."
+  },
+  {
+    "id": "paper_zeevi_2015_chunk_3",
+    "source": "Zeevi et al. 2015 — Cell",
+    "full_citation": "Zeevi D, Korem T, Zmora N, et al. Personalized nutrition by prediction of glycemic responses. Cell. 2015;163(5):1079-1094.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "individual_variation",
+      "glycemic_variability"
+    ],
+    "placeholder": false,
+    "text": "A machine-learning model integrating gut-microbiome composition, blood parameters, anthropometrics and physical activity predicted personal glucose responses far better than carbohydrate content or food glycemic index alone. Personalised diets built from these predictions lowered post-meal glucose in a follow-up trial, demonstrating that the response is a property of the person as much as the food."
+  },
+  {
+    "id": "paper_zeevi_2015_chunk_4",
+    "source": "Zeevi et al. 2015 — Cell",
+    "full_citation": "Zeevi D, Korem T, Zmora N, et al. Personalized nutrition by prediction of glycemic responses. Cell. 2015;163(5):1079-1094.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "individual_variation",
+      "south_asian",
+      "glycemic_load"
+    ],
+    "placeholder": false,
+    "text": "For a tool that scores meals using published glycemic-index values, this work is a caution: the values are population averages and any individual’s response may differ substantially. It supports pairing meal scoring with personal continuous-glucose data where available, and framing GI-based sub-scores as estimates rather than fixed truths for a given South Asian user."
+  },
+  {
+    "id": "paper_hall_2019_chunk_1",
+    "source": "Hall et al. 2019 — Cell Metabolism",
+    "full_citation": "Hall KD, Ayuketah A, Brychta R, et al. Ultra-processed diets cause excess calorie intake and weight gain: an inpatient randomized controlled trial of ad libitum food intake. Cell Metab. 2019;30(1):67-77.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "refined_carb",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "In a tightly controlled inpatient randomised crossover trial, adults ate ad libitum from either an ultra-processed or an unprocessed diet that were matched for calories, sugar, fat, fibre and macronutrients. Despite the matching, people spontaneously ate more and gained weight on the ultra-processed diet."
+  },
+  {
+    "id": "paper_hall_2019_chunk_2",
+    "source": "Hall et al. 2019 — Cell Metabolism",
+    "full_citation": "Hall KD, Ayuketah A, Brychta R, et al. Ultra-processed diets cause excess calorie intake and weight gain: an inpatient randomized controlled trial of ad libitum food intake. Cell Metab. 2019;30(1):67-77.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "refined_carb"
+    ],
+    "placeholder": false,
+    "text": "Participants consumed about 500 kcal per day more on the ultra-processed diet and gained weight, whereas they lost weight on the unprocessed diet — an effect independent of the meals’ macronutrient composition. Processing itself, not just sugar or fat content, drove the excess intake."
+  },
+  {
+    "id": "paper_hall_2019_chunk_3",
+    "source": "Hall et al. 2019 — Cell Metabolism",
+    "full_citation": "Hall KD, Ayuketah A, Brychta R, et al. Ultra-processed diets cause excess calorie intake and weight gain: an inpatient randomized controlled trial of ad libitum food intake. Cell Metab. 2019;30(1):67-77.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "refined_carb",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "The finding supports flagging ultra-processed (NOVA group 4) products in packaged-food analysis: the degree of processing is an independent risk signal beyond the nutrition label. Packaged snacks and refined convenience foods common in urban South Asian diets warrant caution on this basis alone."
+  },
+  {
+    "id": "paper_bhupathiraju_2014_chunk_1",
+    "source": "Bhupathiraju et al. 2014 — Am J Clin Nutr",
+    "full_citation": "Bhupathiraju SN, Tobias DK, Malik VS, et al. Glycemic index, glycemic load, and risk of type 2 diabetes: results from 3 large US cohorts and an updated meta-analysis. Am J Clin Nutr. 2014;100(1):218-232.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "glycemic_load",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "Pooling three large US cohorts with an updated meta-analysis, Bhupathiraju and colleagues found that a higher dietary glycemic load is independently associated with increased incidence of type 2 diabetes. The association held after adjustment for fibre and other dietary factors."
+  },
+  {
+    "id": "paper_bhupathiraju_2014_chunk_2",
+    "source": "Bhupathiraju et al. 2014 — Am J Clin Nutr",
+    "full_citation": "Bhupathiraju SN, Tobias DK, Malik VS, et al. Glycemic index, glycemic load, and risk of type 2 diabetes: results from 3 large US cohorts and an updated meta-analysis. Am J Clin Nutr. 2014;100(1):218-232.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "glycemic_load",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "The relationship between glycemic load and diabetes risk was dose-dependent, strengthening the case for glycemic load as a core metric of a meal’s diabetes-relevant carbohydrate burden. This meta-analysis is a primary evidence base for using glycemic load as the main diabetes sub-score."
+  },
+  {
+    "id": "paper_bhupathiraju_2014_chunk_3",
+    "source": "Bhupathiraju et al. 2014 — Am J Clin Nutr",
+    "full_citation": "Bhupathiraju SN, Tobias DK, Malik VS, et al. Glycemic index, glycemic load, and risk of type 2 diabetes: results from 3 large US cohorts and an updated meta-analysis. Am J Clin Nutr. 2014;100(1):218-232.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "glycemic_load",
+      "refined_carb",
+      "south_asian",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "Because South Asian diets are often built on high-glycemic refined staples such as white rice and refined-wheat rotis, a glycemic-load-driven score is well aligned with the dominant carbohydrate exposure in this population. It captures the cumulative carbohydrate quality and quantity that this evidence links to diabetes risk."
+  },
+  {
+    "id": "paper_keshet_2023_chunk_1",
+    "source": "Keshet et al. 2023 — Cell Metabolism",
+    "full_citation": "Keshet A, Shilo S, Godneva A, et al. CGMap: characterizing continuous glucose monitor data in thousands of non-diabetic individuals. Cell Metab. 2023;35(5):758-769.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "cgm",
+      "glycemic_variability",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "CGMap characterised continuous glucose monitoring data from thousands of non-diabetic individuals, mapping the range of normal glucose dynamics at population scale. It confirmed that even people without diabetes show wide inter-individual variation in glucose patterns."
+  },
+  {
+    "id": "paper_keshet_2023_chunk_2",
+    "source": "Keshet et al. 2023 — Cell Metabolism",
+    "full_citation": "Keshet A, Shilo S, Godneva A, et al. CGMap: characterizing continuous glucose monitor data in thousands of non-diabetic individuals. Cell Metab. 2023;35(5):758-769.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "cgm",
+      "glycemic_variability"
+    ],
+    "placeholder": false,
+    "text": "As one of the largest and most recent (2023) CGM datasets in healthy people, the study provides updated reference distributions for glucose variability metrics in the non-diabetic range. It extends earlier personalised-nutrition work with far greater statistical power."
+  },
+  {
+    "id": "paper_keshet_2023_chunk_3",
+    "source": "Keshet et al. 2023 — Cell Metabolism",
+    "full_citation": "Keshet A, Shilo S, Godneva A, et al. CGMap: characterizing continuous glucose monitor data in thousands of non-diabetic individuals. Cell Metab. 2023;35(5):758-769.",
+    "section": "glycemic_variability",
+    "relevance_tags": [
+      "individual_variation",
+      "cgm"
+    ],
+    "placeholder": false,
+    "text": "The scale of inter-individual variation reinforces that population glycemic-index values cannot fully predict a given person’s glucose response, and that personal CGM data adds real information beyond meal composition. This motivates linking meal scoring to individual glucose tracking."
+  },
+  {
+    "id": "paper_astrup_2020_chunk_1",
+    "source": "Astrup et al. 2020 — J Am Coll Cardiol",
+    "full_citation": "Astrup A, Magkos F, Bier DM, et al. Saturated fats and health: a reassessment and proposal for food-based recommendations. J Am Coll Cardiol. 2020;76(7):844-857.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "fat_quality",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This JACC state-of-the-art review reassessed the evidence linking saturated fat to cardiovascular disease and argued for food-based rather than single-nutrient recommendations. It concluded that the cardiovascular effect of saturated fat depends heavily on the whole food it comes in, not just total grams."
+  },
+  {
+    "id": "paper_astrup_2020_chunk_2",
+    "source": "Astrup et al. 2020 — J Am Coll Cardiol",
+    "full_citation": "Astrup A, Magkos F, Bier DM, et al. Saturated fats and health: a reassessment and proposal for food-based recommendations. J Am Coll Cardiol. 2020;76(7):844-857.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "dairy",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "The authors highlighted that dairy saturated fat — from curd, paneer, milk and yogurt — behaves differently from meat or tropical-oil (palm, coconut) saturated fat in terms of LDL particle characteristics and cardiovascular outcomes. Not all saturated-fat sources carry the same risk."
+  },
+  {
+    "id": "paper_astrup_2020_chunk_3",
+    "source": "Astrup et al. 2020 — J Am Coll Cardiol",
+    "full_citation": "Astrup A, Magkos F, Bier DM, et al. Saturated fats and health: a reassessment and proposal for food-based recommendations. J Am Coll Cardiol. 2020;76(7):844-857.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "dairy",
+      "fat_quality"
+    ],
+    "placeholder": false,
+    "text": "This is the primary basis for a partial exemption for dairy saturated fat in scoring, and it shows that a single blanket saturated-fat threshold is a simplification. A meal whose saturated fat comes mostly from fermented dairy in a high-fibre, low-refined-carb context should not be treated identically to ghee on white rice."
+  },
+  {
+    "id": "paper_hooper_2020_chunk_1",
+    "source": "Hooper et al. 2020 — Cochrane",
+    "full_citation": "Hooper L, Martin N, Jimoh OF, Kirk C, Foster E, Abdelhamid AS. Reduction in saturated fat intake for cardiovascular disease. Cochrane Database Syst Rev. 2020;(8):CD011737.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This Cochrane systematic review of randomised controlled trials found that reducing dietary saturated fat lowers the risk of cardiovascular events. It represents the most robust RCT-level evidence on the question and underpins the fat-quality sub-score."
+  },
+  {
+    "id": "paper_hooper_2020_chunk_2",
+    "source": "Hooper et al. 2020 — Cochrane",
+    "full_citation": "Hooper L, Martin N, Jimoh OF, Kirk C, Foster E, Abdelhamid AS. Reduction in saturated fat intake for cardiovascular disease. Cochrane Database Syst Rev. 2020;(8):CD011737.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "saturated_fat",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "Replacing saturated fat with polyunsaturated fat reduced cardiovascular events by about 17% across the pooled trials. The benefit came specifically from substitution with healthier fats rather than from reduction alone."
+  },
+  {
+    "id": "paper_hooper_2020_chunk_3",
+    "source": "Hooper et al. 2020 — Cochrane",
+    "full_citation": "Hooper L, Martin N, Jimoh OF, Kirk C, Foster E, Abdelhamid AS. Reduction in saturated fat intake for cardiovascular disease. Cochrane Database Syst Rev. 2020;(8):CD011737.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "Because the cardiovascular benefit depends on what replaces saturated fat, the evidence directly supports a MUFA:SFA ratio sub-score rather than a saturated-fat count in isolation. Swapping ghee or palm oil for mustard, groundnut or other unsaturated oils is the actionable lever."
+  },
+  {
+    "id": "paper_siritarino_2010_chunk_1",
+    "source": "Siri-Tarino et al. 2010 — Am J Clin Nutr",
+    "full_citation": "Siri-Tarino PW, Sun Q, Hu FB, Krauss RM. Meta-analysis of prospective cohort studies evaluating the association of saturated fat with cardiovascular disease. Am J Clin Nutr. 2010;91(3):535-546.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This meta-analysis of prospective cohort studies found no significant association between saturated-fat intake and coronary heart disease or cardiovascular disease when the replacement nutrient was left unspecified. It is a key data point in the ongoing scientific debate about saturated fat."
+  },
+  {
+    "id": "paper_siritarino_2010_chunk_2",
+    "source": "Siri-Tarino et al. 2010 — Am J Clin Nutr",
+    "full_citation": "Siri-Tarino PW, Sun Q, Hu FB, Krauss RM. Meta-analysis of prospective cohort studies evaluating the association of saturated fat with cardiovascular disease. Am J Clin Nutr. 2010;91(3):535-546.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "Often called the classic “saturated-fat controversy” paper, it shows that observational associations between saturated fat and heart disease are weaker than once assumed. Presenting it alongside intervention evidence gives users a balanced, honest view."
+  },
+  {
+    "id": "paper_siritarino_2010_chunk_3",
+    "source": "Siri-Tarino et al. 2010 — Am J Clin Nutr",
+    "full_citation": "Siri-Tarino PW, Sun Q, Hu FB, Krauss RM. Meta-analysis of prospective cohort studies evaluating the association of saturated fat with cardiovascular disease. Am J Clin Nutr. 2010;91(3):535-546.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "saturated_fat",
+      "fat_quality"
+    ],
+    "placeholder": false,
+    "text": "The apparent contradiction with intervention trials resolves once the replacement nutrient is considered: swapping saturated fat for refined carbohydrate yields little benefit, whereas swapping it for unsaturated fat does. This reinforces framing fat quality, not just quantity, as the target."
+  },
+  {
+    "id": "paper_rastogi_2004_chunk_1",
+    "source": "Rastogi et al. 2004 — Am J Clin Nutr",
+    "full_citation": "Rastogi T, Reddy KS, Vaz M, et al. Diet and risk of ischemic heart disease in India. Am J Clin Nutr. 2004;79(4):582-592.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "cardiovascular",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "This case-control study in Indian populations examined how dietary fat relates to ischemic heart disease, providing India-specific rather than Western data. It is one of the few studies directly characterising fat intake and coronary risk in South Asians."
+  },
+  {
+    "id": "paper_rastogi_2004_chunk_2",
+    "source": "Rastogi et al. 2004 — Am J Clin Nutr",
+    "full_citation": "Rastogi T, Reddy KS, Vaz M, et al. Diet and risk of ischemic heart disease in India. Am J Clin Nutr. 2004;79(4):582-592.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "cardiovascular",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "The study documented a cardioprotective profile for mustard oil, a monounsaturated-rich cooking oil widely used in parts of India, relative to more saturated fats. This is a population-specific signal favouring unsaturated cooking oils."
+  },
+  {
+    "id": "paper_rastogi_2004_chunk_3",
+    "source": "Rastogi et al. 2004 — Am J Clin Nutr",
+    "full_citation": "Rastogi T, Reddy KS, Vaz M, et al. Diet and risk of ischemic heart disease in India. Am J Clin Nutr. 2004;79(4):582-592.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "The mustard-oil finding directly supports the MUFA:SFA ratio sub-score and the recommendation to prefer mustard or groundnut oil over ghee or vanaspati in Indian-context meals. It grounds the fat-quality logic in South Asian cooking practice."
+  },
+  {
+    "id": "paper_gharibans_2021_chunk_1",
+    "source": "Gharibans et al. 2021 — Nutrients",
+    "full_citation": "Gharibans AA, et al. South Asian dietary patterns and cardiovascular risk. Nutrients. 2021;13(2):545.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "fat_quality",
+      "cardiovascular",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "This review examined dietary fat patterns specific to South Asian populations and their associations with cardiovascular biomarkers. It synthesised how the typical fats and cooking practices of South Asian diets relate to CVD risk."
+  },
+  {
+    "id": "paper_gharibans_2021_chunk_2",
+    "source": "Gharibans et al. 2021 — Nutrients",
+    "full_citation": "Gharibans AA, et al. South Asian dietary patterns and cardiovascular risk. Nutrients. 2021;13(2):545.",
+    "section": "fat_quality_cvd",
+    "relevance_tags": [
+      "south_asian",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "The patterns described are directly relevant to context-specific scoring for both India-resident and US South Asian users, whose fat sources and dishes differ from Western reference diets. It reinforces tailoring CVD scoring to South Asian dietary reality."
+  },
+  {
+    "id": "paper_narayan_2024_chunk_1",
+    "source": "Narayan et al. 2024 — Diabetes Care",
+    "full_citation": "Narayan KMV, Kondal D, Kobes S, et al. Diabetes in South Asians: uncovering novel risk factors with longitudinal studies (Kelly West Award Lecture 2023). Diabetes Care. 2024;47(1):7-16.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "visceral_fat",
+      "type2_diabetes",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "In the 2024 Kelly West Award lecture drawing on the MASALA study, Narayan and colleagues reported that hepatic (liver) fat and visceral fat are independent predictors of glycemic progression in South Asians. Ectopic fat, not overall body size, drives much of the risk in this group."
+  },
+  {
+    "id": "paper_narayan_2024_chunk_2",
+    "source": "Narayan et al. 2024 — Diabetes Care",
+    "full_citation": "Narayan KMV, Kondal D, Kobes S, et al. Diabetes in South Asians: uncovering novel risk factors with longitudinal studies (Kelly West Award Lecture 2023). Diabetes Care. 2024;47(1):7-16.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "type2_diabetes",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "South Asians were shown to have both lower insulin secretion (weaker beta-cell function) and greater insulin resistance than other groups — a dual mechanism explaining why the same meal causes more metabolic damage in a South Asian person. This is the biological basis for stricter India-context scoring."
+  },
+  {
+    "id": "paper_narayan_2024_chunk_3",
+    "source": "Narayan et al. 2024 — Diabetes Care",
+    "full_citation": "Narayan KMV, Kondal D, Kobes S, et al. Diabetes in South Asians: uncovering novel risk factors with longitudinal studies (Kelly West Award Lecture 2023). Diabetes Care. 2024;47(1):7-16.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "visceral_fat",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "Waist circumference is a better proxy for this risk than BMI, and hepatic fat measured by CT or MRI is better still; elevated ceramide levels appear to mediate the link between liver fat and glycemic status. These markers refine risk assessment beyond weight alone."
+  },
+  {
+    "id": "paper_narayan_2024_chunk_4",
+    "source": "Narayan et al. 2024 — Diabetes Care",
+    "full_citation": "Narayan KMV, Kondal D, Kobes S, et al. Diabetes in South Asians: uncovering novel risk factors with longitudinal studies (Kelly West Award Lecture 2023). Diabetes Care. 2024;47(1):7-16.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "south_asian",
+      "visceral_fat",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "For a diet tool, the practical implication is that BMI understates South Asian risk, waist circumference helps, but hepatic fat — which cannot be assessed from diet — remains unmeasured and should be acknowledged in disclaimers. This is arguably the most important recent paper for the app’s scientific foundation."
+  },
+  {
+    "id": "paper_nair_2025_chunk_1",
+    "source": "Nair et al. 2025 — Diabetes Care",
+    "full_citation": "Nair M, et al. Lessons learned from the epidemiology of type 2 diabetes in South Asians (Kelly West Award Lecture 2024). Diabetes Care. 2025;48(2):153.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "type2_diabetes",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "The 2025 Kelly West Award lecture summarised the current state of knowledge on type 2 diabetes epidemiology in South Asians and confirmed the distinct “South Asian phenotype.” It consolidates decades of evidence into a coherent risk picture."
+  },
+  {
+    "id": "paper_nair_2025_chunk_2",
+    "source": "Nair et al. 2025 — Diabetes Care",
+    "full_citation": "Nair M, et al. Lessons learned from the epidemiology of type 2 diabetes in South Asians (Kelly West Award Lecture 2024). Diabetes Care. 2025;48(2):153.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "type2_diabetes",
+      "south_asian",
+      "visceral_fat"
+    ],
+    "placeholder": false,
+    "text": "Defining features include diabetes onset at lower BMI than Western populations, rapid beta-cell decline, and excess ectopic (liver and visceral) fat. South Asians accumulate metabolic risk at body sizes considered healthy by European standards."
+  },
+  {
+    "id": "paper_nair_2025_chunk_3",
+    "source": "Nair et al. 2025 — Diabetes Care",
+    "full_citation": "Nair M, et al. Lessons learned from the epidemiology of type 2 diabetes in South Asians (Kelly West Award Lecture 2024). Diabetes Care. 2025;48(2):153.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "south_asian",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "Because beta-cell function declines rapidly once impaired glucose tolerance sets in, South Asians progress from pre-diabetes to full type 2 diabetes faster than other groups. This makes dietary intervention at the pre-diabetic stage especially time-sensitive."
+  },
+  {
+    "id": "paper_anand_2000_chunk_1",
+    "source": "Anand et al. 2000 — Lancet",
+    "full_citation": "Anand SS, Yusuf S, Vuksan V, et al. Risk factors for myocardial infarction in South Asians (SHARE study). Lancet. 2000;356(9226):279-284.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "cardiovascular",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "This study of South Asians documented that they experience higher cardiovascular disease risk than other populations even at equivalent levels of conventional risk factors. The excess risk is not fully explained by standard risk-factor burden."
+  },
+  {
+    "id": "paper_anand_2000_chunk_2",
+    "source": "Anand et al. 2000 — Lancet",
+    "full_citation": "Anand SS, Yusuf S, Vuksan V, et al. Risk factors for myocardial infarction in South Asians (SHARE study). Lancet. 2000;356(9226):279-284.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "south_asian",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "As a foundational paper on elevated South Asian cardiovascular risk, it supports applying a stricter, context-specific lens to South Asian meals rather than assuming Western risk thresholds transfer directly. It underpins the India-context scoring rationale."
+  },
+  {
+    "id": "paper_misra_2013_chunk_1",
+    "source": "Misra & Shrivastava 2013 — Nutrients",
+    "full_citation": "Misra A, Shrivastava U. Obesity and dyslipidemia in South Asians. Nutrients. 2013;5(7):2708-2733.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "south_asian",
+      "visceral_fat"
+    ],
+    "placeholder": false,
+    "text": "Misra and Shrivastava reviewed the “thin-fat” phenotype in South Asians: individuals who are normal weight by conventional measures yet metabolically obese, with excess body fat and adverse metabolic profiles. Normal weight does not mean low risk in this group."
+  },
+  {
+    "id": "paper_misra_2013_chunk_2",
+    "source": "Misra & Shrivastava 2013 — Nutrients",
+    "full_citation": "Misra A, Shrivastava U. Obesity and dyslipidemia in South Asians. Nutrients. 2013;5(7):2708-2733.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "The evidence supports using lower, Asian-specific BMI cut-offs — for example a BMI of 23 or above defining overweight — rather than standard European thresholds. Applying Western BMI categories misses many at-risk South Asians."
+  },
+  {
+    "id": "paper_misra_2013_chunk_3",
+    "source": "Misra & Shrivastava 2013 — Nutrients",
+    "full_citation": "Misra A, Shrivastava U. Obesity and dyslipidemia in South Asians. Nutrients. 2013;5(7):2708-2733.",
+    "section": "south_asian_risk",
+    "relevance_tags": [
+      "visceral_fat",
+      "south_asian",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "At any given BMI, South Asians tend to carry more total and visceral fat and show a more atherogenic dyslipidemia pattern, including higher triglycerides and lower HDL cholesterol. This body-composition difference helps explain their elevated diabetes and cardiovascular risk."
+  },
+  {
+    "id": "paper_riddell_2017_chunk_1",
+    "source": "Riddell et al. 2017 — Lancet Diabetes Endocrinol",
+    "full_citation": "Riddell MC, Gallen IW, Smart CE, et al. Exercise management in type 1 diabetes: a consensus statement. Lancet Diabetes Endocrinol. 2017;5(5):377-390.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes"
+    ],
+    "placeholder": false,
+    "text": "This consensus statement described how exercise alters glucose levels and insulin requirements in people with type 1 diabetes. Different exercise types shift glucose in different directions, complicating self-management."
+  },
+  {
+    "id": "paper_riddell_2017_chunk_2",
+    "source": "Riddell et al. 2017 — Lancet Diabetes Endocrinol",
+    "full_citation": "Riddell MC, Gallen IW, Smart CE, et al. Exercise management in type 1 diabetes: a consensus statement. Lancet Diabetes Endocrinol. 2017;5(5):377-390.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "The guidance is relevant to analysing how physical strain changes insulin sensitivity for an individual T1D user, and it underscores that responses must be individualised. It complements dietary scoring with an activity dimension in T1D contexts."
+  },
+  {
+    "id": "paper_bell_2015_chunk_1",
+    "source": "Bell et al. 2015 — Am J Clin Nutr",
+    "full_citation": "Bell KJ, Toschi E, Steil GM, Wolpert HA. Estimating insulin demand for protein-containing foods using the food insulin index. Am J Clin Nutr. 2015;101(3):467-473.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "protein_quality"
+    ],
+    "placeholder": false,
+    "text": "Bell and colleagues showed that fat and protein in a meal require additional insulin beyond what carbohydrate counting alone predicts in type 1 diabetes. Carbohydrate is not the only macronutrient that drives insulin need."
+  },
+  {
+    "id": "paper_bell_2015_chunk_2",
+    "source": "Bell et al. 2015 — Am J Clin Nutr",
+    "full_citation": "Bell KJ, Toschi E, Steil GM, Wolpert HA. Estimating insulin demand for protein-containing foods using the food insulin index. Am J Clin Nutr. 2015;101(3):467-473.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes"
+    ],
+    "placeholder": false,
+    "text": "High-fat, high-protein meals slow gastric emptying and produce a delayed, prolonged glucose rise several hours after eating, which a standard rapid bolus mis-times. This is why dishes like paneer curries or dal makhani are hard to dose for."
+  },
+  {
+    "id": "paper_bell_2015_chunk_3",
+    "source": "Bell et al. 2015 — Am J Clin Nutr",
+    "full_citation": "Bell KJ, Toschi E, Steil GM, Wolpert HA. Estimating insulin demand for protein-containing foods using the food insulin index. Am J Clin Nutr. 2015;101(3):467-473.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes"
+    ],
+    "placeholder": false,
+    "text": "The work directly justifies a type-1-specific fat-and-protein impact consideration alongside glycemic load, and the use of extended or dual-wave boluses for such meals. Meal scoring for T1D should surface delayed-rise risk, not just spike speed."
+  },
+  {
+    "id": "paper_dyson_2023_chunk_1",
+    "source": "Dyson et al. 2023 — Diabetologia",
+    "full_citation": "Dyson PA, Twenefour D, Breen C, et al. Evidence-based European recommendations for the dietary management of diabetes. Diabetologia. 2023;66(6):965-985.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "These evidence-based European recommendations cover dietary management for both type 1 and type 2 diabetes. They represent a current, comprehensive clinical guideline synthesising nutrition evidence across diabetes types."
+  },
+  {
+    "id": "paper_dyson_2023_chunk_2",
+    "source": "Dyson et al. 2023 — Diabetologia",
+    "full_citation": "Dyson PA, Twenefour D, Breen C, et al. Evidence-based European recommendations for the dietary management of diabetes. Diabetologia. 2023;66(6):965-985.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "As a 2023 guideline, it emphasises flexible, individualised dietary patterns rather than a single prescriptive diet, while supporting higher-fibre, lower-refined-carbohydrate eating. It is a recent anchor for framing diabetes dietary advice."
+  },
+  {
+    "id": "paper_turton_2025_chunk_1",
+    "source": "Turton et al. 2025 — J Clin Endocrinol Metab",
+    "full_citation": "Turton JL, et al. Dietary patterns for glycemic management in type 1 diabetes. J Clin Endocrinol Metab. 2025. doi:10.1210/clinem/dgaf448.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes"
+    ],
+    "placeholder": false,
+    "text": "This meta-analysis pooled 12 studies published between 2011 and 2024 examining dietary patterns for glycemic management in type 1 diabetes. It is among the most current syntheses focused specifically on T1D nutrition."
+  },
+  {
+    "id": "paper_turton_2025_chunk_2",
+    "source": "Turton et al. 2025 — J Clin Endocrinol Metab",
+    "full_citation": "Turton JL, et al. Dietary patterns for glycemic management in type 1 diabetes. J Clin Endocrinol Metab. 2025. doi:10.1210/clinem/dgaf448.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "fiber"
+    ],
+    "placeholder": false,
+    "text": "A high-fibre diet with moderate carbohydrate restriction was associated with the best glycemic outcomes in T1D. Fibre continues to help by slowing glucose absorption even under insulin therapy."
+  },
+  {
+    "id": "paper_turton_2025_chunk_3",
+    "source": "Turton et al. 2025 — J Clin Endocrinol Metab",
+    "full_citation": "Turton JL, et al. Dietary patterns for glycemic management in type 1 diabetes. J Clin Endocrinol Metab. 2025. doi:10.1210/clinem/dgaf448.",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "Low-carbohydrate diets also showed benefit but carry hypoglycemia and diabetic ketoacidosis risks that a dietary score cannot assess, so individual tailoring under clinical guidance is essential. Recommendations for T1D must stay individualised and cautious."
+  },
+  {
+    "id": "paper_ada_2024_chunk_1",
+    "source": "ADA 2024 — Diabetes Care",
+    "full_citation": "American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes—2024. Diabetes Care. 2024;47(Suppl 1).",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "The ADA Standards of Care 2024 state that no single ideal percentage of calories from carbohydrate, protein or fat is recommended for people with diabetes. Macronutrient targets should be individualised."
+  },
+  {
+    "id": "paper_ada_2024_chunk_2",
+    "source": "ADA 2024 — Diabetes Care",
+    "full_citation": "American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes—2024. Diabetes Care. 2024;47(Suppl 1).",
+    "section": "type1_diabetes",
+    "relevance_tags": [
+      "type1_diabetes",
+      "type2_diabetes",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "The standards endorse flexible, individualised eating patterns for both type 1 and type 2 diabetes rather than a one-size-fits-all diet. This supports presenting meal scores as informational rather than prescriptive."
+  },
+  {
+    "id": "paper_ceriello_2019_chunk_1",
+    "source": "Ceriello et al. 2019 — Diabetes Obes Metab",
+    "full_citation": "Ceriello A, Monnier L, Owens D. Glycaemic variability in diabetes: clinical and therapeutic implications. Diabetes Obes Metab. 2019;21(10):2235-2243.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "glycemic_variability",
+      "cardiovascular",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "This review presented evidence that glycemic variability — the swing of glucose levels over time — independently predicts cardiovascular events in type 2 diabetes, beyond average glucose or HbA1c. Fluctuation itself carries risk."
+  },
+  {
+    "id": "paper_ceriello_2019_chunk_2",
+    "source": "Ceriello et al. 2019 — Diabetes Obes Metab",
+    "full_citation": "Ceriello A, Monnier L, Owens D. Glycaemic variability in diabetes: clinical and therapeutic implications. Diabetes Obes Metab. 2019;21(10):2235-2243.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "glycemic_variability",
+      "cgm"
+    ],
+    "placeholder": false,
+    "text": "The mechanistic rationale involves oxidative stress and endothelial damage from repeated glucose peaks and troughs. This supports tracking a coefficient-of-variation metric from continuous glucose data rather than mean glucose alone."
+  },
+  {
+    "id": "paper_monnier_2023_chunk_1",
+    "source": "Monnier et al. 2023 — J Diabetes Sci Technol",
+    "full_citation": "Monnier L, Colette C, Owens D. Glycemic variability: where do we stand? J Diabetes Sci Technol. 2023;17(5):1265-1273.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "glycemic_variability",
+      "cgm"
+    ],
+    "placeholder": false,
+    "text": "This 2023 review took stock of glycemic-variability metrics and their clinical relevance, clarifying which measures (such as coefficient of variation and time in range) are most useful. It provides an up-to-date framework for interpreting CGM-derived variability."
+  },
+  {
+    "id": "paper_evert_2019_chunk_1",
+    "source": "Evert et al. 2019 — Diabetes Care",
+    "full_citation": "Evert AB, Dennison M, Gardner CD, et al. Nutrition therapy for adults with diabetes or prediabetes: a consensus report. Diabetes Care. 2019;42(5):731-754.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "type2_diabetes",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "This ADA consensus report on nutrition therapy for adults with diabetes and prediabetes is a foundational reference for overall dietary-risk framing. It reviews the evidence across eating patterns and metabolic outcomes."
+  },
+  {
+    "id": "paper_evert_2019_chunk_2",
+    "source": "Evert et al. 2019 — Diabetes Care",
+    "full_citation": "Evert AB, Dennison M, Gardner CD, et al. Nutrition therapy for adults with diabetes or prediabetes: a consensus report. Diabetes Care. 2019;42(5):731-754.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "type2_diabetes",
+      "individual_variation"
+    ],
+    "placeholder": false,
+    "text": "The report concluded that no single macronutrient distribution suits everyone and endorsed individualised eating patterns that emphasise food quality — whole grains, fibre, legumes and reduced refined carbohydrate. It supports quality-focused rather than count-focused scoring."
+  },
+  {
+    "id": "paper_shah_2019_chunk_1",
+    "source": "Shah et al. 2019 — J Clin Endocrinol Metab",
+    "full_citation": "Shah VN, DuBose SN, Li Z, et al. Continuous glucose monitoring profiles in healthy nondiabetic participants: a multicenter prospective study. J Clin Endocrinol Metab. 2019;104(10):4356-4364.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "cgm",
+      "glycemic_variability"
+    ],
+    "placeholder": false,
+    "text": "This multicenter study established reference ranges for continuous-glucose-monitoring metrics in healthy, non-diabetic adults. It defines what normal glucose profiles look like when diabetes is absent."
+  },
+  {
+    "id": "paper_shah_2019_chunk_2",
+    "source": "Shah et al. 2019 — J Clin Endocrinol Metab",
+    "full_citation": "Shah VN, DuBose SN, Li Z, et al. Continuous glucose monitoring profiles in healthy nondiabetic participants: a multicenter prospective study. J Clin Endocrinol Metab. 2019;104(10):4356-4364.",
+    "section": "cgm_variability",
+    "relevance_tags": [
+      "cgm",
+      "glycemic_variability"
+    ],
+    "placeholder": false,
+    "text": "The reference values provide a baseline for interpreting time-in-range and coefficient-of-variation targets in personal glucose data. They anchor whether an individual’s variability is within a healthy band."
+  },
+  {
+    "id": "paper_reynolds_2019_chunk_1",
+    "source": "Reynolds et al. 2019 — Lancet",
+    "full_citation": "Reynolds A, Mann J, Cummings J, Winter N, Mete E, Te Morenga L. Carbohydrate quality and human health: a series of systematic reviews and meta-analyses. Lancet. 2019;393(10170):434-445.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber"
+    ],
+    "placeholder": false,
+    "text": "This Lancet series of systematic reviews and meta-analyses pooled about 185 prospective studies and clinical trials on carbohydrate quality. Higher dietary fibre and whole-grain intake were associated with lower all-cause mortality and reduced incidence of major diseases including type 2 diabetes and coronary heart disease."
+  },
+  {
+    "id": "paper_reynolds_2019_chunk_2",
+    "source": "Reynolds et al. 2019 — Lancet",
+    "full_citation": "Reynolds A, Mann J, Cummings J, Winter N, Mete E, Te Morenga L. Carbohydrate quality and human health: a series of systematic reviews and meta-analyses. Lancet. 2019;393(10170):434-445.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "The relationship was strongly dose-dependent, with benefit continuing to accrue at intakes above 25–30 g of fibre per day. This dose-response supports weighting the fibre sub-score generously and setting a higher per-meal fibre target."
+  },
+  {
+    "id": "paper_reynolds_2019_chunk_3",
+    "source": "Reynolds et al. 2019 — Lancet",
+    "full_citation": "Reynolds A, Mann J, Cummings J, Winter N, Mete E, Te Morenga L. Carbohydrate quality and human health: a series of systematic reviews and meta-analyses. Lancet. 2019;393(10170):434-445.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "For South Asian diets, the finding favours whole grains, legumes and vegetables over refined staples, and justifies rewarding fibre-rich meals in scoring. It is among the strongest recent evidence bases for the fibre sub-score."
+  },
+  {
+    "id": "paper_dahl_2015_chunk_1",
+    "source": "Dahl & Stewart 2015 — J Acad Nutr Diet",
+    "full_citation": "Dahl WJ, Stewart ML. Position of the Academy of Nutrition and Dietetics: Health Implications of Dietary Fiber. J Acad Nutr Diet. 2015;115(11):1861-1870.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber"
+    ],
+    "placeholder": false,
+    "text": "This Academy of Nutrition and Dietetics position paper provides a comprehensive evidence review on the health implications of dietary fibre. It summarises fibre’s benefits for glycemic control, blood lipids, weight and gut health."
+  },
+  {
+    "id": "paper_dahl_2015_chunk_2",
+    "source": "Dahl & Stewart 2015 — J Acad Nutr Diet",
+    "full_citation": "Dahl WJ, Stewart ML. Position of the Academy of Nutrition and Dietetics: Health Implications of Dietary Fiber. J Acad Nutr Diet. 2015;115(11):1861-1870.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber"
+    ],
+    "placeholder": false,
+    "text": "The paper serves as an authoritative reference for setting fibre-intake recommendations and the thresholds used in a fibre sub-score. It grounds fibre targets in consensus dietetics guidance."
+  },
+  {
+    "id": "paper_weickert_2018_chunk_1",
+    "source": "Weickert & Pfeiffer 2018 — J Nutr",
+    "full_citation": "Weickert MO, Pfeiffer AFH. Impact of dietary fiber consumption on insulin resistance and the prevention of type 2 diabetes. J Nutr. 2018;148(1):7-12.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "This review examined how dietary fibre reduces insulin resistance and helps prevent type 2 diabetes. It links higher fibre intake to improved insulin sensitivity."
+  },
+  {
+    "id": "paper_weickert_2018_chunk_2",
+    "source": "Weickert & Pfeiffer 2018 — J Nutr",
+    "full_citation": "Weickert MO, Pfeiffer AFH. Impact of dietary fiber consumption on insulin resistance and the prevention of type 2 diabetes. J Nutr. 2018;148(1):7-12.",
+    "section": "dietary_fiber",
+    "relevance_tags": [
+      "fiber",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "Mechanistically, fibre slows carbohydrate absorption, feeds gut bacteria that produce short-chain fatty acids, and reduces hepatic glucose output. These pathways together lower the post-meal glucose and insulin burden."
+  },
+  {
+    "id": "paper_becerra_2018_chunk_1",
+    "source": "Becerra-Tomás et al. 2018 — Clin Nutr",
+    "full_citation": "Becerra-Tomás N, Diaz-López A, Rosique-Esteban N, et al. Legume consumption is inversely associated with type 2 diabetes incidence in adults: a prospective assessment from the PREDIMED study. Clin Nutr. 2018;37(3):906-913.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "protein_quality",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "This prospective study and dose-response meta-analysis found that higher legume consumption is inversely associated with the incidence of type 2 diabetes. Regularly eating pulses tracked with lower diabetes risk."
+  },
+  {
+    "id": "paper_becerra_2018_chunk_2",
+    "source": "Becerra-Tomás et al. 2018 — Clin Nutr",
+    "full_citation": "Becerra-Tomás N, Diaz-López A, Rosique-Esteban N, et al. Legume consumption is inversely associated with type 2 diabetes incidence in adults: a prospective assessment from the PREDIMED study. Clin Nutr. 2018;37(3):906-913.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "type2_diabetes"
+    ],
+    "placeholder": false,
+    "text": "People with the highest legume intake had roughly a 22% lower risk of developing type 2 diabetes compared with the lowest consumers. The protective association was consistent across the pooled evidence."
+  },
+  {
+    "id": "paper_becerra_2018_chunk_3",
+    "source": "Becerra-Tomás et al. 2018 — Clin Nutr",
+    "full_citation": "Becerra-Tomás N, Diaz-López A, Rosique-Esteban N, et al. Legume consumption is inversely associated with type 2 diabetes incidence in adults: a prospective assessment from the PREDIMED study. Clin Nutr. 2018;37(3):906-913.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "south_asian",
+      "protein_quality"
+    ],
+    "placeholder": false,
+    "text": "South Asian diets typically include substantially more legumes — dals, chana, rajma — than Western diets, making this a genuinely protective feature of the cuisine. Scoring that credits legumes as quality protein correctly captures this benefit."
+  },
+  {
+    "id": "paper_viguiliouk_2019_chunk_1",
+    "source": "Viguiliouk et al. 2019 — Nutrients",
+    "full_citation": "Viguiliouk E, Glenn AJ, Nishi SK, et al. Associations between dietary pulses alone or with other legumes and cardiometabolic disease outcomes: substituting plant proteins for animal proteins. Nutrients. 2019;11(11):2701.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "protein_quality",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This review found that replacing animal protein with plant protein improves cardiometabolic risk factors. Shifting protein sources toward legumes and other plants was beneficial."
+  },
+  {
+    "id": "paper_viguiliouk_2019_chunk_2",
+    "source": "Viguiliouk et al. 2019 — Nutrients",
+    "full_citation": "Viguiliouk E, Glenn AJ, Nishi SK, et al. Associations between dietary pulses alone or with other legumes and cardiometabolic disease outcomes: substituting plant proteins for animal proteins. Nutrients. 2019;11(11):2701.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "protein_quality",
+      "cardiovascular",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "Specific improvements included lower LDL cholesterol and reduced blood pressure when plant proteins substituted for animal proteins. This links protein quality to both cardiovascular and blood-pressure benefit."
+  },
+  {
+    "id": "paper_jayalath_2014_chunk_1",
+    "source": "Jayalath et al. 2014 — Am J Hypertens",
+    "full_citation": "Jayalath VH, de Souza RJ, Sievenpiper JL, et al. Effect of dietary pulses on blood pressure: a systematic review and meta-analysis of controlled feeding trials. Am J Hypertens. 2014;27(1):56-64.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "This systematic review and meta-analysis of controlled feeding trials found that dietary pulses lower blood pressure. Adding legumes to the diet produced measurable blood-pressure reductions."
+  },
+  {
+    "id": "paper_jayalath_2014_chunk_2",
+    "source": "Jayalath et al. 2014 — Am J Hypertens",
+    "full_citation": "Jayalath VH, de Souza RJ, Sievenpiper JL, et al. Effect of dietary pulses on blood pressure: a systematic review and meta-analysis of controlled feeding trials. Am J Hypertens. 2014;27(1):56-64.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "Legume consumption reduced systolic blood pressure by about 2.25 mmHg on average across the trials. Even a modest population-level shift of this size is clinically meaningful for stroke and cardiovascular risk."
+  },
+  {
+    "id": "paper_jayalath_2014_chunk_3",
+    "source": "Jayalath et al. 2014 — Am J Hypertens",
+    "full_citation": "Jayalath VH, de Souza RJ, Sievenpiper JL, et al. Effect of dietary pulses on blood pressure: a systematic review and meta-analysis of controlled feeding trials. Am J Hypertens. 2014;27(1):56-64.",
+    "section": "protein_legumes",
+    "relevance_tags": [
+      "legume",
+      "hypertension",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "The evidence supports counting legumes as a protective factor in a hypertension score, which is especially relevant for legume-rich South Asian diets. Dals and pulses can partially offset the blood-pressure impact of dietary sodium."
+  },
+  {
+    "id": "paper_aburto_2013_chunk_1",
+    "source": "Aburto et al. 2013 — BMJ",
+    "full_citation": "Aburto NJ, Ziolkovska A, Hooper L, Elliott P, Cappuccio FP, Meerpohl JJ. Effect of lower sodium intake on health: systematic review and meta-analyses. BMJ. 2013;346:f1326.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This WHO-commissioned systematic review and meta-analysis found that lower sodium intake is associated with lower blood pressure and fewer cardiovascular events. It is a primary evidence base for treating sodium as a blood-pressure risk driver."
+  },
+  {
+    "id": "paper_aburto_2013_chunk_2",
+    "source": "Aburto et al. 2013 — BMJ",
+    "full_citation": "Aburto NJ, Ziolkovska A, Hooper L, Elliott P, Cappuccio FP, Meerpohl JJ. Effect of lower sodium intake on health: systematic review and meta-analyses. BMJ. 2013;346:f1326.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "Reducing sodium consistently lowered blood pressure across trials, with WHO recommending less than 2000 mg of sodium per day. This underpins a conservative per-meal sodium threshold in scoring."
+  },
+  {
+    "id": "paper_antonios_1995_chunk_1",
+    "source": "Antonios & MacGregor 1995 — Lancet",
+    "full_citation": "Antonios TFT, MacGregor GA. Salt — more adverse effects. Lancet. 1995;348(9022):250-251.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension",
+      "south_asian"
+    ],
+    "placeholder": false,
+    "text": "This editorial highlighted evidence that South Asians have higher rates of salt sensitivity than European populations. The same sodium intake tends to raise blood pressure more in salt-sensitive individuals."
+  },
+  {
+    "id": "paper_antonios_1995_chunk_2",
+    "source": "Antonios & MacGregor 1995 — Lancet",
+    "full_citation": "Antonios TFT, MacGregor GA. Salt — more adverse effects. Lancet. 1995;348(9022):250-251.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "south_asian",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "It is a primary reference for why dietary sodium matters more for South Asians, justifying a stricter sodium threshold in India-context scoring. Salt sensitivity makes sodium reduction a high-value lever in this population."
+  },
+  {
+    "id": "paper_he_2009_chunk_1",
+    "source": "He & MacGregor 2009 — J Hum Hypertens",
+    "full_citation": "He FJ, MacGregor GA. A comprehensive review on salt and health and current experience of worldwide salt reduction programmes. J Hum Hypertens. 2009;23(6):363-384.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension",
+      "cardiovascular"
+    ],
+    "placeholder": false,
+    "text": "This comprehensive review synthesised the evidence for salt’s role in raising blood pressure and cardiovascular risk, drawing on trials and population salt-reduction programmes. It documents a consistent dose-response between salt intake and blood pressure."
+  },
+  {
+    "id": "paper_he_2009_chunk_2",
+    "source": "He & MacGregor 2009 — J Hum Hypertens",
+    "full_citation": "He FJ, MacGregor GA. A comprehensive review on salt and health and current experience of worldwide salt reduction programmes. J Hum Hypertens. 2009;23(6):363-384.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "The review supports both the sodium component of a cardiovascular score and a dedicated hypertension score. Population-level salt reduction has repeatedly lowered blood pressure and cardiovascular events."
+  },
+  {
+    "id": "paper_graudal_2014_chunk_1",
+    "source": "Graudal et al. 2014 — Am J Hypertens",
+    "full_citation": "Graudal NA, Hubeck-Graudal T, Jürgens G. Effects of low-sodium diet vs. high-sodium diet on blood pressure, renin, aldosterone, catecholamines, cholesterol, and triglyceride. Am J Hypertens. 2014;27(9):1129-1137.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "This meta-analysis is the counterpoint in the sodium debate, suggesting that very low sodium intake may not be uniformly beneficial and could carry J-curve effects on some outcomes. It complicates a simple lower-is-always-better view."
+  },
+  {
+    "id": "paper_graudal_2014_chunk_2",
+    "source": "Graudal et al. 2014 — Am J Hypertens",
+    "full_citation": "Graudal NA, Hubeck-Graudal T, Jürgens G. Effects of low-sodium diet vs. high-sodium diet on blood pressure, renin, aldosterone, catecholamines, cholesterol, and triglyceride. Am J Hypertens. 2014;27(9):1129-1137.",
+    "section": "sodium_hypertension",
+    "relevance_tags": [
+      "sodium",
+      "hypertension"
+    ],
+    "placeholder": false,
+    "text": "Presenting this alongside the WHO and salt-sensitivity evidence gives users a balanced, honest picture: the priority is avoiding high sodium rather than pursuing extreme restriction. It supports a moderate rather than alarmist sodium message."
   }
 ]
