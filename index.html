@@ -225,22 +225,36 @@
       <p>This calculator helps South Asians understand how individual meals
         contribute to type 2 diabetes, cardiovascular disease, and hypertension
         risk factors, using thresholds calibrated to South Asian-specific research.</p>
-      <p>Risk scores are educational, not diagnostic. The formulas are the
-        developer's own design derived from published research parameters —
-        they are not validated clinical instruments. Consult a qualified
-        healthcare provider for personal medical decisions.</p>
       <h3>Data sources</h3>
       <ul>
-        <li>Indian Nutrient Databank (INDB) — ingredient nutrient data</li>
-        <li>ICMR-INDIAB Study — India-context diabetes risk thresholds</li>
-        <li>MASALA Study (UCSF) — US South Asian cardiovascular risk data</li>
-        <li>Augustin et al. 2020 — glycemic index meta-analysis</li>
-        <li>WHO/SEARO 2004 — Asian-specific BMI cutoffs</li>
+        <li>INDB / ICMR Indian Food Composition Tables — ingredient nutritional data</li>
+        <li>Augustin et al. 2021 International Glycemic Index Tables — GI values</li>
+        <li>ICMR-INDIAB (Anjana et al. 2017) — India-context diabetes risk thresholds</li>
+        <li>MASALA Study (Kanaya &amp; Kandula, UCSF) — US South Asian CVD risk context</li>
+        <li>NHANES 2011–2018 — ML model training data (non-Hispanic Asian subsample)</li>
+        <li>Open Food Facts — packaged product nutritional data (live API)</li>
+        <li>WHO/SEARO Asian BMI cutoffs — overweight ≥23, obese ≥25</li>
       </ul>
-      <h3>BMI note</h3>
-      <p>This tool uses Asian-specific BMI cutoffs: overweight ≥23 kg/m²,
-        obese ≥25 kg/m². The Western standard uses ≥25 for overweight.
-        South Asians have higher cardiometabolic risk at lower BMI values.</p>
+      <h3>ML model</h3>
+      <ul>
+        <li>Gradient boosting trained on NHANES 2011–2018</li>
+        <li>Features: age, BMI, waist circumference, sedentary hours, 7 dietary features</li>
+        <li>Diabetes: test AUC 0.780, Asian subsample AUC 0.871</li>
+        <li>CVD: test AUC 0.674, Asian subsample AUC 0.781</li>
+        <li>Purpose: personal risk context panel, not meal-level scoring</li>
+      </ul>
+      <h3>Tech stack</h3>
+      <ul>
+        <li>Frontend: Vanilla JS, GitHub Pages</li>
+        <li>Backend: FastAPI on Render (RAG explanations, AI overviews)</li>
+        <li>Database: Supabase (meal history, user auth, ingredient contributions)</li>
+        <li>Embeddings: Voyage AI voyage-3-lite</li>
+        <li>Languages: English, Hindi, Gujarati, Tamil, Telugu</li>
+      </ul>
+      <h3>Disclaimer</h3>
+      <p>This tool is educational only and not a clinical instrument.
+        Scores reflect a single meal, not overall dietary patterns.
+        Consult a qualified healthcare provider for personal health decisions.</p>
     </section>
 
     <section id="history" style="display:none">
