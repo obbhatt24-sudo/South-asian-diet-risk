@@ -293,6 +293,25 @@ function showsCookedToggle(ingredient) {
   return false;
 }
 
+// Servings-based amount entry for foods that report a serving size (Open
+// Food Facts serving_quantity, or Branded USDA foods). The +/- multiplier
+// just drives the same #gram-input the plain-100g path uses, so there is a
+// single source of truth for the amount being added.
+function servingMultiplierHtml(ingredient) {
+  const servingG = ingredient.serving_size_g;
+  if (!servingG) return '';
+  const servingText = ingredient.serving_size_text;
+  return '<div class="serving-row">' +
+    '<span class="serving-label">1 serving = ' + servingG + 'g' +
+      (servingText ? ' (' + servingText + ')' : '') + '</span>' +
+    '<div class="serving-multiplier">' +
+      '<button type="button" id="serving-minus">−</button>' +
+      '<span id="serving-count">1</span> serving(s)' +
+      '<button type="button" id="serving-plus">+</button>' +
+      '<span class="serving-grams" id="serving-grams-display">= ' + servingG + 'g</span>' +
+    '</div></div>';
+}
+
 function promptGramAmount(ingredient, clickedDiv) {
   const hasToggle = showsCookedToggle(ingredient);
   const toggleHtml = hasToggle
@@ -301,17 +320,50 @@ function promptGramAmount(ingredient, clickedDiv) {
         '<label><input type="radio" name="cooked-weight" value="cooked" checked> Cooked weight</label>' +
       '</span> '
     : '';
+  const servingG = ingredient.serving_size_g;
+  const initialGrams = ingredient.default_grams || 100;
 
   const form = document.createElement('div');
   form.innerHTML =
     '<span>' + ingredient.name + '</span> ' +
-    '<input type="number" min="1" max="2000" value="100" id="gram-input"> ' +
+    '<input type="number" min="1" max="2000" value="' + initialGrams + '" id="gram-input"> ' +
     '<span>g</span> ' +
     toggleHtml +
+    servingMultiplierHtml(ingredient) +
     '<button id="gram-add-btn">Add</button> ' +
     '<button id="gram-cancel-btn">Cancel</button>';
 
   clickedDiv.replaceWith(form);
+
+  if (servingG) {
+    const gramInput = form.querySelector('#gram-input');
+    const countEl = form.querySelector('#serving-count');
+    const gramsDisplayEl = form.querySelector('#serving-grams-display');
+    let servings = 1;
+
+    const applyServings = () => {
+      const grams = Math.round(servings * servingG);
+      gramInput.value = grams;
+      countEl.textContent = servings % 1 === 0 ? servings : servings.toFixed(1);
+      gramsDisplayEl.textContent = '= ' + grams + 'g';
+    };
+
+    form.querySelector('#serving-minus').addEventListener('click', function() {
+      servings = Math.max(0.5, servings - 0.5);
+      applyServings();
+    });
+    form.querySelector('#serving-plus').addEventListener('click', function() {
+      servings += 0.5;
+      applyServings();
+    });
+    // Typing a gram amount directly keeps the serving display in sync.
+    gramInput.addEventListener('input', function() {
+      const grams = parseFloat(gramInput.value) || 0;
+      servings = grams / servingG;
+      countEl.textContent = servings % 1 === 0 ? servings : servings.toFixed(1);
+      gramsDisplayEl.textContent = '= ' + grams + 'g';
+    });
+  }
 
   form.querySelector('#gram-add-btn').addEventListener('click', function() {
     const gramAmount = parseInt(form.querySelector('#gram-input').value, 10);

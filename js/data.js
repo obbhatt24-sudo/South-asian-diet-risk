@@ -221,6 +221,12 @@ function normaliseUSDAFood(f) {
     return n ? Math.round(n.value * 10) / 10 : null;
   };
   const inferredRoleTags = inferRoleTags(f.description, f.foodCategory);
+  // Only Branded-type USDA records report a serving size in grams; the
+  // Foundation/SR Legacy foods this app searches usually omit it, so this
+  // is null for most results and the plain-100g input is used instead.
+  const servingGrams = (f.servingSizeUnit && /^g/i.test(f.servingSizeUnit) &&
+    f.servingSize) ? Math.round(f.servingSize) : null;
+  const servingSizeText = f.householdServingFullText || null;
   return {
     id: 'usda_' + f.fdcId,
     source_code: String(f.fdcId),
@@ -242,7 +248,10 @@ function normaliseUSDAFood(f) {
     glycemic_index: null,
     cooked_conversion_factor: null,
     source: 'USDA FoodData Central',
-    _isExternal: true   // flag for UI display
+    _isExternal: true,   // flag for UI display
+    serving_size_g:    servingGrams,
+    serving_size_text: servingSizeText,
+    default_grams:     servingGrams || 100
   };
 }
 
@@ -317,7 +326,8 @@ async function searchOpenFoodFacts(query) {
     `?search_terms=${encodeURIComponent(query)}` +
     `&search_simple=1&action=process&json=1&page_size=8` +
     `&fields=product_name,brands,nutriscore_grade,nova_group,` +
-    `nutriments,image_small_url,code,ingredients_text,ingredients_text_en`;
+    `nutriments,image_small_url,code,ingredients_text,ingredients_text_en,` +
+    `serving_size,serving_quantity`;
   try {
     const res = await fetch(url);
     const data = await res.json();
@@ -347,6 +357,10 @@ async function lookupOFFByBarcode(barcode) {
 
 function normaliseOFFProduct(p) {
   const n = p.nutriments || {};
+  // OFF returns serving_size as a free-text string like '30g' or
+  // '2 biscuits (30g)'; serving_quantity is the parsed numeric grams value.
+  const servingGrams = parseFloat(p.serving_quantity) || null;
+  const servingSizeText = p.serving_size || null;
   return {
     id: 'off_' + (p.code || Math.random().toString(36).slice(2)),
     source_code: p.code || '',
@@ -371,7 +385,10 @@ function normaliseOFFProduct(p) {
     _rawIngredients: p.ingredients_text || p.ingredients_text_en || '',
     source: 'Open Food Facts',
     _isExternal: true,
-    _isPackaged: true
+    _isPackaged: true,
+    serving_size_g:    servingGrams,
+    serving_size_text: servingSizeText,
+    default_grams:     servingGrams || 100
   };
 }
 
