@@ -631,8 +631,13 @@ function renderCookingMethodSelector(item, index) {
   if (methods.length <= 1) return '';  // no choice to offer
 
   const lang = getCurrentLang();
-  const current = item.cooking_method ||
-    (methods.some(m => m.id === 'boiled') ? 'boiled' : methods[0].id);
+  // Packaged (Open Food Facts) products — including scanned barcodes, which
+  // are normalised through the same OFF path — carry no cooking instructions
+  // of their own, so default them to "N/A" instead of "Boiled".
+  const defaultMethod = ing._isPackaged
+    ? 'none'
+    : (methods.some(m => m.id === 'boiled') ? 'boiled' : methods[0].id);
+  const current = item.cooking_method || defaultMethod;
 
   return `
     <select class='cooking-method-select'

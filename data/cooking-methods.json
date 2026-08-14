@@ -1,5 +1,18 @@
 [
   {
+    "id": "none",
+    "name": "N/A — already prepared / packaged",
+    "name_hi": "लागू नहीं — पहले से तैयार",
+    "name_gu": "લાગુ નહીં — પહેલેથી તૈયાર",
+    "name_ta": "பொருந்தாது — ஏற்கனவே தயாரிக்கப்பட்டது",
+    "name_te": "వర్తించదు — ఇప్పటికే తయారైన",
+    "applies_to": ["starch_source", "vegetable", "legume", "protein_source",
+                   "dairy", "fat_source", "snack", "other"],
+    "gi_multiplier": 1.0,
+    "fat_add_per_100g": 0,
+    "note": "No cooking modification — product is packaged or already prepared"
+  },
+  {
     "id": "boiled",
     "name": "Boiled",
     "name_hi": "उबला हुआ",
