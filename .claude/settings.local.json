@@ -95,7 +95,16 @@
       "PowerShell($n=\\(Get-Command node -ErrorAction SilentlyContinue\\); if\\($n\\){ node --check js/meal-builder.js; if\\($?\\){ \"meal-builder.js OK\" } } else { \"node not installed\" })",
       "Bash(python -m http.server 5210 --bind 127.0.0.1)",
       "PowerShell(try { Stop-Process -Id 23336 -Force -ErrorAction Stop; \"stopped 23336\" } catch { $_.Exception.Message }; Start-Sleep -Milliseconds 300; if \\(Get-NetTCPConnection -LocalPort 5210 -State Listen -ErrorAction SilentlyContinue\\) { \"still listening\" } else { \"port 5210 free\" })",
-      "Bash(git commit -m 'feat: cooking method modifiers \\(Step 65\\) *)"
+      "Bash(git commit -m 'feat: cooking method modifiers \\(Step 65\\) *)",
+      "Bash(./venv/Scripts/python.exe build_embeddings.py)",
+      "Bash(./venv/Scripts/python.exe -c ' *)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('data/i18n/en.json','utf8'\\)\\); console.log\\('en.json OK'\\)\")",
+      "Bash(node --check js/scorer.js)",
+      "Bash(node --check js/app.js)",
+      "Bash(node --check js/results.js)",
+      "Bash(node --check js/explainer.js)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e \"require.resolve\\('canvas'\\); const {createCanvas}=require\\('canvas'\\); const c=createCanvas\\(10,10\\); console.log\\('canvas OK', c.toBuffer\\('image/png'\\).length\\)\")"
     ]
   }
 }
