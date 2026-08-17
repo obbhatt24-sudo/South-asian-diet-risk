@@ -146,5 +146,89 @@
     "fat_add_per_100g": 3,
     "saturated_fat_add_per_100g": 1.2,
     "note": "Assumes 1 tsp ghee or oil per serving for tempering"
+  },
+  {
+    "id": "baked",
+    "name": "Baked / oven roasted",
+    "name_hi": "बेक किया हुआ",
+    "name_gu": "બેક કરેલું",
+    "name_ta": "சுட்ட",
+    "name_te": "బేక్ చేసిన",
+    "applies_to": ["starch_source", "vegetable", "protein_source", "snack"],
+    "gi_multiplier": 1.08,
+    "fat_add_per_100g": 2,
+    "note": "Slightly raises GI vs boiling. Small fat addition from brushing/coating."
+  },
+  {
+    "id": "grilled_tandoor",
+    "name": "Grilled / tandoor",
+    "name_hi": "ग्रिल्ड / तंदूर",
+    "name_gu": "ગ્રિલ્ડ / તંદૂર",
+    "name_ta": "கிரில்டு / தந்தூர்",
+    "name_te": "గ్రిల్డ్ / తందూర్",
+    "applies_to": ["protein_source", "vegetable", "starch_source"],
+    "gi_multiplier": 1.05,
+    "fat_add_per_100g": -3,
+    "note": "Fat drips off during grilling — net fat reduction for meats (~3g/100g)."
+  },
+  {
+    "id": "air_fried",
+    "name": "Air fried",
+    "name_hi": "एयर फ्राइड",
+    "name_gu": "એર ફ્રાઇડ",
+    "name_ta": "ஏர் ஃபிரைட்",
+    "name_te": "ఎయిర్ ఫ్రైడ్",
+    "applies_to": ["starch_source", "vegetable", "protein_source", "snack"],
+    "gi_multiplier": 1.05,
+    "fat_add_per_100g": 2,
+    "note": "70-80% less fat than deep frying. Similar crispiness, much lower fat."
+  },
+  {
+    "id": "stir_fried",
+    "name": "Stir fried",
+    "name_hi": "स्टर फ्राइड",
+    "name_gu": "સ્ટર ફ્રાઇડ",
+    "name_ta": "ஸ்டிர் ஃபிரைட்",
+    "name_te": "స్టిర్ ఫ్రైడ్",
+    "applies_to": ["vegetable", "protein_source", "starch_source"],
+    "gi_multiplier": 1.02,
+    "fat_add_per_100g": 3,
+    "note": "Quick high heat with small oil amount. Minimal GI change, moderate fat."
+  },
+  {
+    "id": "slow_cooked",
+    "name": "Slow cooked",
+    "name_hi": "धीमी आंच पर पका",
+    "name_gu": "ધીમા તાપ પર રાંધ્યું",
+    "name_ta": "மெதுவாக சமைத்த",
+    "name_te": "నెమ్మదిగా వండిన",
+    "applies_to": ["legume", "protein_source", "vegetable", "starch_source"],
+    "gi_multiplier": 1.10,
+    "fat_add_per_100g": 0,
+    "note": "Long cooking breaks down cell walls and starch — slight GI increase."
+  },
+  {
+    "id": "microwaved",
+    "name": "Microwaved",
+    "name_hi": "माइक्रोवेव में पका",
+    "name_gu": "માઇક્રોવેવ",
+    "name_ta": "மைக்ரோவேவில் சமைத்த",
+    "name_te": "మైక్రోవేవ్లో వండిన",
+    "applies_to": ["starch_source", "vegetable", "protein_source", "legume"],
+    "gi_multiplier": 0.97,
+    "fat_add_per_100g": 0,
+    "note": "Minimal nutrient loss. Similar nutritional profile to steaming."
+  },
+  {
+    "id": "smoked",
+    "name": "Smoked",
+    "name_hi": "धुएं में पका",
+    "name_gu": "ધૂમ્રપાન",
+    "name_ta": "புகையில் சமைத்த",
+    "name_te": "పొగలో వండిన",
+    "applies_to": ["protein_source", "vegetable"],
+    "gi_multiplier": 1.0,
+    "fat_add_per_100g": 0,
+    "note": "No significant GI or fat change. Note: smoked/cured foods may have high sodium."
   }
 ]
