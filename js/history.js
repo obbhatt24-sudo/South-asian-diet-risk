@@ -28,8 +28,116 @@ async function loadHistory() {
 
   content.style.display = 'block';
   renderPatternSummary(meals);
+  renderCumulativeRisk(meals);
   renderTrendChart(meals);
   renderMealHistoryList(meals);
+}
+
+function renderCumulativeRisk(meals) {
+  const panel = document.getElementById('cumulative-risk');
+  if (!meals || meals.length < 14) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = 'block';
+
+  // Sort oldest first for trend analysis
+  const sorted = [...meals].sort((a, b) =>
+    new Date(a.created_at) - new Date(b.created_at));
+
+  // 7-day rolling averages
+  function rollingAvg(arr, field, windowSize) {
+    return arr.map((_, i) => {
+      const start = Math.max(0, i - windowSize + 1);
+      const window = arr.slice(start, i + 1);
+      return window.reduce((s, m) => s + m[field], 0) / window.length;
+    });
+  }
+
+  const dRolling = rollingAvg(sorted, 'diabetes_score', 7);
+  const cRolling = rollingAvg(sorted, 'cvd_score', 7);
+
+  // Overall averages — first half vs second half
+  const half = Math.floor(sorted.length / 2);
+  const firstHalf = sorted.slice(0, half);
+  const secondHalf = sorted.slice(half);
+
+  const avgD1 = firstHalf.reduce((s,m) => s+m.diabetes_score,0)/firstHalf.length;
+  const avgD2 = secondHalf.reduce((s,m) => s+m.diabetes_score,0)/secondHalf.length;
+  const avgC1 = firstHalf.reduce((s,m) => s+m.cvd_score,0)/firstHalf.length;
+  const avgC2 = secondHalf.reduce((s,m) => s+m.cvd_score,0)/secondHalf.length;
+
+  const dTrend = avgD2 - avgD1;
+  const cTrend = avgC2 - avgC1;
+
+  function trendIcon(diff) {
+    if (diff < -3) return '↓ Improving';
+    if (diff > 3)  return '↑ Worsening';
+    return '→ Stable';
+  }
+  function trendClass(diff) {
+    if (diff < -3) return 'trend-improving';
+    if (diff > 3)  return 'trend-worsening';
+    return 'trend-stable';
+  }
+
+  // Cumulative impact statement
+  const overallAvgD = sorted.reduce((s,m) => s+m.diabetes_score,0)/sorted.length;
+  const overallAvgC = sorted.reduce((s,m) => s+m.cvd_score,0)/sorted.length;
+
+  let impactStatement = '';
+  if (overallAvgD >= 65 && overallAvgC >= 65) {
+    impactStatement = `Your meals over this period have consistently contributed
+      to elevated diabetes and cardiovascular risk factors. Sustained high
+      dietary risk scores over weeks are associated with progressive insulin
+      resistance and arterial inflammation in South Asian populations.`;
+  } else if (overallAvgD >= 65 || overallAvgC >= 65) {
+    const highScore = overallAvgD >= 65 ? 'diabetes' : 'cardiovascular';
+    impactStatement = `Your ${highScore} risk factor scores have been
+      consistently elevated across your recent meals. Even moderate persistent
+      elevation in dietary risk scores is associated with gradual metabolic
+      changes over months in South Asian populations.`;
+  } else if (overallAvgD < 35 && overallAvgC < 35) {
+    impactStatement = `Your meal patterns over this period show consistently
+      low dietary risk scores — a strong indicator of protective dietary
+      habits. Sustained low-risk dietary patterns are associated with
+      significantly reduced T2D incidence in South Asian populations.`;
+  } else {
+    impactStatement = `Your meal patterns over this period show moderate
+      dietary risk scores. Consistent moderate scores indicate room for
+      improvement — small, sustainable dietary changes have the largest
+      long-term impact on South Asian metabolic health.`;
+  }
+
+  // Count high-risk meal days
+  const highRiskMeals = sorted.filter(m =>
+    m.diabetes_score >= 65 || m.cvd_score >= 65).length;
+  const highRiskPct = Math.round(highRiskMeals / sorted.length * 100);
+
+  panel.innerHTML = `
+    <div class='card-title'>Cumulative dietary risk</div>
+    <div class='cumulative-stats'>
+      <div class='cumulative-stat'>
+        <span class='cumulative-label'>Avg diabetes score</span>
+        <span class='cumulative-value'>${Math.round(overallAvgD)}</span>
+        <span class='${trendClass(dTrend)}'>${trendIcon(dTrend)}</span>
+      </div>
+      <div class='cumulative-stat'>
+        <span class='cumulative-label'>Avg CVD score</span>
+        <span class='cumulative-value'>${Math.round(overallAvgC)}</span>
+        <span class='${trendClass(cTrend)}'>${trendIcon(cTrend)}</span>
+      </div>
+      <div class='cumulative-stat'>
+        <span class='cumulative-label'>High-risk meals</span>
+        <span class='cumulative-value'>${highRiskPct}%</span>
+        <span class='cumulative-sublabel'>of ${sorted.length} saved</span>
+      </div>
+    </div>
+    <p class='cumulative-impact'>${impactStatement}</p>
+    <p class='cumulative-note'>
+      Based on ${sorted.length} saved meals.
+      ${meals.length < 30 ? 'Save more meals for a more accurate picture.' : ''}
+    </p>`;
 }
 
 function renderPatternSummary(meals) {

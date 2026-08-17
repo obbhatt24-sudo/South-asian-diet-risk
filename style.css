@@ -1128,6 +1128,24 @@ input:focus, select:focus {
 .pattern-trend.worsened { color: var(--color-high); }
 .pattern-trend.stable   { color: var(--color-text-muted); }
 
+.cumulative-stats { display: flex; gap: var(--space-xl); flex-wrap: wrap;
+  margin: var(--space-md) 0; }
+.cumulative-stat { display: flex; flex-direction: column; gap: 2px; }
+.cumulative-label { font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--color-text-muted); }
+.cumulative-value { font-size: 2rem; font-weight: 800;
+  color: var(--color-text); line-height: 1; }
+.cumulative-sublabel { font-size: 0.75rem; color: var(--color-text-faint); }
+.trend-improving { color: var(--color-low); font-weight: 600;
+  font-size: 0.85rem; }
+.trend-worsening { color: var(--color-high); font-weight: 600;
+  font-size: 0.85rem; }
+.trend-stable { color: var(--color-text-muted); font-size: 0.85rem; }
+.cumulative-impact { font-size: 0.88rem; line-height: 1.6;
+  color: var(--color-text); margin: var(--space-sm) 0; }
+.cumulative-note { font-size: 0.75rem; color: var(--color-text-faint);
+  font-style: italic; }
+
 .learn-more-intro { color: var(--color-text-muted); font-size: 0.9rem;
   margin-bottom: var(--space-lg); line-height: 1.6; }
 .topic-card { margin-bottom: var(--space-md); }
