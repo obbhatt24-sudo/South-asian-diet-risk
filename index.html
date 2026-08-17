@@ -45,6 +45,7 @@
       <button data-view="about" data-i18n="nav.about">About</button>
       <button data-view="history" data-i18n="nav.history" style="display:none">History</button>
       <button data-view="pantry" style="display:none">Pantry</button>
+      <button data-view='today' style='display:none'>Today</button>
       <button data-view="learn-more" data-i18n="nav.learn_more">Learn More</button>
     </div>
   </nav>
@@ -326,6 +327,11 @@
       </div>
     </section>
 
+    <section id='today' style='display:none'>
+      <h2>Today's nutrition</h2>
+      <div id='today-content'></div>
+    </section>
+
     <section id='learn-more' style='display:none'>
       <h2 data-i18n="learn_more.heading">Learn more</h2>
       <p class='learn-more-intro' data-i18n="learn_more.intro">
@@ -359,6 +365,7 @@
   <script src="js/auth.js"></script>
   <script src="js/history.js"></script>
   <script src="js/pantry.js"></script>
+  <script src="js/daily-dashboard.js"></script>
   <script src="js/learn-more.js"></script>
   <script src="js/voice-input.js"></script>
   <script src="js/app.js"></script>

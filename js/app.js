@@ -16,7 +16,7 @@ const CONTEXT_DESCRIPTIONS = {
 };
 
 function showView(id) {
-  ['meal-builder', 'results', 'about', 'history', 'pantry', 'learn-more'].forEach(function(viewId) {
+  ['meal-builder', 'results', 'about', 'history', 'pantry', 'today', 'learn-more'].forEach(function(viewId) {
     document.getElementById(viewId).style.display = viewId === id ? 'block' : 'none';
   });
   document.querySelectorAll('nav button').forEach(function(btn) {
@@ -24,6 +24,7 @@ function showView(id) {
   });
   if (id === 'history' && isSignedIn()) loadHistory();
   if (id === 'pantry') loadPantry();
+  if (id === 'today') loadTodayDashboard();
   if (id === 'learn-more') initLearnMore();
 }
 

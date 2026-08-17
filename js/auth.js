@@ -23,6 +23,7 @@ function updateAuthUI() {
   const saveBtn    = document.getElementById('save-meal-btn');
   const historyNav = document.querySelector('[data-view="history"]');
   const pantryNav  = document.querySelector('[data-view="pantry"]');
+  const todayNav   = document.querySelector('[data-view="today"]');
 
   if (currentUser) {
     if (authBtn)    authBtn.textContent = 'Sign out';
@@ -30,12 +31,14 @@ function updateAuthUI() {
     if (saveBtn)    saveBtn.style.display = 'block';
     if (historyNav) historyNav.style.display = 'inline-block';
     if (pantryNav)  pantryNav.style.display = 'inline-block';
+    if (todayNav)   todayNav.style.display = 'inline-block';
   } else {
     if (authBtn)    authBtn.textContent = 'Sign in';
     if (userInfo)   userInfo.textContent = '';
     if (saveBtn)    saveBtn.style.display = 'none';
     if (historyNav) historyNav.style.display = 'none';
     if (pantryNav)  pantryNav.style.display = 'none';
+    if (todayNav)   todayNav.style.display = 'none';
   }
 }
 
