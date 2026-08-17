@@ -473,12 +473,18 @@ function computeMealNutrients(mealItems) {
     let scale = 0;
     let microConfidence = null;
 
+    let folateLossFactor = 1;
+
     if (item.type === 'ingredient') {
       const ing = _ingById[item.id];
       if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealNutrients'); continue; }
       nutrients = ing.nutrients_per_100g;
       scale = effectiveGrams(item, ing) / 100;
       microConfidence = ing.micronutrient_confidence || null;
+      if (item.cooking_method && _cookingMethods) {
+        const method = _cookingMethods.find(m => m.id === item.cooking_method);
+        if (method && method.folate_loss_factor) folateLossFactor = method.folate_loss_factor;
+      }
     } else if (item.type === 'dish') {
       const dish = _dishById[item.id];
       if (!dish) continue;
@@ -492,7 +498,8 @@ function computeMealNutrients(mealItems) {
     // may be slightly understated for those items.
     for (const key of nutrientKeys) {
       if (nutrients[key] === null) hasIncompleteData = true;
-      totals[key] += (nutrients[key] ?? 0) * scale;
+      const factor = key === 'folate_µg' ? folateLossFactor : 1;
+      totals[key] += (nutrients[key] ?? 0) * factor * scale;
     }
 
     for (const field of MICRONUTRIENT_FIELDS) {
