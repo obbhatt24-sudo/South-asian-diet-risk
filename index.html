@@ -203,6 +203,23 @@
             <option value="800" data-i18n="meal_builder.salt_heavy">Heavy (~800mg sodium)</option>
           </select>
         </label>
+
+        <div class="sodium-precise">
+          <label class="sodium-precise-label">Or enter exact amount:</label>
+          <div class="sodium-entry-row">
+            <input type="number" id="sodium-exact" min="0" max="5000"
+                   placeholder="e.g. 600"
+                   oninput="updatePreciseSodium(this.value, document.getElementById('sodium-unit').value)" />
+            <select id="sodium-unit" onchange="updateSodiumUnit()">
+              <option value="mg">mg sodium</option>
+              <option value="tsp">tsp salt</option>
+              <option value="g">g salt</option>
+            </select>
+          </div>
+          <p class="sodium-reference">
+            Reference: 1 tsp salt = 2300mg sodium | &frac14; tsp = 575mg
+          </p>
+        </div>
       </div>
 
       <button id="calculate-btn" data-i18n="meal_builder.calculate" disabled>Calculate meal risk</button>

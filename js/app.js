@@ -79,6 +79,7 @@ document.querySelectorAll('input[name="context"]').forEach(function(radio) {
 
 document.getElementById('salt-input').addEventListener('change', function() {
   state.addedSodiumMg = this.value !== 'null' ? parseInt(this.value, 10) : null;
+  updateNutrientTotals();
 });
 
 function updateBMI() {

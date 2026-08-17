@@ -1308,3 +1308,13 @@ input:focus, select:focus {
 }
 .btn-mic-secondary.listening { border-color: var(--color-high);
   color: var(--color-high); }
+
+/* Precise sodium entry (Step 78) */
+.sodium-precise { margin-top: var(--space-sm); }
+.sodium-precise-label { font-size: 0.82rem; color: var(--color-text-muted);
+  display: block; margin-bottom: 4px; }
+.sodium-entry-row { display: flex; gap: 6px; align-items: center; }
+.sodium-entry-row input { width: 80px; margin-bottom: 0; }
+.sodium-entry-row select { width: auto; margin-bottom: 0; }
+.sodium-reference { font-size: 0.72rem; color: var(--color-text-faint);
+  font-style: italic; margin-top: 4px; }

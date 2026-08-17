@@ -878,6 +878,7 @@ function startEditMealItem(item, index, label, name) {
 function updateNutrientTotals() {
   const totals = computeMealNutrients(state.mealItems);
   const container = document.getElementById('meal-nutrient-totals');
+  const sodiumTotal = totals.sodium_mg + (state.addedSodiumMg || 0);
 
   const chips = [
     { value: totals.energy_kcal.toFixed(0),      label: 'kcal' },
@@ -886,7 +887,7 @@ function updateNutrientTotals() {
     { value: totals.total_fat_g.toFixed(1),      label: 'fat' },
     { value: totals.saturated_fat_g.toFixed(1),  label: 'sat fat' },
     { value: totals.protein_g.toFixed(1),        label: 'protein' },
-    { value: totals.sodium_mg.toFixed(0),        label: 'sodium' }
+    { value: sodiumTotal.toFixed(0),             label: 'sodium' }
   ];
 
   container.innerHTML = chips.map(function(chip) {
@@ -895,6 +896,34 @@ function updateNutrientTotals() {
       '<span class="nutrient-chip-label">' + chip.label + '</span>' +
       '</div>';
   }).join('');
+}
+
+// ===== Step 78 — precise sodium entry =====
+function getSodiumFromSelector() {
+  const value = document.getElementById('salt-input').value;
+  return value !== 'null' ? parseInt(value, 10) : null;
+}
+
+function updatePreciseSodium(value, unit) {
+  if (!value) {
+    state.addedSodiumMg = getSodiumFromSelector();
+    updateNutrientTotals();
+    return;
+  }
+  const num = parseFloat(value);
+  let mgValue;
+  if (unit === 'mg')  mgValue = num;
+  if (unit === 'tsp') mgValue = num * 2300;
+  if (unit === 'g')   mgValue = num * 1000 * 0.393;
+  // 0.393 = fraction of salt that is sodium
+  state.addedSodiumMg = Math.round(mgValue);
+  updateNutrientTotals();
+}
+
+function updateSodiumUnit() {
+  const value = document.getElementById('sodium-exact').value;
+  const unit  = document.getElementById('sodium-unit').value;
+  if (value) updatePreciseSodium(value, unit);
 }
 
 // ===== Step 64 — barcode contribution pipeline =====
