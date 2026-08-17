@@ -29,6 +29,17 @@ function applycooking_modifier(ingredient, methodId, servingGrams) {
     modified.gl_per_100g = modified.gi * (modified.carb_g || 0) / 100;
   }
 
+  // Apply folate cooking loss (or gain, for fermented/sprouted). Clone
+  // nutrients_per_100g first — `modified` is only a shallow copy of
+  // `ingredient`, so writing straight into the nested object would mutate
+  // the shared ingredient record.
+  if (method.folate_loss_factor && modified.nutrients_per_100g?.folate_µg) {
+    modified.nutrients_per_100g = {
+      ...modified.nutrients_per_100g,
+      folate_µg: modified.nutrients_per_100g.folate_µg * method.folate_loss_factor,
+    };
+  }
+
   // Apply fat addition (per 100g, scaled to serving)
   if (method.fat_add_per_100g) {
     const scale = servingGrams / 100;

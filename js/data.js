@@ -436,6 +436,15 @@ function effectiveGrams(item, ing) {
   return grams;
 }
 
+// Step 83 — micronutrient fields tracked alongside the macro nutrients, each
+// paired with a per-ingredient confidence rating (see ingredients.json's
+// micronutrient_confidence). Shared with daily-dashboard.js.
+const MICRONUTRIENT_FIELDS = [
+  'iron_mg', 'calcium_mg', 'zinc_mg', 'folate_µg', 'b12_µg',
+  'vitamin_d_µg', 'vitamin_a_re_µg', 'vitamin_c_mg', 'potassium_mg', 'magnesium_mg'
+];
+const CONFIDENCE_RANK = { high: 3, medium: 2, low: 1, unknown: 0 };
+
 function computeMealNutrients(mealItems) {
   const totals = {
     energy_kcal: 0,
@@ -447,20 +456,29 @@ function computeMealNutrients(mealItems) {
     sugars_g: 0,
     sodium_mg: 0
   };
+  MICRONUTRIENT_FIELDS.forEach(field => { totals[field] = 0; });
   // Captured before any flag is added so the summing loop only iterates the
   // real nutrient keys, never the _hasIncompleteData marker.
   const nutrientKeys = Object.keys(totals);
   let hasIncompleteData = false;
 
+  // Worst (lowest-rank) confidence seen per micronutrient across all items —
+  // an ingredient with no data for a field drags the whole meal's rating for
+  // that field down to 'unknown', since the total is then a silent undercount.
+  const confidenceRank = {};
+  MICRONUTRIENT_FIELDS.forEach(field => { confidenceRank[field] = CONFIDENCE_RANK.high; });
+
   for (const item of mealItems) {
     let nutrients = null;
     let scale = 0;
+    let microConfidence = null;
 
     if (item.type === 'ingredient') {
       const ing = _ingById[item.id];
       if (!ing) { warnUnresolvedIngredient(item.id, 'computeMealNutrients'); continue; }
       nutrients = ing.nutrients_per_100g;
       scale = effectiveGrams(item, ing) / 100;
+      microConfidence = ing.micronutrient_confidence || null;
     } else if (item.type === 'dish') {
       const dish = _dishById[item.id];
       if (!dish) continue;
@@ -476,7 +494,18 @@ function computeMealNutrients(mealItems) {
       if (nutrients[key] === null) hasIncompleteData = true;
       totals[key] += (nutrients[key] ?? 0) * scale;
     }
+
+    for (const field of MICRONUTRIENT_FIELDS) {
+      const level = microConfidence ? (microConfidence[field] || 'unknown') : 'unknown';
+      confidenceRank[field] = Math.min(confidenceRank[field], CONFIDENCE_RANK[level]);
+    }
   }
+
+  const RANK_TO_LEVEL = ['unknown', 'low', 'medium', 'high'];
+  totals._microConfidence = {};
+  MICRONUTRIENT_FIELDS.forEach(field => {
+    totals._microConfidence[field] = RANK_TO_LEVEL[confidenceRank[field]];
+  });
 
   if (hasIncompleteData) totals._hasIncompleteData = true;
   return totals;

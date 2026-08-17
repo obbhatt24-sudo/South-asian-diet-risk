@@ -154,6 +154,7 @@ document.getElementById('waist-input').addEventListener('input', e => {
 state.personalContext.age = 40;
 state.personalContext.sedentaryHrs = 6;
 state.personalContext.waistCm = null;
+state.personalContext.sex = 'male';
 
 // Search-source tabs: each entry pairs a tab button with the panel it controls.
 const SEARCH_TABS = [

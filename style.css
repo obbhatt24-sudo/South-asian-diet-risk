@@ -728,6 +728,21 @@ input:focus, select:focus {
 .daily-disclaimer { font-size: 0.72rem; color: var(--color-text-faint);
   font-style: italic; margin-top: var(--space-md); }
 
+.micro-heading { font-size: 0.85rem; color: var(--color-text-muted);
+  margin: var(--space-md) 0 var(--space-sm); }
+.nutrient-unknown .nutrient-bar-fill { background: #eee !important; }
+.nutrient-unknown .nutrient-value { color: var(--color-text-faint); }
+.confidence-low { color: var(--color-moderate); font-size: 0.7rem;
+  vertical-align: super; }
+.confidence-unknown { color: var(--color-text-faint); font-size: 0.7rem;
+  vertical-align: super; }
+.confidence-footnote { font-size: 0.72rem; color: var(--color-text-faint);
+  font-style: italic; margin-top: var(--space-md); line-height: 1.6; }
+.bioavailability-note { font-size: 0.78rem; color: var(--color-text-muted);
+  background: var(--color-teal-light); border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md); margin-top: var(--space-md);
+  line-height: 1.5; }
+
 .results-divider { font-size: 0.75rem; color: var(--color-text-faint);
   padding: 8px 0; border-top: 1px solid var(--color-border);
   margin-top: var(--space-xs); text-transform: uppercase;

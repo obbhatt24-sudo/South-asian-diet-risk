@@ -172,6 +172,13 @@
           <span style="font-size:0.8rem;color:#888"> years</span>
         </label>
 
+        <label>Sex
+          <select id='sex-select' onchange='state.personalContext.sex = this.value'>
+            <option value='male' selected>Male</option>
+            <option value='female'>Female</option>
+          </select>
+        </label>
+
         <label><span data-i18n="meal_builder.sedentary_label">Sedentary time</span>
           <select id="sedentary-input">
             <option value="4">Active — mostly on feet (4 hrs sitting)</option>

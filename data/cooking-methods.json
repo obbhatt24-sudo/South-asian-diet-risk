@@ -6,11 +6,20 @@
     "name_gu": "લાગુ નહીં — પહેલેથી તૈયાર",
     "name_ta": "பொருந்தாது — ஏற்கனவே தயாரிக்கப்பட்டது",
     "name_te": "వర్తించదు — ఇప్పటికే తయారైన",
-    "applies_to": ["starch_source", "vegetable", "legume", "protein_source",
-                   "dairy", "fat_source", "snack", "other"],
-    "gi_multiplier": 1.0,
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "legume",
+      "protein_source",
+      "dairy",
+      "fat_source",
+      "snack",
+      "other"
+    ],
+    "gi_multiplier": 1,
     "fat_add_per_100g": 0,
-    "note": "No cooking modification — product is packaged or already prepared"
+    "note": "No cooking modification — product is packaged or already prepared",
+    "folate_loss_factor": 1
   },
   {
     "id": "boiled",
@@ -19,10 +28,15 @@
     "name_gu": "બાફેલું",
     "name_ta": "வேகவைத்த",
     "name_te": "ఉడికించిన",
-    "applies_to": ["starch_source", "vegetable", "legume"],
-    "gi_multiplier": 1.0,
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "legume"
+    ],
+    "gi_multiplier": 1,
     "fat_add_per_100g": 0,
-    "note": "Baseline — no modification"
+    "note": "Baseline — no modification",
+    "folate_loss_factor": 0.45
   },
   {
     "id": "pressure_cooked",
@@ -31,10 +45,14 @@
     "name_gu": "પ્રેશર કૂકર",
     "name_ta": "பிரஷர் கூகரில் சமைத்த",
     "name_te": "ప్రెషర్ కుక్కర్లో వండిన",
-    "applies_to": ["starch_source", "legume"],
+    "applies_to": [
+      "starch_source",
+      "legume"
+    ],
     "gi_multiplier": 0.82,
     "fat_add_per_100g": 0,
-    "note": "GI reduction 15-25% vs boiling (Wolever et al. 2003)"
+    "note": "GI reduction 15-25% vs boiling (Wolever et al. 2003)",
+    "folate_loss_factor": 0.65
   },
   {
     "id": "deep_fried",
@@ -43,11 +61,17 @@
     "name_gu": "ઊંડા તળ્યું",
     "name_ta": "ஆழமாக வறுத்த",
     "name_te": "లోతుగా వేయించిన",
-    "applies_to": ["starch_source", "vegetable", "protein_source", "snack"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source",
+      "snack"
+    ],
     "gi_multiplier": 1.05,
     "fat_add_per_100g": 10,
     "saturated_fat_add_per_100g": 2,
-    "note": "Adds ~10g fat per 100g (varies by porosity and frying medium)"
+    "note": "Adds ~10g fat per 100g (varies by porosity and frying medium)",
+    "folate_loss_factor": 0.5
   },
   {
     "id": "shallow_fried",
@@ -56,11 +80,16 @@
     "name_gu": "છીછરું તળ્યું",
     "name_ta": "ஆட்டத்தில் வறுத்த",
     "name_te": "నిస్సారంగా వేయించిన",
-    "applies_to": ["starch_source", "vegetable", "protein_source"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source"
+    ],
     "gi_multiplier": 1.02,
     "fat_add_per_100g": 4,
     "saturated_fat_add_per_100g": 0.8,
-    "note": "Moderate fat addition depending on pan and oil used"
+    "note": "Moderate fat addition depending on pan and oil used",
+    "folate_loss_factor": 0.6
   },
   {
     "id": "steamed",
@@ -69,10 +98,15 @@
     "name_gu": "વરાળ",
     "name_ta": "ஆவியில் வேகவைத்த",
     "name_te": "ఆవిరిలో వండిన",
-    "applies_to": ["starch_source", "vegetable", "protein_source"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source"
+    ],
     "gi_multiplier": 0.95,
     "fat_add_per_100g": 0,
-    "note": "Slightly lower GI than boiling for most foods"
+    "note": "Slightly lower GI than boiling for most foods",
+    "folate_loss_factor": 0.7
   },
   {
     "id": "roasted_dry",
@@ -81,10 +115,15 @@
     "name_gu": "સૂકો શેકેલો",
     "name_ta": "வறட்டாய் வறுத்த",
     "name_te": "పొడి వేయించిన",
-    "applies_to": ["starch_source", "legume", "fat_source"],
+    "applies_to": [
+      "starch_source",
+      "legume",
+      "fat_source"
+    ],
     "gi_multiplier": 1.1,
     "fat_add_per_100g": 0,
-    "note": "Slightly raises GI by breaking down starch granules"
+    "note": "Slightly raises GI by breaking down starch granules",
+    "folate_loss_factor": 0.55
   },
   {
     "id": "cooled_reheated",
@@ -93,10 +132,13 @@
     "name_gu": "રાંધી ઠંડુ કરી ફરી ગરમ",
     "name_ta": "சமைத்து குளிர வைத்து மீண்டும் சூடாக்கிய",
     "name_te": "వండి చల్లారించి మళ్ళీ వేడి చేసిన",
-    "applies_to": ["starch_source"],
-    "gi_multiplier": 0.70,
+    "applies_to": [
+      "starch_source"
+    ],
+    "gi_multiplier": 0.7,
     "fat_add_per_100g": 0,
-    "note": "Resistant starch increases significantly on cooling. GI drops 25-40%. (Leeman et al. 2005)"
+    "note": "Resistant starch increases significantly on cooling. GI drops 25-40%. (Leeman et al. 2005)",
+    "folate_loss_factor": 0.4
   },
   {
     "id": "fermented",
@@ -105,10 +147,15 @@
     "name_gu": "આથો",
     "name_ta": "புளிக்க வைத்த",
     "name_te": "పులియపెట్టిన",
-    "applies_to": ["starch_source", "legume", "dairy"],
+    "applies_to": [
+      "starch_source",
+      "legume",
+      "dairy"
+    ],
     "gi_multiplier": 0.88,
     "fat_add_per_100g": 0,
-    "note": "Fermentation reduces GI 8-15% via acid formation (Liljeberg et al. 1998)"
+    "note": "Fermentation reduces GI 8-15% via acid formation (Liljeberg et al. 1998)",
+    "folate_loss_factor": 1.1
   },
   {
     "id": "sprouted",
@@ -117,10 +164,13 @@
     "name_gu": "અંકુરિત",
     "name_ta": "முளைகட்டிய",
     "name_te": "మొలకలు వేసిన",
-    "applies_to": ["legume"],
+    "applies_to": [
+      "legume"
+    ],
     "gi_multiplier": 0.55,
     "fat_add_per_100g": 0,
-    "note": "Sprouting dramatically lowers GI (moong: 52 -> 25). High resistant starch."
+    "note": "Sprouting dramatically lowers GI (moong: 52 -> 25). High resistant starch.",
+    "folate_loss_factor": 1.3
   },
   {
     "id": "raw",
@@ -129,10 +179,15 @@
     "name_gu": "કાચું",
     "name_ta": "பச்சையான",
     "name_te": "పచ్చి",
-    "applies_to": ["vegetable", "fat_source", "dairy"],
+    "applies_to": [
+      "vegetable",
+      "fat_source",
+      "dairy"
+    ],
     "gi_multiplier": 0.85,
     "fat_add_per_100g": 0,
-    "note": "Raw vegetables generally have lower GI than cooked"
+    "note": "Raw vegetables generally have lower GI than cooked",
+    "folate_loss_factor": 1
   },
   {
     "id": "tadka",
@@ -141,11 +196,15 @@
     "name_gu": "વઘારણ સાથે",
     "name_ta": "தாளிக்கப்பட்ட",
     "name_te": "తాలింపు తో",
-    "applies_to": ["legume", "vegetable"],
-    "gi_multiplier": 1.0,
+    "applies_to": [
+      "legume",
+      "vegetable"
+    ],
+    "gi_multiplier": 1,
     "fat_add_per_100g": 3,
     "saturated_fat_add_per_100g": 1.2,
-    "note": "Assumes 1 tsp ghee or oil per serving for tempering"
+    "note": "Assumes 1 tsp ghee or oil per serving for tempering",
+    "folate_loss_factor": 0.9
   },
   {
     "id": "baked",
@@ -154,10 +213,16 @@
     "name_gu": "બેક કરેલું",
     "name_ta": "சுட்ட",
     "name_te": "బేక్ చేసిన",
-    "applies_to": ["starch_source", "vegetable", "protein_source", "snack"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source",
+      "snack"
+    ],
     "gi_multiplier": 1.08,
     "fat_add_per_100g": 2,
-    "note": "Slightly raises GI vs boiling. Small fat addition from brushing/coating."
+    "note": "Slightly raises GI vs boiling. Small fat addition from brushing/coating.",
+    "folate_loss_factor": 0.55
   },
   {
     "id": "grilled_tandoor",
@@ -166,10 +231,15 @@
     "name_gu": "ગ્રિલ્ડ / તંદૂર",
     "name_ta": "கிரில்டு / தந்தூர்",
     "name_te": "గ్రిల్డ్ / తందూర్",
-    "applies_to": ["protein_source", "vegetable", "starch_source"],
+    "applies_to": [
+      "protein_source",
+      "vegetable",
+      "starch_source"
+    ],
     "gi_multiplier": 1.05,
     "fat_add_per_100g": -3,
-    "note": "Fat drips off during grilling — net fat reduction for meats (~3g/100g)."
+    "note": "Fat drips off during grilling — net fat reduction for meats (~3g/100g).",
+    "folate_loss_factor": 0.6
   },
   {
     "id": "air_fried",
@@ -178,10 +248,16 @@
     "name_gu": "એર ફ્રાઇડ",
     "name_ta": "ஏர் ஃபிரைட்",
     "name_te": "ఎయిర్ ఫ్రైడ్",
-    "applies_to": ["starch_source", "vegetable", "protein_source", "snack"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source",
+      "snack"
+    ],
     "gi_multiplier": 1.05,
     "fat_add_per_100g": 2,
-    "note": "70-80% less fat than deep frying. Similar crispiness, much lower fat."
+    "note": "70-80% less fat than deep frying. Similar crispiness, much lower fat.",
+    "folate_loss_factor": 0.65
   },
   {
     "id": "stir_fried",
@@ -190,10 +266,15 @@
     "name_gu": "સ્ટર ફ્રાઇડ",
     "name_ta": "ஸ்டிர் ஃபிரைட்",
     "name_te": "స్టిర్ ఫ్రైడ్",
-    "applies_to": ["vegetable", "protein_source", "starch_source"],
+    "applies_to": [
+      "vegetable",
+      "protein_source",
+      "starch_source"
+    ],
     "gi_multiplier": 1.02,
     "fat_add_per_100g": 3,
-    "note": "Quick high heat with small oil amount. Minimal GI change, moderate fat."
+    "note": "Quick high heat with small oil amount. Minimal GI change, moderate fat.",
+    "folate_loss_factor": 0.7
   },
   {
     "id": "slow_cooked",
@@ -202,10 +283,16 @@
     "name_gu": "ધીમા તાપ પર રાંધ્યું",
     "name_ta": "மெதுவாக சமைத்த",
     "name_te": "నెమ్మదిగా వండిన",
-    "applies_to": ["legume", "protein_source", "vegetable", "starch_source"],
-    "gi_multiplier": 1.10,
+    "applies_to": [
+      "legume",
+      "protein_source",
+      "vegetable",
+      "starch_source"
+    ],
+    "gi_multiplier": 1.1,
     "fat_add_per_100g": 0,
-    "note": "Long cooking breaks down cell walls and starch — slight GI increase."
+    "note": "Long cooking breaks down cell walls and starch — slight GI increase.",
+    "folate_loss_factor": 0.35
   },
   {
     "id": "microwaved",
@@ -214,10 +301,16 @@
     "name_gu": "માઇક્રોવેવ",
     "name_ta": "மைக்ரோவேவில் சமைத்த",
     "name_te": "మైక్రోవేవ్లో వండిన",
-    "applies_to": ["starch_source", "vegetable", "protein_source", "legume"],
+    "applies_to": [
+      "starch_source",
+      "vegetable",
+      "protein_source",
+      "legume"
+    ],
     "gi_multiplier": 0.97,
     "fat_add_per_100g": 0,
-    "note": "Minimal nutrient loss. Similar nutritional profile to steaming."
+    "note": "Minimal nutrient loss. Similar nutritional profile to steaming.",
+    "folate_loss_factor": 0.75
   },
   {
     "id": "smoked",
@@ -226,9 +319,13 @@
     "name_gu": "ધૂમ્રપાન",
     "name_ta": "புகையில் சமைத்த",
     "name_te": "పొగలో వండిన",
-    "applies_to": ["protein_source", "vegetable"],
-    "gi_multiplier": 1.0,
+    "applies_to": [
+      "protein_source",
+      "vegetable"
+    ],
+    "gi_multiplier": 1,
     "fat_add_per_100g": 0,
-    "note": "No significant GI or fat change. Note: smoked/cured foods may have high sodium."
+    "note": "No significant GI or fat change. Note: smoked/cured foods may have high sodium.",
+    "folate_loss_factor": 0.55
   }
 ]
