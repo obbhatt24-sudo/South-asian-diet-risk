@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -426,6 +427,69 @@ ingredient was cooked.'''
     except json.JSONDecodeError:
         raise HTTPException(status_code=502,
                             detail='Could not parse cooking methods')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+def _strip_markdown(text: str) -> str:
+    """Strip common markdown syntax the model adds despite instructions
+    not to, since the frontend renders this text as raw innerHTML."""
+    text = re.sub(r'^#{1,6}\s*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    text = re.sub(r'(?<!\w)\*(.+?)\*(?!\w)', r'\1', text)
+    text = re.sub(r'^[\s]*[-*]\s+', '', text, flags=re.MULTILINE)
+    return text.strip()
+
+
+class MonthlySummaryRequest(BaseModel):
+    meal_count: int
+    avg_diabetes_score: int
+    avg_cvd_score: int
+    top_flags: list[str] = []
+    recent_meal_names: list[str] = []
+    language: str = 'en'
+
+
+@app.post('/monthly-summary')
+async def monthly_summary(req: MonthlySummaryRequest):
+    """Summarise a month of saved meal history into a personalised
+    dietary summary.
+
+    Runs the LLM call server-side so the Anthropic API key stays secret —
+    the browser cannot call api.anthropic.com directly.
+    """
+    try:
+        lang_instruction = LANGUAGE_INSTRUCTIONS.get(req.language, 'Respond in English.')
+
+        system_prompt = f'''You are a South Asian nutrition advisor reviewing
+a month of meal history for one person.
+Output raw plain text ONLY — never use markdown syntax of any kind.
+Specifically: no "#" headers, no "**" bold, no "*" or "-" bullet
+points, no numbered lists. Write ordinary prose sentences only.
+Write exactly 3 paragraphs, separated by a single blank line:
+Paragraph 1: What the scores and patterns show overall.
+Paragraph 2: The 1-2 most consistent dietary risk factors and their
+  specific impact on South Asian metabolic health.
+Paragraph 3: 2-3 specific, achievable dietary changes for next month.
+Keep each paragraph to 3-4 sentences so the whole summary is concise.
+Be direct, warm, and specific. Do not give medical advice.
+Do not mention that you are an AI. {lang_instruction}'''
+
+        user_prompt = f'''Summary data:
+- Meals saved: {req.meal_count}
+- Average diabetes score: {req.avg_diabetes_score}/100
+- Average CVD score: {req.avg_cvd_score}/100
+- Most common risk flags: {'; '.join(req.top_flags) or 'none'}
+- Recent meals include: {', '.join(req.recent_meal_names) or 'none'}'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=900,
+            system=system_prompt,
+            messages=[{'role': 'user', 'content': user_prompt}]
+        )
+
+        return {'summary': _strip_markdown(response.content[0].text)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

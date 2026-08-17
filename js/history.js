@@ -339,6 +339,81 @@ function reloadMeal(mealJsonStr) {
   showView('meal-builder');
 }
 
+async function generateMonthlySummary() {
+  const btn = document.getElementById('monthly-summary-btn');
+  const output = document.getElementById('monthly-summary-output');
+
+  const cacheKey = 'monthly_summary_' + new Date().toISOString().slice(0, 7)
+                    + '_' + getCurrentLang();
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached) {
+    output.innerHTML = cached;
+    btn.style.display = 'none';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '✦ Generating...';
+  output.innerHTML = `<div class="explanation-loading">
+    <div class="explanation-spinner"></div>
+    Analysing your meal history...</div>`;
+
+  const { data: meals, error } = await getRecentMeals(30);
+  if (error || !meals || meals.length < 7) {
+    output.innerHTML = '<p>Save at least 7 meals to generate a monthly summary.</p>';
+    btn.disabled = false;
+    btn.textContent = '✦ Generate monthly dietary summary';
+    return;
+  }
+
+  const avgD = Math.round(meals.reduce((s, m) => s + m.diabetes_score, 0) / meals.length);
+  const avgC = Math.round(meals.reduce((s, m) => s + m.cvd_score, 0) / meals.length);
+  const flags = {};
+  meals.forEach(m => (m.flags || []).forEach(f => {
+    flags[f] = (flags[f] || 0) + 1;
+  }));
+  const topFlags = Object.entries(flags)
+    .sort((a, b) => b[1] - a[1]).slice(0, 3)
+    .map(([f, n]) => `${f} (${n} of ${meals.length} meals)`);
+  const mealNames = meals.slice(0, 10).map(m => m.meal_name || 'unnamed');
+
+  try {
+    const response = await fetch(RAG_SERVER_URL + '/monthly-summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        meal_count: meals.length,
+        avg_diabetes_score: avgD,
+        avg_cvd_score: avgC,
+        top_flags: topFlags,
+        recent_meal_names: mealNames,
+        language: getCurrentLang(),
+      })
+    });
+    if (!response.ok) throw new Error('Request failed');
+    const data = await response.json();
+    const text = data.summary;
+
+    const html = `<div class='monthly-summary-card'>
+      <div class='monthly-summary-header'>
+        <span class='monthly-summary-label'>&#10022; Monthly summary</span>
+        <span class='monthly-summary-date'>
+          ${new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}
+        </span>
+      </div>
+      <div class='monthly-summary-text'>${text}</div>
+    </div>`;
+
+    sessionStorage.setItem(cacheKey, html);
+    output.innerHTML = html;
+    btn.style.display = 'none';
+  } catch (err) {
+    output.innerHTML = '<p class="ai-overview-error">Could not generate summary.</p>';
+    btn.disabled = false;
+    btn.textContent = '✦ Try again';
+  }
+}
+
 async function deleteHistoryMeal(mealId, btn) {
   if (!confirm('Delete this meal from history?')) return;
   btn.disabled = true;

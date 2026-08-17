@@ -297,6 +297,14 @@
       <div id="history-loading" class="history-loading" data-i18n="history.loading">Loading...</div>
       <div id="history-content" style="display:none">
         <div id='cumulative-risk' class='card' style='display:none'></div>
+        <div class='monthly-summary-section'>
+          <button id='monthly-summary-btn'
+                  onclick='generateMonthlySummary()'
+                  class='btn-monthly'>
+            &#10022; Generate monthly dietary summary
+          </button>
+          <div id='monthly-summary-output'></div>
+        </div>
         <div id='pattern-summary' class='card pattern-card'></div>
         <div id="trend-chart-container" class="card">
           <div class="card-title" data-i18n="history.trend_title">Score trends — last 30 meals</div>
