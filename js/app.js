@@ -81,9 +81,52 @@ document.getElementById('salt-input').addEventListener('change', function() {
   state.addedSodiumMg = this.value !== 'null' ? parseInt(this.value, 10) : null;
 });
 
-document.getElementById('bmi-input').addEventListener('change', function() {
-  state.personalContext.bmiCategory = this.value;
-});
+function updateBMI() {
+  const heightCm = parseFloat(document.getElementById('height-cm').value);
+  const weightKg = parseFloat(document.getElementById('weight-kg').value);
+
+  if (!heightCm || !weightKg) {
+    document.getElementById('bmi-display').style.display = 'none';
+    return;
+  }
+
+  const bmi = weightKg / Math.pow(heightCm / 100, 2);
+  const bmiRounded = Math.round(bmi * 10) / 10;
+
+  // Asian BMI cutoffs (WHO/SEARO)
+  let category, categoryLabel, categoryClass;
+  if (bmi < 18.5) {
+    category = 'underweight'; categoryLabel = 'Underweight'; categoryClass = 'bmi-low';
+  } else if (bmi < 23) {
+    category = 'normal'; categoryLabel = 'Normal'; categoryClass = 'bmi-normal';
+  } else if (bmi < 25) {
+    category = 'overweight'; categoryLabel = 'Overweight (Asian)'; categoryClass = 'bmi-warning';
+  } else {
+    category = 'obese'; categoryLabel = 'Obese (Asian)'; categoryClass = 'bmi-high';
+  }
+
+  // Waist-to-height ratio if waist is entered
+  const waistCm = parseFloat(document.getElementById('waist-input')?.value);
+  let whrText = '';
+  if (waistCm && heightCm) {
+    const whr = waistCm / heightCm;
+    const whrRisk = whr >= 0.5 ? 'elevated risk' : 'normal';
+    whrText = `  |  Waist-to-height ratio: ${whr.toFixed(2)} (${whrRisk})`;
+  }
+
+  // Update display
+  document.getElementById('bmi-display').style.display = 'block';
+  document.getElementById('bmi-value').textContent = bmiRounded.toFixed(1);
+  document.getElementById('bmi-category-label').textContent = categoryLabel;
+  document.getElementById('bmi-category-label').className = categoryClass;
+  document.getElementById('whr-display').textContent = whrText;
+
+  // Update state
+  state.personalContext.bmi = bmiRounded;
+  state.personalContext.bmiCategory = category;
+  state.personalContext.heightCm = heightCm;
+  state.personalContext.weightKg = weightKg;
+}
 
 document.getElementById('t2d-history').addEventListener('change', function() {
   state.personalContext.t2dFamilyHistory =
@@ -103,6 +146,7 @@ document.getElementById('sedentary-input').addEventListener('change', function(e
 });
 document.getElementById('waist-input').addEventListener('input', e => {
   state.personalContext.waistCm = parseInt(e.target.value) || null;
+  updateBMI();
 });
 state.personalContext.age = 40;
 state.personalContext.sedentaryHrs = 6;

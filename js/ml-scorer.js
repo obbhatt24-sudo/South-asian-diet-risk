@@ -52,17 +52,15 @@ function gbmPredict(weightsBlock, featuresDict) {
 }
 
 function buildMLFeatures(personalContext, mealItems, addedSodiumMg) {
-  // Convert personal context inputs to feature values
-  const bmiMap = {
-    underweight: 17, normal: 22, overweight: 26, obese: 31
-  };
   const nutrients = computeMealNutrients(mealItems);
   const gl = computeMealGL(mealItems);
   const DAILY_SCALE = 3;
 
   return {
     feature_age:                 personalContext.age || 40,
-    feature_bmi:                 bmiMap[personalContext.bmiCategory] || 22,
+    feature_bmi:                 personalContext.bmi
+                                   ? Math.min(Math.max(personalContext.bmi, 15), 60)
+                                   : 25,  // default if not entered
     feature_waist_cm:            personalContext.waistCm
                                    ? Math.min(Math.max(personalContext.waistCm, 50), 160)
                                    : (personalContext.bmiCategory === 'obese' ? 102

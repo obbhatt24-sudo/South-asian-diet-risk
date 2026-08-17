@@ -583,6 +583,15 @@ input:focus, select:focus {
   margin-top: -4px;
   margin-bottom: var(--space-sm);
 }
+.biometric-inputs { display: flex; flex-direction: column; gap: 8px; }
+.biometric-row { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+.unit-input { display: flex; align-items: center; gap: 4px; }
+.unit-label { font-size: 0.85rem; color: var(--color-text-muted); }
+.bmi-display { font-size: 0.88rem; padding: 6px 0; }
+.bmi-low     { color: #1565C0; font-weight: 600; }
+.bmi-normal  { color: var(--color-low); font-weight: 600; }
+.bmi-warning { color: var(--color-moderate); font-weight: 600; }
+.bmi-high    { color: var(--color-high); font-weight: 600; }
 
 /* ==================================================================
    SECTION 9: Disclaimer and risk notes

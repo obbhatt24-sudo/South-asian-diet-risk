@@ -126,16 +126,34 @@
           I have Type 1 diabetes
         </label>
 
-        <label><span data-i18n="meal_builder.bmi_label">BMI category</span>
-          <select id="bmi-input">
-            <option value="normal" selected>Not specified / Normal (18.5–22.9)</option>
-            <option value="underweight">Underweight (&lt;18.5)</option>
-            <option value="overweight">Overweight (23–24.9) — Asian cutoff</option>
-            <option value="obese">Obese (≥25) — Asian cutoff</option>
-          </select>
-        </label>
-        <p class="bmi-note" data-i18n="meal_builder.bmi_note">Asian cutoffs: overweight ≥23, obese ≥25 (WHO/SEARO).
-          Western standard uses ≥25 for overweight.</p>
+        <div class='biometric-inputs'>
+          <div class='biometric-row'>
+            <label>Height
+              <div class='unit-input'>
+                <input type='number' id='height-cm' min='100' max='250'
+                       placeholder='e.g. 170' style='width:70px'
+                       oninput='updateBMI()' />
+                <span class='unit-label'>cm</span>
+              </div>
+            </label>
+            <label>Weight
+              <div class='unit-input'>
+                <input type='number' id='weight-kg' min='30' max='200'
+                       placeholder='e.g. 70' style='width:70px'
+                       oninput='updateBMI()' />
+                <span class='unit-label'>kg</span>
+              </div>
+            </label>
+          </div>
+          <div id='bmi-display' class='bmi-display' style='display:none'>
+            BMI: <span id='bmi-value'></span>
+            <span id='bmi-category-label'></span>
+            <span id='whr-display'></span>
+          </div>
+          <p class='bmi-note'>
+            South Asian thresholds: overweight ≥23, obese ≥25 (WHO/SEARO)
+          </p>
+        </div>
 
         <label>Waist circumference (optional)
           <input type='number' id='waist-input' min='50' max='160'
