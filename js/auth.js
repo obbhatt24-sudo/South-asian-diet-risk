@@ -22,17 +22,20 @@ function updateAuthUI() {
   const userInfo   = document.getElementById('user-info');
   const saveBtn    = document.getElementById('save-meal-btn');
   const historyNav = document.querySelector('[data-view="history"]');
+  const pantryNav  = document.querySelector('[data-view="pantry"]');
 
   if (currentUser) {
     if (authBtn)    authBtn.textContent = 'Sign out';
     if (userInfo)   userInfo.textContent = currentUser.email;
     if (saveBtn)    saveBtn.style.display = 'block';
     if (historyNav) historyNav.style.display = 'inline-block';
+    if (pantryNav)  pantryNav.style.display = 'inline-block';
   } else {
     if (authBtn)    authBtn.textContent = 'Sign in';
     if (userInfo)   userInfo.textContent = '';
     if (saveBtn)    saveBtn.style.display = 'none';
     if (historyNav) historyNav.style.display = 'none';
+    if (pantryNav)  pantryNav.style.display = 'none';
   }
 }
 

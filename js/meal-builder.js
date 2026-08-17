@@ -138,6 +138,16 @@ function renderPackagedResults(results, query) {
     });
     div.appendChild(header);
 
+    if (typeof isSignedIn === 'function' && isSignedIn()) {
+      const pantryBtn = document.createElement('button');
+      pantryBtn.textContent = '+ Add to pantry';
+      pantryBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        addProductToPantry(product);
+      });
+      div.appendChild(pantryBtn);
+    }
+
     // Ingredient-list analysis, rendered asynchronously into its own container.
     const analysisEl = document.createElement('div');
     analysisEl.className = 'ingredient-analysis-wrap';
@@ -146,6 +156,19 @@ function renderPackagedResults(results, query) {
 
     container.appendChild(div);
   });
+}
+
+async function addProductToPantry(product) {
+  const { error } = await addToPantry({
+    product_name:       product.name,
+    barcode:            product.barcode || product.source_code || null,
+    brand:              product.brand || null,
+    serving_size_g:     product.serving_size_g || 100,
+    servings_total:     1,
+    nutrients_per_100g: product.nutrients_per_100g || product.nutrients || null,
+    ingredient_flags:   null,
+  });
+  if (!error) showScanStatus('Added to pantry!');
 }
 
 // Renders the red/amber/green ingredient-list breakdown for a packaged product

@@ -64,3 +64,32 @@ async function getRecentMeals(limit = 30) {
 async function deleteMeal(mealId) {
   return _supabase.from('meals').delete().eq('id', mealId);
 }
+
+// ── Pantry helpers ────────────────────────────────────
+
+async function addToPantry(productData) {
+  const user = await getCurrentUser();
+  if (!user) return { error: { message: 'Not signed in' } };
+  return _supabase.from('pantry_items').insert({
+    user_id: user.id, ...productData
+  });
+}
+
+async function getPantryItems() {
+  const user = await getCurrentUser();
+  if (!user) return { data: [], error: null };
+  return _supabase.from('pantry_items')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('last_used_at', { ascending: false, nullsFirst: false });
+}
+
+async function updatePantryServings(itemId, servingsUsed) {
+  return _supabase.from('pantry_items')
+    .update({ servings_used: servingsUsed, last_used_at: new Date().toISOString() })
+    .eq('id', itemId);
+}
+
+async function deletePantryItem(itemId) {
+  return _supabase.from('pantry_items').delete().eq('id', itemId);
+}

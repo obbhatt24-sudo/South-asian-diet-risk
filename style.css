@@ -1336,3 +1336,22 @@ input:focus, select:focus {
 .sodium-entry-row select { width: auto; margin-bottom: 0; }
 .sodium-reference { font-size: 0.72rem; color: var(--color-text-faint);
   font-style: italic; margin-top: 4px; }
+
+/* Virtual pantry (Step 81) */
+.pantry-item { margin-bottom: var(--space-sm); }
+.pantry-item-header { display: flex; justify-content: space-between;
+  align-items: flex-start; }
+.pantry-item-name { font-weight: 600; font-size: 0.95rem; }
+.pantry-item-brand { font-size: 0.75rem; color: var(--color-text-faint);
+  display: block; font-weight: 400; }
+.pantry-item-remaining { font-size: 0.82rem; color: var(--color-text-muted); }
+.pantry-progress-bar { height: 4px; background: var(--color-border);
+  border-radius: 2px; overflow: hidden; margin: 8px 0; }
+.pantry-progress-fill { height: 100%; background: var(--color-teal);
+  border-radius: 2px; transition: width 0.3s; }
+.pantry-item-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.pantry-item-actions button { background: none;
+  border: 1px solid var(--color-border);
+  padding: 4px 10px; border-radius: var(--radius-sm);
+  font-size: 0.78rem; cursor: pointer;
+  font-family: var(--font-body); }
