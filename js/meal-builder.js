@@ -1166,6 +1166,64 @@ function showScanSuccess(msg) {
   if (el) el.innerHTML = `<p class='scan-status'>✓ Added ${msg} to meal.</p>`;
 }
 
+// Jaccard similarity of two item lists by ingredient id overlap.
+function mealSimilarity(mealsA, mealsB) {
+  const idsA = new Set(mealsA.map(i => i.id));
+  const idsB = new Set(mealsB.map(i => i.id));
+  const intersection = [...idsA].filter(id => idsB.has(id)).length;
+  const union = new Set([...idsA, ...idsB]).size;
+  return union === 0 ? 0 : intersection / union;
+}
+
+// Group meals whose ingredient sets are >=50% similar (Jaccard), instead of
+// requiring an exact fingerprint match, so near-identical repeat meals
+// (e.g. dal+roti+spinach vs dal+roti+potato, one side item swapped) are
+// still recognized as "the same meal". A typical 3-item meal with one item
+// swapped only reaches 50% Jaccard (2 shared / 4 union), so 75% never
+// matches this common case in practice.
+const PATTERN_SIMILARITY_THRESHOLD = 0.5;
+
+function groupMealsByPattern(meals) {
+  const groups = [];
+
+  for (const meal of meals) {
+    const items = (meal.meal_items || []).filter(i => i.type === 'ingredient');
+    if (!items.length) continue;
+
+    let matched = false;
+    for (const group of groups) {
+      const sim = mealSimilarity(items, group.representative_items);
+      if (sim >= PATTERN_SIMILARITY_THRESHOLD) {
+        group.meals.push(meal);
+        group.count++;
+        if (new Date(meal.created_at) > new Date(group.representative.created_at)) {
+          group.representative = meal;
+          group.representative_items = items;
+        }
+        matched = true;
+        break;
+      }
+    }
+
+    if (!matched) {
+      groups.push({
+        representative: meal,
+        representative_items: items,
+        meals: [meal],
+        count: 1,
+      });
+    }
+  }
+
+  return groups.sort((a, b) => b.count - a.count ||
+    new Date(b.representative.created_at) - new Date(a.representative.created_at));
+}
+
+function avgScore(meals, field) {
+  const vals = meals.map(m => m[field]).filter(Boolean);
+  return vals.length ? Math.round(vals.reduce((s, v) => s + v, 0) / vals.length) : '?';
+}
+
 async function loadRecentMeals() {
   if (!isSignedIn()) return;
 
@@ -1176,25 +1234,13 @@ async function loadRecentMeals() {
     const { data: meals } = await getRecentMeals(20);
     if (!meals || meals.length === 0) return;
 
-    // Deduplicate by meal fingerprint
-    // Fingerprint = sorted ingredient IDs joined by pipe
-    const seen = new Set();
-    const unique = [];
-    for (const meal of meals) {
-      const items = (meal.meal_items || []).filter(i => i.type === 'ingredient');
-      const fp = items.map(i => i.id).sort().join('|');
-      if (!seen.has(fp) && items.length > 0) {
-        seen.add(fp);
-        unique.push({ ...meal, _fingerprint: fp });
-        if (unique.length >= 8) break;  // show max 8 unique meals
-      }
-    }
-
-    if (!unique.length) return;
+    const groups = groupMealsByPattern(meals).slice(0, 8);  // show max 8 patterns
+    if (!groups.length) return;
 
     section.style.display = 'block';
-    list.innerHTML = unique.map((meal, i) => {
-      const items = (meal.meal_items || []).filter(i => i.type === 'ingredient');
+    list.innerHTML = groups.map((group, i) => {
+      const meal = group.representative;
+      const items = group.representative_items;
       const names = items.slice(0, 3).map(item => {
         const ing = getIngredientById(item.id);
         return ing ? ing.name.split(' ')[0] : item.id;  // first word only
@@ -1202,30 +1248,49 @@ async function loadRecentMeals() {
       const moreCount = items.length > 3 ? `+${items.length - 3}` : '';
       const dateStr = new Date(meal.created_at).toLocaleDateString('en-IN',
         { weekday: 'short', month: 'short', day: 'numeric' });
+      const isFrequent = group.count >= 3;
 
       return `
-        <button class='recent-meal-card'
-                onclick='reloadRecentMeal(${i})'
+        <button class='recent-meal-card${isFrequent ? ' frequent-meal' : ''}'
+                onclick='reloadMealGroup(${i})'
                 title='${meal.meal_name || 'Unnamed meal'}'>
+          ${isFrequent ? `<span class='frequent-badge'>${group.count}x this month</span>` : ''}
           <span class='recent-meal-name'>
             ${meal.meal_name || names}
           </span>
           <span class='recent-meal-items'>
             ${names}${moreCount ? ` ${moreCount} more` : ''}
           </span>
-          <span class='recent-meal-date'>${dateStr}</span>
+          <span class='recent-meal-date'>Last: ${dateStr}</span>
           <span class='recent-meal-scores'>
-            D:${meal.diabetes_score || '?'} C:${meal.cvd_score || '?'}
+            Avg D:${avgScore(group.meals, 'diabetes_score')} C:${avgScore(group.meals, 'cvd_score')}
           </span>
         </button>`;
     }).join('');
 
-    // Store meals for reload
-    window._recentMealsData = unique;
+    // Store groups and their representative meals for reload.
+    // _recentMealsData is indexed identically to _recentMealGroups so
+    // reloadMealGroup(i) can hand off to reloadRecentMeal(i) directly.
+    window._recentMealGroups = groups;
+    window._recentMealsData = groups.map(g => g.representative);
 
   } catch(e) {
     console.warn('Recent meals load failed:', e);
   }
+}
+
+function reloadMealGroup(index) {
+  const group = window._recentMealGroups?.[index];
+  if (!group) return;
+
+  if (group.count > 1) {
+    const useLatest = window.confirm(
+      `You've had this meal ${group.count} times. Load the most recent version?`
+    );
+    if (!useLatest) return;
+  }
+
+  reloadRecentMeal(index);
 }
 
 // Named reloadRecentMeal (not reloadMeal) — history.js already defines a
