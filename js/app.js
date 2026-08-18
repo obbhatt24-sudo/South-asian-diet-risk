@@ -76,6 +76,7 @@ document.querySelectorAll('input[name="context"]').forEach(function(radio) {
       document.getElementById('context-description').textContent =
         typeof t === 'function' ? t(`context.${radio.value}_description`) : CONTEXT_DESCRIPTIONS[radio.value];
     }
+    scheduleProfileSave();
   });
 });
 
@@ -143,18 +144,117 @@ document.getElementById('cvd-history').addEventListener('change', function() {
 
 document.getElementById('age-input').addEventListener('input', function(e) {
   state.personalContext.age = parseInt(e.target.value) || 40;
+  scheduleProfileSave();
 });
 document.getElementById('sedentary-input').addEventListener('change', function(e) {
   state.personalContext.sedentaryHrs = parseInt(e.target.value);
+  scheduleProfileSave();
 });
 document.getElementById('waist-input').addEventListener('input', e => {
   state.personalContext.waistCm = parseInt(e.target.value) || null;
   updateBMI();
+  scheduleProfileSave();
 });
+document.getElementById('height-cm').addEventListener('input', scheduleProfileSave);
+document.getElementById('weight-kg').addEventListener('input', scheduleProfileSave);
+document.getElementById('sex-select').addEventListener('change', scheduleProfileSave);
+document.getElementById('t1d-toggle').addEventListener('change', scheduleProfileSave);
 state.personalContext.age = 40;
 state.personalContext.sedentaryHrs = 6;
 state.personalContext.waistCm = null;
 state.personalContext.sex = 'male';
+
+// ── Saved personal-context profile (Step 92) ──────────
+
+let _profileSaveTimer = null;
+
+function scheduleProfileSave() {
+  if (!isSignedIn()) return;
+  clearTimeout(_profileSaveTimer);
+  _profileSaveTimer = setTimeout(async () => {
+    const ctx = state.personalContext;
+    await saveUserProfile({
+      height_cm:     ctx.heightCm || null,
+      weight_kg:     ctx.weightKg || null,
+      waist_cm:      ctx.waistCm || null,
+      age_years:     ctx.age || null,
+      sex:           ctx.sex || 'male',
+      sedentary_hrs: ctx.sedentaryHrs || 8,
+      context:       state.context === 't1d' ? (state.baseContext || 'india') : state.context,
+      t1d:           state.context === 't1d',
+    });
+    showProfileSaveIndicator();
+  }, 2000);
+}
+
+function showProfileSaveIndicator() {
+  const indicator = document.getElementById('profile-save-indicator');
+  if (!indicator) return;
+  indicator.textContent = '✓ Saved';
+  indicator.style.opacity = '1';
+  setTimeout(() => { indicator.style.opacity = '0'; }, 2000);
+}
+
+async function handleSignedIn(user) {
+  const profile = await loadUserProfile();
+  if (profile) {
+    applyProfileToUI(profile);
+    showToast('Personal context loaded from your profile');
+  } else {
+    showToast('Fill in your personal context — it will be saved automatically');
+  }
+}
+
+function applyProfileToUI(profile) {
+  if (profile.height_cm) {
+    const el = document.getElementById('height-cm');
+    if (el) el.value = profile.height_cm;
+    state.personalContext.heightCm = profile.height_cm;
+  }
+  if (profile.weight_kg) {
+    const el = document.getElementById('weight-kg');
+    if (el) el.value = profile.weight_kg;
+    state.personalContext.weightKg = profile.weight_kg;
+  }
+  if (profile.waist_cm) {
+    const el = document.getElementById('waist-input');
+    if (el) el.value = profile.waist_cm;
+    state.personalContext.waistCm = profile.waist_cm;
+  }
+  if (profile.age_years) {
+    const el = document.getElementById('age-input');
+    if (el) el.value = profile.age_years;
+    state.personalContext.age = profile.age_years;
+  }
+  if (profile.sex) {
+    const el = document.getElementById('sex-select');
+    if (el) el.value = profile.sex;
+    state.personalContext.sex = profile.sex;
+  }
+  if (profile.sedentary_hrs != null) {
+    const el = document.getElementById('sedentary-input');
+    if (el) el.value = profile.sedentary_hrs;
+    state.personalContext.sedentaryHrs = profile.sedentary_hrs;
+  }
+  if (profile.context) {
+    state.baseContext = profile.context;
+    const radio = document.querySelector(`input[name="context"][value="${profile.context}"]`);
+    if (radio) radio.checked = true;
+    if (state.context !== 't1d') {
+      state.context = profile.context;
+      document.getElementById('context-description').textContent =
+        typeof t === 'function' ? t(`context.${profile.context}_description`) : CONTEXT_DESCRIPTIONS[profile.context];
+    }
+  }
+  if (profile.t1d) {
+    const el = document.getElementById('t1d-toggle');
+    if (el) el.checked = true;
+    state.context = 't1d';
+  }
+  if (profile.height_cm && profile.weight_kg) {
+    updateBMI();
+  }
+}
 
 // Search-source tabs: each entry pairs a tab button with the panel it controls.
 const SEARCH_TABS = [

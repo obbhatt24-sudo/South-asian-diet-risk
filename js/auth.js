@@ -11,6 +11,7 @@ function initAuth() {
     updateAuthUI();
     if (user) {
       console.log('Signed in:', user.email);
+      handleSignedIn(user);
     } else {
       console.log('Signed out');
     }

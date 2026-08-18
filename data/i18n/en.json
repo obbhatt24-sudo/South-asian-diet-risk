@@ -34,7 +34,7 @@
     "salt_light": "Light (~200mg sodium)",
     "salt_moderate": "Moderate (~400mg sodium)",
     "salt_heavy": "Heavy (~800mg sodium)",
-    "personal_context_heading": "Personal context (optional — not stored)",
+    "personal_context_heading": "Personal context (optional — saved to your profile when signed in)",
     "bmi_label": "BMI category",
     "bmi_note": "Asian cutoffs: overweight ≥23, obese ≥25 (WHO/SEARO). Western standard: overweight ≥25.",
     "age_label": "Your age",

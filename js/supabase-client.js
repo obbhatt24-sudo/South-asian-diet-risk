@@ -93,3 +93,28 @@ async function updatePantryServings(itemId, servingsUsed) {
 async function deletePantryItem(itemId) {
   return _supabase.from('pantry_items').delete().eq('id', itemId);
 }
+
+// ── Personal context profile helpers ──────────────────
+
+async function loadUserProfile() {
+  const user = await getCurrentUser();
+  if (!user) return null;
+  const { data } = await _supabase
+    .from('user_profiles')
+    .select('*')
+    .eq('user_id', user.id)
+    .single();
+  return data;
+}
+
+async function saveUserProfile(profileData) {
+  const user = await getCurrentUser();
+  if (!user) return;
+  await _supabase
+    .from('user_profiles')
+    .upsert({
+      user_id: user.id,
+      ...profileData,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' });
+}

@@ -126,7 +126,12 @@
       <div id="meal-nutrient-totals"></div>
 
       <div id="personal-context" class="card">
-        <h3 data-i18n="meal_builder.personal_context_heading">Personal context (optional — not stored)</h3>
+        <h3 data-i18n="meal_builder.personal_context_heading">Personal context (optional — saved to your profile when signed in)</h3>
+        <span id='profile-save-indicator'
+              style='font-size:0.72rem; color:var(--color-low); opacity:0;
+                     transition: opacity 0.5s; margin-left: 8px;'>
+          ✓ Saved
+        </span>
 
         <label class='context-option'>
           <input type='checkbox' id='t1d-toggle'
