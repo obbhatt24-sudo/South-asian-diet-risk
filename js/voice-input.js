@@ -114,8 +114,19 @@ async function parseMealFromTranscript(transcript, lang) {
 
     if (!response.ok) throw new Error('Server error: ' + response.status);
     const data = await response.json();
+    const parsedItems = data.items || [];
 
-    await applyVoiceMealItems(data.items || []);
+    if (!parsedItems.length) {
+      voiceStatus.textContent = 'No ingredients matched. Try speaking more clearly.';
+      voiceStatus.style.color = 'var(--color-high)';
+      return;
+    }
+
+    voiceStatus.textContent = 'Matching ingredients...';
+    const results = await matchVoiceItems(parsedItems);
+    _pendingVoiceMatches = results;
+    voiceStatus.textContent = '';
+    renderVoiceConfirmation(results);
 
   } catch(err) {
     if (err.name === 'TimeoutError') {
@@ -129,35 +140,158 @@ async function parseMealFromTranscript(transcript, lang) {
   }
 }
 
-async function applyVoiceMealItems(parsedItems) {
-  const voiceStatus = document.getElementById('voice-status');
+function renderVoiceConfirmation(matchResults) {
+  const container = document.getElementById('voice-confirmation');
+  if (!container) return;
 
-  if (!parsedItems.length) {
-    voiceStatus.textContent = 'No ingredients matched. Try speaking more clearly.';
-    voiceStatus.style.color = 'var(--color-high)';
+  const disambig = matchResults.filter(r => r.needs_disambiguation);
+  const askUser = matchResults.filter(r => r.ask_user);
+  const unmatched = matchResults.filter(r => r.match_type === 'unmatched');
+
+  const matched = matchResults.filter(r => r.ingredient && !r.needs_disambiguation);
+  const total = matched.length + disambig.length;
+  if (total === 0 && askUser.length === 0) {
+    document.getElementById('voice-status').textContent =
+      'No ingredients recognised. Try speaking more clearly or search manually.';
     return;
   }
 
-  voiceStatus.textContent = 'Matching ingredients...';
-  const results = await matchVoiceItems(parsedItems);
-  _pendingVoiceMatches = results;
+  container.innerHTML = `
+    <div class='voice-confirm-card'>
+      <div class='voice-confirm-heading'>
+        I heard ${matchResults.length} item${matchResults.length > 1 ? 's' : ''}
+        — confirm before adding:
+      </div>
 
-  // Nothing is added to state.mealItems here — items that matched cleanly,
-  // need disambiguation, or need the user to specify are all handed to the
-  // Step 85 confirmation UI, which is responsible for adding confirmed
-  // items to the meal.
-  const resolved = results.filter(r =>
-    r.ingredient && !r.needs_disambiguation && !r.ask_user);
-  const needsInput = results.filter(r =>
-    r.needs_disambiguation || r.ask_user || !r.ingredient);
+      <div class='voice-confirm-items' id='voice-confirm-list'>
+        ${matchResults.map((r, i) => renderConfirmRow(r, i)).join('')}
+      </div>
 
-  let msg = `Matched ${resolved.length} ingredient${resolved.length !== 1 ? 's' : ''}.`;
-  if (needsInput.length > 0) {
-    msg += ` ${needsInput.length} need confirmation: ` +
-      needsInput.map(r => r.spoken).join(', ') + '.';
+      ${unmatched.length ? `
+        <p class='voice-confirm-unmatched'>
+          Could not match: ${unmatched.map(r => r.spoken).join(', ')}.
+          Add these manually from the search tab.
+        </p>` : ''}
+
+      <div class='voice-confirm-actions'>
+        <button onclick='confirmVoiceItems()'
+                class='btn-confirm-voice'>
+          Add all to meal
+        </button>
+        <button onclick='cancelVoiceConfirmation()'
+                class='btn-cancel-voice'>
+          Cancel
+        </button>
+      </div>
+    </div>`;
+
+  container.style.display = 'block';
+  _pendingVoiceMatches = matchResults;
+}
+
+function renderConfirmRow(result, index) {
+  const isAsk = result.ask_user;
+  const isDisambig = result.needs_disambiguation;
+  const ingName = result.ingredient?.name || '??';
+
+  if (isAsk) {
+    return `
+      <div class='confirm-row confirm-ask' data-index='${index}'>
+        <span class='confirm-spoken'>"${result.spoken}"</span>
+        <span class='confirm-arrow'>→</span>
+        <input type='text' class='confirm-search-input'
+               placeholder='Which ingredient?'
+               oninput='searchConfirmIngredient(${index}, this.value)'
+               id='confirm-search-${index}' />
+        <div class='confirm-search-results' id='confirm-results-${index}'></div>
+      </div>`;
   }
-  voiceStatus.textContent = msg;
-  voiceStatus.style.color = resolved.length > 0 ? 'var(--color-low)' : 'var(--color-high)';
+
+  return `
+    <div class='confirm-row ${isDisambig ? 'confirm-disambig' : 'confirm-matched'}'
+         data-index='${index}'>
+      <span class='confirm-ingredient-name'>${ingName}</span>
+      <span class='confirm-heard'>heard: "${result.spoken}"</span>
+      <div class='confirm-grams'>
+        <button onclick='adjustConfirmGrams(${index}, -25)'>−</button>
+        <span class='confirm-gram-value' id='confirm-g-${index}'>
+          ${result.grams}
+        </span>
+        <span>g</span>
+        <button onclick='adjustConfirmGrams(${index}, 25)'>+</button>
+      </div>
+      ${isDisambig ? `
+        <select class='confirm-disambig-select'
+                onchange='setConfirmIngredient(${index}, this.value)'>
+          ${result.options.map(opt => `
+            <option value='${opt.id}'
+              ${opt.id === result.ingredient?.id ? 'selected' : ''}>
+              ${opt.name}
+            </option>`).join('')}
+        </select>` : ''}
+    </div>`;
+}
+
+function adjustConfirmGrams(index, delta) {
+  const result = _pendingVoiceMatches[index];
+  result.grams = Math.max(10, (result.grams || 100) + delta);
+  document.getElementById(`confirm-g-${index}`).textContent = result.grams;
+}
+
+function setConfirmIngredient(index, ingredientId) {
+  const result = _pendingVoiceMatches[index];
+  result.ingredient = getIngredientById(ingredientId);
+  result.needs_disambiguation = false;
+}
+
+function searchConfirmIngredient(index, query) {
+  if (query.length < 2) {
+    document.getElementById(`confirm-results-${index}`).innerHTML = '';
+    return;
+  }
+  const results = searchIngredients(query).slice(0, 5);
+  document.getElementById(`confirm-results-${index}`).innerHTML =
+    results.map(ing => `
+      <div class='confirm-search-result'
+           onclick='selectConfirmIngredient(${index}, "${ing.id}",
+                    "${ing.name.replace(/'/g, "\\'")}")'>
+        ${ing.name}
+      </div>`).join('');
+}
+
+function selectConfirmIngredient(index, id, name) {
+  _pendingVoiceMatches[index].ingredient = getIngredientById(id);
+  _pendingVoiceMatches[index].ask_user = false;
+  document.getElementById(`confirm-search-${index}`).value = name;
+  document.getElementById(`confirm-results-${index}`).innerHTML = '';
+}
+
+function confirmVoiceItems() {
+  const results = _pendingVoiceMatches || [];
+  let added = 0;
+  for (const r of results) {
+    if (!r.ingredient) continue;
+    state.mealItems.push({
+      type: 'ingredient',
+      id: r.ingredient.id,
+      gramAmount: r.grams || 100,
+      cooking_method: r.cooking_method || null,
+    });
+    added++;
+  }
+  cancelVoiceConfirmation();
+  renderMealItems();
+  updateNutrientTotals();
+  updateCalculateButton();
+  document.getElementById('voice-status').textContent =
+    `Added ${added} ingredient${added !== 1 ? 's' : ''} to meal.`;
+  document.getElementById('voice-status').style.color = 'var(--color-low)';
+}
+
+function cancelVoiceConfirmation() {
+  const container = document.getElementById('voice-confirmation');
+  if (container) { container.innerHTML = ''; container.style.display = 'none'; }
+  _pendingVoiceMatches = [];
 }
 
 async function startCookingMethodVoice() {

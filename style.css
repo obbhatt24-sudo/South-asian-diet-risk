@@ -1366,6 +1366,52 @@ input:focus, select:focus {
   font-size: 0.72rem; color: var(--color-text-faint);
   font-style: italic; margin-bottom: var(--space-sm);
 }
+
+/* Voice meal confirmation (Step 85) */
+.voice-confirm-card { background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: var(--space-md);
+  margin-top: var(--space-sm); }
+.voice-confirm-heading { font-weight: 600; font-size: 0.9rem;
+  margin-bottom: var(--space-sm); color: var(--color-navy); }
+.voice-confirm-items { display: flex; flex-direction: column; gap: 8px; }
+.confirm-row { display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap; padding: 8px;
+  border-radius: var(--radius-sm); font-size: 0.88rem; }
+.confirm-matched { background: var(--color-low-bg); }
+.confirm-disambig { background: var(--color-moderate-bg); }
+.confirm-ask { background: var(--color-high-bg); }
+.confirm-ingredient-name { font-weight: 600; min-width: 120px; }
+.confirm-heard { font-size: 0.78rem; color: var(--color-text-muted);
+  font-style: italic; }
+.confirm-grams { display: flex; align-items: center; gap: 4px; }
+.confirm-grams button { background: var(--color-bg);
+  border: 1px solid var(--color-border); width: 24px; height: 24px;
+  border-radius: 50%; cursor: pointer; font-size: 0.9rem; }
+.confirm-gram-value { font-weight: 700; min-width: 30px;
+  text-align: center; }
+.confirm-disambig-select { font-size: 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); padding: 2px 4px; }
+.confirm-search-input { flex: 1; min-width: 140px; font-size: 0.85rem; }
+.confirm-search-results { position: absolute; background: white;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  max-height: 150px; overflow-y: auto; z-index: 100; width: 200px; }
+.confirm-search-result { padding: 6px 10px; cursor: pointer;
+  font-size: 0.85rem; }
+.confirm-search-result:hover { background: var(--color-teal-light); }
+.voice-confirm-unmatched { font-size: 0.82rem; color: var(--color-high);
+  margin-top: var(--space-sm); }
+.voice-confirm-actions { display: flex; gap: 10px; margin-top: var(--space-sm); }
+.btn-confirm-voice { background: var(--color-teal); color: white;
+  border: none; padding: 10px 20px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  font-family: var(--font-body); }
+.btn-cancel-voice { background: none;
+  border: 1px solid var(--color-border);
+  padding: 10px 16px; border-radius: var(--radius-sm);
+  font-size: 0.9rem; cursor: pointer; font-family: var(--font-body); }
+
 .btn-mic-secondary {
   background: none;
   border: 1px solid var(--color-navy);
