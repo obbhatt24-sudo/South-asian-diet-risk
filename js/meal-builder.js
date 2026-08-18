@@ -1166,6 +1166,125 @@ function showScanSuccess(msg) {
   if (el) el.innerHTML = `<p class='scan-status'>✓ Added ${msg} to meal.</p>`;
 }
 
+async function loadRecentMeals() {
+  if (!isSignedIn()) return;
+
+  const section = document.getElementById('recent-meals-section');
+  const list = document.getElementById('recent-meals-list');
+
+  try {
+    const { data: meals } = await getRecentMeals(20);
+    if (!meals || meals.length === 0) return;
+
+    // Deduplicate by meal fingerprint
+    // Fingerprint = sorted ingredient IDs joined by pipe
+    const seen = new Set();
+    const unique = [];
+    for (const meal of meals) {
+      const items = (meal.meal_items || []).filter(i => i.type === 'ingredient');
+      const fp = items.map(i => i.id).sort().join('|');
+      if (!seen.has(fp) && items.length > 0) {
+        seen.add(fp);
+        unique.push({ ...meal, _fingerprint: fp });
+        if (unique.length >= 8) break;  // show max 8 unique meals
+      }
+    }
+
+    if (!unique.length) return;
+
+    section.style.display = 'block';
+    list.innerHTML = unique.map((meal, i) => {
+      const items = (meal.meal_items || []).filter(i => i.type === 'ingredient');
+      const names = items.slice(0, 3).map(item => {
+        const ing = getIngredientById(item.id);
+        return ing ? ing.name.split(' ')[0] : item.id;  // first word only
+      }).join(', ');
+      const moreCount = items.length > 3 ? `+${items.length - 3}` : '';
+      const dateStr = new Date(meal.created_at).toLocaleDateString('en-IN',
+        { weekday: 'short', month: 'short', day: 'numeric' });
+
+      return `
+        <button class='recent-meal-card'
+                onclick='reloadRecentMeal(${i})'
+                title='${meal.meal_name || 'Unnamed meal'}'>
+          <span class='recent-meal-name'>
+            ${meal.meal_name || names}
+          </span>
+          <span class='recent-meal-items'>
+            ${names}${moreCount ? ` ${moreCount} more` : ''}
+          </span>
+          <span class='recent-meal-date'>${dateStr}</span>
+          <span class='recent-meal-scores'>
+            D:${meal.diabetes_score || '?'} C:${meal.cvd_score || '?'}
+          </span>
+        </button>`;
+    }).join('');
+
+    // Store meals for reload
+    window._recentMealsData = unique;
+
+  } catch(e) {
+    console.warn('Recent meals load failed:', e);
+  }
+}
+
+// Named reloadRecentMeal (not reloadMeal) — history.js already defines a
+// global reloadMeal(mealJsonStr) with a different signature, and scripts
+// share one global scope, so reusing that name would shadow one or the
+// other depending on load order.
+function reloadRecentMeal(index) {
+  const meal = window._recentMealsData?.[index];
+  if (!meal) return;
+
+  const items = (meal.meal_items || []).filter(item =>
+    item.type === 'ingredient' && getIngredientById(item.id)
+  );
+
+  if (!items.length) {
+    showToast('Could not reload this meal — ingredients not found.');
+    return;
+  }
+
+  // Ask for confirmation if meal builder already has items
+  if (state.mealItems.length > 0) {
+    const confirmReplace = window.confirm(
+      `Replace current meal with '${meal.meal_name || 'this meal'}'?`
+    );
+    if (!confirmReplace) return;
+  }
+
+  state.mealItems = items.map(item => ({
+    type: 'ingredient',
+    id: item.id,
+    gramAmount: item.gramAmount || 100,
+    cooking_method: item.cooking_method || null,
+  }));
+
+  renderMealItems();
+  updateNutrientTotals();
+  updateCalculateButton();
+
+  // Show salt and personal context from the saved meal if available
+  if (meal.added_sodium_mg) {
+    state.addedSodiumMg = meal.added_sodium_mg;
+  }
+
+  showToast(`Loaded: ${meal.meal_name || items.length + ' ingredients'}`);
+}
+
+function showToast(message) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.className = 'app-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('visible');
+  setTimeout(() => toast.classList.remove('visible'), 2500);
+}
+
 function initMealBuilder() {
   const searchInput = document.getElementById('ingredient-search');
   const dishSearchInput = document.getElementById('dish-search');
@@ -1224,7 +1343,22 @@ function initMealBuilder() {
     renderDishResults(dishResults, dishQuery);
   });
 
+  // Refresh the recent-meals strip whenever auth state flips to signed-in.
+  // auth.js (loaded after this file) defines updateAuthUI as the single
+  // callback onAuthStateChange invokes on every login/logout/session
+  // restore, so wrapping it here — once auth.js has finished loading —
+  // covers sign-in without editing auth.js itself.
+  if (typeof updateAuthUI === 'function' && !updateAuthUI._wrappedForRecentMeals) {
+    const _origUpdateAuthUI = updateAuthUI;
+    updateAuthUI = function() {
+      _origUpdateAuthUI();
+      if (isSignedIn()) loadRecentMeals();
+    };
+    updateAuthUI._wrappedForRecentMeals = true;
+  }
+
   renderMealItems();
   updateNutrientTotals();
   updateCalculateButton();
+  loadRecentMeals();
 }
