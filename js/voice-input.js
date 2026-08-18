@@ -1,5 +1,6 @@
 let _recognition = null;
 let _isListening = false;
+let _pendingVoiceMatches = [];  // consumed by the Step 85 confirmation UI
 
 const VOICE_LANG_MAP = {
   en: 'en-IN',  // English with Indian accent model
@@ -130,44 +131,33 @@ async function parseMealFromTranscript(transcript, lang) {
 
 async function applyVoiceMealItems(parsedItems) {
   const voiceStatus = document.getElementById('voice-status');
-  const matched = [];
-  const unmatched = [];
 
-  for (const item of parsedItems) {
-    // Try to match to existing ingredient
-    const ing = _ingredients.find(i =>
-      i.name.toLowerCase() === item.name.toLowerCase() ||
-      i.name.toLowerCase().includes(item.name.toLowerCase())
-    );
-
-    if (ing) {
-      matched.push({
-        type: 'ingredient',
-        id: ing.id,
-        gramAmount: item.grams || 100,
-        cooking_method: item.cooking_method || null
-      });
-    } else {
-      unmatched.push(item.name);
-    }
-  }
-
-  if (matched.length > 0) {
-    state.mealItems = [...state.mealItems, ...matched];
-    renderMealItems();
-    updateNutrientTotals();
-    updateCalculateButton();
-
-    let msg = `Added ${matched.length} ingredient${matched.length > 1 ? 's' : ''}.`;
-    if (unmatched.length > 0) {
-      msg += ` Could not match: ${unmatched.join(', ')} — add manually.`;
-    }
-    voiceStatus.textContent = msg;
-    voiceStatus.style.color = 'var(--color-low)';
-  } else {
+  if (!parsedItems.length) {
     voiceStatus.textContent = 'No ingredients matched. Try speaking more clearly.';
     voiceStatus.style.color = 'var(--color-high)';
+    return;
   }
+
+  voiceStatus.textContent = 'Matching ingredients...';
+  const results = await matchVoiceItems(parsedItems);
+  _pendingVoiceMatches = results;
+
+  // Nothing is added to state.mealItems here — items that matched cleanly,
+  // need disambiguation, or need the user to specify are all handed to the
+  // Step 85 confirmation UI, which is responsible for adding confirmed
+  // items to the meal.
+  const resolved = results.filter(r =>
+    r.ingredient && !r.needs_disambiguation && !r.ask_user);
+  const needsInput = results.filter(r =>
+    r.needs_disambiguation || r.ask_user || !r.ingredient);
+
+  let msg = `Matched ${resolved.length} ingredient${resolved.length !== 1 ? 's' : ''}.`;
+  if (needsInput.length > 0) {
+    msg += ` ${needsInput.length} need confirmation: ` +
+      needsInput.map(r => r.spoken).join(', ') + '.';
+  }
+  voiceStatus.textContent = msg;
+  voiceStatus.style.color = resolved.length > 0 ? 'var(--color-low)' : 'var(--color-high)';
 }
 
 async function startCookingMethodVoice() {

@@ -1,0 +1,326 @@
+[
+  {
+    "spoken": "dal",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_015", "ing_016", "ing_014", "ing_013", "ing_034"],
+    "default_id": "ing_015",
+    "spoken_variants": ["dhal", "daal", "lentils", "lentil"]
+  },
+  {
+    "spoken": "rice",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_001", "ing_002", "ing_005", "ing_102"],
+    "default_id": "ing_001",
+    "spoken_variants": ["chawal", "bhaat", "cooked rice", "steamed rice"]
+  },
+  {
+    "spoken": "roti",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_003", "ing_004", "ing_112", "ing_111", "ing_006"],
+    "default_id": "ing_003",
+    "spoken_variants": ["chapati", "chapatti", "phulka", "flatbread"]
+  },
+  {
+    "spoken": "sabzi",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["subzi", "subji", "sabji", "vegetable curry",
+                        "veg curry", "vegetable dish", "veggies"]
+  },
+  {
+    "spoken": "aloo",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_023"],
+    "default_id": "ing_023",
+    "spoken_variants": ["potato", "potatoes", "aloo sabzi", "aloo curry"]
+  },
+  {
+    "spoken": "chole",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_035"],
+    "default_id": "ing_035",
+    "spoken_variants": ["cholay", "chollay", "chana masala", "chole masala",
+                        "chickpeas", "chick peas", "kabuli chana"]
+  },
+  {
+    "spoken": "paneer",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_020"],
+    "default_id": "ing_020",
+    "spoken_variants": ["cottage cheese", "indian cheese"]
+  },
+  {
+    "spoken": "dahi",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_021"],
+    "default_id": "ing_021",
+    "spoken_variants": ["curd", "yogurt", "yoghurt", "raita", "lassi"]
+  },
+  {
+    "spoken": "ghee",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_009"],
+    "default_id": "ing_009",
+    "spoken_variants": ["clarified butter", "desi ghee"]
+  },
+  {
+    "spoken": "dal chawal",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_015", "ing_001"],
+    "default_id": null,
+    "spoken_variants": ["dal rice", "daal chawal", "rice and dal"]
+  },
+  {
+    "spoken": "idli",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_118"],
+    "default_id": "ing_118",
+    "spoken_variants": ["idly", "steamed rice cake", "idlis"]
+  },
+  {
+    "spoken": "dosa",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_119"],
+    "default_id": "ing_119",
+    "spoken_variants": ["dosai", "plain dosa", "crispy dosa"]
+  },
+  {
+    "spoken": "sambar",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["sambhar", "south indian dal"]
+  },
+  {
+    "spoken": "biryani",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["biriyani", "briyani"]
+  },
+  {
+    "spoken": "paratha",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_113", "ing_127"],
+    "default_id": "ing_113",
+    "spoken_variants": ["parantha", "stuffed roti", "layered roti"]
+  },
+  {
+    "spoken": "curry",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["gravy", "masala"]
+  },
+  {
+    "spoken": "bread",
+    "match_type": "disambiguate",
+    "ingredient_ids": ["ing_046", "ing_045"],
+    "default_id": "ing_046",
+    "spoken_variants": ["toast", "sandwich bread", "loaf"]
+  },
+  {
+    "spoken": "milk",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_022"],
+    "default_id": "ing_022",
+    "spoken_variants": ["doodh", "dudh", "full fat milk", "toned milk"]
+  },
+  {
+    "spoken": "chai",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["tea", "masala tea", "indian tea", "chaa"]
+  },
+  {
+    "spoken": "egg",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_030"],
+    "default_id": "ing_030",
+    "spoken_variants": ["eggs", "anda", "ande", "omelette", "omelet", "omlet"]
+  },
+  {
+    "spoken": "chicken",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_029"],
+    "default_id": "ing_029",
+    "spoken_variants": ["murgi", "murgh", "murg", "chicken curry"]
+  },
+  {
+    "spoken": "poha",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_041"],
+    "default_id": "ing_041",
+    "spoken_variants": ["pohe", "flattened rice", "poha nashta"]
+  },
+  {
+    "spoken": "upma",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["uppma", "upma nashta", "rava upma"]
+  },
+  {
+    "spoken": "khichdi",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["khichadi", "kitchari", "kicheri"]
+  },
+  {
+    "spoken": "rajma",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_036"],
+    "default_id": "ing_036",
+    "spoken_variants": ["rajma curry", "kidney beans", "rajma masala"]
+  },
+  {
+    "spoken": "kadhi",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["kadhi pakora", "besan kadhi", "karhi"]
+  },
+  {
+    "spoken": "palak paneer",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["palak panir", "spinach paneer", "saag paneer"]
+  },
+  {
+    "spoken": "matar paneer",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["mutter paneer", "peas paneer", "matter paneer"]
+  },
+  {
+    "spoken": "naan",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_115"],
+    "default_id": "ing_115",
+    "spoken_variants": ["naan bread", "tandoori naan"]
+  },
+  {
+    "spoken": "kulcha",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_114"],
+    "default_id": "ing_114",
+    "spoken_variants": ["kulcha bread", "amritsari kulcha"]
+  },
+  {
+    "spoken": "puri",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_117"],
+    "default_id": "ing_117",
+    "spoken_variants": ["poori", "fried puri"]
+  },
+  {
+    "spoken": "bhatura",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_116"],
+    "default_id": "ing_116",
+    "spoken_variants": ["bhature", "bhatoora"]
+  },
+  {
+    "spoken": "samosa",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["samosas", "aloo samosa"]
+  },
+  {
+    "spoken": "pakora",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["pakoda", "fritters"]
+  },
+  {
+    "spoken": "bhajiya",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["bhajia", "onion bhajiya"]
+  },
+  {
+    "spoken": "gulab jamun",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["gulab jamoon", "gulaab jamun"]
+  },
+  {
+    "spoken": "kheer",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_179"],
+    "default_id": "ing_179",
+    "spoken_variants": ["rice pudding", "chaval kheer"]
+  },
+  {
+    "spoken": "halwa",
+    "match_type": "direct",
+    "ingredient_ids": ["ing_180"],
+    "default_id": "ing_180",
+    "spoken_variants": ["sooji halwa", "suji halwa", "halwa sweet"]
+  },
+  {
+    "spoken": "apple",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["apples", "seb"]
+  },
+  {
+    "spoken": "banana",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["bananas", "kela"]
+  },
+  {
+    "spoken": "mango",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["mangoes", "aam"]
+  },
+  {
+    "spoken": "orange",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["oranges", "santra"]
+  },
+  {
+    "spoken": "something",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["some food", "a dish", "i ate something"]
+  },
+  {
+    "spoken": "food",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["some food", "meal item"]
+  },
+  {
+    "spoken": "meal",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["my meal", "a meal", "full meal"]
+  },
+  {
+    "spoken": "snack",
+    "match_type": "ask",
+    "ingredient_ids": [],
+    "default_id": null,
+    "spoken_variants": ["a snack", "snacks", "nashta"]
+  }
+]

@@ -20,6 +20,7 @@ let _dishById = {};
 let _giOverrides = {};
 let _recOverrides = [];
 let _ingredientFlags = null;
+let _voiceSynonyms = [];
 let _dataLoaded = false;
 
 async function loadData() {
@@ -27,13 +28,14 @@ async function loadData() {
   // row is { id, name, data, status } where `data` holds the full object). The
   // remaining datasets (overrides, flags) stay as bundled JSON. data/*.json for
   // ingredients and dishes is kept in the repo as an offline fallback.
-  const [ingredients, dishes, giOverrides, recOverrides, ingredientFlags] =
+  const [ingredients, dishes, giOverrides, recOverrides, ingredientFlags, voiceSynonyms] =
     await Promise.all([
       loadIngredientsFromSupabase(),
       loadDishesFromSupabase(),
       fetch('data/gi-overrides.json').then(r => r.json()),
       fetch('data/rec-overrides.json').then(r => r.json()),
       fetch('data/ingredient-flags.json').then(r => r.json()),
+      fetch('data/voice-synonyms.json').then(r => r.json()),
       loadCookingMethods()
     ]);
 
@@ -44,6 +46,7 @@ async function loadData() {
   _giOverrides = Object.fromEntries(giOverrides.map(o => [o.ingredient_id, o.gi]));
   _recOverrides = recOverrides;
   _ingredientFlags = ingredientFlags;
+  _voiceSynonyms = voiceSynonyms;
   _dataLoaded = true;
 
   console.log(`Loaded ${_ingredients.length} ingredients, ${_dishes.length} dishes`);

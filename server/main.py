@@ -431,6 +431,50 @@ ingredient was cooked.'''
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class DisambiguateRequest(BaseModel):
+    terms: list[str]
+    ingredient_names: list[str] = []
+
+
+@app.post('/disambiguate-ingredients')
+async def disambiguate_ingredients(req: DisambiguateRequest):
+    """Match spoken ingredient terms that survived the local exact/synonym/
+    fuzzy layers in js/voice-matching.js to the closest known ingredient name.
+
+    Runs the LLM call server-side so the Anthropic API key stays secret —
+    the browser cannot call api.anthropic.com directly (see /parse-meal).
+    """
+    try:
+        if not req.terms:
+            return {'matches': []}
+        ingredient_list = ', '.join(req.ingredient_names[:80])
+        system_prompt = f'''Match these spoken food terms to the closest
+ingredient name. Respond ONLY with a JSON array. No other text.
+Each item: {{ "spoken": string, "matched_name": string|null, "confidence": "high"|"medium"|"low" }}
+Set matched_name to null if no reasonable match exists.
+Available ingredients: {ingredient_list}'''
+
+        response = claude.messages.create(
+            model='claude-sonnet-4-6',
+            max_tokens=400,
+            system=system_prompt,
+            messages=[{'role': 'user',
+                       'content': f'Terms to match: {json.dumps(req.terms)}'}],
+        )
+
+        text = response.content[0].text.strip()
+        clean = text.replace('```json', '').replace('```', '').strip()
+        matches = json.loads(clean)
+        if not isinstance(matches, list):
+            matches = []
+        return {'matches': matches}
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502,
+                            detail='Could not disambiguate ingredient terms')
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 def _strip_markdown(text: str) -> str:
     """Strip common markdown syntax the model adds despite instructions
     not to, since the frontend renders this text as raw innerHTML."""
