@@ -753,6 +753,168 @@ function showCookingNote(msg) {
   setTimeout(() => { note.textContent = ''; }, 4000);
 }
 
+// ===== Step 91 — unit conversion =====
+// Fallback unit options by category for ingredients without unit_options.
+const CATEGORY_UNIT_DEFAULTS = {
+  fat_source: [
+    { unit: 'tsp',  grams: 4.5 },
+    { unit: 'tbsp', grams: 13.5 },
+    { unit: 'g',    grams: 1 }
+  ],
+  spice: [
+    { unit: 'pinch', grams: 0.3 },
+    { unit: 'tsp',   grams: 2.5 },
+    { unit: 'tbsp',  grams: 7.5 },
+    { unit: 'g',     grams: 1 }
+  ],
+  dairy: [
+    { unit: 'tbsp',  grams: 15 },
+    { unit: 'cup',   grams: 240 },
+    { unit: 'ml',    grams: 1 },
+    { unit: 'g',     grams: 1 }
+  ],
+  starch_source: [
+    { unit: 'cup cooked', grams: 180 },
+    { unit: 'serving',    grams: 150 },
+    { unit: 'g',          grams: 1 }
+  ],
+  legume: [
+    { unit: 'cup cooked', grams: 180 },
+    { unit: 'small bowl', grams: 150 },
+    { unit: 'g',          grams: 1 }
+  ],
+  vegetable: [
+    { unit: 'cup chopped', grams: 90 },
+    { unit: 'medium',      grams: 100 },
+    { unit: 'g',           grams: 1 }
+  ],
+  protein_source: [
+    { unit: 'small serving',  grams: 85 },
+    { unit: 'medium serving', grams: 120 },
+    { unit: 'g',              grams: 1 }
+  ],
+  bread: [
+    { unit: 'piece', grams: 40 },
+    { unit: 'g',     grams: 1 }
+  ],
+};
+
+// Real role_tags values (see ingredientCookingCategory above) don't line up
+// 1:1 with the CATEGORY_UNIT_DEFAULTS keys — e.g. ingredients carry
+// 'legume_protein'/'cooking_fat'/'dairy_protein', not 'legume'/'fat_source'/
+// 'dairy'. Map them the same way the cooking-method category resolution does.
+function unitDefaultsCategory(ingredient) {
+  const tags = ingredient.role_tags || [];
+  if (tags.includes('starch_source') || tags.includes('starchy_vegetable')) return 'starch_source';
+  if (tags.includes('legume_protein')) return 'legume';
+  if (tags.includes('animal_protein')) return 'protein_source';
+  if (tags.includes('dairy_protein') || tags.includes('dairy_fat')) return 'dairy';
+  if (tags.includes('cooking_fat')) return 'fat_source';
+  if (tags.includes('spice') || tags.includes('condiment')) return 'spice';
+  if (tags.includes('vegetable')) return 'vegetable';
+  return ingredient.category || 'other';
+}
+
+function getUnitOptions(ingredient) {
+  if (ingredient.unit_options && ingredient.unit_options.length) {
+    // Step 90 packaged ingredients store { label, grams }, not { unit, grams }.
+    const normalized = ingredient.unit_options.map(u =>
+      ({ unit: u.unit || u.label, grams: u.grams }));
+    return [
+      ...normalized,
+      // Always include grams as last option if not already there
+      ...(normalized.some(u => u.unit === 'g') ? [] :
+          [{ unit: 'g', grams: 1 }])
+    ];
+  }
+  // Fall back to category defaults
+  const category = unitDefaultsCategory(ingredient);
+  return CATEGORY_UNIT_DEFAULTS[category] ||
+    [{ unit: 'g', grams: 1 }, { unit: 'serving', grams: 100 }];
+}
+
+function convertToGrams(quantity, unitOption) {
+  return Math.round(quantity * unitOption.grams);
+}
+
+function renderQuantityInput(item, index) {
+  const ing = getIngredientById(item.id);
+  if (!ing) return `<input type='number' value='${item.gramAmount}' min='1'
+    onchange='updateGrams(${index}, this.value)' />g`;
+
+  const units = getUnitOptions(ing);
+  // Find which unit the current grams corresponds to, or default to grams
+  const currentUnit = item._unit || 'g';
+  const currentUnitObj = units.find(u => u.unit === currentUnit) ||
+    { unit: 'g', grams: 1 };
+  const displayQty = currentUnitObj.grams === 1
+    ? item.gramAmount
+    : Math.round(item.gramAmount / currentUnitObj.grams * 10) / 10;
+
+  return `
+    <div class='quantity-with-unit'>
+      <input type='number'
+             id='qty-${index}'
+             value='${displayQty}'
+             min='0.1' step='0.5'
+             style='width:55px'
+             onchange='updateQuantityWithUnit(${index}, this.value)' />
+      <select id='unit-${index}'
+              onchange='updateUnit(${index}, this.value)'>
+        ${units.map(u => `
+          <option value='${u.unit}'
+            ${u.unit === currentUnit ? 'selected' : ''}>
+            ${u.unit}
+          </option>`).join('')}
+      </select>
+      <span class='gram-equivalent' id='gram-eq-${index}'>
+        ${currentUnitObj.unit !== 'g' ? `= ${item.gramAmount}g` : ''}
+      </span>
+    </div>`;
+}
+
+// Fallback for meal items whose ingredient can't be resolved (renderQuantityInput's
+// !ing branch) — keeps that onchange from calling an undefined function.
+function updateGrams(index, value) {
+  const item = state.mealItems[index];
+  if (!item) return;
+  item.gramAmount = Math.round(parseFloat(value)) || 1;
+  updateNutrientTotals();
+  updateCalculateButton();
+}
+
+function updateUnit(index, newUnit) {
+  const item = state.mealItems[index];
+  const ing = getIngredientById(item.id);
+  if (!ing) return;
+  const units = getUnitOptions(ing);
+  const unitObj = units.find(u => u.unit === newUnit);
+  if (!unitObj) return;
+  item._unit = newUnit;
+  // Recalculate display quantity from current grams
+  const displayQty = unitObj.grams === 1
+    ? item.gramAmount
+    : Math.round(item.gramAmount / unitObj.grams * 10) / 10;
+  document.getElementById(`qty-${index}`).value = displayQty;
+  document.getElementById(`gram-eq-${index}`).textContent =
+    unitObj.unit !== 'g' ? `= ${item.gramAmount}g` : '';
+  updateNutrientTotals();
+}
+
+function updateQuantityWithUnit(index, displayQty) {
+  const item = state.mealItems[index];
+  const ing = getIngredientById(item.id);
+  if (!ing) { item.gramAmount = Math.round(parseFloat(displayQty)) || 100; return; }
+  const units = getUnitOptions(ing);
+  const unitObj = units.find(u => u.unit === (item._unit || 'g'))
+    || { grams: 1 };
+  item.gramAmount = convertToGrams(parseFloat(displayQty) || 1, unitObj);
+  document.getElementById(`gram-eq-${index}`).textContent =
+    unitObj.unit !== 'g' ? `= ${item.gramAmount}g` : '';
+  updateNutrientTotals();
+  updateCalculateButton();
+}
+
 function renderMealItems() {
   const container = document.getElementById('meal-items');
   container.innerHTML = '';
@@ -777,11 +939,9 @@ function renderMealItems() {
     }
 
     let name = '';
-    let quantity = '';
 
     const ingItem = getIngredientById(item.id);
     name = ingItem ? ingItem.name : item.id;
-    quantity = item.gramAmount;
 
     const div = document.createElement('div');
     div.className = 'meal-item';
@@ -795,7 +955,7 @@ function renderMealItems() {
       if (ing && ing.cooked_conversion_factor != null) {
         weightNote = item.isCooked === true ? ' (cooked)' : ' (raw)';
       }
-      label.textContent = (index + 1) + '. ' + name + '  ' + quantity + ' g' + weightNote;
+      label.textContent = (index + 1) + '. ' + name + weightNote;
 
       if (ing && ing._isPackaged) {
         const badgesHtml = nutriScoreBadgeHtml(ing.nutriscore) + ' ' +
@@ -807,6 +967,10 @@ function renderMealItems() {
         }
       }
     }
+
+    // Step 91 — quantity input with a unit selector (defaults to grams).
+    const qtyWrap = document.createElement('span');
+    qtyWrap.innerHTML = renderQuantityInput(item, index);
 
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
@@ -824,6 +988,7 @@ function renderMealItems() {
     });
 
     div.appendChild(label);
+    div.appendChild(qtyWrap);
     if (badgesSpan) div.appendChild(badgesSpan);
     div.appendChild(removeBtn);
     div.appendChild(editBtn);

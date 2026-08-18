@@ -509,6 +509,17 @@ input:focus, select:focus {
 }
 .meal-item button:hover { border-color: var(--color-navy); color: var(--color-navy); }
 
+/* Step 91 — unit conversion */
+.quantity-with-unit { display: flex; align-items: center;
+  gap: 4px; flex-wrap: nowrap; }
+.quantity-with-unit input { width: 55px; margin-bottom: 0; }
+.quantity-with-unit select { width: auto; font-size: 0.82rem;
+  padding: 4px 6px; margin-bottom: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); }
+.gram-equivalent { font-size: 0.75rem; color: var(--color-text-faint);
+  min-width: 40px; white-space: nowrap; }
+
 #meal-nutrient-totals {
   background: var(--color-bg);
   border-radius: var(--radius-sm);
