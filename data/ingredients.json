@@ -12505,5 +12505,2400 @@
       "potassium_mg": "low",
       "magnesium_mg": "low"
     }
+  },
+  {
+    "id": "ing_278",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-278",
+    "name": "Potato chips / crisps (generic, salted)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 555,
+      "protein_g": 7,
+      "carbohydrate_g": 53,
+      "fiber_g": 4,
+      "total_fat_g": 35,
+      "saturated_fat_g": 10,
+      "sugars_g": 0.5,
+      "sodium_mg": 658,
+      "iron_mg": 1.2,
+      "calcium_mg": 20,
+      "zinc_mg": 0.3,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 8,
+      "potassium_mg": 1200,
+      "magnesium_mg": 40
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": "E",
+    "unit_options": [
+      {
+        "label": "small bag",
+        "grams": 28
+      },
+      {
+        "label": "regular bag",
+        "grams": 50
+      },
+      {
+        "label": "large bag",
+        "grams": 100
+      }
+    ]
+  },
+  {
+    "id": "ing_279",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-279",
+    "name": "Lays Classic (salted)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 556,
+      "protein_g": 6,
+      "carbohydrate_g": 52,
+      "fiber_g": 4,
+      "total_fat_g": 36,
+      "saturated_fat_g": 10,
+      "sugars_g": 0.6,
+      "sodium_mg": 558,
+      "iron_mg": 1.0,
+      "calcium_mg": 18,
+      "zinc_mg": 0.3,
+      "folate_µg": 14,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 8,
+      "potassium_mg": 1150,
+      "magnesium_mg": 38
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Lays",
+    "nova_group": 4,
+    "nutriscore": "D",
+    "unit_options": [
+      {
+        "label": "small bag",
+        "grams": 26
+      },
+      {
+        "label": "regular",
+        "grams": 52
+      }
+    ]
+  },
+  {
+    "id": "ing_280",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-280",
+    "name": "Kurkure Masala Munch",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 482,
+      "protein_g": 6,
+      "carbohydrate_g": 65,
+      "fiber_g": 3,
+      "total_fat_g": 22,
+      "saturated_fat_g": 9,
+      "sugars_g": 3,
+      "sodium_mg": 870,
+      "iron_mg": 1.5,
+      "calcium_mg": 25,
+      "zinc_mg": 0.4,
+      "folate_µg": 12,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 5,
+      "vitamin_c_mg": 2,
+      "potassium_mg": 250,
+      "magnesium_mg": 30
+    },
+    "glycemic_index": 68,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Kurkure",
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "small pack",
+        "grams": 22
+      },
+      {
+        "label": "regular",
+        "grams": 50
+      }
+    ]
+  },
+  {
+    "id": "ing_281",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-281",
+    "name": "Haldiram's Bhujia",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 542,
+      "protein_g": 15,
+      "carbohydrate_g": 53,
+      "fiber_g": 5,
+      "total_fat_g": 30,
+      "saturated_fat_g": 14,
+      "sugars_g": 2,
+      "sodium_mg": 780,
+      "iron_mg": 3,
+      "calcium_mg": 40,
+      "zinc_mg": 1.2,
+      "folate_µg": 50,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 5,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 350,
+      "magnesium_mg": 60
+    },
+    "glycemic_index": 55,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Haldiram's",
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "tbsp",
+        "grams": 15
+      },
+      {
+        "label": "small serving",
+        "grams": 30
+      },
+      {
+        "label": "cup",
+        "grams": 60
+      }
+    ]
+  },
+  {
+    "id": "ing_282",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-282",
+    "name": "Haldiram's Aloo Bhujia",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 542,
+      "protein_g": 15,
+      "carbohydrate_g": 53,
+      "fiber_g": 5,
+      "total_fat_g": 30,
+      "saturated_fat_g": 14,
+      "sugars_g": 2,
+      "sodium_mg": 780,
+      "iron_mg": 3,
+      "calcium_mg": 40,
+      "zinc_mg": 1.2,
+      "folate_µg": 50,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 5,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 350,
+      "magnesium_mg": 60
+    },
+    "glycemic_index": 55,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Haldiram's",
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "tbsp",
+        "grams": 15
+      },
+      {
+        "label": "small serving",
+        "grams": 30
+      },
+      {
+        "label": "cup",
+        "grams": 60
+      }
+    ]
+  },
+  {
+    "id": "ing_283",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-283",
+    "name": "Haldiram's Moong Dal (namkeen)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 510,
+      "protein_g": 18,
+      "carbohydrate_g": 60,
+      "fiber_g": 6,
+      "total_fat_g": 22,
+      "saturated_fat_g": 8,
+      "sugars_g": 1,
+      "sodium_mg": 650,
+      "iron_mg": 3.5,
+      "calcium_mg": 35,
+      "zinc_mg": 1.5,
+      "folate_µg": 60,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 3,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 400,
+      "magnesium_mg": 70
+    },
+    "glycemic_index": 45,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Haldiram's",
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "tbsp",
+        "grams": 15
+      },
+      {
+        "label": "small serving",
+        "grams": 30
+      },
+      {
+        "label": "cup",
+        "grams": 60
+      }
+    ]
+  },
+  {
+    "id": "ing_284",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-284",
+    "name": "Haldiram's Chana Dal (namkeen)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 506,
+      "protein_g": 19,
+      "carbohydrate_g": 58,
+      "fiber_g": 7,
+      "total_fat_g": 22,
+      "saturated_fat_g": 8,
+      "sugars_g": 1,
+      "sodium_mg": 600,
+      "iron_mg": 4,
+      "calcium_mg": 40,
+      "zinc_mg": 1.8,
+      "folate_µg": 70,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 3,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 420,
+      "magnesium_mg": 75
+    },
+    "glycemic_index": 40,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Haldiram's",
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "tbsp",
+        "grams": 15
+      },
+      {
+        "label": "small serving",
+        "grams": 30
+      },
+      {
+        "label": "cup",
+        "grams": 60
+      }
+    ]
+  },
+  {
+    "id": "ing_285",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-285",
+    "name": "Chakli (rice flour spiral)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 462,
+      "protein_g": 5,
+      "carbohydrate_g": 70,
+      "fiber_g": 2,
+      "total_fat_g": 18,
+      "saturated_fat_g": 6,
+      "sugars_g": 1,
+      "sodium_mg": 450,
+      "iron_mg": 1,
+      "calcium_mg": 20,
+      "zinc_mg": 0.5,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 2,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 150,
+      "magnesium_mg": 25
+    },
+    "glycemic_index": 65,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 chakli",
+        "grams": 15
+      },
+      {
+        "label": "3 chakli",
+        "grams": 45
+      }
+    ]
+  },
+  {
+    "id": "ing_286",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-286",
+    "name": "Murukku",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 476,
+      "protein_g": 6,
+      "carbohydrate_g": 68,
+      "fiber_g": 2.5,
+      "total_fat_g": 20,
+      "saturated_fat_g": 7,
+      "sugars_g": 1,
+      "sodium_mg": 500,
+      "iron_mg": 1.2,
+      "calcium_mg": 25,
+      "zinc_mg": 0.6,
+      "folate_µg": 18,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 2,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 180,
+      "magnesium_mg": 30
+    },
+    "glycemic_index": 65,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 piece",
+        "grams": 10
+      },
+      {
+        "label": "handful",
+        "grams": 30
+      }
+    ]
+  },
+  {
+    "id": "ing_287",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-287",
+    "name": "Mathri",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 514,
+      "protein_g": 8,
+      "carbohydrate_g": 62,
+      "fiber_g": 2.5,
+      "total_fat_g": 26,
+      "saturated_fat_g": 10,
+      "sugars_g": 1,
+      "sodium_mg": 800,
+      "iron_mg": 2,
+      "calcium_mg": 30,
+      "zinc_mg": 0.7,
+      "folate_µg": 25,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 3,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 150,
+      "magnesium_mg": 35
+    },
+    "glycemic_index": 65,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 mathri",
+        "grams": 15
+      },
+      {
+        "label": "2 mathri",
+        "grams": 30
+      }
+    ]
+  },
+  {
+    "id": "ing_288",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-288",
+    "name": "Pappad (raw, uncooked)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 357,
+      "protein_g": 22,
+      "carbohydrate_g": 65,
+      "fiber_g": 10,
+      "total_fat_g": 1,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 2,
+      "sodium_mg": 2800,
+      "iron_mg": 5,
+      "calcium_mg": 50,
+      "zinc_mg": 2,
+      "folate_µg": 90,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 1,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 350,
+      "magnesium_mg": 90
+    },
+    "glycemic_index": 35,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 pappad",
+        "grams": 10
+      }
+    ]
+  },
+  {
+    "id": "ing_289",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-289",
+    "name": "Pappad (roasted)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 357,
+      "protein_g": 22,
+      "carbohydrate_g": 65,
+      "fiber_g": 10,
+      "total_fat_g": 1,
+      "saturated_fat_g": 0.3,
+      "sugars_g": 2,
+      "sodium_mg": 2800,
+      "iron_mg": 5,
+      "calcium_mg": 50,
+      "zinc_mg": 2,
+      "folate_µg": 90,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 1,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 350,
+      "magnesium_mg": 90
+    },
+    "glycemic_index": 40,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 pappad",
+        "grams": 10
+      }
+    ]
+  },
+  {
+    "id": "ing_290",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-290",
+    "name": "Pappad (fried)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 429,
+      "protein_g": 22,
+      "carbohydrate_g": 65,
+      "fiber_g": 10,
+      "total_fat_g": 9,
+      "saturated_fat_g": 1.5,
+      "sugars_g": 2,
+      "sodium_mg": 2800,
+      "iron_mg": 5,
+      "calcium_mg": 50,
+      "zinc_mg": 2,
+      "folate_µg": 90,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 1,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 350,
+      "magnesium_mg": 90
+    },
+    "glycemic_index": 42,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 pappad",
+        "grams": 10
+      }
+    ]
+  },
+  {
+    "id": "ing_291",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-291",
+    "name": "Parle-G biscuit",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 426,
+      "protein_g": 7,
+      "carbohydrate_g": 77,
+      "fiber_g": 2,
+      "total_fat_g": 10,
+      "saturated_fat_g": 5,
+      "sugars_g": 26,
+      "sodium_mg": 340,
+      "iron_mg": 2,
+      "calcium_mg": 40,
+      "zinc_mg": 0.5,
+      "folate_µg": 20,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 5,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 120,
+      "magnesium_mg": 20
+    },
+    "glycemic_index": 72,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Parle",
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 biscuit",
+        "grams": 5.5
+      },
+      {
+        "label": "4 biscuits",
+        "grams": 22
+      },
+      {
+        "label": "small pack",
+        "grams": 55
+      }
+    ]
+  },
+  {
+    "id": "ing_292",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-292",
+    "name": "Marie biscuit",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 416,
+      "protein_g": 7,
+      "carbohydrate_g": 79,
+      "fiber_g": 2,
+      "total_fat_g": 8,
+      "saturated_fat_g": 4,
+      "sugars_g": 22,
+      "sodium_mg": 420,
+      "iron_mg": 1.8,
+      "calcium_mg": 35,
+      "zinc_mg": 0.4,
+      "folate_µg": 18,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 4,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 110,
+      "magnesium_mg": 18
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 biscuit",
+        "grams": 7
+      },
+      {
+        "label": "4 biscuits",
+        "grams": 28
+      }
+    ]
+  },
+  {
+    "id": "ing_293",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-293",
+    "name": "Digestive biscuit",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 484,
+      "protein_g": 8,
+      "carbohydrate_g": 68,
+      "fiber_g": 3,
+      "total_fat_g": 20,
+      "saturated_fat_g": 9,
+      "sugars_g": 18,
+      "sodium_mg": 580,
+      "iron_mg": 2,
+      "calcium_mg": 45,
+      "zinc_mg": 0.6,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 6,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 150,
+      "magnesium_mg": 30
+    },
+    "glycemic_index": 59,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 biscuit",
+        "grams": 14
+      },
+      {
+        "label": "3 biscuits",
+        "grams": 42
+      }
+    ]
+  },
+  {
+    "id": "ing_294",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-294",
+    "name": "Bourbon biscuit",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 478,
+      "protein_g": 6,
+      "carbohydrate_g": 73,
+      "fiber_g": 2,
+      "total_fat_g": 18,
+      "saturated_fat_g": 9,
+      "sugars_g": 34,
+      "sodium_mg": 340,
+      "iron_mg": 2,
+      "calcium_mg": 40,
+      "zinc_mg": 0.5,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 4,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 150,
+      "magnesium_mg": 25
+    },
+    "glycemic_index": 68,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": "E",
+    "unit_options": [
+      {
+        "label": "1 biscuit",
+        "grams": 10
+      },
+      {
+        "label": "2 biscuits",
+        "grams": 20
+      }
+    ]
+  },
+  {
+    "id": "ing_295",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-295",
+    "name": "Good Day butter biscuit",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 468,
+      "protein_g": 7,
+      "carbohydrate_g": 74,
+      "fiber_g": 1.5,
+      "total_fat_g": 16,
+      "saturated_fat_g": 8,
+      "sugars_g": 24,
+      "sodium_mg": 360,
+      "iron_mg": 1.8,
+      "calcium_mg": 35,
+      "zinc_mg": 0.4,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 8,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 120,
+      "magnesium_mg": 20
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": "Britannia",
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 biscuit",
+        "grams": 8
+      },
+      {
+        "label": "4 biscuits",
+        "grams": 32
+      }
+    ]
+  },
+  {
+    "id": "ing_296",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-296",
+    "name": "Rusk (double roti toast)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 408,
+      "protein_g": 9,
+      "carbohydrate_g": 75,
+      "fiber_g": 2.5,
+      "total_fat_g": 8,
+      "saturated_fat_g": 2,
+      "sugars_g": 20,
+      "sodium_mg": 280,
+      "iron_mg": 2.5,
+      "calcium_mg": 50,
+      "zinc_mg": 0.6,
+      "folate_µg": 25,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 2,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 140,
+      "magnesium_mg": 25
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_snack",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 rusk",
+        "grams": 17
+      },
+      {
+        "label": "2 rusk",
+        "grams": 34
+      }
+    ]
+  },
+  {
+    "id": "ing_297",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-297",
+    "name": "Maggi 2-minute noodles (plain, cooked)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 325,
+      "protein_g": 9,
+      "carbohydrate_g": 43,
+      "fiber_g": 2,
+      "total_fat_g": 13,
+      "saturated_fat_g": 6,
+      "sugars_g": 2,
+      "sodium_mg": 1430,
+      "iron_mg": 4,
+      "calcium_mg": 20,
+      "zinc_mg": 0.5,
+      "folate_µg": 30,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 150,
+      "magnesium_mg": 15
+    },
+    "glycemic_index": 67,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "high",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": "Maggi",
+    "nova_group": 4,
+    "nutriscore": "D",
+    "unit_options": [
+      {
+        "label": "half pack cooked",
+        "grams": 100
+      },
+      {
+        "label": "full pack cooked",
+        "grams": 200
+      }
+    ]
+  },
+  {
+    "id": "ing_298",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-298",
+    "name": "Yippee noodles (cooked)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 320,
+      "protein_g": 9,
+      "carbohydrate_g": 44,
+      "fiber_g": 2,
+      "total_fat_g": 12,
+      "saturated_fat_g": 5.5,
+      "sugars_g": 2,
+      "sodium_mg": 1200,
+      "iron_mg": 3.5,
+      "calcium_mg": 18,
+      "zinc_mg": 0.5,
+      "folate_µg": 28,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 140,
+      "magnesium_mg": 15
+    },
+    "glycemic_index": 66,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": "Yippee",
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "half pack cooked",
+        "grams": 100
+      },
+      {
+        "label": "full pack cooked",
+        "grams": 200
+      }
+    ]
+  },
+  {
+    "id": "ing_299",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-299",
+    "name": "Top Ramen (cooked)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 326,
+      "protein_g": 8,
+      "carbohydrate_g": 42,
+      "fiber_g": 2,
+      "total_fat_g": 14,
+      "saturated_fat_g": 6.5,
+      "sugars_g": 2,
+      "sodium_mg": 1400,
+      "iron_mg": 3.5,
+      "calcium_mg": 18,
+      "zinc_mg": 0.5,
+      "folate_µg": 28,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 140,
+      "magnesium_mg": 15
+    },
+    "glycemic_index": 67,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": "Top Ramen",
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "half pack cooked",
+        "grams": 100
+      },
+      {
+        "label": "full pack cooked",
+        "grams": 200
+      }
+    ]
+  },
+  {
+    "id": "ing_300",
+    "cooked_conversion_factor": 2.5,
+    "source_code": "STEP90-300",
+    "name": "Poha, packaged (iron-fortified, ready to cook)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 333,
+      "protein_g": 6,
+      "carbohydrate_g": 75,
+      "fiber_g": 2.5,
+      "total_fat_g": 1,
+      "saturated_fat_g": 0.2,
+      "sugars_g": 0.5,
+      "sodium_mg": 200,
+      "iron_mg": 20,
+      "calcium_mg": 15,
+      "zinc_mg": 0.6,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 100,
+      "magnesium_mg": 35
+    },
+    "glycemic_index": 70,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "high",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "serving dry",
+        "grams": 75
+      }
+    ]
+  },
+  {
+    "id": "ing_301",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-301",
+    "name": "Packaged upma mix",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 355,
+      "protein_g": 10,
+      "carbohydrate_g": 72,
+      "fiber_g": 4,
+      "total_fat_g": 3,
+      "saturated_fat_g": 0.6,
+      "sugars_g": 1,
+      "sodium_mg": 600,
+      "iron_mg": 2,
+      "calcium_mg": 30,
+      "zinc_mg": 0.8,
+      "folate_µg": 20,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 1,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 200,
+      "magnesium_mg": 40
+    },
+    "glycemic_index": 65,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null
+  },
+  {
+    "id": "ing_302",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-302",
+    "name": "Packaged idli/dosa batter (ready to use)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 109,
+      "protein_g": 4,
+      "carbohydrate_g": 22,
+      "fiber_g": 1,
+      "total_fat_g": 0.5,
+      "saturated_fat_g": 0.1,
+      "sugars_g": 0.5,
+      "sodium_mg": 380,
+      "iron_mg": 0.8,
+      "calcium_mg": 15,
+      "zinc_mg": 0.4,
+      "folate_µg": 10,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 80,
+      "magnesium_mg": 20
+    },
+    "glycemic_index": 65,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "2 idlis (batter)",
+        "grams": 100
+      },
+      {
+        "label": "1 dosa (batter)",
+        "grams": 50
+      }
+    ]
+  },
+  {
+    "id": "ing_303",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-303",
+    "name": "Packaged sambhar mix",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "spice"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 274,
+      "protein_g": 10,
+      "carbohydrate_g": 45,
+      "fiber_g": 12,
+      "total_fat_g": 6,
+      "saturated_fat_g": 1,
+      "sugars_g": 3,
+      "sodium_mg": 2400,
+      "iron_mg": 10,
+      "calcium_mg": 150,
+      "zinc_mg": 1.5,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 20,
+      "vitamin_c_mg": 5,
+      "potassium_mg": 500,
+      "magnesium_mg": 100
+    },
+    "glycemic_index": 0,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null
+  },
+  {
+    "id": "ing_304",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-304",
+    "name": "Packaged dal makhani (ready to eat)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "legume_protein"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 144,
+      "protein_g": 6,
+      "carbohydrate_g": 12,
+      "fiber_g": 4,
+      "total_fat_g": 8,
+      "saturated_fat_g": 4,
+      "sugars_g": 2,
+      "sodium_mg": 820,
+      "iron_mg": 1.5,
+      "calcium_mg": 40,
+      "zinc_mg": 0.6,
+      "folate_µg": 20,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 10,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 180,
+      "magnesium_mg": 25
+    },
+    "glycemic_index": 35,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": "C",
+    "unit_options": [
+      {
+        "label": "serving",
+        "grams": 250
+      }
+    ]
+  },
+  {
+    "id": "ing_305",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-305",
+    "name": "Multigrain bread",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "starch_source",
+      "whole_grain"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 253,
+      "protein_g": 10,
+      "carbohydrate_g": 42,
+      "fiber_g": 6,
+      "total_fat_g": 5,
+      "saturated_fat_g": 1,
+      "sugars_g": 4,
+      "sodium_mg": 450,
+      "iron_mg": 3,
+      "calcium_mg": 90,
+      "zinc_mg": 1.2,
+      "folate_µg": 45,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 220,
+      "magnesium_mg": 70
+    },
+    "glycemic_index": 55,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_food",
+    "brand": null,
+    "nova_group": 3,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "1 slice",
+        "grams": 30
+      },
+      {
+        "label": "2 slices",
+        "grams": 60
+      }
+    ]
+  },
+  {
+    "id": "ing_306",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-306",
+    "name": "Masala chai (with milk and sugar)",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 50,
+      "protein_g": 2.0,
+      "carbohydrate_g": 6.0,
+      "fiber_g": 0,
+      "total_fat_g": 2.0,
+      "saturated_fat_g": 1.2,
+      "sugars_g": 4,
+      "sodium_mg": 33,
+      "iron_mg": 0.1,
+      "calcium_mg": 67,
+      "zinc_mg": 0.1,
+      "folate_µg": 3,
+      "b12_µg": 0.1,
+      "vitamin_d_µg": 0.02,
+      "vitamin_a_re_µg": 15,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 60,
+      "magnesium_mg": 5
+    },
+    "glycemic_index": 45,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "small cup",
+        "grams": 150
+      },
+      {
+        "label": "large cup",
+        "grams": 250
+      }
+    ]
+  },
+  {
+    "id": "ing_307",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-307",
+    "name": "Black tea (without milk/sugar)",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "beverage"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 1,
+      "protein_g": 0,
+      "carbohydrate_g": 0.2,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 0,
+      "sodium_mg": 2,
+      "iron_mg": 0.02,
+      "calcium_mg": 1,
+      "zinc_mg": 0,
+      "folate_µg": 1,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 20,
+      "magnesium_mg": 2
+    },
+    "glycemic_index": 0,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "cup",
+        "grams": 240
+      }
+    ]
+  },
+  {
+    "id": "ing_308",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-308",
+    "name": "Green tea",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "beverage"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 1,
+      "protein_g": 0,
+      "carbohydrate_g": 0,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 0,
+      "sodium_mg": 1,
+      "iron_mg": 0,
+      "calcium_mg": 0,
+      "zinc_mg": 0,
+      "folate_µg": 0,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 8,
+      "magnesium_mg": 1
+    },
+    "glycemic_index": 0,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "cup",
+        "grams": 240
+      }
+    ]
+  },
+  {
+    "id": "ing_309",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-309",
+    "name": "Black coffee",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "beverage"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 1,
+      "protein_g": 0.1,
+      "carbohydrate_g": 0,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 0,
+      "sodium_mg": 2,
+      "iron_mg": 0,
+      "calcium_mg": 2,
+      "zinc_mg": 0,
+      "folate_µg": 0,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 30,
+      "magnesium_mg": 3
+    },
+    "glycemic_index": 0,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "cup",
+        "grams": 240
+      }
+    ]
+  },
+  {
+    "id": "ing_310",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-310",
+    "name": "Coffee with milk and sugar",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 38,
+      "protein_g": 1.3,
+      "carbohydrate_g": 5.3,
+      "fiber_g": 0,
+      "total_fat_g": 1.3,
+      "saturated_fat_g": 0.8,
+      "sugars_g": 3,
+      "sodium_mg": 20,
+      "iron_mg": 0.05,
+      "calcium_mg": 40,
+      "zinc_mg": 0.1,
+      "folate_µg": 2,
+      "b12_µg": 0.1,
+      "vitamin_d_µg": 0.01,
+      "vitamin_a_re_µg": 8,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 50,
+      "magnesium_mg": 4
+    },
+    "glycemic_index": 50,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "small cup",
+        "grams": 150
+      }
+    ]
+  },
+  {
+    "id": "ing_311",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-311",
+    "name": "Nimbu pani (homemade lemonade with sugar)",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 48,
+      "protein_g": 0.2,
+      "carbohydrate_g": 12,
+      "fiber_g": 0.2,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 11,
+      "sodium_mg": 200,
+      "iron_mg": 0.1,
+      "calcium_mg": 5,
+      "zinc_mg": 0.05,
+      "folate_µg": 2,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 1,
+      "vitamin_c_mg": 20,
+      "potassium_mg": 40,
+      "magnesium_mg": 3
+    },
+    "glycemic_index": 55,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 250
+      }
+    ]
+  },
+  {
+    "id": "ing_312",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-312",
+    "name": "Sugarcane juice",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 108,
+      "protein_g": 0.3,
+      "carbohydrate_g": 27,
+      "fiber_g": 0.3,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 25,
+      "sodium_mg": 15,
+      "iron_mg": 0.4,
+      "calcium_mg": 15,
+      "zinc_mg": 0.1,
+      "folate_µg": 1,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 1,
+      "potassium_mg": 140,
+      "magnesium_mg": 10
+    },
+    "glycemic_index": 43,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "high",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "high",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 250
+      },
+      {
+        "label": "large glass",
+        "grams": 350
+      }
+    ]
+  },
+  {
+    "id": "ing_313",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-313",
+    "name": "Aam panna (raw mango drink)",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 80,
+      "protein_g": 0.3,
+      "carbohydrate_g": 20,
+      "fiber_g": 0.5,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 17,
+      "sodium_mg": 10,
+      "iron_mg": 0.3,
+      "calcium_mg": 10,
+      "zinc_mg": 0.1,
+      "folate_µg": 3,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 15,
+      "vitamin_c_mg": 20,
+      "potassium_mg": 60,
+      "magnesium_mg": 5
+    },
+    "glycemic_index": 50,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "high",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 200
+      }
+    ]
+  },
+  {
+    "id": "ing_314",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-314",
+    "name": "Jaljeera",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "beverage"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 24,
+      "protein_g": 0.5,
+      "carbohydrate_g": 6,
+      "fiber_g": 0.3,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 3,
+      "sodium_mg": 300,
+      "iron_mg": 0.3,
+      "calcium_mg": 10,
+      "zinc_mg": 0.1,
+      "folate_µg": 2,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 2,
+      "vitamin_c_mg": 3,
+      "potassium_mg": 80,
+      "magnesium_mg": 5
+    },
+    "glycemic_index": 30,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 200
+      }
+    ]
+  },
+  {
+    "id": "ing_315",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-315",
+    "name": "Mango juice (packaged, Maaza/Slice type)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 56,
+      "protein_g": 0.2,
+      "carbohydrate_g": 14,
+      "fiber_g": 0.2,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 13,
+      "sodium_mg": 20,
+      "iron_mg": 0.2,
+      "calcium_mg": 5,
+      "zinc_mg": 0.05,
+      "folate_µg": 2,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 10,
+      "vitamin_c_mg": 3,
+      "potassium_mg": 40,
+      "magnesium_mg": 3
+    },
+    "glycemic_index": 55,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_beverage",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "small bottle",
+        "grams": 200
+      },
+      {
+        "label": "large",
+        "grams": 600
+      }
+    ]
+  },
+  {
+    "id": "ing_316",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-316",
+    "name": "Orange juice (fresh)",
+    "food_group": "Beverages",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 44,
+      "protein_g": 0.7,
+      "carbohydrate_g": 11,
+      "fiber_g": 0.2,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 9,
+      "sodium_mg": 2,
+      "iron_mg": 0.2,
+      "calcium_mg": 10,
+      "zinc_mg": 0.1,
+      "folate_µg": 15,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 5,
+      "vitamin_c_mg": 50,
+      "potassium_mg": 180,
+      "magnesium_mg": 10
+    },
+    "glycemic_index": 50,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "high",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 240
+      }
+    ]
+  },
+  {
+    "id": "ing_317",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-317",
+    "name": "Energy drink (Red Bull type)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 44,
+      "protein_g": 0,
+      "carbohydrate_g": 11,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 11,
+      "sodium_mg": 105,
+      "iron_mg": 0,
+      "calcium_mg": 2,
+      "zinc_mg": 0,
+      "folate_µg": 1,
+      "b12_µg": 1.2,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 1,
+      "magnesium_mg": 2
+    },
+    "glycemic_index": 68,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_beverage",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "can",
+        "grams": 250
+      }
+    ]
+  },
+  {
+    "id": "ing_318",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-318",
+    "name": "Cold drink / cola (Coke/Pepsi type)",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "sweetener"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 44,
+      "protein_g": 0,
+      "carbohydrate_g": 11,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 11,
+      "sodium_mg": 10,
+      "iron_mg": 0,
+      "calcium_mg": 2,
+      "zinc_mg": 0,
+      "folate_µg": 0,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 1,
+      "magnesium_mg": 1
+    },
+    "glycemic_index": 63,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_beverage",
+    "brand": null,
+    "nova_group": 4,
+    "nutriscore": "E",
+    "unit_options": [
+      {
+        "label": "small can",
+        "grams": 150
+      },
+      {
+        "label": "can",
+        "grams": 330
+      },
+      {
+        "label": "bottle",
+        "grams": 600
+      }
+    ]
+  },
+  {
+    "id": "ing_319",
+    "cooked_conversion_factor": null,
+    "source_code": "STEP90-319",
+    "name": "Soda water / sparkling water",
+    "food_group": "Packaged product",
+    "diet_type": "veg",
+    "role_tags": [
+      "beverage"
+    ],
+    "nutrients_per_100g": {
+      "energy_kcal": 0,
+      "protein_g": 0,
+      "carbohydrate_g": 0,
+      "fiber_g": 0,
+      "total_fat_g": 0,
+      "saturated_fat_g": 0,
+      "sugars_g": 0,
+      "sodium_mg": 15,
+      "iron_mg": 0,
+      "calcium_mg": 0,
+      "zinc_mg": 0,
+      "folate_µg": 0,
+      "b12_µg": 0,
+      "vitamin_d_µg": 0,
+      "vitamin_a_re_µg": 0,
+      "vitamin_c_mg": 0,
+      "potassium_mg": 2,
+      "magnesium_mg": 0
+    },
+    "glycemic_index": 0,
+    "source": "Step 90 expansion (macros: label/Open Food Facts values where cited by brand; micronutrients: estimated; GI: Foster-Powell 2002 / Augustin 2021 where applicable)",
+    "micronutrient_confidence": {
+      "iron_mg": "medium",
+      "calcium_mg": "medium",
+      "zinc_mg": "medium",
+      "folate_µg": "medium",
+      "b12_µg": "medium",
+      "vitamin_d_µg": "medium",
+      "vitamin_a_re_µg": "medium",
+      "vitamin_c_mg": "medium",
+      "potassium_mg": "medium",
+      "magnesium_mg": "medium"
+    },
+    "category": "packaged_beverage",
+    "brand": null,
+    "nova_group": 1,
+    "nutriscore": null,
+    "unit_options": [
+      {
+        "label": "glass",
+        "grams": 250
+      }
+    ]
   }
 ]
